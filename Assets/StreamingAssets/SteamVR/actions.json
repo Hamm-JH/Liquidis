@@ -50,6 +50,22 @@
       "type": "boolean"
     },
     {
+      "name": "/actions/default/in/TrackpadClick",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/TrackpadPos",
+      "type": "vector2"
+    },
+    {
+      "name": "/actions/default/in/menu",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/TrackpadTouch",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -169,7 +185,11 @@
       "/actions/default/out/Haptic": "Haptic",
       "/actions/platformer/in/Jump": "Jump",
       "/actions/default/in/SnapTurnLeft": "Snap Turn (Left)",
-      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)"
+      "/actions/default/in/SnapTurnRight": "Snap Turn (Right)",
+      "/actions/default/in/TrackpadPos": "TrackpadPos",
+      "/actions/default/in/menu": "menu",
+      "/actions/default/in/TrackpadClick": "TrackpadClick",
+      "/actions/default/in/TrackpadTouch": "TrackpadTouch"
     }
   ]
 }
