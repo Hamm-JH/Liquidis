@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Inputs
 {
-	public class InputInterface : MonoBehaviour
+	public class InputInterface<T> : MonoBehaviour /*where T : Inputs*/
 	{
 		// Start is called before the first frame update
 		void Start()

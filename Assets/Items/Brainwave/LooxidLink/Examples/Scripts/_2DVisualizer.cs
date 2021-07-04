@@ -6,15 +6,15 @@ using UnityEngine.UI;
 
 namespace Looxid.Link
 {
-    public enum Tab2DVisualizer
-    {
-        SENSOR_STATUS = 0,
-        MIND_INDEX = 1,
-        FEATURE_INDEX = 2,
-        RAW_SIGNAL = 3
-    }
+	public enum Tab2DVisualizer
+	{
+		SENSOR_STATUS = 0,
+		MIND_INDEX = 1,
+		FEATURE_INDEX = 2,
+		RAW_SIGNAL = 3
+	}
 
-    public class _2DVisualizer : MonoBehaviour
+	public class _2DVisualizer : MonoBehaviour
     {
         [Header("Tabs")]
         public Tab2DVisualizer SelectTab = Tab2DVisualizer.SENSOR_STATUS;
