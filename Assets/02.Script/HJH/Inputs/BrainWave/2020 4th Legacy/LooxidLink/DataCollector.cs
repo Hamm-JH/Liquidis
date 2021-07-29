@@ -134,7 +134,7 @@ namespace Looxid.Link
             delta = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
             theta = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
             alpha = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
-            beta = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
+            beta  = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
             gamma = new LinkDataValue[Enum.GetValues(typeof(EEGSensorID)).Length];
 
             for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
