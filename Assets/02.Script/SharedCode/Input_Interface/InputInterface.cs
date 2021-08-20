@@ -181,6 +181,7 @@ namespace Inputs
 		{
 			StringBuilder sb = new StringBuilder();
 			sb.AppendLine("------ Debugging OnDrag Start ------");
+			sb.AppendLine($"OnDrag delta : {data.Delta}");
 			sb.AppendLine($"OnDrag : {data.DebugText}");
 			sb.AppendLine($"OnDrag device type : {data.DeviceType}");
 			sb.AppendLine($"OnDrag time : {data.Time}");

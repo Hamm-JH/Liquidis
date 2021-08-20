@@ -14,24 +14,17 @@ namespace Inputs
 		private string debugText;
 
 		// def
-		private string deviceType;
+		private InputDevice deviceType;
 		private DateTime time;
 
 		public string DebugText { get => debugText; set => debugText=value; }
-		public string DeviceType { get => deviceType; set => deviceType=value; }
+		public InputDevice DeviceType { get => deviceType; set => deviceType=value; }
 		public DateTime Time { get => time; set => time=value; }
 
 
 		public void Set(InputDevice dev)
 		{
-			if(dev == InputDevice.VRController)
-			{
-				deviceType = "VRController";
-			}
-			else
-			{
-				deviceType = "Mouse";
-			}
+			deviceType = dev;
 
 			time = DateTime.Now;
 		}
@@ -44,25 +37,23 @@ namespace Inputs
 	public struct OnDragData
 	{
 		private string debugText;
-
-		// def
-		private string deviceType;
-		private DateTime time;
+		private Vector2 delta;
 
 		public string DebugText { get => debugText; set => debugText=value; }
-		public string DeviceType { get => deviceType; set => deviceType=value; }
+		public Vector2 Delta { get => delta; set => delta=value; }
+
+		// -----
+
+		// def
+		private InputDevice deviceType;
+		private DateTime time;
+
+		public InputDevice DeviceType { get => deviceType; set => deviceType=value; }
 		public DateTime Time { get => time; set => time=value; }
 
 		public void Set(InputDevice dev)
 		{
-			if(dev == InputDevice.VRController)
-			{
-				deviceType = "VRController";
-			}
-			else
-			{
-				deviceType = "Mouse";
-			}
+			deviceType = dev;
 
 			time = DateTime.Now;
 		}
