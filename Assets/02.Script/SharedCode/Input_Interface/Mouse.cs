@@ -27,6 +27,5 @@ namespace Inputs
 				callTarget.Events.OnClick.Invoke(clickData);
 			}
 		}
-
 	}
 }
