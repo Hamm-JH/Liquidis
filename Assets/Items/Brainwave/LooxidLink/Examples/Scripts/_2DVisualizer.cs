@@ -84,6 +84,11 @@ namespace Looxid.Link
         private LinkDataValue beta;
         private LinkDataValue gamma;
 
+        public double deltaV;
+        public double thetaV;
+        public double alphaV;
+        public double betaV;
+        public double gammaV;
 
         void Start()
         {
@@ -143,7 +148,8 @@ namespace Looxid.Link
             LooxidLinkData.OnReceiveEEGFeatureIndexes -= OnReceiveEEGFeatureIndexes;
         }
 
-        void OnLinkCoreConncetd()
+		#region Sensor status
+		void OnLinkCoreConncetd()
         {
             if( !displayLinkMessage )
             {
@@ -199,9 +205,10 @@ namespace Looxid.Link
                 HideMessage(LooxidLinkMessageType.NoiseSignal);
             }
         }
+		#endregion
 
-        // Data Subscription
-        void OnReceiveEEGSensorStatus(EEGSensor sensorStatusData)
+		// Data Subscription
+		void OnReceiveEEGSensorStatus(EEGSensor sensorStatusData)
         {
             this.sensorStatusData = sensorStatusData;
         }
@@ -367,6 +374,15 @@ namespace Looxid.Link
 
         void Update()
         {
+            if(Input.GetKeyDown(KeyCode.RightArrow))
+			{
+                OnClickRightButton();
+			}
+            else if(Input.GetKeyDown(KeyCode.LeftArrow))
+			{
+                OnClickLeftButton();
+			}
+
             if (Panels != null)
             {
                 for (int i = 0; i < Panels.Length; i++)
@@ -400,6 +416,12 @@ namespace Looxid.Link
             alpha.value = Mathf.Lerp((float)alpha.value, (float)alpha.target, 0.2f);
             beta.value = Mathf.Lerp((float)beta.value, (float)beta.target, 0.2f);
             gamma.value = Mathf.Lerp((float)gamma.value, (float)gamma.target, 0.2f);
+
+            deltaV = delta.value;
+            thetaV = theta.value;
+            alphaV = alpha.value;
+            betaV = beta.value;
+            gammaV = gamma.value;
         }
 
         public void OnSelectChannel(int num)
