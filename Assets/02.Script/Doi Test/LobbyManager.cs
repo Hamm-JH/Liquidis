@@ -8,6 +8,9 @@ using Photon.Realtime;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
 
+    public Button enterLobby_button;
+    public Text status_text;
+
   private string roomCode = "ABCD";
       void Start()
       {
@@ -58,7 +61,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
       public override void OnDisconnected(DisconnectCause cause)
       {
           //base.OnDisconnected(cause);
-          generateCode_button.interactable = false;
+        
 
           status_text.text = $"오프라인 {cause.ToString()} - 다시 연결 시도중";
 
