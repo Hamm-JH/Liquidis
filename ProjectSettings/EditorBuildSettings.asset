@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Items/URP/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/AkilliMum/Samples/SRP/Mirror/Scenes_OldCameraShade/TestScenes.unity
+    guid: 9c4e463a8884d4107860229a1d1e5a5c
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: a27a22030b3b85c4ab3b40b3b0a34f9d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 85636931203d6934a8658773aaff6c36, type: 2}
