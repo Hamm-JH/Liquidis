@@ -6,7 +6,7 @@ using Debug = UnityEngine.Debug;
 
 public class TimelineTransform : MonoBehaviour
 {
-    public Timer timer;
+    public Debugging.Timer timer;
 
     public int index;
     public float interval;
