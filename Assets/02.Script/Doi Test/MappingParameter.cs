@@ -108,8 +108,31 @@ public class MappingParameter : MonoBehaviour
         menu_left_button.onClick.AddListener(GeneralMenu_Left);
         menu_right_button.onClick.AddListener(GeneralMenu_Right);
 
+        // Geometry
+        geo_left_button.onClick.AddListener(SetGeoType_Left);
+        geo_right_button.onClick.AddListener(SetGeoType_Right);
+        geo_sub_button.onClick.AddListener(GeoValueAdd);
+        geo_add_button.onClick.AddListener(GeoValueSub);
 
-    }
+        // Color
+        color_sub_button.onClick.AddListener(ColorValueSub);
+        color_add_button.onClick.AddListener(ColorValueAdd);
+       
+
+
+        // VFX_Texture
+        vfx_left_button.onClick.AddListener(ChangeVFXType_Left);
+        vfx_right_button.onClick.AddListener(ChangeVFXType_Right);
+        vfx_sub_button.onClick.AddListener(VfxValueSub);
+        vfx_add_button.onClick.AddListener(VfxValueAdd);
+
+
+        // Speed
+        speed_left_button.onClick.AddListener(SetSpeedType_Left);
+        speed_right_button.onClick.AddListener(SetSpeedType_Right);
+        speed_sub_button.onClick.AddListener(SpeedValueSub);
+        speed_add_button.onClick.AddListener(SpeedValueAdd);
+}
 
     // 전체 메뉴 <- 버튼
     public void GeneralMenu_Left()
@@ -185,59 +208,54 @@ public class MappingParameter : MonoBehaviour
         geoValue = geo_slider.value;
     }
 
-    // Color value slider에서 값 바꿀 때 호출
-    public void SetColorTarget(int targetColor)
-    {
-        // 0이면 A조작, 1이면 B조작
-        editingColor = targetColor;
-    }
+   
 
     // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_R_Value(float value)
+    public void SetColor_R_Value(int targetColor)
     {
-        if(editingColor == 0)
+        if(targetColor == 0)
         {
-            color_A_R = value;
+            color_A_R = color_A_R_slider.value;
         }
         else
         {
-            color_B_R = value;
+            color_B_R = color_B_R_slider.value;
         }
     }
     // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_G_Value(float value)
+    public void SetColor_G_Value(int targetColor)
     {
-        if (editingColor == 0)
+        if (targetColor == 0)
         {
-            color_A_G = value;
+            color_A_G = color_A_G_slider.value;
         }
         else
         {
-            color_B_G = value;
+            color_B_G = color_B_G_slider.value;
         }
     }
     // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_B_Value(float value)
+    public void SetColor_B_Value(int targetColor)
     {
-        if (editingColor == 0)
+        if (targetColor == 0)
         {
-            color_A_B = value;
+            color_A_B = color_A_B_slider.value;
         }
         else
         {
-            color_B_B = value;
+            color_B_B = color_B_B_slider.value;
         }
     }
     // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_BW_Value(float value)
+    public void SetColor_BW_Value(int targetColor)
     {
-        if (editingColor == 0)
+        if (targetColor == 0)
         {
-            color_A_BW = value;
+            color_A_BW = color_A_BW_slider.value;
         }
         else
         {
-            color_B_BW = value;
+            color_B_BW = color_B_BW_slider.value;
         }
     }
 
@@ -302,7 +320,11 @@ public class MappingParameter : MonoBehaviour
             vfx_slider.value = vfxValue;
         }
     }
-
+    // vfx Slider 에서 값 바꿀 때마다 호출
+    public void SetVFXValue()
+    {
+        vfxValue = vfx_slider.value;
+    }
     // speed 타입 바꾸기 ->버튼
     public void SetSpeedType_Right()
     {
