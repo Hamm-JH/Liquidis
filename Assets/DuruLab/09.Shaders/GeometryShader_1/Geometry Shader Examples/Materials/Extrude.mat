@@ -70,7 +70,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _ExtrudeAnimation: 1
-    - _ExtrudeAnimationSpeed: 1
+    - _ExtrudeAnimationSpeed: 1.7
     - _ExtrudeSize: 0.001
     - _GlossMapScale: 0
     - _Glossiness: 0

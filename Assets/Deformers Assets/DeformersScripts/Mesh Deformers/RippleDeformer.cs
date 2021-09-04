@@ -202,8 +202,9 @@ public class RippleDeformer : MonoBehaviour {
 				new_x = x;
 				xsquared = Mathf.Pow (x+OffsetA, 2);
 				ysquared = Mathf.Pow (y+OffsetB, 2);
-				new_z = z + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared +ysquared) + Phaze)*PeakMultiplier;
-				new_y = y;
+			new_z = z + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared +ysquared) + Phaze)*PeakMultiplier;
+					
+					new_y = y;
 				break;
 			}
 
