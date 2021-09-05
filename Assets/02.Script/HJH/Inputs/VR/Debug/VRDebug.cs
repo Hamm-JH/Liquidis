@@ -36,11 +36,45 @@ namespace Inputs.VR.Debug
         public SteamVR_Action_Vector2 Rt_TrackpadPos;
         public SteamVR_Action_Pose Rt_pose;
 
+        public SteamVR_Action_Vibration vive;
+
         // Start is called before the first frame update
         void Start()
         {
-        
-        }
+			//vive.Execute(0, 1, 10, 1f, LeftController);
+			//vive.Execute(0, 1, 10, 1f, RightController);
+
+			//StartCoroutine(DoSomething());
+		}
+
+        private IEnumerator DoSomething()
+		{
+            yield return new WaitForEndOfFrame();
+
+            float time = 0;
+            bool executed = false;
+
+            while(true)
+			{
+                yield return null;
+
+                time += Time.deltaTime;
+
+                if ((int)(time % 2) == 0 && executed == false)
+                {
+                    executed = true;
+                    vive.Execute(0, 0.1f, 1, 1f, RightController);
+                }
+                else if ( (int)(time % 2) != 0 && executed == true)
+				{
+                    executed = false;
+				}
+
+
+			}
+		}
+
+        bool isExecuted = false;
 
         // Update is called once per frame
         void Update()
@@ -68,6 +102,24 @@ namespace Inputs.VR.Debug
                 $"\nRt_pose.localPosition" +
                 $"\n{Rt_pose.localPosition}" +
                 $"\nRt_pose.localRotation {Rt_pose.localRotation}");
+
+			if (Rt_GrabPinch.state)
+			{
+                if(isExecuted == false)
+				{
+                    isExecuted = true;
+				    vive.Execute(0, 1/*Time.deltaTime*/, 0.1f, 0.1f, RightController);
+				}
+			}
+            else if(Rt_GrabPinch.stateUp)
+			{
+                isExecuted = false;
+			}
+
+			//vive.Execute(1, 1, 10, 1f, LeftController);
+			//vive.Execute(1, 1, 10, 1f, RightController);
+
+
 		}
     }
 }
