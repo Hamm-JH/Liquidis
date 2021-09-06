@@ -902,18 +902,18 @@
 				#endif
 			#endif
 
-			/*
-			#if defined(MK_ALPHA_LOOKUP)
-				finalLightColor.a = dot(finalLightColor.rgb, REL_LUMA);
-				//finalLightColor.a = (finalLightColor.r + finalLightColor.g + finalLightColor.b) * 0.33;
-			#endif
-			#if defined(MK_SURFACE_TYPE_OPAQUE)
+			#ifdef MK_LIGHTING_ALPHA
+				#if defined(MK_ALPHA_LOOKUP)
+					finalLightColor.a = dot(finalLightColor.rgb, REL_LUMA);
+					//finalLightColor.a = (finalLightColor.r + finalLightColor.g + finalLightColor.b) * 0.33;
+				#endif
+				#if defined(MK_SURFACE_TYPE_OPAQUE)
+					finalLightColor.a = 1;
+				#endif
+			#else
 				finalLightColor.a = 1;
 			#endif
-			*/
 			
-			finalLightColor.a = 1;
-
 			return diffuse.a;
 		#endif
 	}

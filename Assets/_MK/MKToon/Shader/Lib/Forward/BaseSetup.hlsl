@@ -13,7 +13,7 @@
 		#define MK_FORWARD_BASE_PASS
 	#endif
 
-	#if defined(MK_URP) && defined(MK_PARTICLES)
+	#if defined(MK_URP) && defined(MK_PARTICLES) && UNITY_VERSION >= 202020
 		#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/ParticlesInstancing.hlsl"
 	#endif
 	

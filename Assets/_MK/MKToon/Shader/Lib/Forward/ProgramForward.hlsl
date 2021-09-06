@@ -173,6 +173,7 @@
 					}
 
 					#ifdef _ADDITIONAL_LIGHTS
+						half4 gD = surface.goochDark;
 						surface.goochDark = 0;
 						uint lightCount = GetAdditionalLightsCount();
 						half4 additionalDirect = 0;
@@ -201,10 +202,12 @@
 								surface.direct += additionalDirect;
 							}
 						LIGHT_LOOP_END
+						surface.goochDark = gD;
 					#endif
 				#else
 					LightingDirect(surface, surfaceData, pbsData, light, lightData, surface.direct);
 					#ifdef _ADDITIONAL_LIGHTS
+						half4 gD = surface.goochDark;
 						surface.goochDark = 0;
 						uint lightCount = GetAdditionalLightsCount();
 						half4 additionalDirect = 0;
@@ -216,6 +219,7 @@
 							LightingDirectAdditional(surface, surfaceData, pbsData, additionalLight, additionalLightData, additionalDirect);
 							surface.direct += additionalDirect;
 						}
+						surface.goochDark = gD;
 					#endif
 				#endif
 			#else

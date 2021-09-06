@@ -137,6 +137,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OutlineMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _RimRamp:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -253,6 +257,8 @@ Material:
     - _OptionsTab: 1
     - _Outline: 7
     - _OutlineData: 0
+    - _OutlineFadeMax: 2
+    - _OutlineFadeMin: 0.25
     - _OutlineMode: 1
     - _OutlineNoise: 0
     - _OutlineSize: 3.5
@@ -283,7 +289,7 @@ Material:
     - _SpecularThresholdOffset: 0.25
     - _SrcBlend: 1
     - _Stencil: 2
-    - _StencilComp: 3
+    - _StencilComp: 5
     - _StencilFail: 0
     - _StencilMode: 1
     - _StencilPass: 0
@@ -304,7 +310,7 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _AlbedoColor: {r: 0, g: 0.3019608, b: 0.49019608, a: 1}
+    - _AlbedoColor: {r: 0, g: 0.61599994, b: 1, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0.588, g: 0.588, b: 0.588, a: 1}
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
@@ -325,3 +331,4 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _SpecularColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 1}
     - _VertexAnimationFrequency: {r: 2.5, g: 2.5, b: 2.5, a: 1}
+  m_BuildTextureStacks: []

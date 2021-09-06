@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: title
-  m_Shader: {fileID: 4800000, guid: 459d11903a28c7946969293add79fc98, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 625184ec9986e464da2e853a83113e2d, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,6 +19,22 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - Texture2D_0ac7bc520859470586b7e2f0009bc52b:
+        m_Texture: {fileID: 2800000, guid: a23041ae1aae5b641aff366b0463edc6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_2dd04d5c6b6f4176a578d906befdeaba:
+        m_Texture: {fileID: 2800000, guid: e0708a157f8b38e46848c768cb2ee7c1, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_cb65860d82604ee8a5743cd500fa8c60:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_e57bb59dace54e84b149433cd7f3bd44:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}

@@ -326,7 +326,6 @@ Shader "MK/Toon/URP/Standard/Unlit + Refraction"
 
             #pragma multi_compile_fog
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_REFRACTION
@@ -411,7 +410,6 @@ Shader "MK/Toon/URP/Standard/Unlit + Refraction"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_UNLIT
@@ -513,7 +511,6 @@ Shader "MK/Toon/URP/Standard/Unlit + Refraction"
 
             #pragma multi_compile_fog
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_REFRACTION
@@ -598,7 +595,6 @@ Shader "MK/Toon/URP/Standard/Unlit + Refraction"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_UNLIT

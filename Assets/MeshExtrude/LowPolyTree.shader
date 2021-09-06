@@ -38,7 +38,7 @@
                 }        
               }
      
-            void surf (Input IN, inout SurfaceOutputStandard o) {
+            void su rf (Input IN, inout SurfaceOutputStandard o) {
                 o.Albedo = _Color.rgb;
                 o.Metallic = _Metallic;
                 o.Smoothness = _Glossiness;

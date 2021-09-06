@@ -639,7 +639,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -690,7 +689,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -786,7 +784,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
 
 			#pragma multi_compile_fog
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_STANDARD
@@ -827,7 +824,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -865,7 +861,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -1004,7 +999,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -1053,7 +1047,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -1145,7 +1138,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
 
 			#pragma multi_compile_fog
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_STANDARD
@@ -1184,7 +1176,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS
@@ -1222,7 +1213,6 @@ Shader "MK/Toon/URP/Standard/Physically Based + Outline"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_PBS

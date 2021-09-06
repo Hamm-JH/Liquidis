@@ -61,18 +61,19 @@
 				//surface.final.rgb = lerp(surface.final.rgb, _RimDarkColor.rgb, surface.rimDark.rgb * _RimDarkColor.a);
 			#endif
 
-			/*
-			#if defined(MK_ALPHA_LOOKUP)
-				surface.direct.a = saturate(surface.direct.a);
-			#endif
+			#ifdef MK_LIGHTING_ALPHA
+				#if defined(MK_ALPHA_LOOKUP)
+					surface.direct.a = saturate(surface.direct.a);
+				#endif
 
-			surface.final.a = lerp(surface.goochDark.a, surface.goochBright.a, surface.direct.a);
+				surface.final.a = lerp(surface.goochDark.a, surface.goochBright.a, surface.direct.a);
 
-			#if defined(MK_ALPHA_CLIPPING)
-				Clip0(surface.final.a - _AlphaCutoff);
+				#if defined(MK_ALPHA_CLIPPING)
+					Clip0(surface.final.a - _AlphaCutoff);
+				#endif
+			#else
+				surface.final.a = surface.alpha;
 			#endif
-			*/
-			surface.final.a = surface.alpha;
 		#else
 			//non lit color output
 			surface.final.rgb = surface.albedo;

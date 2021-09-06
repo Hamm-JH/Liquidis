@@ -499,7 +499,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -548,7 +547,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -622,7 +620,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -660,7 +657,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -788,7 +784,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -837,7 +832,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma exclude_renderers d3d11_9x
 
 			#pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -911,7 +905,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
@@ -949,7 +942,6 @@ Shader "MK/Toon/URP/Standard/Simple"
             #pragma shader_feature_local __ _MK_ALPHA_CLIPPING
 
             #pragma multi_compile_instancing
-			#pragma multi_compile __ DOTS_INSTANCING_ON
 
 			#define MK_URP
 			#define MK_SIMPLE
