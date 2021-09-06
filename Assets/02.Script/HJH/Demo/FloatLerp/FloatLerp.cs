@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class FloatLerp : MonoBehaviour
 {
+    [Header("target resource")]
     public GameObject obj;
 
+    public SkinnedMeshRenderer render;
+    public Material mat;
+    public string targetParameter;
+    //---------
+
+    [Header("operating value")]
     public float currentValue;
     [SerializeField] private float targetValue;
 
@@ -26,6 +33,8 @@ public class FloatLerp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //mat = render.material;
+
         //StartCoroutine(Lerp(5, 3, 2, Function.Log));s
     }
 
@@ -57,6 +66,11 @@ public class FloatLerp : MonoBehaviour
         bool isReached = false;     // 러프값 도달 확인
 
         Function func = function;
+        
+        if(mat == null)
+		{
+            mat = render.material;
+		}
 
         while(true)
 		{
@@ -71,7 +85,9 @@ public class FloatLerp : MonoBehaviour
 
                     // 내부 초기화
                     // TODO : 타겟 값을 할당한다
-                    from = obj.transform.position.y;
+                    from = mat.GetFloat(targetParameter);
+                    //from = obj.transform.position.y; // obj 보간할 경우에 씀
+
                     to = targetValue;
 
                     between = to - from;    // 사이값 초기화
@@ -103,11 +119,14 @@ public class FloatLerp : MonoBehaviour
 
 
                 // 움직일 목표에 값 할당
-                obj.transform.position = new Vector3(
-                    0,
-                    from + lerpValue,
-                    0
-                );
+                mat.SetFloat(targetParameter, from + lerpValue);
+
+                // obj 보간시 사용
+                //obj.transform.position = new Vector3(
+                //    0,
+                //    from + lerpValue,
+                //    0
+                //);
 
                 // 현재 값 업데이트
                 // 타겟 값과 러프값을 더한 값으로 업데이트한다.
