@@ -10,13 +10,19 @@ namespace Manager
 	{
 		private EEGSensor sensorStatusData;
 
+		// TODO : 추후 연결정리
+		[Header("demo resource")]
+		public FloatLerp sizeLerpModule;
+		public FloatLerp speedLerpModule;
+
+
 		[Header("Raw Signal")]
-		public LineChart AF3Chart;
-		public LineChart AF4Chart;
-		public LineChart Fp1Chart;
-		public LineChart Fp2Chart;
-		public LineChart AF7Chart;
-		public LineChart AF8Chart;
+		//public LineChart AF3Chart;
+		//public LineChart AF4Chart;
+		//public LineChart Fp1Chart;
+		//public LineChart Fp2Chart;
+		//public LineChart AF7Chart;
+		//public LineChart AF8Chart;
 
 		[Header("Feature Index")]
 		public EEGSensorID SelectChannel;
@@ -124,6 +130,12 @@ namespace Manager
 			alphaV = alpha.value;
 			betaV = beta.value;
 			gammaV = gamma.value;
+
+			if(sizeLerpModule.isReached)
+			{
+				sizeLerpModule.targetValue = (float)deltaV / 100;
+				speedLerpModule.targetValue = (float)thetaV * 3;
+			}
 		}
 
 		IEnumerator DisplayData()

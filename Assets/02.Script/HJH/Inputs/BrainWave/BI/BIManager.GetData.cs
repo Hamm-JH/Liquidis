@@ -20,12 +20,12 @@ namespace Manager
         }
         void OnReceiveEEGRawSignals(EEGRawSignal rawSignalData)
         {
-			if (AF3Chart != null) AF3Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF3));
-			if (AF4Chart != null) AF4Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF4));
-			if (Fp1Chart != null) Fp1Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.Fp1));
-			if (Fp2Chart != null) Fp2Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.Fp2));
-			if (AF7Chart != null) AF7Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF7));
-			if (AF8Chart != null) AF8Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF8));
+			//if (AF3Chart != null) AF3Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF3));
+			//if (AF4Chart != null) AF4Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF4));
+			//if (Fp1Chart != null) Fp1Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.Fp1));
+			//if (Fp2Chart != null) Fp2Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.Fp2));
+			//if (AF7Chart != null) AF7Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF7));
+			//if (AF8Chart != null) AF8Chart.SetValue(rawSignalData.FilteredRawSignal(EEGSensorID.AF8));
 		}
         void OnReceiveEEGFeatureIndexes(EEGFeatureIndex featureIndexData)
         {
@@ -46,6 +46,8 @@ namespace Manager
             alpha.target = (double.IsInfinity(alphaValue) || double.IsNaN(alphaValue)) ? 0.0f : LooxidLinkUtility.Scale(alpha.min, alpha.max, 0.0f, 1.0f, alphaValue);
             beta.target = (double.IsInfinity(betaValue) || double.IsNaN(betaValue)) ? 0.0f : LooxidLinkUtility.Scale(beta.min, beta.max, 0.0f, 1.0f, betaValue);
             gamma.target = (double.IsInfinity(gammaValue) || double.IsNaN(gammaValue)) ? 0.0f : LooxidLinkUtility.Scale(gamma.min, gamma.max, 0.0f, 1.0f, gammaValue);
+
+
 
             //Debug.Log($"Hello");
 

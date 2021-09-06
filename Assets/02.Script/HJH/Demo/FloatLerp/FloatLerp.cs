@@ -10,11 +10,14 @@ public class FloatLerp : MonoBehaviour
     public SkinnedMeshRenderer render;
     public Material mat;
     public string targetParameter;
+
+    public bool isUseMat;
+
     //---------
 
     [Header("operating value")]
-    public float currentValue;
-    [SerializeField] private float targetValue;
+    [SerializeField] private float currentValue;
+    public float targetValue;
 
     public float boundary;      // 러프 재시작 경계값
     public Function function;   // 러프 결정함수
@@ -22,6 +25,8 @@ public class FloatLerp : MonoBehaviour
     public float interval;      // 러프 타이밍 간격
 
     bool isRoutineRunning;      // 루틴 시동관리 변순
+
+    public bool isReached;      // 러프 완료 확인코드
 
 
     public enum Function
@@ -63,7 +68,7 @@ public class FloatLerp : MonoBehaviour
         //float timeValue = 0f;   // 러프 결과값
         float second = interval;    // 시간간격값
 
-        bool isReached = false;     // 러프값 도달 확인
+        isReached = false;     // 러프값 도달 확인
 
         Function func = function;
         
@@ -86,6 +91,13 @@ public class FloatLerp : MonoBehaviour
                     // 내부 초기화
                     // TODO : 타겟 값을 할당한다
                     from = mat.GetFloat(targetParameter);
+     //               if(isUseMat)
+					//{
+					//}
+     //               else
+					//{
+     //                   from = mat.GetColor("_BaseColor").b;
+					//}
                     //from = obj.transform.position.y; // obj 보간할 경우에 씀
 
                     to = targetValue;
@@ -117,9 +129,30 @@ public class FloatLerp : MonoBehaviour
                     between * (func == Function.Log ? Log(timer / second) : Power(timer / second));
 
 
-
-                // 움직일 목표에 값 할당
                 mat.SetFloat(targetParameter, from + lerpValue);
+
+    //            // 움직일 목표에 값 할당
+    //            if(isUseMat)
+				//{
+				//}
+    //            else
+				//{
+    //                float blue = from + lerpValue;
+    //                float red = 1 - (from + lerpValue);
+
+    //                if(blue < 0)
+				//	{
+    //                    blue = 0;
+    //                    red = 1;
+				//	}
+    //                else if(blue > 1)
+				//	{
+    //                    blue = 1;
+    //                    red = 0;
+				//	}
+
+    //                mat.SetColor("_BaseColor", new Color(red, 0, blue));
+				//}
 
                 // obj 보간시 사용
                 //obj.transform.position = new Vector3(
