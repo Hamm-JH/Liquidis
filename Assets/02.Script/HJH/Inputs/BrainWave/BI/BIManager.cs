@@ -91,7 +91,7 @@ namespace Manager
 			LooxidLinkData.OnReceiveMindIndexes += OnReceiveMindIndexes;
 			LooxidLinkData.OnReceiveEEGFeatureIndexes += OnReceiveEEGFeatureIndexes;
 
-			StartCoroutine(DisplayData());
+			//StartCoroutine(DisplayData());
 		}
 
 		private void OnDisable()
@@ -131,7 +131,8 @@ namespace Manager
 			betaV = beta.value;
 			gammaV = gamma.value;
 
-			if(sizeLerpModule.isReached)
+			// TODO 0917 잠시 멈춤
+			if (sizeLerpModule.isReached)
 			{
 				sizeLerpModule.targetValue = (float)deltaV / 100;
 				speedLerpModule.targetValue = (float)thetaV * 3;
@@ -140,6 +141,7 @@ namespace Manager
 
 		IEnumerator DisplayData()
 		{
+			#region 데이터 초기화
 			// 데이터 선언, 초기화
 			List<List<double>> deltaScaleDataList = new List<List<double>>();
 			List<List<double>> thetaScaleDataList = new List<List<double>>();
@@ -147,6 +149,7 @@ namespace Manager
 			List<List<double>> betaScaleDataList = new List<List<double>>();
 			List<List<double>> gammaScaleDataList = new List<List<double>>();
 
+			// 뇌파 센서의 수 만큼 각각의 데이터리스트를 초기화한다.
 			for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
 			{
 				deltaScaleDataList.Add(new List<double>());
@@ -155,20 +158,32 @@ namespace Manager
 				betaScaleDataList.Add(new List<double>());
 				gammaScaleDataList.Add(new List<double>());
 			}
+			#endregion
 
+			// 이 객체가 활성화된 동안 동작
 			while (this.gameObject.activeSelf)
 			{
+				// 0.1초 간격으로 대기
 				yield return new WaitForSeconds(0.1f);
 
+				// 룩시드링크에서 현재에서 과거 10초 안의 데이터를 가져온다.
 				List<EEGFeatureIndex> featureIndexList = LooxidLinkData.Instance.GetEEGFeatureIndexData(10.0f);
 
+				// 가져온 데이터가 하나라도 있을 경우
 				if (featureIndexList.Count > 0)
 				{
 					// 센서별로 리스트 데이터 초기화
+					// AF3 = 0,
+					// AF4 = 1,
+					// Fp1 = 2,
+					// Fp2 = 3,
+					// AF7 = 4,
+					// AF8 = 5
 					for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
 					{
 						for (int ii = 0; ii < featureIndexList.Count; ii++)
 						{
+							// EEGFeatureIndex 리스트의 n번째 요소의 데이터를 반복문에서 하나씩 처리한다.
 							// 센서별로 데이터 수집
 							double deltaValue = featureIndexList[i].Delta((EEGSensorID)i);
 							double thetaValue = featureIndexList[i].Theta((EEGSensorID)i);
