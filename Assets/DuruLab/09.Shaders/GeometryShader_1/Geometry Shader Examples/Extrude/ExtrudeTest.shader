@@ -1,261 +1,274 @@
 ﻿Shader "Universal Render Pipeline/Lit/ExtrudeTest"
 {
-    Properties
-    {
-        // Specular vs Metallic workflow
-        [HideInInspector] _WorkflowMode("WorkflowMode", Float) = 1.0
+	Properties
+	{
+		// Specular vs Metallic workflow
+		[HideInInspector] _WorkflowMode("WorkflowMode", Float) = 1.0
 
-        [MainColor] _BaseColor("Color", Color) = (1,1,1,1)
-        [MainTexture] _BaseMap("Albedo", 2D) = "white" {}
+		[MainColor] _BaseColor("Color", Color) = (1,1,1,1)
+		[MainTexture] _BaseMap("Albedo", 2D) = "white" {}
 
-        _Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
+		_Cutoff("Alpha Cutoff", Range(0.0, 1.0)) = 0.5
 
-        _Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
-        _GlossMapScale("Smoothness Scale", Range(0.0, 1.0)) = 1.0
-        _SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
+		_Smoothness("Smoothness", Range(0.0, 1.0)) = 0.5
+		_GlossMapScale("Smoothness Scale", Range(0.0, 1.0)) = 1.0
+		_SmoothnessTextureChannel("Smoothness texture channel", Float) = 0
 
-        [Gamma] _Metallic("Metallic", Range(0.0, 1.0)) = 0.0
-        _MetallicGlossMap("Metallic", 2D) = "white" {}
+		[Gamma] _Metallic("Metallic", Range(0.0, 1.0)) = 0.0
+		_MetallicGlossMap("Metallic", 2D) = "white" {}
 
-        _SpecColor("Specular", Color) = (0.2, 0.2, 0.2)
-        _SpecGlossMap("Specular", 2D) = "white" {}
+		_SpecColor("Specular", Color) = (0.2, 0.2, 0.2)
+		_SpecGlossMap("Specular", 2D) = "white" {}
 
-        [ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
-        [ToggleOff] _EnvironmentReflections("Environment Reflections", Float) = 1.0
+		[ToggleOff] _SpecularHighlights("Specular Highlights", Float) = 1.0
+		[ToggleOff] _EnvironmentReflections("Environment Reflections", Float) = 1.0
 
-        _BumpScale("Scale", Float) = 1.0
-        _BumpMap("Normal Map", 2D) = "bump" {}
+		_BumpScale("Scale", Float) = 1.0
+		_BumpMap("Normal Map", 2D) = "bump" {}
 
-        _OcclusionStrength("Strength", Range(0.0, 1.0)) = 1.0
-        _OcclusionMap("Occlusion", 2D) = "white" {}
+		_OcclusionStrength("Strength", Range(0.0, 1.0)) = 1.0
+		_OcclusionMap("Occlusion", 2D) = "white" {}
 
-        _EmissionColor("Color", Color) = (0,0,0)
-        _EmissionMap("Emission", 2D) = "white" {}
+		_EmissionColor("Color", Color) = (0,0,0)
+		_EmissionMap("Emission", 2D) = "white" {}
 
-        _ExtrudeSize("Extrude Size", Range(0.0, 2.0)) = 0.25
-        [ToggleOff] _ExtrudeAnimation("Extrude Animation", Float) = 1.0
-        _ExtrudeAnimationSpeed("Extrude Animation Speed", Range(0.0, 100.0)) = 1.0
+		_ExtrudeSize("Extrude Size", Range(0.0, 2.0)) = 0.25
+		[ToggleOff] _ExtrudeAnimation("Extrude Animation", Float) = 1.0
+		_ExtrudeAnimationSpeed("Extrude Animation Speed", Range(0.0, 100.0)) = 1.0
 
-        // Blending state
-        [HideInInspector] _Surface("__surface", Float) = 0.0
-        [HideInInspector] _Blend("__blend", Float) = 0.0
-        [HideInInspector] _AlphaClip("__clip", Float) = 0.0
-        [HideInInspector] _SrcBlend("__src", Float) = 1.0
-        [HideInInspector] _DstBlend("__dst", Float) = 0.0
-        [HideInInspector] _ZWrite("__zw", Float) = 1.0
-        [HideInInspector] _Cull("__cull", Float) = 2.0
+			// Blending state
+			[HideInInspector] _Surface("__surface", Float) = 0.0
+			[HideInInspector] _Blend("__blend", Float) = 0.0
+			[HideInInspector] _AlphaClip("__clip", Float) = 0.0
+			[HideInInspector] _SrcBlend("__src", Float) = 1.0
+			[HideInInspector] _DstBlend("__dst", Float) = 0.0
+			[HideInInspector] _ZWrite("__zw", Float) = 1.0
+			[HideInInspector] _Cull("__cull", Float) = 2.0
 
-        _ReceiveShadows("Receive Shadows", Float) = 1.0
-        // Editmode props
-        [HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
+			_ReceiveShadows("Receive Shadows", Float) = 1.0
+			// Editmode props
+			[HideInInspector] _QueueOffset("Queue offset", Float) = 0.0
 
-        // ObsoleteProperties
-        [HideInInspector] _MainTex("BaseMap", 2D) = "white" {}
-        [HideInInspector] _Color("Base Color", Color) = (1, 1, 1, 1)
-        [HideInInspector] _GlossMapScale("Smoothness", Float) = 0.0
-        [HideInInspector] _Glossiness("Smoothness", Float) = 0.0
-        [HideInInspector] _GlossyReflections("EnvironmentReflections", Float) = 0.0
-    }
+			// ObsoleteProperties
+			[HideInInspector] _MainTex("BaseMap", 2D) = "white" {}
+			[HideInInspector] _Color("Base Color", Color) = (1, 1, 1, 1)
+			[HideInInspector] _GlossMapScale("Smoothness", Float) = 0.0
+			[HideInInspector] _Glossiness("Smoothness", Float) = 0.0
+			[HideInInspector] _GlossyReflections("EnvironmentReflections", Float) = 0.0
 
-    SubShader
-    {
-        // Universal Pipeline tag is required. If Universal render pipeline is not set in the graphics settings
-        // this Subshader will fail. One can add a subshader below or fallback to Standard built-in to make this
-        // material work with both Universal Render Pipeline and Builtin Unity Pipeline
-        Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True"}
-        LOD 300
+				_StencilRef("StencilRef",Int) = 0
+				
+	}
 
-        // ------------------------------------------------------------------
-        //  Forward pass. Shades all light in a single pass. GI + emission + Fog
-        Pass
-        {
-            // Lightmode matches the ShaderPassName set in UniversalRenderPipeline.cs. SRPDefaultUnlit and passes with
-            // no LightMode tag are also rendered by Universal Render Pipeline
-            Name "ForwardLit"
-            Tags{"LightMode" = "UniversalForward"}
+		SubShader
+			{
+				// Universal Pipeline tag is required. If Universal render pipeline is not set in the graphics settings
+				// this Subshader will fail. One can add a subshader below or fallback to Standard built-in to make this
+				// material work with both Universal Render Pipeline and Builtin Unity Pipeline
+				Tags{"RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True"}
+				LOD 300
+					Stencil{
+					Ref[_StencilRef]
+					Comp equal
+					Pass keep
+					ReadMask 255
+					WriteMask 255
+					Pass keep
+					Fail keep
+					ZFail keep
 
-            Blend[_SrcBlend][_DstBlend]
-            ZWrite[_ZWrite]
-            Cull[_Cull]
+		}
+				// ------------------------------------------------------------------
+				//  Forward pass. Shades all light in a single pass. GI + emission + Fog
+				Pass
+				{
+					// Lightmode matches the ShaderPassName set in UniversalRenderPipeline.cs. SRPDefaultUnlit and passes with
+					// no LightMode tag are also rendered by Universal Render Pipeline
+					Name "ForwardLit"
+					Tags{"LightMode" = "UniversalForward"}
 
-            HLSLPROGRAM
-            // Required to compile gles 2.0 with standard SRP library
-            // All shaders must be compiled with HLSLcc and currently only gles is not using HLSLcc by default
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
-            #pragma target 2.0
-            #pragma require geometry
+					Blend[_SrcBlend][_DstBlend]
+					ZWrite[_ZWrite]
+					Cull[_Cull]
 
-            // -------------------------------------
-            // Material Keywords
-            #pragma shader_feature _NORMALMAP
-            #pragma shader_feature _ALPHATEST_ON
-            #pragma shader_feature _ALPHAPREMULTIPLY_ON
-            #pragma shader_feature _EMISSION
-            #pragma shader_feature _METALLICSPECGLOSSMAP
-            #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-            #pragma shader_feature _OCCLUSIONMAP
+					HLSLPROGRAM
+				// Required to compile gles 2.0 with standard SRP library
+				// All shaders must be compiled with HLSLcc and currently only gles is not using HLSLcc by default
+				#pragma prefer_hlslcc gles
+				#pragma exclude_renderers d3d11_9x
+				#pragma target 2.0
+				#pragma require geometry
 
-            #pragma shader_feature _SPECULARHIGHLIGHTS_OFF
-            #pragma shader_feature _ENVIRONMENTREFLECTIONS_OFF
-            #pragma shader_feature _SPECULAR_SETUP
-            #pragma shader_feature _RECEIVE_SHADOWS_OFF
+				// -------------------------------------
+				// Material Keywords
+				#pragma shader_feature _NORMALMAP
+				#pragma shader_feature _ALPHATEST_ON
+				#pragma shader_feature _ALPHAPREMULTIPLY_ON
+				#pragma shader_feature _EMISSION
+				#pragma shader_feature _METALLICSPECGLOSSMAP
+				#pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+				#pragma shader_feature _OCCLUSIONMAP
 
-            // -------------------------------------
-            // Extrusion defined keywords
-            #pragma shader_feature _EXTRUDEANIMATION_OFF
+				#pragma shader_feature _SPECULARHIGHLIGHTS_OFF
+				#pragma shader_feature _ENVIRONMENTREFLECTIONS_OFF
+				#pragma shader_feature _SPECULAR_SETUP
+				#pragma shader_feature _RECEIVE_SHADOWS_OFF
 
-            // -------------------------------------
-            // Universal Pipeline keywords
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS
-            #pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
-            #pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
-            #pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
-            #pragma multi_compile _ _SHADOWS_SOFT
-            #pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
+				// -------------------------------------
+				// Extrusion defined keywords
+				#pragma shader_feature _EXTRUDEANIMATION_OFF
 
-            // -------------------------------------
-            // Unity defined keywords
-            #pragma multi_compile _ DIRLIGHTMAP_COMBINED
-            #pragma multi_compile _ LIGHTMAP_ON
-            #pragma multi_compile_fog
+				// -------------------------------------
+				// Universal Pipeline keywords
+				#pragma multi_compile _ _MAIN_LIGHT_SHADOWS
+				#pragma multi_compile _ _MAIN_LIGHT_SHADOWS_CASCADE
+				#pragma multi_compile _ _ADDITIONAL_LIGHTS_VERTEX _ADDITIONAL_LIGHTS
+				#pragma multi_compile _ _ADDITIONAL_LIGHT_SHADOWS
+				#pragma multi_compile _ _SHADOWS_SOFT
+				#pragma multi_compile _ _MIXED_LIGHTING_SUBTRACTIVE
 
-            //--------------------------------------
-            // GPU Instancing
-            #pragma multi_compile_instancing
+				// -------------------------------------
+				// Unity defined keywords
+				#pragma multi_compile _ DIRLIGHTMAP_COMBINED
+				#pragma multi_compile _ LIGHTMAP_ON
+				#pragma multi_compile_fog
 
-            #pragma vertex LitPassVertex
-            #pragma geometry LitPassGeometry
-            #pragma fragment LitPassFragment
+				//--------------------------------------
+				// GPU Instancing
+				#pragma multi_compile_instancing
 
-            #include "ExtrudeLitInput.hlsl"
-            #include "ExtrudeLitForwardPass.hlsl"
-            ENDHLSL
-        }
+				#pragma vertex LitPassVertex
+				#pragma geometry LitPassGeometry
+				#pragma fragment LitPassFragment
 
-        Pass
-        {
-            Name "ShadowCaster"
-            Tags{"LightMode" = "ShadowCaster"}
+				#include "ExtrudeLitInput.hlsl"
+				#include "ExtrudeLitForwardPass.hlsl"
+				ENDHLSL
+			}
 
-            ZWrite On
-            ZTest LEqual
-            Cull[_Cull]
+			Pass
+			{
+				Name "ShadowCaster"
+				Tags{"LightMode" = "ShadowCaster"}
 
-            HLSLPROGRAM
-            // Required to compile gles 2.0 with standard srp library
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
-            #pragma target 2.0
-            #pragma require geometry
+				ZWrite On
+				ZTest LEqual
+				Cull[_Cull]
 
-            // -------------------------------------
-            // Material Keywords
-            #pragma shader_feature _ALPHATEST_ON
+				HLSLPROGRAM
+				// Required to compile gles 2.0 with standard srp library
+				#pragma prefer_hlslcc gles
+				#pragma exclude_renderers d3d11_9x
+				#pragma target 2.0
+				#pragma require geometry
 
-            //--------------------------------------
-            // GPU Instancing
-            #pragma multi_compile_instancing
-            #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+				// -------------------------------------
+				// Material Keywords
+				#pragma shader_feature _ALPHATEST_ON
 
-            #pragma vertex ShadowPassVertex
-            #pragma geometry ShadowPassGeometry
-            #pragma fragment ShadowPassFragment
+				//--------------------------------------
+				// GPU Instancing
+				#pragma multi_compile_instancing
+				#pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 
-            #include "ExtrudeLitInput.hlsl"
-            #include "ExtrudeShadowCasterPass.hlsl"
-            ENDHLSL
-        }
+				#pragma vertex ShadowPassVertex
+				#pragma geometry ShadowPassGeometry
+				#pragma fragment ShadowPassFragment
 
-        Pass
-        {
-            Name "DepthOnly"
-            Tags{"LightMode" = "DepthOnly"}
+				#include "ExtrudeLitInput.hlsl"
+				#include "ExtrudeShadowCasterPass.hlsl"
+				ENDHLSL
+			}
 
-            ZWrite On
-            ColorMask 0
-            Cull[_Cull]
+			Pass
+			{
+				Name "DepthOnly"
+				Tags{"LightMode" = "DepthOnly"}
 
-            HLSLPROGRAM
-            // Required to compile gles 2.0 with standard srp library
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
-            #pragma target 2.0
-            #pragma require geometry
+				ZWrite On
+				ColorMask 0
+				Cull[_Cull]
 
-            #pragma vertex DepthOnlyVertex
-            #pragma geometry DepthOnlyGeometry
-            #pragma fragment DepthOnlyFragment
+				HLSLPROGRAM
+				// Required to compile gles 2.0 with standard srp library
+				#pragma prefer_hlslcc gles
+				#pragma exclude_renderers d3d11_9x
+				#pragma target 2.0
+				#pragma require geometry
 
-            // -------------------------------------
-            // Material Keywords
-            #pragma shader_feature _ALPHATEST_ON
-            #pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+				#pragma vertex DepthOnlyVertex
+				#pragma geometry DepthOnlyGeometry
+				#pragma fragment DepthOnlyFragment
 
-            //--------------------------------------
-            // GPU Instancing
-            #pragma multi_compile_instancing
+				// -------------------------------------
+				// Material Keywords
+				#pragma shader_feature _ALPHATEST_ON
+				#pragma shader_feature _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 
-            #include "ExtrudeLitInput.hlsl"
-            #include "ExtrudeDepthOnlyPass.hlsl"
-            ENDHLSL
-        }
+				//--------------------------------------
+				// GPU Instancing
+				#pragma multi_compile_instancing
 
-        // This pass it not used during regular rendering, only for lightmap baking.
-        Pass
-        {
-            Name "Meta"
-            Tags{"LightMode" = "Meta"}
+				#include "ExtrudeLitInput.hlsl"
+				#include "ExtrudeDepthOnlyPass.hlsl"
+				ENDHLSL
+			}
 
-            Cull Off
+				// This pass it not used during regular rendering, only for lightmap baking.
+				Pass
+				{
+					Name "Meta"
+					Tags{"LightMode" = "Meta"}
 
-            HLSLPROGRAM
-            // Required to compile gles 2.0 with standard srp library
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
+					Cull Off
 
-            #pragma vertex UniversalVertexMeta
-            #pragma fragment UniversalFragmentMeta
+					HLSLPROGRAM
+				// Required to compile gles 2.0 with standard srp library
+				#pragma prefer_hlslcc gles
+				#pragma exclude_renderers d3d11_9x
 
-            #pragma shader_feature _SPECULAR_SETUP
-            #pragma shader_feature _EMISSION
-            #pragma shader_feature _METALLICSPECGLOSSMAP
-            #pragma shader_feature _ALPHATEST_ON
-            #pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+				#pragma vertex UniversalVertexMeta
+				#pragma fragment UniversalFragmentMeta
 
-            #pragma shader_feature _SPECGLOSSMAP
+				#pragma shader_feature _SPECULAR_SETUP
+				#pragma shader_feature _EMISSION
+				#pragma shader_feature _METALLICSPECGLOSSMAP
+				#pragma shader_feature _ALPHATEST_ON
+				#pragma shader_feature _ _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
 
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitMetaPass.hlsl"
+				#pragma shader_feature _SPECGLOSSMAP
 
-            ENDHLSL
-        }
-        Pass
-        {
-            Name "Universal2D"
-            Tags{ "LightMode" = "Universal2D" }
+				#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+				#include "Packages/com.unity.render-pipelines.universal/Shaders/LitMetaPass.hlsl"
 
-            Blend[_SrcBlend][_DstBlend]
-            ZWrite[_ZWrite]
-            Cull[_Cull]
+				ENDHLSL
+			}
+			Pass
+			{
+				Name "Universal2D"
+				Tags{ "LightMode" = "Universal2D" }
 
-            HLSLPROGRAM
-            // Required to compile gles 2.0 with standard srp library
-            #pragma prefer_hlslcc gles
-            #pragma exclude_renderers d3d11_9x
+				Blend[_SrcBlend][_DstBlend]
+				ZWrite[_ZWrite]
+				Cull[_Cull]
 
-            #pragma vertex vert
-            #pragma fragment frag
-            #pragma shader_feature _ALPHATEST_ON
-            #pragma shader_feature _ALPHAPREMULTIPLY_ON
+				HLSLPROGRAM
+				// Required to compile gles 2.0 with standard srp library
+				#pragma prefer_hlslcc gles
+				#pragma exclude_renderers d3d11_9x
 
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
-            #include "Packages/com.unity.render-pipelines.universal/Shaders/Utils/Universal2D.hlsl"
-            ENDHLSL
-        }
+				#pragma vertex vert
+				#pragma fragment frag
+				#pragma shader_feature _ALPHATEST_ON
+				#pragma shader_feature _ALPHAPREMULTIPLY_ON
+
+				#include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
+				#include "Packages/com.unity.render-pipelines.universal/Shaders/Utils/Universal2D.hlsl"
+				ENDHLSL
+			}
 
 
-    }
-    FallBack "Hidden/Universal Render Pipeline/FallbackError"
-    CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.ExtrudeLitShader"
+			}
+				FallBack "Hidden/Universal Render Pipeline/FallbackError"
+				//   CustomEditor "UnityEditor.Rendering.Universal.ShaderGUI.ExtrudeLitShader"
 }

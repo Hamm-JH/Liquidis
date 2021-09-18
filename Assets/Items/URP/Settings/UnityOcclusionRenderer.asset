@@ -20,52 +20,13 @@ MonoBehaviour:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 8
+        m_Bits: 64
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: 192c6a83a026ae34698ea55a7df5639a, type: 2}
+    overrideMaterial: {fileID: 2100000, guid: 2c6a83d1303ce47228acf3a969d9b49a, type: 2}
     overrideMaterialPassIndex: 0
     overrideDepthState: 1
     depthCompareFunction: 4
     enableWrite: 1
-    stencilSettings:
-      overrideStencilState: 0
-      stencilReference: 0
-      stencilCompareFunction: 8
-      passOperation: 0
-      failOperation: 0
-      zFailOperation: 0
-    cameraSettings:
-      overrideCamera: 0
-      restoreCamera: 1
-      offset: {x: 0, y: 0, z: 0, w: 0}
-      cameraFieldOfView: 60
---- !u!114 &-2748514356091039034
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
-  m_Name: Obstacle
-  m_EditorClassIdentifier: 
-  m_Active: 1
-  settings:
-    passTag: Obstacle
-    Event: 300
-    filterSettings:
-      RenderQueueType: 0
-      LayerMask:
-        serializedVersion: 2
-        m_Bits: 64
-      PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: bc6e6e37b6a346a4281b022da25f890e, type: 2}
-    overrideMaterialPassIndex: 0
-    overrideDepthState: 1
-    depthCompareFunction: 5
-    enableWrite: 0
     stencilSettings:
       overrideStencilState: 0
       stencilReference: 0
@@ -98,7 +59,7 @@ MonoBehaviour:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 136
+        m_Bits: 64
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: 2c6a83d1303ce47228acf3a969d9b49a, type: 2}
     overrideMaterialPassIndex: 0
@@ -132,7 +93,6 @@ MonoBehaviour:
   m_RendererFeatures:
   - {fileID: -780751906011717640}
   - {fileID: -4517663146314970007}
-  - {fileID: -2748514356091039034}
   - {fileID: 1881682561235368309}
   m_RendererFeatureMap: c6d22161c150dbd975397be251141d1a
   postProcessData: {fileID: 11400000, guid: 41439944d30ece34e96484bdb6645b55, type: 2}
@@ -175,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b3d386ba5cd94485973aee1479b272e, type: 3}
   m_Name: eyelash
   m_EditorClassIdentifier: 
-  m_Active: 1
+  m_Active: 0
   settings:
     passTag: eyelash
     Event: 300
@@ -185,7 +145,7 @@ MonoBehaviour:
         serializedVersion: 2
         m_Bits: 128
       PassNames: []
-    overrideMaterial: {fileID: 2100000, guid: bc6e6e37b6a346a4281b022da25f890e, type: 2}
+    overrideMaterial: {fileID: 0}
     overrideMaterialPassIndex: 0
     overrideDepthState: 1
     depthCompareFunction: 5
