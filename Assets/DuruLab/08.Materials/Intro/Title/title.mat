@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_0ac7bc520859470586b7e2f0009bc52b:
-        m_Texture: {fileID: 2800000, guid: a23041ae1aae5b641aff366b0463edc6, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_2dd04d5c6b6f4176a578d906befdeaba:
@@ -77,6 +77,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _ParallaxMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7e74121bcc7c488180b480fdd97815b9_Texture_1:
+        m_Texture: {fileID: 2800000, guid: 1b2dba613df99794597f9979261d90ba, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_f935757da2794c33bd137cbcd8bac6cd_Texture_1:
+        m_Texture: {fileID: 2800000, guid: f37f5171180275e49809b3fd026f7874, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
