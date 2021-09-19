@@ -5,6 +5,7 @@ using UnityEngine;
 namespace API
 {
 	using Looxid.Link;
+	using UnityEngine.Events;
 
 	public sealed class Brainwave : _API
 	{
@@ -13,10 +14,11 @@ namespace API
 		/// </summary>
 		/// <param name="targetId"> 요청 센서데이터 </param>
 		/// <param name="targetSecond"> 요청 검출 초 간격 </param>
-		public Brainwave(EEGSensorID targetId, float targetSecond)
+		public Brainwave(EEGSensorID targetId, float targetSecond, UnityAction<Brainwave> targetCallBack)
 		{
 			id = targetId;
 			second = targetSecond;
+			callBack = targetCallBack;
 		}
 
 		/// <summary>
@@ -32,7 +34,7 @@ namespace API
 			delta = _delta;
 			theta = _theta;
 			alpha = _alpha;
-			beta = _beta;
+			beta  = _beta;
 			gamma = _gamma;
 		}
 
@@ -41,6 +43,8 @@ namespace API
 		/// </summary>
 		private EEGSensorID id;
 		private float second;
+		private UnityAction<Brainwave> callBack;
+
 		private float delta;
 		private float theta;
 		private float alpha;
@@ -52,10 +56,12 @@ namespace API
 		/// </summary>
 		public EEGSensorID Id { get => id; }		// 요청 : EEG 센서정보
 		public float Second { get => second; }		// 요청 : 추출 시간간격
+		public UnityAction<Brainwave> CallBack { get => callBack;}	// 요청 : 데이터 반환 이벤트
+
 		public float Delta { get => delta; }		// 출력 : 델타파 비중치 0 ~ 1
 		public float Theta { get => theta; }		// 출력 : 세타파 비중치 0 ~ 1
 		public float Alpha { get => alpha; }		// 출력 : 알파파 비중치 0 ~ 1
 		public float Beta { get => beta; }			// 출력 : 베타파 비중치 0 ~ 1
-		public float Gamma { get => gamma; }		// 출력 : 감마파 비중치 0 ~ 1
+		public float Gamma { get => gamma; }        // 출력 : 감마파 비중치 0 ~ 1
 	}
 }

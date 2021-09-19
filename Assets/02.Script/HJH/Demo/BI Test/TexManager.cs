@@ -28,18 +28,22 @@ public class TexManager : MonoBehaviour
         int index = Enum.GetValues(typeof(EEGSensorID)).Length;
 		for (int i = 0; i < index; i++)
 		{
-            Request(new API.Brainwave(targetId: (EEGSensorID)i, targetSecond: 10), biGetter);
+            Request(new API.Brainwave(
+                targetId: (EEGSensorID)i,
+                targetSecond: 10,
+                targetCallBack: biGetter)
+                );
         }
 	}
 
     /// <summary>
-    /// 관리자로 데이터 요청
+    /// 뇌파 관리자로 데이터 요청
     /// </summary>
     /// <param name="api"></param>
     /// <param name="action"></param>
-    private void Request(API.Brainwave api, UnityAction<API.Brainwave> action)
+    private void Request(API.Brainwave api)
 	{
-        Manager.BIManager.Instance.GetData(api, action);
+        Manager.BIManager.Instance.Request(api);
 	}
 
     /// <summary>
