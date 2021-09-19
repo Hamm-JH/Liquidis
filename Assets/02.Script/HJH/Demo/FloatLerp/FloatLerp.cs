@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class FloatLerp : MonoBehaviour
 {
+    // 러프를 실행할 목표 변수, 객체
+
     [Header("target resource")]
     public GameObject obj;
 
@@ -14,6 +16,7 @@ public class FloatLerp : MonoBehaviour
     public bool isUseMat;
 
     //---------
+    // 러프 변수
 
     [Header("operating value")]
     [SerializeField] private float currentValue;
@@ -24,7 +27,7 @@ public class FloatLerp : MonoBehaviour
 
     public float interval;      // 러프 타이밍 간격
 
-    bool isRoutineRunning;      // 루틴 시동관리 변순
+    bool isRoutineRunning;      // 루틴 시동관리 변수
 
     public bool isReached;      // 러프 완료 확인코드
 
@@ -35,14 +38,9 @@ public class FloatLerp : MonoBehaviour
         Power
 	}
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        //mat = render.material;
-
-        //StartCoroutine(Lerp(5, 3, 2, Function.Log));s
-    }
-
+    /// <summary>
+    /// 이 스크립트 활성화시, 러프 코루틴을 활성화한다.
+    /// </summary>
 	private void OnEnable()
 	{
         isRoutineRunning = true;
@@ -50,12 +48,15 @@ public class FloatLerp : MonoBehaviour
         StartCoroutine(Lerp());
     }
 
+    /// <summary>
+    /// 이 스크립트 비활성화시, 러프 코루틴을 비활성화한다.
+    /// </summary>
 	private void OnDisable()
 	{
         isRoutineRunning = false;
 	}
 
-	public IEnumerator Lerp(/*float from, float to, float second, Function func*/)
+	public IEnumerator Lerp()
     {
         // 지정된 초(second) 동안 from에서 to로 러프 연산
 
@@ -65,7 +66,6 @@ public class FloatLerp : MonoBehaviour
 
         float timer = 0f;       // 내부 타이머값
 
-        //float timeValue = 0f;   // 러프 결과값
         float second = interval;    // 시간간격값
 
         isReached = false;     // 러프값 도달 확인
@@ -88,17 +88,9 @@ public class FloatLerp : MonoBehaviour
 				{
                     isReached = false;
 
-                    // 내부 초기화
-                    // TODO : 타겟 값을 할당한다
+                    // 내부 변수 초기화
+                    // 시작 변수값 할당
                     from = mat.GetFloat(targetParameter);
-     //               if(isUseMat)
-					//{
-					//}
-     //               else
-					//{
-     //                   from = mat.GetColor("_BaseColor").b;
-					//}
-                    //from = obj.transform.position.y; // obj 보간할 경우에 씀
 
                     to = targetValue;
 
@@ -106,16 +98,18 @@ public class FloatLerp : MonoBehaviour
                     second = interval;      // 시간간격 업데이트
 
                     timer = 0;      // 타이머 초기화
-                    //timeValue = 0;  // 시간 결과값 초기화
 
                     func = function;    // 러프 결정함수 업데이트
 				}
                 else
 				{
+                    // 코루틴 종료 확인
+                    if (!isRoutineRunning) break;
                     yield return null;
                     continue;
 				}
 			}
+            // 러프 진행
             else
 			{
                 // 타이머 업데이트
@@ -129,101 +123,58 @@ public class FloatLerp : MonoBehaviour
                     between * (func == Function.Log ? Log(timer / second) : Power(timer / second));
 
 
-                mat.SetFloat(targetParameter, from + lerpValue);
+				#region 목표 변수에 러프값 할당
 
-    //            // 움직일 목표에 값 할당
-    //            if(isUseMat)
-				//{
-				//}
-    //            else
-				//{
-    //                float blue = from + lerpValue;
-    //                float red = 1 - (from + lerpValue);
+				mat.SetFloat(targetParameter, from + lerpValue);
 
-    //                if(blue < 0)
-				//	{
-    //                    blue = 0;
-    //                    red = 1;
-				//	}
-    //                else if(blue > 1)
-				//	{
-    //                    blue = 1;
-    //                    red = 0;
-				//	}
+				#endregion
 
-    //                mat.SetColor("_BaseColor", new Color(red, 0, blue));
-				//}
+				// 목표 변수의 현재값 업데이트
+				// 타겟 값과 러프값을 더한 값으로 업데이트한다.
+				currentValue = from + lerpValue;
 
-                // obj 보간시 사용
-                //obj.transform.position = new Vector3(
-                //    0,
-                //    from + lerpValue,
-                //    0
-                //);
-
-                // 현재 값 업데이트
-                // 타겟 값과 러프값을 더한 값으로 업데이트한다.
-                currentValue = from + lerpValue;
-
-
+                // 코루틴 종료 확인
                 if (!isRoutineRunning) break;
-
                 yield return null;
 			}
 
-            // isReached == false인 경우, 다시 러프값이 초기화된 경우
-
-
-            // boundary보다 차이값이 많이 나는 경우
-            //timer = (timer + Time.deltaTime >= second) ? second : timer + Time.deltaTime;
-
-            // 타임오버시 브레이크
-            //if (timer >= second)    isReached = true;
-
-            // 현재 진행된 시간만큼 러프할 기반값을 계산
-            //float lerpValue =
-            //    between * (func == Function.Log ? Log(timer / second) : Power(timer / second));
-
-            //Debug.Log(lerpValue);
-
-            //Debug.Log(timer / second);
-            //Debug.Log(Log(timer / second));
-
-            //obj.transform.position = new Vector3(
-            //    0,
-            //    Log(timer/second),
-            //    0
-            //    );
-
+            // 코루틴 종료 확인
             if (!isRoutineRunning) break;
-
             yield return null;
 		}
 
         yield break;
 	}
 
-    public float Log(float _value)
+	#region 러프용 수학 함수
+
+	/// <summary>
+	/// 로그6 함수
+	/// </summary>
+	/// <param name="_value"></param>
+	/// <returns></returns>
+	public float Log(float _value)
     {
         float value = Mathf.Log((_value*63 + 1), 2) / 6;
 
         return value;
 
-        Debug.Log(Mathf.Log((_value*63 + 1), 2) / 6);
+        //Debug.Log(Mathf.Log((_value*63 + 1), 2) / 6);
     }
 
+    /// <summary>
+    /// n제곱 함수
+    /// </summary>
+    /// <param name="_value"></param>
+    /// <returns></returns>
     public float Power(float _value)
 	{
         float value = Mathf.Pow(_value * 32, 2) / Mathf.Pow(32, 2);
 
         return value;
 
-        Debug.Log(value);
+        //Debug.Log(value);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	#endregion
 }
