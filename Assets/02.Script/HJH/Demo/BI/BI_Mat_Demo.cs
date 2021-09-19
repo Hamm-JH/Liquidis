@@ -34,16 +34,17 @@ public class BI_Mat_Demo : MonoBehaviour
 
         if(currSec != lastSec)
 		{
-            //Debug.Log($"sec changed : {currSec}");
+            // TODO 0919 Comm
+            ////Debug.Log($"sec changed : {currSec}");
 
-            Debug.Log(biManager.Delta.value);
-            float dValue = (float)biManager.deltaV;
+            //Debug.Log(biManager.Delta.value);
+            //float dValue = (float)biManager.deltaV;
 
-            float prev = targetMat.GetFloat("_ExtrudeSize");
-            float toV = 0.001f + dValue / 100 * 10;
-            targetMat.SetFloat("_ExtrudeSize", toV);
+            //float prev = targetMat.GetFloat("_ExtrudeSize");
+            //float toV = 0.001f + dValue / 100 * 10;
+            //targetMat.SetFloat("_ExtrudeSize", toV);
 
-            tm.text = toV.ToString();
+            //tm.text = toV.ToString();
 		}
 
         lastSec = currSec;

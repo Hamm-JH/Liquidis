@@ -36,7 +36,7 @@ public class TexOut : MonoBehaviour
 		int index = eegTxt.baseTexts.Count;
 		for (int i = 0; i < index; i++)
 		{
-			Debug.Log("Hello");
+			//Debug.Log("Hello");
 			sb.AppendLine(string.Format("{0}\t: {1}", eegTxt.baseTexts[i], _in[i]));
 		}
 
