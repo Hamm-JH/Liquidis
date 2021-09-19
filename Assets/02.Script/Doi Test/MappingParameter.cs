@@ -16,21 +16,24 @@ public class MappingParameter : MonoBehaviour
                 return _mappingParameter;
         }
     }
-    
+    [Header("object")]
+    public GameObject previewCube;
+    public Material refMaterial;
+
     [Header("value")]
     // Geometry
     public int geometryType = 0;
     public float geoValue = 0f;
 
     // Color
-    public float color_A_R = 0f;
+    public float color_A_R = 1f;
     public float color_A_G = 0f;
     public float color_A_B = 0f;
     public float color_A_BW = 0f;
 
     public float color_B_R = 0f;
     public float color_B_G = 0f;
-    public float color_B_B = 0f;
+    public float color_B_B = 1f;
     public float color_B_BW = 0f;
 
     public float colorValue = 0f;
@@ -132,6 +135,8 @@ public class MappingParameter : MonoBehaviour
         speed_right_button.onClick.AddListener(SetSpeedType_Right);
         speed_sub_button.onClick.AddListener(SpeedValueSub);
         speed_add_button.onClick.AddListener(SpeedValueAdd);
+
+        previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
 }
 
     // 전체 메뉴 <- 버튼
@@ -282,6 +287,12 @@ public class MappingParameter : MonoBehaviour
             colorValue += 0.1f;
             color_slider.value = colorValue;
         }
+    }
+
+    // 프리뷰 큐브에 색깔 입히는 매소드
+    void LerpColorSetColor()
+    {
+
     }
 
     // vfx type 바꾸는 버튼 ->
