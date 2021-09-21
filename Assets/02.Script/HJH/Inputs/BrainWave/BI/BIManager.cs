@@ -2,6 +2,7 @@ using Looxid.Link;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -49,6 +50,9 @@ namespace Manager
 		[Header("Feature Index")]
 		//public EEGSensorID SelectChannel;
 
+		private bool isSensorConnected;
+		private bool isSensorNoised;
+
 		// 센서의 개수를 지정한 변수 (초기화 대상)
 		private int sensorCount;
 
@@ -68,6 +72,9 @@ namespace Manager
 		public LinkDataValue[] Alpha { get => alpha; set => alpha = value; }
 		public LinkDataValue[] Beta { get => beta; set => beta = value; }
 		public LinkDataValue[] Gamma { get => gamma; set => gamma = value; }
+
+		public bool IsSensorConnected { get => isSensorConnected;}
+		public bool IsSensorNoised { get => isSensorNoised;}
 
 		#endregion
 
@@ -209,6 +216,8 @@ namespace Manager
 		/// <param name="api"></param>
 		public void Request(API.Brainwave api)
 		{
+			//ThreadPool.QueueUserWorkItem(Request_Inside, api);
+
 			// 센서 인덱스
 			EEGSensorID id = api.Id;
 			int sIndex = (int)id;
@@ -223,7 +232,7 @@ namespace Manager
 			float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
 			float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
 			float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
-			float _beta =  Mathf.Lerp((float)Beta[sIndex].value,  (float)Beta[sIndex].target,  1);
+			float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
 			float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
 
 			// 수집된 데이터 api에 할당
@@ -231,6 +240,60 @@ namespace Manager
 
 			// 수집된 데이터를 콜백 이벤트에 실어보냄
 			api.CallBack.Invoke(api);
+
+			//string str = "";
+			//str += $"sensorID : {api.Id.ToString()}\n";
+			//str += $"delta : {api.Delta}\n";
+			//str += $"theta : {api.Theta}\n";
+			//str += $"alpha : {api.Alpha}\n";
+			//str += $"beta : {api.Beta}\n";
+			//str += $"gamma : {api.Gamma}\n";
+
+			//Debug.Log(str);
+		}
+
+		private void Request_Inside(object _api)
+		{
+			if (IsSensorConnected != true && IsSensorNoised != false) return;
+
+			API.Brainwave api = _api as API.Brainwave;
+
+			int sIndex = (int)api.Id;
+
+			// 타이머별 데이터 수집코드		// 코루틴 코드 대체 (min, max 할당)
+			// 여기서 EEG.min, EEG.max값 할당
+			SetSingleEEG(api.Id, api.Second);
+
+			// 수집코드 할당				// Update 코드 대체 (value 할당)
+			float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
+			float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
+			float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
+			float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
+			float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
+
+			// 수집된 데이터 api에 할당
+			api.Set(_delta, _theta, _alpha, _beta, _gamma);
+
+			
+
+			// 수집된 데이터를 콜백 이벤트에 실어보냄
+			api.CallBack.Invoke(api);
+			////Debug.Log($"Hello");
+			
+			//string str = "";
+			//str += $"sensorID : {api.Id.ToString()}\n";
+			//str += $"-- delta : {api.Delta}\n";
+			//str += $"-- theta : {api.Theta}\n";
+			//str += $"-- alpha : {api.Alpha}\n";
+			//str += $"-- beta : {api.Beta}\n";
+			//str += $"-- gamma : {api.Gamma}\n";
+
+			//Debug.Log(str);
+			
+			//str += $"second : {api.Second}\n";
+			//str += $"callback event : {api.CallBack}";
+
+			//Debug.Log(str);
 		}
 
 		private void SetSingleEEG(EEGSensorID id, float second)

@@ -52,16 +52,28 @@ public class TexManager : MonoBehaviour
     /// <param name="api"></param>
     private void Receive(API.Brainwave api)
 	{
-        List<string> _in = new List<string>();
-        _in.Add(api.Id.ToString());
-        _in.Add(api.Delta.ToString());
-        _in.Add(api.Theta.ToString());
-        _in.Add(api.Alpha.ToString());
-        _in.Add(api.Beta.ToString());
-        _in.Add(api.Gamma.ToString());
+        //stacks[(int)api.Id].Push(api);
 
-        eegTxts[(int)api.Id].Set(_in.ToArray());
-    }
+		List<string> _in = new List<string>();
+		_in.Add(api.Id.ToString());
+		_in.Add(api.Delta.ToString());
+		_in.Add(api.Theta.ToString());
+		_in.Add(api.Alpha.ToString());
+		_in.Add(api.Beta.ToString());
+		_in.Add(api.Gamma.ToString());
+
+		eegTxts[(int)api.Id].Set(_in.ToArray());
+
+		//string str = "";
+		//str += $"++ sensorID : {api.Id.ToString()}\n";
+		//str += $"++ delta : {api.Delta}\n";
+		//str += $"++ theta : {api.Theta}\n";
+		//str += $"++ alpha : {api.Alpha}\n";
+		//str += $"++ beta : {api.Beta}\n";
+		//str += $"++ gamma : {api.Gamma}\n";
+
+		//Debug.Log(str);
+	}
 
 	private void OnEnable()
 	{

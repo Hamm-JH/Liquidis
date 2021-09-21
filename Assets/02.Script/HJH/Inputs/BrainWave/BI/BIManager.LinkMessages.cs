@@ -45,6 +45,7 @@ namespace Manager
         void OnShowSensorOffMessage()
         {
             Debug.Log("Sensor off");
+            isSensorConnected = false;
         }
 
         /// <summary>
@@ -53,6 +54,7 @@ namespace Manager
         void OnHideSensorOffMessage()
         {
             Debug.Log("Sensor on");
+            isSensorConnected = true;
         }
 
         /// <summary>
@@ -61,6 +63,7 @@ namespace Manager
         void OnShowNoiseSignalMessage()
         {
             Debug.Log("noise detected");
+            isSensorNoised = true;
         }
 
         /// <summary>
@@ -69,6 +72,7 @@ namespace Manager
         void OnHideNoiseSignalMessage()
         {
             Debug.Log("noise not detected");
+            isSensorNoised = false;
         }
     }
 }
