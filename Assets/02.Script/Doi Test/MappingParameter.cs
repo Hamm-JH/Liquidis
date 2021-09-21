@@ -36,6 +36,10 @@ public class MappingParameter : MonoBehaviour
     public float color_B_B = 1f;
     public float color_B_BW = 0f;
 
+    Color colorA;
+    Color colorB;
+    Color lerpColor;
+
     public float colorValue = 0f;
     int editingColor = 0;
 
@@ -137,7 +141,11 @@ public class MappingParameter : MonoBehaviour
         speed_add_button.onClick.AddListener(SpeedValueAdd);
 
         previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
-}
+
+        colorA = new Color(color_A_R, color_A_G, color_A_B, color_A_BW);
+        colorB = new Color(color_B_R, color_B_G, color_B_B, color_B_BW);
+        lerpColor = Color.Lerp(colorA, colorB, 0f);
+    }
 
     // 전체 메뉴 <- 버튼
     public void GeneralMenu_Left()
@@ -221,10 +229,15 @@ public class MappingParameter : MonoBehaviour
         if(targetColor == 0)
         {
             color_A_R = color_A_R_slider.value;
+            colorA.r = color_A_R_slider.value;
+            LerpColorSetColor(colorValue);
         }
         else
         {
             color_B_R = color_B_R_slider.value;
+            colorB.r = color_B_R_slider.value;
+            LerpColorSetColor(colorValue);
+
         }
     }
     // Color value slider에서 값 바꿀 때 호출
@@ -233,10 +246,16 @@ public class MappingParameter : MonoBehaviour
         if (targetColor == 0)
         {
             color_A_G = color_A_G_slider.value;
+            colorA.g = color_A_G_slider.value;
+            LerpColorSetColor(colorValue);
+
         }
         else
         {
             color_B_G = color_B_G_slider.value;
+            colorB.g = color_B_G_slider.value;
+            LerpColorSetColor(colorValue);
+
         }
     }
     // Color value slider에서 값 바꿀 때 호출
@@ -245,10 +264,15 @@ public class MappingParameter : MonoBehaviour
         if (targetColor == 0)
         {
             color_A_B = color_A_B_slider.value;
+            colorA.b = color_B_B_slider.value;
+            LerpColorSetColor(colorValue);
         }
         else
         {
             color_B_B = color_B_B_slider.value;
+            colorB.b = color_B_B_slider.value;
+            LerpColorSetColor(colorValue);
+
         }
     }
     // Color value slider에서 값 바꿀 때 호출
@@ -257,10 +281,14 @@ public class MappingParameter : MonoBehaviour
         if (targetColor == 0)
         {
             color_A_BW = color_A_BW_slider.value;
+            colorA.a = color_A_BW_slider.value;
+            LerpColorSetColor(colorValue);
         }
         else
         {
             color_B_BW = color_B_BW_slider.value;
+            colorB.a = color_B_BW_slider.value;
+            LerpColorSetColor(colorValue);
         }
     }
 
@@ -268,6 +296,7 @@ public class MappingParameter : MonoBehaviour
     public void SetColorValue()
     {
         colorValue = color_slider.value;
+        LerpColorSetColor(colorValue);
     }
 
     // Color 슬라이더 조작 -
@@ -277,6 +306,8 @@ public class MappingParameter : MonoBehaviour
         {
             colorValue -= 0.1f;
             color_slider.value = colorValue;
+            LerpColorSetColor(colorValue);
+
         }
     }
     // Color 슬라이더 조작 +
@@ -286,13 +317,16 @@ public class MappingParameter : MonoBehaviour
         {
             colorValue += 0.1f;
             color_slider.value = colorValue;
+            LerpColorSetColor(colorValue);
+
         }
     }
 
     // 프리뷰 큐브에 색깔 입히는 매소드
-    void LerpColorSetColor()
+    void LerpColorSetColor(float value)
     {
-
+        lerpColor = Color.Lerp(colorA, colorB, value);
+        previewCube.GetComponent<MeshRenderer>().material.color = lerpColor;
     }
 
     // vfx type 바꾸는 버튼 ->
