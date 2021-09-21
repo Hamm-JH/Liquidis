@@ -29,12 +29,12 @@ public class MappingParameter : MonoBehaviour
     public float color_A_R = 1f;
     public float color_A_G = 0f;
     public float color_A_B = 0f;
-    public float color_A_BW = 0f;
+    //public float color_A_BW = 0f;
 
     public float color_B_R = 0f;
     public float color_B_G = 0f;
     public float color_B_B = 1f;
-    public float color_B_BW = 0f;
+    //public float color_B_BW = 0f;
 
     Color colorA;
     Color colorB;
@@ -73,12 +73,12 @@ public class MappingParameter : MonoBehaviour
     public Slider color_A_R_slider;
     public Slider color_A_G_slider;
     public Slider color_A_B_slider;
-    public Slider color_A_BW_slider;
+    //public Slider color_A_BW_slider;
 
     public Slider color_B_R_slider;
     public Slider color_B_G_slider;
     public Slider color_B_B_slider;
-    public Slider color_B_BW_slider;
+    //public Slider color_B_BW_slider;
 
     public Button color_sub_button;
     public Button color_add_button;
@@ -142,8 +142,8 @@ public class MappingParameter : MonoBehaviour
 
         previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
 
-        colorA = new Color(color_A_R, color_A_G, color_A_B, color_A_BW);
-        colorB = new Color(color_B_R, color_B_G, color_B_B, color_B_BW);
+        colorA = new Color(color_A_R, color_A_G, color_A_B);
+        colorB = new Color(color_B_R, color_B_G, color_B_B);
         lerpColor = Color.Lerp(colorA, colorB, 0f);
     }
 
@@ -276,21 +276,21 @@ public class MappingParameter : MonoBehaviour
         }
     }
     // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_BW_Value(int targetColor)
-    {
-        if (targetColor == 0)
-        {
-            color_A_BW = color_A_BW_slider.value;
-            colorA.a = color_A_BW_slider.value;
-            LerpColorSetColor(colorValue);
-        }
-        else
-        {
-            color_B_BW = color_B_BW_slider.value;
-            colorB.a = color_B_BW_slider.value;
-            LerpColorSetColor(colorValue);
-        }
-    }
+    //public void SetColor_BW_Value(int targetColor)
+    //{
+    //    if (targetColor == 0)
+    //    {
+    //        color_A_BW = color_A_BW_slider.value;
+    //        colorA.a = color_A_BW_slider.value;
+    //        LerpColorSetColor(colorValue);
+    //    }
+    //    else
+    //    {
+    //        color_B_BW = color_B_BW_slider.value;
+    //        colorB.a = color_B_BW_slider.value;
+    //        LerpColorSetColor(colorValue);
+    //    }
+    //}
 
     // Color Slider 에서 값 바꿀 때 호출
     public void SetColorValue()
