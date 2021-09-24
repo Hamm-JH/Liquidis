@@ -271,7 +271,7 @@ Material:
     - _ParticlesTab: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RenderFace: 1
+    - _RenderFace: 2
     - _RenderPriority: 1
     - _Rim: 0
     - _RimSize: 1
