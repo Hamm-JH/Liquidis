@@ -54,8 +54,8 @@ Material:
     - _Float5: 1
     - _Metallic: 1
     - _NoiseStrength: 0.139
-    - _NoiseStrengthA: 0.000001
-    - _NoiseStrengthB: 0.000001
+    - _NoiseStrengthA: 0
+    - _NoiseStrengthB: 0
     - _NoiseStrengthC: 0
     - _PlayerHole: -1.01
     - _PlayerRadius: 1.79
@@ -103,7 +103,7 @@ Material:
     - _NoiseScaleB: {r: 1, g: 1, b: 1, a: 0}
     - _NoiseScaleC: {r: 1, g: 1, b: 2.02, a: 0}
     - _PlayerPos: {r: 1.77, g: 6.11, b: -31.65, a: 0}
-    - _RimColor: {r: 0.3490566, g: 0.3490566, b: 0.3490566, a: 0}
+    - _RimColor: {r: 0.34905654, g: 0.34905654, b: 0.34905654, a: 0}
     - _SmoothStep: {r: 0.2, g: 0.83, b: 0, a: 0}
     - _TextureColor: {r: 0, g: 0.5252361, b: 1, a: 1}
     - _Tiling: {r: -0.05, g: -0.05, b: 0, a: 0}

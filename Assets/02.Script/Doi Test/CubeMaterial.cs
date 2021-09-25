@@ -38,13 +38,14 @@ public class CubeMaterial : MonoBehaviour
     {
        
         targetRotation = cubeObj.transform.eulerAngles.y - 90f;
-
-        if(targetRotation < 0f)
+        Debug.Log(targetRotation);
+        if (targetRotation <= 0f)
         {
             targetRotation += 360f;
+            //360 - ÇöÀç°ª.
         }
        
-        Debug.Log(targetRotation);
+        
         rotateRight = true;
     }
 
@@ -68,7 +69,7 @@ public class CubeMaterial : MonoBehaviour
            
 
         }
-
+        Debug.Log("y is "+transform.rotation.eulerAngles.y);
         if (rotateRight)
         {
             cubeObj.transform.Rotate(new Vector3(0f, -1f, 0f));

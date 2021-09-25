@@ -155,8 +155,8 @@ Material:
     - ENUM_4C9403D0: 0
     - Vector1_6C8D85FC: 0.5
     - Vector1_F897DEF9: 0
-    - _BiomesEdgeNoiseScale: 0.73
-    - _BiomesEdgeNoiseStrength: 2.49
+    - _BiomesEdgeNoiseScale: 5.57
+    - _BiomesEdgeNoiseStrength: 1.47
     - _DesertBiomeDisplacementAmplitude: 0.4
     - _DesertBiomeDisplacementPower: 2.4
     - _DesertBiomeNoiseBaseRoughness: 0.15
@@ -164,7 +164,7 @@ Material:
     - _DesertBiomeNoisePersistence: 0.5
     - _DesertBiomeNoiseRoughness: 6.3
     - _DesertBiomeNoiseStrength: 0.55
-    - _DisplacementAmplitude: 0.03
+    - _DisplacementAmplitude: 0.09
     - _DisplacementPower: 3.17
     - _ForestBiomeDisplacementAmplitude: 0.7
     - _ForestBiomeDisplacementPower: 2.77
@@ -175,12 +175,12 @@ Material:
     - _ForestBiomeNoiseStrength: 0.7
     - _Metallic: 0.01
     - _NoiseBaseRoughness: 1
-    - _NoiseOctaves: 3
+    - _NoiseOctaves: 2.74
     - _NoisePersistence: 1.19
     - _NoiseRoughness: 1
-    - _NoiseStrength: 0.1
+    - _NoiseStrength: 0.31
     - _Occlusion: 0.52
-    - _PlanetMeshRadius: 1
+    - _PlanetMeshRadius: 0.93
     - _PolarBiomeDisplacementAmplitude: 0.4
     - _PolarBiomeDisplacementPower: 6.36
     - _PolarBiomeNoiseBaseRoughness: 1.62
