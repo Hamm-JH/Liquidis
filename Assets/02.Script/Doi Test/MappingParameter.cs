@@ -54,7 +54,9 @@ public class MappingParameter : MonoBehaviour
 
     [Header("General")]
     public int currentOpenMenu = 0;
+    public int currentMatchEmotion = 0;
     public GameObject[] menu_UI;
+    public int[] matchType;
 
     [Header("UI")]
     // General
@@ -100,7 +102,7 @@ public class MappingParameter : MonoBehaviour
     public Button speed_sub_button;
     public Button speed_add_button;
 
-
+    
     private void Awake()
     {
         if (_mappingParameter == null)
@@ -124,7 +126,7 @@ public class MappingParameter : MonoBehaviour
         // Color
         color_sub_button.onClick.AddListener(ColorValueSub);
         color_add_button.onClick.AddListener(ColorValueAdd);
-       
+
 
 
         // VFX_Texture
@@ -148,6 +150,13 @@ public class MappingParameter : MonoBehaviour
 
         // 흑백으로 세팅
         LerpColorSetColor(colorValue);
+
+        matchType = new int[4];
+        for(int i=0; i<4; i++)
+        {
+            matchType[i] = 0;
+        }
+
     }
 
     // 전체 메뉴 <- 버튼
@@ -178,6 +187,38 @@ public class MappingParameter : MonoBehaviour
 
             menu_UI[currentOpenMenu].SetActive(true);
         }
+    }
+
+    // CubeMaterial에서 호출
+    public void SetCurrentEmotion(int num)
+    {
+        currentMatchEmotion = num;
+    }
+    public void MatchButtonClicked()
+    {
+        matchType[currentOpenMenu] = currentMatchEmotion;
+    }
+
+    public bool CheckAllMappingEmotion()
+    {
+        int count = 0;
+        bool result = false;
+
+        for(int i=0; i<4; i++)
+        {
+            if(matchType[i] == 0)
+            {
+                count++;
+            }
+            
+        }
+
+        if (count == 0)
+            result = true;
+        else
+            result = false;
+
+        return result;
     }
 
     // Geometry 타입 바꾸기 ->버튼

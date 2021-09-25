@@ -19,6 +19,11 @@ public class CubeMaterial : MonoBehaviour
     float targetRotation = 0f;
     float curRotation = 0f;
 
+    public int currentEmotion = 1;
+    // 1부터 시작, 1,2,3,4
+
+    public MappingParameter mappingParameter;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,24 +34,41 @@ public class CubeMaterial : MonoBehaviour
     void RotateCubeLeft()
     {
         
-        targetRotation = cubeObj.transform.eulerAngles.y + 90f;
-        rotateLeft = true;
-        
+       
+        if(currentEmotion < 4)
+        {
+            currentEmotion += 1;
+            mappingParameter.SetCurrentEmotion(currentEmotion);
+
+            targetRotation = cubeObj.transform.eulerAngles.y + 90f;
+            rotateLeft = true;
+
+        }
+
     }
 
     void RotateCubeRight()
     {
        
-        targetRotation = cubeObj.transform.eulerAngles.y - 90f;
-        Debug.Log(targetRotation);
-        if (targetRotation <= 0f)
-        {
-            targetRotation += 360f;
-            //360 - 현재값.
-        }
        
         
-        rotateRight = true;
+        if (currentEmotion > 1)
+        {
+            currentEmotion -= 1;
+            mappingParameter.SetCurrentEmotion(currentEmotion);
+
+            if (targetRotation <= 0f)
+            {
+                targetRotation += 360f;
+                //360 - 현재값.
+            }
+
+            targetRotation = cubeObj.transform.eulerAngles.y - 90f;
+            Debug.Log(targetRotation);
+            rotateRight = true;
+
+        }
+
     }
 
 

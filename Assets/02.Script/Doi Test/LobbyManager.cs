@@ -21,28 +21,38 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
       public void OnJoinButtonClicked()
       {
-          enterLobby_button.interactable = false;
 
-          if (PhotonNetwork.IsConnected)
-          {
+        if (MappingParameter.instance.CheckAllMappingEmotion())
+        {
+            enterLobby_button.interactable = false;
 
-
-              status_text.text = "접속 중입니다";
-
-              RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
-
-              PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+            if (PhotonNetwork.IsConnected)
+            {
 
 
-          }
-          else
-          {
-              enterLobby_button.interactable = false;
+                status_text.text = "접속 중입니다";
 
-              status_text.text = "Offline : Connection Disabled - Try Reconnecting";
+                RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
-              PhotonNetwork.ConnectUsingSettings();
-          }
+                PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+
+
+            }
+            else
+            {
+                enterLobby_button.interactable = false;
+
+                status_text.text = "Offline : Connection Disabled - Try Reconnecting";
+
+                PhotonNetwork.ConnectUsingSettings();
+            }
+        }
+        else
+        {
+            // 맵핑을 다 해야 넘어간다는 안내창 필요
+            Debug.Log("맵핑이 다 안됐다");
+        }
+         
 
 
 

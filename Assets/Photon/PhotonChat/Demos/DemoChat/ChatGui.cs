@@ -127,7 +127,7 @@ namespace Photon.Chat.Demo
 
             if (string.IsNullOrEmpty(this.UserName))
             {
-               //his.UserName = "user" + Environment.TickCount%99; //made-up username
+                this.UserName = "user" /*+ Environment.TickCount%99*/; //made-up username
             }
 
             #if PHOTON_UNITY_NETWORKING
