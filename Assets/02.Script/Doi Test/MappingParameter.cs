@@ -27,13 +27,13 @@ public class MappingParameter : MonoBehaviour
 
     // Color
     public float color_A_R = 1f;
-    public float color_A_G = 0f;
-    public float color_A_B = 0f;
+    public float color_A_G = 1f;
+    public float color_A_B = 1f;
     //public float color_A_BW = 0f;
 
     public float color_B_R = 0f;
     public float color_B_G = 0f;
-    public float color_B_B = 1f;
+    public float color_B_B = 0f;
     //public float color_B_BW = 0f;
 
     Color colorA;
@@ -145,6 +145,9 @@ public class MappingParameter : MonoBehaviour
         colorA = new Color(color_A_R, color_A_G, color_A_B);
         colorB = new Color(color_B_R, color_B_G, color_B_B);
         lerpColor = Color.Lerp(colorA, colorB, 0f);
+
+        // 흑백으로 세팅
+        LerpColorSetColor(colorValue);
     }
 
     // 전체 메뉴 <- 버튼

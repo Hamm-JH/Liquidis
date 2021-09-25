@@ -16,9 +16,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
       {
 
           PhotonNetwork.ConnectUsingSettings();
+        OnConnectedToMaster();
       }
 
-      private void OnJoinButtonClicked()
+      public void OnJoinButtonClicked()
       {
           enterLobby_button.interactable = false;
 
@@ -74,7 +75,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
           status_text.text = "방에 입장하는 중입니다";
 
-          PhotonNetwork.LoadLevel("03.MeetingRoom");
+          PhotonNetwork.LoadLevel("04_Play_WaitingRoom");
 
 
 
