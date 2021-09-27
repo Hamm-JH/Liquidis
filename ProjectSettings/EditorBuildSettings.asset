@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Items/URP/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/01.Scene/Main/01_Intro.unity
+    path: Assets/01.Scene/Main/Backup/0927__01_Intro.unity
     guid: 337af64afce53ca4c96b00a73df07ea4
   - enabled: 1
-    path: Assets/01.Scene/Main/02_Play_Guide.unity
+    path: Assets/01.Scene/Main/Backup/0927__02_Play_Guide.unity
     guid: bc1a7e5ae76424a93a9c0e6afaa3461c
   - enabled: 1
     path: Assets/01.Scene/Main/03_Play_Select.unity

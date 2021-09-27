@@ -20,6 +20,8 @@ public class TrackpadMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        float y = Rt_TrackpadPos.axis.y;
+
+        targetTransform.Translate(Vector3.forward * y);
     }
 }
