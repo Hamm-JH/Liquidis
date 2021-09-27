@@ -57,11 +57,13 @@ public class MappingParameter : MonoBehaviour
     public int currentMatchEmotion = 0;
     public GameObject[] menu_UI;
     public int[] matchType;
+    public bool[] typeUse;
 
     [Header("UI")]
     // General
     public Button menu_left_button;
     public Button menu_right_button;
+    public Button match_button;
 
     // Geometry
     public Button geo_left_button;
@@ -151,12 +153,20 @@ public class MappingParameter : MonoBehaviour
         // 흑백으로 세팅
         LerpColorSetColor(colorValue);
 
+
+        // 타입 이니셜
         matchType = new int[4];
+        typeUse = new bool[4];
         for(int i=0; i<4; i++)
         {
             matchType[i] = 0;
+            typeUse[i] = false;
         }
 
+        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        {
+            match_button.interactable = true;
+        }
     }
 
     // 전체 메뉴 <- 버튼
@@ -171,7 +181,19 @@ public class MappingParameter : MonoBehaviour
             currentOpenMenu -= 1;
 
             menu_UI[currentOpenMenu].SetActive(true);
+
+            if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+            {
+                match_button.interactable = true;
+            }
+            else
+            {
+                match_button.interactable = false;
+
+            }
         }
+
+        
     }
 
     // 전체 메뉴 -> 버튼
@@ -186,17 +208,56 @@ public class MappingParameter : MonoBehaviour
             currentOpenMenu += 1;
 
             menu_UI[currentOpenMenu].SetActive(true);
+
+            if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+            {
+                match_button.interactable = true;
+            }
+            else
+            {
+                match_button.interactable = false;
+
+            }
         }
+
+        
     }
 
     // CubeMaterial에서 호출
     public void SetCurrentEmotion(int num)
     {
         currentMatchEmotion = num;
+
+        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        {
+            match_button.interactable = true;
+        }
     }
+
+    // match 버튼 클릭
     public void MatchButtonClicked()
     {
         matchType[currentOpenMenu] = currentMatchEmotion;
+        typeUse[currentMatchEmotion] = true;
+        match_button.interactable = false;
+        
+    }
+
+    // cancel 버튼 클릭
+    public void CancelButtonClicked()
+    {
+        matchType[currentOpenMenu] = 0;
+        typeUse[currentMatchEmotion] = false;
+
+        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        {
+            match_button.interactable = true;
+        }
+    }
+
+    bool CheckTypeUse()
+    {
+        return typeUse[currentMatchEmotion];
     }
 
     public bool CheckAllMappingEmotion()
