@@ -33,7 +33,7 @@ namespace Demo
 			RaycastHit hit;
 
 			//if(Physics.Raycast(laserTransform.position, laserTransform.forward, out hit, 100, LayerMask.NameToLayer("Interactable")))
-			if (Physics.Raycast(laserTransform.position, laserTransform.forward, out hit, 100))
+			if (Physics.Raycast(laserTransform.position, laserTransform.forward, out hit, 1000))
 			{
 				//Debug.Log(LayerMask.LayerToName(hit.transform.gameObject.layer));
 				laser.transform.localScale = new Vector3(1, 1, hit.distance);
