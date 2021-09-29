@@ -21,9 +21,9 @@ public class RotateCylinder_Duru : MonoBehaviour
     {
 
 
-        cy1.transform.Rotate(Vector3.forward * Time.deltaTime * speed);
-        cy2.transform.Rotate(Vector3.forward * Time.deltaTime * -speed);
-        cy3.transform.Rotate(Vector3.forward * Time.deltaTime * speed);
+        cy1.transform.Rotate(Vector3.up * Time.deltaTime * speed);
+        cy2.transform.Rotate(Vector3.up * Time.deltaTime * -speed);
+        cy3.transform.Rotate(Vector3.up * Time.deltaTime * speed);
 
 
     }
