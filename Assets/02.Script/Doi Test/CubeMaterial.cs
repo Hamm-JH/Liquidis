@@ -27,8 +27,8 @@ public class CubeMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        left_rotate_button.onClick.AddListener(RotateCubeLeft);
-        right_rotate_button.onClick.AddListener(RotateCubeRight);
+        //left_rotate_button.onClick.AddListener(RotateCubeLeft);
+        //right_rotate_button.onClick.AddListener(RotateCubeRight);
     }
 
     void RotateCubeLeft()
@@ -91,7 +91,7 @@ public class CubeMaterial : MonoBehaviour
            
 
         }
-        Debug.Log("y is "+transform.rotation.eulerAngles.y);
+        //Debug.Log("y is "+transform.rotation.eulerAngles.y);
         if (rotateRight)
         {
             cubeObj.transform.Rotate(new Vector3(0f, -1f, 0f));

@@ -18,6 +18,8 @@ public class VRInputModule : BaseInputModule
         eventSystem.RaycastAll(Data, m_RaycastResultCache);
         Data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
 
+        //Debug.Log(Data.pointerCurrentRaycast.gameObject);
+
         HandlePointerExitAndEnter(Data, Data.pointerCurrentRaycast.gameObject);
 
         ExecuteEvents.Execute(Data.pointerDrag, Data, ExecuteEvents.dragHandler);

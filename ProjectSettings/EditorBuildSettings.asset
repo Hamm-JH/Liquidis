@@ -15,7 +15,7 @@ EditorBuildSettings:
     path: Assets/01.Scene/Main/Backup/0927__02_Play_Guide.unity
     guid: bc1a7e5ae76424a93a9c0e6afaa3461c
   - enabled: 1
-    path: Assets/01.Scene/Main/03_Play_Select.unity
+    path: Assets/01.Scene/Main/Backup/0929__03_Play_Select.unity
     guid: b296347f040ff4045b98c828358506e9
   - enabled: 1
     path: Assets/01.Scene/Main/04_Play_WaitingRoom.unity
