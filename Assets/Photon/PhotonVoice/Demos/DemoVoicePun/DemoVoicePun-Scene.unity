@@ -4435,7 +4435,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 2fd3b782f12b3444997ac3cea871d5d5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.116
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -6285,7 +6285,7 @@ MonoBehaviour:
   MinimalTimeScaleToDispatchInFixedUpdate: -1
   AutoCreateSpeakerIfNotFound: 1
   AutoConnectAndJoin: 1
-  AutoLeaveAndDisconnect: 1
-  WorkInOfflineMode: 1
+  AutoLeaveAndDisconnect: 0
+  WorkInOfflineMode: 0
   usePunAppSettings: 1
   usePunAuthValues: 1
