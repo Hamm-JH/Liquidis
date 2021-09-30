@@ -24,12 +24,13 @@ public class RippleDeformer : MonoBehaviour {
 	[Tooltip("Enable/Disable the use of the effector")]
 	public bool UseEffector = false;
 	[Tooltip("The effector Object (must have the effector script attached to it)")]
-	public GameObject Effector;
+	public GameObject[] Effector = new GameObject[2];
+	
 	float new_y, new_x, new_z,xsquared,ysquared,zsquared = 0;
 	Mesh deformingMesh;
 	Vector3[] originalVertices, displacedVertices;
 	float normalized,curveValue,normalized2,curveValue2;
-	private EffectorVal theEffector;
+	private EffectorVal[] theEffector = new EffectorVal[2];
 
 	private float EffectorDistance = 3.0f;
 	private bool InvertedEffector = false;
@@ -38,9 +39,14 @@ public class RippleDeformer : MonoBehaviour {
 
 	void Start () 
 	{
+
 		if (UseEffector != false) {
 			if (Effector != null) {
-				theEffector = Effector.GetComponent<EffectorVal> ();
+                for (int i = 0; i < Effector.Length; i++)
+                {
+					theEffector[i] = Effector[i].GetComponent<EffectorVal>();
+				}
+				
 			} else {
 				Debug.LogWarning ("Please assign an effector to the effector Value, to create an effector go to: Mesh Deformer -> createEffector");
 			}
@@ -73,98 +79,116 @@ public class RippleDeformer : MonoBehaviour {
 	}
 	void RippleEffector()
 	{
-			InvertedEffector = theEffector.Inverted;
-			Refinecurve = theEffector.FallOffCurve;
-			EffectorDistance = theEffector.EffectorDistance;
+        for (int i = 0; i < Effector.Length; i++)
+        {
+			InvertedEffector = theEffector[i].Inverted;
+			Refinecurve = theEffector[i].FallOffCurve;
+			EffectorDistance = theEffector[i].EffectorDistance;
 
-		if (!InvertedEffector) {
-			for (int i = 0; i < originalVertices.Length; i++) {
-				if (Vector3.Distance (transform.TransformPoint (originalVertices [i]), Effector.transform.position) <= EffectorDistance) { 
-					float dist = Vector3.Distance (transform.TransformPoint (originalVertices [i]), Effector.transform.position);
-					normalizedCurve = dist / EffectorDistance;
-					curveValue = Refinecurve.Evaluate (normalizedCurve);
-					float x, y, z;
-					x = originalVertices [i].x;
-					y = originalVertices [i].y;
-					z = originalVertices [i].z;
-					switch (DeformAxis) {
-					case Axis.X:
-						new_y = y;
-						ysquared = Mathf.Pow (y + OffsetA, 2);
-						zsquared = Mathf.Pow (z + OffsetB, 2);
-						new_x = x + Mathf.Sin (Frequency * Mathf.Sqrt (ysquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
-						new_z = z;
-						break;
+			if (!InvertedEffector)
+			{
+				for (int j = 0; j < originalVertices.Length; j++)
+				{
 
-					case Axis.Y:
-						new_x = x;
-						xsquared = Mathf.Pow (x + OffsetA, 2);
-						zsquared = Mathf.Pow (z + OffsetB, 2);
-						new_y = y + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
-						new_z = z;
-						break;
+					if (Vector3.Distance(transform.TransformPoint(originalVertices[j]), Effector[i].transform.position) <= EffectorDistance)
+					{
+						float dist = Vector3.Distance(transform.TransformPoint(originalVertices[j]), Effector[i].transform.position);
+						normalizedCurve = dist / EffectorDistance;
+						curveValue = Refinecurve.Evaluate(normalizedCurve);
+						float x, y, z;
+						x = originalVertices[j].x;
+						y = originalVertices[j].y;
+						z = originalVertices[j].z;
+						switch (DeformAxis)
+						{
+							case Axis.X:
+								new_y = y;
+								ysquared = Mathf.Pow(y + OffsetA, 2);
+								zsquared = Mathf.Pow(z + OffsetB, 2);
+								new_x = x + Mathf.Sin(Frequency * Mathf.Sqrt(ysquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
+								new_z = z;
+								break;
 
-					case Axis.Z:
-						new_x = x;
-						xsquared = Mathf.Pow (x + OffsetA, 2);
-						ysquared = Mathf.Pow (y + OffsetB, 2);
-						new_z = z + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared + ysquared) + Phaze) * PeakMultiplier * curveValue;
-						new_y = y;
-						break;
+							case Axis.Y:
+								new_x = x;
+								xsquared = Mathf.Pow(x + OffsetA, 2);
+								zsquared = Mathf.Pow(z + OffsetB, 2);
+								new_y = y + Mathf.Sin(Frequency * Mathf.Sqrt(xsquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
+								new_z = z;
+								break;
+
+							case Axis.Z:
+								new_x = x;
+								xsquared = Mathf.Pow(x + OffsetA, 2);
+								ysquared = Mathf.Pow(y + OffsetB, 2);
+								new_z = z + Mathf.Sin(Frequency * Mathf.Sqrt(xsquared + ysquared) + Phaze) * PeakMultiplier * curveValue;
+								new_y = y;
+								break;
+						}
+
+						Vector3 newvertPos = new Vector3(new_x, new_y, new_z);
+						displacedVertices[j] = newvertPos;
 					}
-
-					Vector3 newvertPos = new Vector3 (new_x, new_y, new_z);
-					displacedVertices [i] = newvertPos;
-				} else {
-					displacedVertices [i] = originalVertices [i];
+					else
+					{
+						displacedVertices[j] = originalVertices[j];
+					}
 				}
 			}
-		} else {
-			for (int i = 0; i < originalVertices.Length; i++) {
-				if (Vector3.Distance (transform.TransformPoint (originalVertices [i]), Effector.transform.position) >= EffectorDistance) { 
-					float dist = Vector3.Distance (transform.TransformPoint (originalVertices [i]), Effector.transform.position);
-					normalizedCurve = (dist - EffectorDistance) / EffectorDistance;
-					curveValue = Refinecurve.Evaluate (normalizedCurve);
-					float x, y, z;
-					x = originalVertices [i].x;
-					y = originalVertices [i].y;
-					z = originalVertices [i].z;
-					switch (DeformAxis) {
-					case Axis.X:
-						new_y = y;
-						ysquared = Mathf.Pow (y + OffsetA, 2);
-						zsquared = Mathf.Pow (z + OffsetB, 2);
-						new_x = x + Mathf.Sin (Frequency * Mathf.Sqrt (ysquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
-						new_z = z;
-						break;
+			else
+			{
+				for (int j = 0; j < originalVertices.Length; j++)
+				{
+					if (Vector3.Distance(transform.TransformPoint(originalVertices[j]), Effector[i].transform.position) >= EffectorDistance)
+					{
+						float dist = Vector3.Distance(transform.TransformPoint(originalVertices[j]), Effector[i].transform.position);
+						normalizedCurve = (dist - EffectorDistance) / EffectorDistance;
+						curveValue = Refinecurve.Evaluate(normalizedCurve);
+						float x, y, z;
+						x = originalVertices[j].x;
+						y = originalVertices[j].y;
+						z = originalVertices[j].z;
+						switch (DeformAxis)
+						{
+							case Axis.X:
+								new_y = y;
+								ysquared = Mathf.Pow(y + OffsetA, 2);
+								zsquared = Mathf.Pow(z + OffsetB, 2);
+								new_x = x + Mathf.Sin(Frequency * Mathf.Sqrt(ysquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
+								new_z = z;
+								break;
 
-					case Axis.Y:
-						new_x = x;
-						xsquared = Mathf.Pow (x + OffsetA, 2);
-						zsquared = Mathf.Pow (z + OffsetB, 2);
-						new_y = y + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
-						new_z = z;
-						break;
+							case Axis.Y:
+								new_x = x;
+								xsquared = Mathf.Pow(x + OffsetA, 2);
+								zsquared = Mathf.Pow(z + OffsetB, 2);
+								new_y = y + Mathf.Sin(Frequency * Mathf.Sqrt(xsquared + zsquared) + Phaze) * PeakMultiplier * curveValue;
+								new_z = z;
+								break;
 
-					case Axis.Z:
-						new_x = x;
-						xsquared = Mathf.Pow (x + OffsetA, 2);
-						ysquared = Mathf.Pow (y + OffsetB, 2);
-						new_z = z + Mathf.Sin (Frequency * Mathf.Sqrt (xsquared + ysquared) + Phaze) * PeakMultiplier * curveValue;
-						new_y = y;
-						break;
+							case Axis.Z:
+								new_x = x;
+								xsquared = Mathf.Pow(x + OffsetA, 2);
+								ysquared = Mathf.Pow(y + OffsetB, 2);
+								new_z = z + Mathf.Sin(Frequency * Mathf.Sqrt(xsquared + ysquared) + Phaze) * PeakMultiplier * curveValue;
+								new_y = y;
+								break;
+						}
+
+						Vector3 newvertPos = new Vector3(new_x, new_y, new_z);
+						displacedVertices[j] = newvertPos;
 					}
-
-					Vector3 newvertPos = new Vector3 (new_x, new_y, new_z);
-					displacedVertices [i] = newvertPos;
-				} else {
-					displacedVertices [i] = originalVertices [i];
+					else
+					{
+						displacedVertices[j] = originalVertices[j];
+					}
 				}
 			}
+
+			deformingMesh.vertices = displacedVertices;
+			deformingMesh.RecalculateNormals();
 		}
-
-		deformingMesh.vertices = displacedVertices;
-		deformingMesh.RecalculateNormals();
+			
 	}	
 
 	public void animateRipple()
