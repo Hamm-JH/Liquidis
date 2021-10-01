@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
+using Photon.Voice;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
 
     public Button enterLobby_button;
     public Text status_text;
+    
 
   private string roomCode = "ABCD";
       void Start()
@@ -17,6 +19,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
           PhotonNetwork.ConnectUsingSettings();
         OnConnectedToMaster();
+
+        
       }
 
       public void OnJoinButtonClicked()
