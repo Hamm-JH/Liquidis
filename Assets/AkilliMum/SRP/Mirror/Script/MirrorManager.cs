@@ -225,7 +225,13 @@ namespace AkilliMum.SRP.Mirror
            ScriptableRenderContext context,
            Camera cameraSrp)
         {
-            _camera = cameraSrp;
+            if(_camera == null)
+            {
+                _camera = GetComponent<Camera>();
+                if (_camera == null)
+                    _camera = Camera.main;
+            }
+            //_camera = cameraSrp;
 
             _context = context;
 
@@ -1016,6 +1022,8 @@ namespace AkilliMum.SRP.Mirror
             return 0.0f;
         }
 
+
+        private List<XRNodeState> nodeStates = new List<XRNodeState>();
         public void Draw(RendererManager rendererManager,
             RenderTextureManager renderTextureManager,
             ScriptableRenderContext context,
@@ -1062,6 +1070,23 @@ namespace AkilliMum.SRP.Mirror
                 var fix = distance / 2;
 
                 worldToCameraMatrix[12] += stereoTargetEyeMask == StereoTargetEyeMask.Left ? fix : -fix;
+
+
+
+
+                //Quaternion eyeRotation;
+                //InputTracking.GetNodeStates(nodeStates);
+                //if (stereoTargetEyeMask == StereoTargetEyeMask.Left)
+                //{
+                //    var state = nodeStates.FirstOrDefault(node => node.nodeType == XRNode.LeftEye);
+                //    state.TryGetRotation(out eyeRotation);
+                //}
+                //else
+                //{
+                //    var state = nodeStates.FirstOrDefault(node => node.nodeType == XRNode.RightEye);
+                //    state.TryGetRotation(out eyeRotation);
+                //}
+                //_mirrorCamera.transform.rotation = eyeRotation; //!!!
             }
 
             _mirrorCamera.worldToCameraMatrix = worldToCameraMatrix;
