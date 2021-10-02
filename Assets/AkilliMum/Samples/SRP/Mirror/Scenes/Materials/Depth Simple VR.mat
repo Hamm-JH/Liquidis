@@ -150,7 +150,7 @@ Material:
     - _EnableDepthBlur: -1
     - _EnableLocallyCorrection: -1
     - _EnableMask: -1
-    - _EnableRefraction: -1
+    - _EnableRefraction: 1
     - _EnableRipple: -1
     - _EnableRotation: 0
     - _EnableSimpleDepth: 1
