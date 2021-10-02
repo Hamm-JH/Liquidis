@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class MappingParameter : MonoBehaviour
 {
-   private static MappingParameter _mappingParameter;
-   public static MappingParameter instance
+    private static MappingParameter _mappingParameter;
+    public static MappingParameter instance
     {
         get
         {
@@ -26,22 +26,23 @@ public class MappingParameter : MonoBehaviour
     public float geoValue = 0f;
 
     // Color
-    public float color_A_R = 1f;
-    public float color_A_G = 1f;
-    public float color_A_B = 1f;
+
+    //public float color_A_R = 1f;
+    //public float color_A_G = 1f;
+    //public float color_A_B = 1f;
     //public float color_A_BW = 0f;
 
-    public float color_B_R = 0f;
-    public float color_B_G = 0f;
-    public float color_B_B = 0f;
+    //public float color_B_R = 0f;
+    //public float color_B_G = 0f;
+    //public float color_B_B = 0f;
     //public float color_B_BW = 0f;
 
-    Color colorA;
-    Color colorB;
+    public Color colorA;
+    public Color colorB;
     Color lerpColor;
 
     public float colorValue = 0f;
-    int editingColor = 0;
+    public int targetColor = 0;
 
     // VFX_Texture
     public int vfx_textureType = 0;
@@ -50,7 +51,7 @@ public class MappingParameter : MonoBehaviour
     // Speed
     public int speedType = 0;
     public float speedValue = 0f;
-  
+
 
     [Header("General")]
     public int currentOpenMenu = 0;
@@ -58,6 +59,9 @@ public class MappingParameter : MonoBehaviour
     public GameObject[] menu_UI;
     public int[] matchType;
     public bool[] typeUse;
+    public Material[] geoMaterials_origin;
+    public Material[] geoMaterials;
+
 
     [Header("UI")]
     // General
@@ -74,15 +78,20 @@ public class MappingParameter : MonoBehaviour
 
 
     // Color
-    public Slider color_A_R_slider;
-    public Slider color_A_G_slider;
-    public Slider color_A_B_slider;
+    //public Slider color_A_R_slider;
+    //public Slider color_A_G_slider;
+    //public Slider color_A_B_slider;
     //public Slider color_A_BW_slider;
 
-    public Slider color_B_R_slider;
-    public Slider color_B_G_slider;
-    public Slider color_B_B_slider;
+    //public Slider color_B_R_slider;
+    //public Slider color_B_G_slider;
+    //public Slider color_B_B_slider;
     //public Slider color_B_BW_slider;
+
+    public ColorPicker colorPicker;
+    public Button setColorA_button;
+    public Button setColorB_button;
+
 
     public Button color_sub_button;
     public Button color_add_button;
@@ -104,7 +113,7 @@ public class MappingParameter : MonoBehaviour
     public Button speed_sub_button;
     public Button speed_add_button;
 
-    
+
     private void Awake()
     {
         if (_mappingParameter == null)
@@ -125,9 +134,20 @@ public class MappingParameter : MonoBehaviour
         geo_sub_button.onClick.AddListener(GeoValueAdd);
         geo_add_button.onClick.AddListener(GeoValueSub);
 
+
+        // geo material 초기화 
+        for (int i = 0; i < geoMaterials_origin.Length; i++)
+        {
+            geoMaterials[i] = new Material(geoMaterials_origin[i]);
+        }
+
+        previewCube.GetComponent<MeshRenderer>().material = geoMaterials[0];
+
         // Color
         color_sub_button.onClick.AddListener(ColorValueSub);
         color_add_button.onClick.AddListener(ColorValueAdd);
+        setColorA_button.onClick.AddListener(SetColorTargetA);
+        setColorB_button.onClick.AddListener(SetColorTargetB);
 
 
 
@@ -144,11 +164,13 @@ public class MappingParameter : MonoBehaviour
         speed_sub_button.onClick.AddListener(SpeedValueSub);
         speed_add_button.onClick.AddListener(SpeedValueAdd);
 
-        previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
+        //previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
 
-        colorA = new Color(color_A_R, color_A_G, color_A_B);
-        colorB = new Color(color_B_R, color_B_G, color_B_B);
+        colorA = new Color(1, 1, 1);
+        colorB = new Color(0, 0, 0);
         lerpColor = Color.Lerp(colorA, colorB, 0f);
+
+
 
         // 흑백으로 세팅
         LerpColorSetColor(colorValue);
@@ -157,7 +179,7 @@ public class MappingParameter : MonoBehaviour
         // 타입 이니셜
         matchType = new int[4];
         typeUse = new bool[4];
-        for(int i=0; i<4; i++)
+        for (int i = 0; i < 4; i++)
         {
             matchType[i] = 0;
             typeUse[i] = false;
@@ -193,7 +215,7 @@ public class MappingParameter : MonoBehaviour
             }
         }
 
-        
+
     }
 
     // 전체 메뉴 -> 버튼
@@ -220,7 +242,7 @@ public class MappingParameter : MonoBehaviour
             }
         }
 
-        
+
     }
 
     // CubeMaterial에서 호출
@@ -240,7 +262,7 @@ public class MappingParameter : MonoBehaviour
         matchType[currentOpenMenu] = currentMatchEmotion;
         typeUse[currentMatchEmotion] = true;
         match_button.interactable = false;
-        
+
     }
 
     // cancel 버튼 클릭
@@ -265,13 +287,13 @@ public class MappingParameter : MonoBehaviour
         int count = 0;
         bool result = false;
 
-        for(int i=0; i<4; i++)
+        for (int i = 0; i < 4; i++)
         {
-            if(matchType[i] == 0)
+            if (matchType[i] == 0)
             {
                 count++;
             }
-            
+
         }
 
         if (count == 0)
@@ -285,9 +307,10 @@ public class MappingParameter : MonoBehaviour
     // Geometry 타입 바꾸기 ->버튼
     public void SetGeoType_Right()
     {
-        if(geometryType < 3)
+        if (geometryType < 2)
         {
             geometryType += 1;
+            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
         }
     }
 
@@ -298,16 +321,21 @@ public class MappingParameter : MonoBehaviour
         if (geometryType > 0)
         {
             geometryType -= 1;
+            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
+
         }
     }
 
     // Geo 슬라이더 조작 -
     public void GeoValueSub()
     {
-        if(geoValue > 0)
+        if (geoValue > 0)
         {
             geoValue -= 0.1f;
             geo_slider.value = geoValue;
+
+            if (geometryType == 0)
+                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
         }
     }
 
@@ -326,60 +354,95 @@ public class MappingParameter : MonoBehaviour
         geoValue = geo_slider.value;
     }
 
-   
 
-    // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_R_Value(int targetColor)
-    {
-        if(targetColor == 0)
-        {
-            color_A_R = color_A_R_slider.value;
-            colorA.r = color_A_R_slider.value;
-            LerpColorSetColor(colorValue);
-        }
-        else
-        {
-            color_B_R = color_B_R_slider.value;
-            colorB.r = color_B_R_slider.value;
-            LerpColorSetColor(colorValue);
 
-        }
-    }
-    // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_G_Value(int targetColor)
+    // Color picker 에서 값 바꿀 때 호출
+    public void SetColor()
     {
         if (targetColor == 0)
         {
-            color_A_G = color_A_G_slider.value;
-            colorA.g = color_A_G_slider.value;
+            colorA = colorPicker.pickedColor;
             LerpColorSetColor(colorValue);
 
         }
         else
         {
-            color_B_G = color_B_G_slider.value;
-            colorB.g = color_B_G_slider.value;
+            colorB = colorPicker.pickedColor;
             LerpColorSetColor(colorValue);
 
         }
     }
-    // Color value slider에서 값 바꿀 때 호출
-    public void SetColor_B_Value(int targetColor)
+
+    public void SetColorTargetA()
     {
-        if (targetColor == 0)
-        {
-            color_A_B = color_A_B_slider.value;
-            colorA.b = color_B_B_slider.value;
-            LerpColorSetColor(colorValue);
-        }
-        else
-        {
-            color_B_B = color_B_B_slider.value;
-            colorB.b = color_B_B_slider.value;
-            LerpColorSetColor(colorValue);
+        targetColor = 0;
 
-        }
+        //슬라이더 왼쪽으로
+        colorValue = 0f;
+        color_slider.value = colorValue;
+        LerpColorSetColor(colorValue);
     }
+    public void SetColorTargetB()
+    {
+        targetColor = 1;
+
+        //슬라이더 오른쪽으로
+        colorValue = 1f;
+        color_slider.value = colorValue;
+        LerpColorSetColor(colorValue);
+    }
+
+    //public void SetColor_R_Value(int targetColor)
+    //{
+    //    if(targetColor == 0)
+    //    {
+    //        color_A_R = color_A_R_slider.value;
+    //        colorA.r = color_A_R_slider.value;
+    //        LerpColorSetColor(colorValue);
+    //    }
+    //    else
+    //    {
+    //        color_B_R = color_B_R_slider.value;
+    //        colorB.r = color_B_R_slider.value;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //}
+    //// Color value slider에서 값 바꿀 때 호출
+    //public void SetColor_G_Value(int targetColor)
+    //{
+    //    if (targetColor == 0)
+    //    {
+    //        color_A_G = color_A_G_slider.value;
+    //        colorA.g = color_A_G_slider.value;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //    else
+    //    {
+    //        color_B_G = color_B_G_slider.value;
+    //        colorB.g = color_B_G_slider.value;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //}
+    //// Color value slider에서 값 바꿀 때 호출
+    //public void SetColor_B_Value(int targetColor)
+    //{
+    //    if (targetColor == 0)
+    //    {
+    //        color_A_B = color_A_B_slider.value;
+    //        colorA.b = color_B_B_slider.value;
+    //        LerpColorSetColor(colorValue);
+    //    }
+    //    else
+    //    {
+    //        color_B_B = color_B_B_slider.value;
+    //        colorB.b = color_B_B_slider.value;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //}
     // Color value slider에서 값 바꿀 때 호출
     //public void SetColor_BW_Value(int targetColor)
     //{
@@ -431,13 +494,13 @@ public class MappingParameter : MonoBehaviour
     void LerpColorSetColor(float value)
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
-        previewCube.GetComponent<MeshRenderer>().material.color = lerpColor;
+        previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
 
     // vfx type 바꾸는 버튼 ->
     public void ChangeVFXType_Left()
     {
-        if(vfx_textureType < 3)
+        if (vfx_textureType < 3)
         {
             vfx_textureType += 1;
         }
@@ -455,7 +518,7 @@ public class MappingParameter : MonoBehaviour
     // vfx 슬라이더 조작 -
     public void VfxValueSub()
     {
-        if(vfxValue > 0)
+        if (vfxValue > 0)
         {
             vfxValue -= 0.1f;
             vfx_slider.value = vfxValue;
@@ -517,5 +580,5 @@ public class MappingParameter : MonoBehaviour
     {
         speedValue = speed_slider.value;
     }
-   
+
 }
