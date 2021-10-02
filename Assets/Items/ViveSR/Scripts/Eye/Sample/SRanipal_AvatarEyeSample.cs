@@ -60,18 +60,28 @@ namespace ViveSR
                     if (SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.WORKING &&
                         SRanipal_Eye_Framework.Status != SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT) return;
 
+                    //Debug.Log(NeededToGetData);
+
                     if (NeededToGetData)
                     {
+                        
+
                         if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == true && eye_callback_registered == false)
                         {
                             SRanipal_Eye.WrapperRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye.CallbackBasic)EyeCallback));
                             eye_callback_registered = true;
-                        } else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false && eye_callback_registered == true) {
+                            //Debug.Log("0");
+                        }
+                        else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false && eye_callback_registered == true) {
                             SRanipal_Eye.WrapperUnRegisterEyeDataCallback(Marshal.GetFunctionPointerForDelegate((SRanipal_Eye.CallbackBasic)EyeCallback));
                             eye_callback_registered = false;
+                            //Debug.Log("1");
                         }
                         else if (SRanipal_Eye_Framework.Instance.EnableEyeDataCallback == false)
+						{
                             SRanipal_Eye_API.GetEyeData(ref eyeData);
+                            //Debug.Log("2");
+                        }
 
                         bool isLeftEyeActive = false;
                         bool isRightEyeAcitve = false;
@@ -79,16 +89,21 @@ namespace ViveSR
                         {
                             isLeftEyeActive = eyeData.verbose_data.left.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_ORIGIN_VALIDITY);
                             isRightEyeAcitve = eyeData.verbose_data.right.GetValidity(SingleEyeDataValidity.SINGLE_EYE_DATA_GAZE_ORIGIN_VALIDITY);
+                            //Debug.Log("11");
                         }
                         else if (SRanipal_Eye_Framework.Status == SRanipal_Eye_Framework.FrameworkStatus.NOT_SUPPORT)
                         {
                             isLeftEyeActive = true;
                             isRightEyeAcitve = true;
+                            //Debug.Log("22");
                         }
 
                         if (isLeftEyeActive || isRightEyeAcitve)
                         {
-                            if (eye_callback_registered == true)
+                            if (Manager.VRManager.Instance != null) Manager.VRManager.Instance.isHeadEquiped.Invoke(true);
+							//Debug.Log("111 Active");
+
+							if (eye_callback_registered == true)
                                 SRanipal_Eye.GetEyeWeightings(out EyeWeightings, eyeData);
                             else
                                 SRanipal_Eye.GetEyeWeightings(out EyeWeightings);
@@ -96,7 +111,10 @@ namespace ViveSR
                         }
                         else
                         {
-                            for (int i = 0; i < (int)EyeShape.Max; ++i)
+                            if (Manager.VRManager.Instance != null) Manager.VRManager.Instance.isHeadEquiped.Invoke(false);
+							//Debug.Log("222 Deactive");
+
+							for (int i = 0; i < (int)EyeShape.Max; ++i)
                             {
                                 bool isBlink = ((EyeShape)i == EyeShape.Eye_Left_Blink || (EyeShape)i == EyeShape.Eye_Right_Blink);
                                 EyeWeightings[(EyeShape)i] = isBlink ? 1 : 0;

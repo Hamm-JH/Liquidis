@@ -34,6 +34,7 @@ public class FloatLerp : MonoBehaviour
 
     public enum Function
 	{
+        Linear,
         Log,
         Power
 	}

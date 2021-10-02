@@ -1284,7 +1284,7 @@ MonoBehaviour:
   targetParameter: _ExtrudeSize
   isUseMat: 0
   currentValue: 0
-  targetValue: 0
+  targetValue: 1
   boundary: 0.0001
   function: 0
   interval: 0.6
@@ -5380,14 +5380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11f0f74451d4d8e438ef480f20deac02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeLerpModule: {fileID: 489643377}
-  speedLerpModule: {fileID: 1886025738}
-  SelectChannel: 0
-  deltaV: 0
-  thetaV: 0
-  alphaV: 0
-  betaV: 0
-  gammaV: 0
 --- !u!4 &1852182153
 Transform:
   m_ObjectHideFlags: 0
