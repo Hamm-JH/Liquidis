@@ -20,10 +20,40 @@ public class UIManager_Duru : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        Debug.Log("colname is " + col);
+       // Debug.Log("colname is " + col);
         if (col.tag == "Guide")
         {
-            Debug.Log("Enter~");
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide2")
+        {
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide3")
+        {
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide4")
+        {
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide5")
+        {
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide6")
+        {
+            //Debug.Log("Enter~");
+            col.gameObject.GetComponent<Animator>().SetTrigger("Start");
+        }
+        if (col.tag == "Guide7")
+        {
+            //Debug.Log("Enter~");
             col.gameObject.GetComponent<Animator>().SetTrigger("Start");
         }
     }
@@ -36,6 +66,54 @@ public class UIManager_Duru : MonoBehaviour
                 col.gameObject.GetComponent<Animator>().SetTrigger("End");
             }
             
+        }
+        if (col.tag == "Guide2")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
+        }
+        if (col.tag == "GuidE3")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
+        }
+        if (col.tag == "Guide4")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
+        }
+        if (col.tag == "Guide5")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
+        }
+        if (col.tag == "Guide6")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
+        }
+        if (col.tag == "Guide7")
+        {
+            if (col.gameObject.GetComponent<Animator>().isActiveAndEnabled)
+            {
+                col.gameObject.GetComponent<Animator>().SetTrigger("End");
+            }
+
         }
     }
    

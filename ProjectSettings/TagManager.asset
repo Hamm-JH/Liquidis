@@ -6,6 +6,12 @@ TagManager:
   tags:
   - sphere
   - Guide
+  - Guide2
+  - Guide3
+  - Guide4
+  - Guide5
+  - Guide6
+  - Guide7
   layers:
   - Default
   - TransparentFX
