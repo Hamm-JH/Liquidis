@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MappingParameter : MonoBehaviour
 {
@@ -58,7 +59,7 @@ public class MappingParameter : MonoBehaviour
     public int currentMatchEmotion = 0;
     public GameObject[] menu_UI;
     public int[] matchType;
-    public bool[] typeUse;
+    //public bool[] typeUse;
     public Material[] geoMaterials_origin;
     public Material[] geoMaterials;
 
@@ -68,6 +69,9 @@ public class MappingParameter : MonoBehaviour
     public Button menu_left_button;
     public Button menu_right_button;
     public Button match_button;
+    public Button match_cancel_button;
+    public TextMeshProUGUI emotionText;
+    public Image emotionSlider;
 
     // Geometry
     public Button geo_left_button;
@@ -177,17 +181,22 @@ public class MappingParameter : MonoBehaviour
 
 
         // 타입 이니셜
-        matchType = new int[4];
-        typeUse = new bool[4];
-        for (int i = 0; i < 4; i++)
+        matchType = new int[3];
+        //typeUse = new bool[4];
+        for (int i = 0; i < 3; i++)
         {
             matchType[i] = 0;
-            typeUse[i] = false;
+           
         }
+        //for (int i = 0; i < 4; i++)
+        //{
+            
+        //    typeUse[i] = false;
+        //}
 
-        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        if (matchType[currentOpenMenu] == 0 && !IsMappedEmotion(currentMatchEmotion))
         {
-            match_button.interactable = true;
+            match_button.gameObject.SetActive(true);
         }
     }
 
@@ -204,13 +213,15 @@ public class MappingParameter : MonoBehaviour
 
             menu_UI[currentOpenMenu].SetActive(true);
 
-            if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+            if (matchType[currentOpenMenu] == 0)
             {
-                match_button.interactable = true;
+                match_button.gameObject.SetActive(true);
+                match_cancel_button.gameObject.SetActive(false);
             }
             else
             {
-                match_button.interactable = false;
+                match_button.gameObject.SetActive(false);
+                match_cancel_button.gameObject.SetActive(true);
 
             }
         }
@@ -221,7 +232,7 @@ public class MappingParameter : MonoBehaviour
     // 전체 메뉴 -> 버튼
     public void GeneralMenu_Right()
     {
-        if (currentOpenMenu < 3)
+        if (currentOpenMenu < 2)
         {
             foreach (GameObject menu in menu_UI)
             {
@@ -231,13 +242,15 @@ public class MappingParameter : MonoBehaviour
 
             menu_UI[currentOpenMenu].SetActive(true);
 
-            if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+            if (matchType[currentOpenMenu] == 0)
             {
-                match_button.interactable = true;
+                match_button.gameObject.SetActive(true);
+                match_cancel_button.gameObject.SetActive(false);
             }
             else
             {
-                match_button.interactable = false;
+                match_button.gameObject.SetActive(false);
+                match_cancel_button.gameObject.SetActive(true);
 
             }
         }
@@ -250,18 +263,40 @@ public class MappingParameter : MonoBehaviour
     {
         currentMatchEmotion = num;
 
-        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        if (matchType[currentOpenMenu] == 0)
         {
-            match_button.interactable = true;
+            match_button.gameObject.SetActive(true);
+            match_cancel_button.gameObject.SetActive(false);
+        }
+
+        if(currentMatchEmotion == 1)
+        {
+            emotionText.text = "집중";
+
+        }else if(currentMatchEmotion == 2)
+        {
+            emotionText.text = "긍/부정";
+
+        }
+        else if(currentMatchEmotion == 3)
+        {
+            emotionText.text = "흥분";
+
         }
     }
 
     // match 버튼 클릭
     public void MatchButtonClicked()
     {
-        matchType[currentOpenMenu] = currentMatchEmotion;
-        typeUse[currentMatchEmotion] = true;
-        match_button.interactable = false;
+        if(IsMappedEmotion(currentMatchEmotion)== false)
+        {
+            matchType[currentOpenMenu] = currentMatchEmotion;
+            match_button.gameObject.SetActive(false);
+            match_cancel_button.gameObject.SetActive(true);
+
+            emotionSlider.fillAmount += 0.3f;
+        }
+       
 
     }
 
@@ -269,25 +304,29 @@ public class MappingParameter : MonoBehaviour
     public void CancelButtonClicked()
     {
         matchType[currentOpenMenu] = 0;
-        typeUse[currentMatchEmotion] = false;
 
-        if (matchType[currentOpenMenu] == 0 && !typeUse[currentMatchEmotion])
+        if (matchType[currentOpenMenu] == 0)
         {
-            match_button.interactable = true;
+            match_button.gameObject.SetActive(true);
+            match_cancel_button.gameObject.SetActive(false);
+
+            emotionSlider.fillAmount -= 0.3f;
+
         }
     }
 
-    bool CheckTypeUse()
-    {
-        return typeUse[currentMatchEmotion];
-    }
+    //bool CheckTypeUse()
+    //{
+    //    return typeUse[currentMatchEmotion];
+    //}
 
-    public bool CheckAllMappingEmotion()
+    // meeting room 진입할 때 체크함. LobbyManager.cs
+    public bool AllMappedEmotionCheck()
     {
         int count = 0;
         bool result = false;
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 3; i++)
         {
             if (matchType[i] == 0)
             {
@@ -297,9 +336,32 @@ public class MappingParameter : MonoBehaviour
         }
 
         if (count == 0)
-            result = true;
-        else
             result = false;
+        else
+            result = true;
+
+        return result;
+    }
+
+    bool IsMappedEmotion(int target)
+    {
+        bool result = false;
+        int count = 0;
+
+
+        for (int i = 0; i < 3; i++)
+        {
+            if (matchType[i] == target)
+            {
+                count++;
+            }
+
+        }
+
+        if (count == 0)
+            result = false;
+        else
+            result = true;
 
         return result;
     }

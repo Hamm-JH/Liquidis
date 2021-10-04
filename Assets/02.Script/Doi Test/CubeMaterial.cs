@@ -19,6 +19,8 @@ public class CubeMaterial : MonoBehaviour
     float targetRotation = 0f;
     float curRotation = 0f;
 
+    RotateCube rotateCube;
+
     public int currentEmotion = 1;
     // 1부터 시작, 1,2,3,4
 
@@ -27,21 +29,24 @@ public class CubeMaterial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //left_rotate_button.onClick.AddListener(RotateCubeLeft);
-        //right_rotate_button.onClick.AddListener(RotateCubeRight);
+        left_rotate_button.onClick.AddListener(RotateCubeLeft);
+        right_rotate_button.onClick.AddListener(RotateCubeRight);
+
+        rotateCube = GetComponent<RotateCube>();
     }
 
     void RotateCubeLeft()
     {
         
        
-        if(currentEmotion < 4)
+        if(currentEmotion < 3)
         {
             currentEmotion += 1;
             mappingParameter.SetCurrentEmotion(currentEmotion);
 
-            targetRotation = cubeObj.transform.eulerAngles.y + 90f;
-            rotateLeft = true;
+            rotateCube.OnRotate(0);
+            //targetRotation = cubeObj.transform.eulerAngles.y + 90f;
+            //rotateLeft = true;
 
         }
 
@@ -57,15 +62,17 @@ public class CubeMaterial : MonoBehaviour
             currentEmotion -= 1;
             mappingParameter.SetCurrentEmotion(currentEmotion);
 
-            if (targetRotation <= 0f)
-            {
-                targetRotation += 360f;
-                //360 - 현재값.
-            }
+            rotateCube.OnRotate(1);
 
-            targetRotation = cubeObj.transform.eulerAngles.y - 90f;
-            Debug.Log(targetRotation);
-            rotateRight = true;
+            //if (targetRotation <= 0f)
+            //{
+            //    targetRotation += 360f;
+            //    //360 - 현재값.
+            //}
+
+            //targetRotation = cubeObj.transform.eulerAngles.y - 90f;
+            //Debug.Log(targetRotation);
+            //rotateRight = true;
 
         }
 
@@ -73,43 +80,43 @@ public class CubeMaterial : MonoBehaviour
 
 
 
-    private void Update()
-    {
-        if (rotateLeft)
-        {
+    //private void Update()
+    //{
+    //    if (rotateLeft)
+    //    {
             
-            if (cubeObj.transform.rotation.eulerAngles.y < targetRotation)
-            {
-                cubeObj.transform.Rotate(new Vector3(0f, 1f, 0f));
+    //        if (cubeObj.transform.rotation.eulerAngles.y < targetRotation)
+    //        {
+    //            cubeObj.transform.Rotate(new Vector3(0f, 1f, 0f));
                 
-            }
-            else
-            {
+    //        }
+    //        else
+    //        {
                
-                rotateLeft = false;
-            }
+    //            rotateLeft = false;
+    //        }
            
 
-        }
-        //Debug.Log("y is "+transform.rotation.eulerAngles.y);
-        if (rotateRight)
-        {
-            cubeObj.transform.Rotate(new Vector3(0f, -1f, 0f));
+    //    }
+    //    //Debug.Log("y is "+transform.rotation.eulerAngles.y);
+    //    if (rotateRight)
+    //    {
+    //        cubeObj.transform.Rotate(new Vector3(0f, -1f, 0f));
 
-            if (cubeObj.transform.rotation.eulerAngles.y < targetRotation)
-            {
-                rotateRight = false;
+    //        if (cubeObj.transform.rotation.eulerAngles.y < targetRotation)
+    //        {
+    //            rotateRight = false;
                
                 
 
-            }
-            else
-            {
+    //        }
+    //        else
+    //        {
 
                 
-            }
+    //        }
 
 
-        }
-    }
+    //    }
+    //}
 }

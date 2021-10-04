@@ -26,7 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
       public void OnJoinButtonClicked()
       {
 
-        if (MappingParameter.instance.CheckAllMappingEmotion())
+        if (MappingParameter.instance.AllMappedEmotionCheck())
         {
             enterLobby_button.interactable = false;
 
