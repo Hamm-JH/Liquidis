@@ -294,7 +294,7 @@ public class MappingParameter : MonoBehaviour
             match_button.gameObject.SetActive(false);
             match_cancel_button.gameObject.SetActive(true);
 
-            emotionSlider.fillAmount += 0.3f;
+            emotionSlider.fillAmount += 1f/3f;
         }
        
 
@@ -310,7 +310,7 @@ public class MappingParameter : MonoBehaviour
             match_button.gameObject.SetActive(true);
             match_cancel_button.gameObject.SetActive(false);
 
-            emotionSlider.fillAmount -= 0.3f;
+            emotionSlider.fillAmount -= 1f/3f;
 
         }
     }
