@@ -1921,7 +1921,7 @@ GameObject:
   - component: {fileID: 261326327}
   - component: {fileID: 261326326}
   m_Layer: 5
-  m_Name: Select UI (1)
+  m_Name: Select UI_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
