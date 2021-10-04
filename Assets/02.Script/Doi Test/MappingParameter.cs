@@ -63,6 +63,13 @@ public class MappingParameter : MonoBehaviour
     public Material[] geoMaterials_origin;
     public Material[] geoMaterials;
 
+    public enum scene {
+        SELECT,
+        WAITING,
+        MEETING
+    };
+    public scene currentScene;
+   
 
     [Header("UI")]
     // General
@@ -121,83 +128,107 @@ public class MappingParameter : MonoBehaviour
     private void Awake()
     {
         if (_mappingParameter == null)
+        {
             _mappingParameter = this;
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            if(_mappingParameter != this)
+            {
+                Destroy(this.gameObject);
+            }
+        }
 
 
     }
 
     private void Start()
     {
-        // 전체 메뉴 <- ->
-        menu_left_button.onClick.AddListener(GeneralMenu_Left);
-        menu_right_button.onClick.AddListener(GeneralMenu_Right);
 
-        // Geometry
-        geo_left_button.onClick.AddListener(SetGeoType_Left);
-        geo_right_button.onClick.AddListener(SetGeoType_Right);
-        geo_sub_button.onClick.AddListener(GeoValueAdd);
-        geo_add_button.onClick.AddListener(GeoValueSub);
-
-
-        // geo material 초기화 
-        for (int i = 0; i < geoMaterials_origin.Length; i++)
+        if(currentScene == scene.SELECT)
         {
-            geoMaterials[i] = new Material(geoMaterials_origin[i]);
-        }
+            // 전체 메뉴 <- ->
+            menu_left_button.onClick.AddListener(GeneralMenu_Left);
+            menu_right_button.onClick.AddListener(GeneralMenu_Right);
 
-        previewCube.GetComponent<MeshRenderer>().material = geoMaterials[0];
-
-        // Color
-        color_sub_button.onClick.AddListener(ColorValueSub);
-        color_add_button.onClick.AddListener(ColorValueAdd);
-        setColorA_button.onClick.AddListener(SetColorTargetA);
-        setColorB_button.onClick.AddListener(SetColorTargetB);
-
+            // Geometry
+            geo_left_button.onClick.AddListener(SetGeoType_Left);
+            geo_right_button.onClick.AddListener(SetGeoType_Right);
+            geo_sub_button.onClick.AddListener(GeoValueAdd);
+            geo_add_button.onClick.AddListener(GeoValueSub);
 
 
-        // VFX_Texture
-        vfx_left_button.onClick.AddListener(ChangeVFXType_Left);
-        vfx_right_button.onClick.AddListener(ChangeVFXType_Right);
-        vfx_sub_button.onClick.AddListener(VfxValueSub);
-        vfx_add_button.onClick.AddListener(VfxValueAdd);
+            // geo material 초기화 
+            for (int i = 0; i < geoMaterials_origin.Length; i++)
+            {
+                geoMaterials[i] = new Material(geoMaterials_origin[i]);
+            }
 
+            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[0];
 
-        // Speed
-        speed_left_button.onClick.AddListener(SetSpeedType_Left);
-        speed_right_button.onClick.AddListener(SetSpeedType_Right);
-        speed_sub_button.onClick.AddListener(SpeedValueSub);
-        speed_add_button.onClick.AddListener(SpeedValueAdd);
-
-        //previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
-
-        colorA = new Color(1, 1, 1);
-        colorB = new Color(0, 0, 0);
-        lerpColor = Color.Lerp(colorA, colorB, 0f);
+            // Color
+            color_sub_button.onClick.AddListener(ColorValueSub);
+            color_add_button.onClick.AddListener(ColorValueAdd);
+            setColorA_button.onClick.AddListener(SetColorTargetA);
+            setColorB_button.onClick.AddListener(SetColorTargetB);
 
 
 
-        // 흑백으로 세팅
-        LerpColorSetColor(colorValue);
+            // VFX_Texture
+            vfx_left_button.onClick.AddListener(ChangeVFXType_Left);
+            vfx_right_button.onClick.AddListener(ChangeVFXType_Right);
+            vfx_sub_button.onClick.AddListener(VfxValueSub);
+            vfx_add_button.onClick.AddListener(VfxValueAdd);
 
 
-        // 타입 이니셜
-        matchType = new int[3];
-        //typeUse = new bool[4];
-        for (int i = 0; i < 3; i++)
+            // Speed
+            speed_left_button.onClick.AddListener(SetSpeedType_Left);
+            speed_right_button.onClick.AddListener(SetSpeedType_Right);
+            speed_sub_button.onClick.AddListener(SpeedValueSub);
+            speed_add_button.onClick.AddListener(SpeedValueAdd);
+
+            //previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
+
+            colorA = new Color(1, 1, 1);
+            colorB = new Color(0, 0, 0);
+            lerpColor = Color.Lerp(colorA, colorB, 0f);
+
+
+
+            // 흑백으로 세팅
+            LerpColorSetColor(colorValue);
+
+
+            // 타입 이니셜
+            matchType = new int[3];
+            //typeUse = new bool[4];
+            for (int i = 0; i < 3; i++)
+            {
+                matchType[i] = 0;
+
+            }
+            //for (int i = 0; i < 4; i++)
+            //{
+
+            //    typeUse[i] = false;
+            //}
+
+            if (matchType[currentOpenMenu] == 0 && !IsMappedEmotion(currentMatchEmotion))
+            {
+                match_button.gameObject.SetActive(true);
+            }
+        }else if(currentScene == scene.WAITING)
         {
-            matchType[i] = 0;
-           
-        }
-        //for (int i = 0; i < 4; i++)
-        //{
-            
-        //    typeUse[i] = false;
-        //}
+            // geo material 초기화 
+            for (int i = 0; i < geoMaterials_origin.Length; i++)
+            {
+                geoMaterials[i] = new Material(geoMaterials_origin[i]);
+            }
 
-        if (matchType[currentOpenMenu] == 0 && !IsMappedEmotion(currentMatchEmotion))
-        {
-            match_button.gameObject.SetActive(true);
+            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
         }
+        
     }
 
     // 전체 메뉴 <- 버튼
@@ -315,6 +346,22 @@ public class MappingParameter : MonoBehaviour
         }
     }
 
+    // select 벗어날 때 초기화
+    public void RemoveWaitingRoomParameters()
+    {
+        geoValue = 0f;
+        colorValue = 0f;
+        speedValue = 0f;
+        vfxValue = 0f;
+
+    }
+    // waiting room 진입할 때 초기화
+    public void InitialWaitingRoomParameters(GameObject targetSphere)
+    {
+        previewCube = targetSphere;
+        currentScene = scene.WAITING;
+
+    }
     //bool CheckTypeUse()
     //{
     //    return typeUse[currentMatchEmotion];
@@ -336,9 +383,9 @@ public class MappingParameter : MonoBehaviour
         }
 
         if (count == 0)
-            result = false;
-        else
             result = true;
+        else
+            result = false;
 
         return result;
     }
@@ -408,12 +455,18 @@ public class MappingParameter : MonoBehaviour
         {
             geoValue += 0.1f;
             geo_slider.value = geoValue;
+
+            if (geometryType == 0)
+                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
         }
     }
     // Geometry Slider 에서 값 바꿀 때마다 호출
     public void SetGeoValue()
     {
         geoValue = geo_slider.value;
+
+        if (geometryType == 0)
+            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
     }
 
 
