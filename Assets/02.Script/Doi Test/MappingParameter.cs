@@ -259,6 +259,14 @@ public class MappingParameter : MonoBehaviour
             //    typeUse[i] = false;
             //}
 
+
+            // window stencil 초기화
+            for (int i = 0; i < stencilWindows.Length; i++)
+            {
+                stencilWindows[i].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
+            }
+
+
             if (matchType[currentOpenMenu] == 0 && !IsMappedEmotion(currentMatchEmotion))
             {
                 match_button.gameObject.SetActive(true);
@@ -266,20 +274,19 @@ public class MappingParameter : MonoBehaviour
         }else if(currentScene == scene.WAITING)
         {
             // geo material 초기화 
+            // 해야 되는지?
             for (int i = 0; i < geoMaterials_stencil_origin.Length; i++)
             {
-                geoPreviewMaterials[i] = new Material(geoMaterials_preview_origin[i]);
-               
+
+                stencilStencilMaterials[i] = new Material(geoMaterials_stencil_origin[i]);
+
+
             }
 
-            previewCube.GetComponent<MeshRenderer>().material = geoMaterials_preview_origin[geometryType];
+            previewCube.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
         }
         
-        // window stencil 초기화
-        for(int i=0; i<stencilWindows.Length; i++)
-        {
-            stencilWindows[i].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
-        }
+        
     }
 
     // 전체 메뉴 <- 버튼
@@ -419,7 +426,6 @@ public class MappingParameter : MonoBehaviour
                     break;
                 case 1:
                     targetMaterial = colorStencil;
-                    //LerpColorStencilSphere(colorValue);
                     FixColor();
                     break;
                 case 2:
@@ -452,6 +458,9 @@ public class MappingParameter : MonoBehaviour
             if(currentOpenMenu == 1)
             {
                 LerpColorStencilSphere(colorValue);
+            }else if(currentOpenMenu == 2)
+            {
+                SpeedColorSetColor(colorValue);
             }
 
             match_button.gameObject.SetActive(false);

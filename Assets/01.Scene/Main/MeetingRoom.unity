@@ -222,8 +222,18 @@ MonoBehaviour:
   refMaterial: {fileID: 2100000, guid: f0a6a86e908f6204ab518387a784ed36, type: 2}
   geometryType: 0
   geoValue: 0
+  color_A_R: 1
+  color_A_G: 1
+  color_A_B: 1
+  color_A_BW: 0
+  color_B_R: 0
+  color_B_G: 0
+  color_B_B: 0
+  color_B_BW: 0
   colorA: {r: 0, g: 0, b: 0, a: 0}
   colorB: {r: 0, g: 0, b: 0, a: 0}
+  fixedColorA: {r: 0, g: 0, b: 0, a: 0}
+  fixedColorB: {r: 0, g: 0, b: 0, a: 0}
   colorValue: 0
   targetColor: 0
   vfx_textureType: 0
@@ -238,12 +248,19 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   matchType: 010000000200000003000000
-  geoMaterials_origin:
-  - {fileID: 2100000, guid: a10e073a89fed5c40878dcad9d8a5f3e, type: 2}
-  - {fileID: 2100000, guid: 97d8b0c5abe05ee4b8bdf02e054a38ac, type: 2}
-  geoMaterials:
-  - {fileID: 0}
-  - {fileID: 0}
+  geoMaterials_preview_origin: []
+  geoMaterials_stencil_origin: []
+  geoMaterials_speed_origin: []
+  geoPreviewMaterials: []
+  stencilStencilMaterials: []
+  stencilSpeedMaterials: []
+  color_preview_origin: {fileID: 0}
+  color_stencil_origin: {fileID: 0}
+  colorStencil: {fileID: 0}
+  colorPreview: {fileID: 0}
+  colorCancelDefault: {fileID: 0}
+  stencilWindows: []
+  stencilSpheres: []
   currentScene: 2
   menu_left_button: {fileID: 0}
   menu_right_button: {fileID: 0}
@@ -251,11 +268,20 @@ MonoBehaviour:
   match_cancel_button: {fileID: 0}
   emotionText: {fileID: 0}
   emotionSlider: {fileID: 0}
+  ready_button: {fileID: 0}
   geo_left_button: {fileID: 0}
   geo_right_button: {fileID: 0}
   geo_sub_button: {fileID: 0}
   geo_add_button: {fileID: 0}
   geo_slider: {fileID: 0}
+  color_A_R_slider: {fileID: 0}
+  color_A_G_slider: {fileID: 0}
+  color_A_B_slider: {fileID: 0}
+  color_A_BW_slider: {fileID: 0}
+  color_B_R_slider: {fileID: 0}
+  color_B_G_slider: {fileID: 0}
+  color_B_B_slider: {fileID: 0}
+  color_B_BW_slider: {fileID: 0}
   colorPicker: {fileID: 0}
   setColorA_button: {fileID: 0}
   setColorB_button: {fileID: 0}
@@ -2140,6 +2166,49 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1159472467}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1723355191
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1723355193}
+  - component: {fileID: 1723355192}
+  m_Layer: 0
+  m_Name: Control Data
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1723355192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723355191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddefeb2aaff3330449985c9818121469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1723355193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1723355191}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1807909449
 PrefabInstance:
