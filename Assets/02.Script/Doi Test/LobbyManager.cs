@@ -36,6 +36,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                 status_text.text = "접속 중입니다";
 
+
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
                 PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
