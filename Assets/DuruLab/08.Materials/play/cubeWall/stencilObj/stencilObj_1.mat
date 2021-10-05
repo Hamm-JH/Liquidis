@@ -286,7 +286,7 @@ Material:
     - _StencilFail: 0
     - _StencilPass: 0
     - _StencilReadMask: 255
-    - _StencilRef: 1
+    - _StencilRef: 0
     - _StencilWriteMask: 255
     - _StencilZFail: 0
     - _StylizeTab: 1

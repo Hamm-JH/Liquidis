@@ -63,6 +63,16 @@ public class MappingParameter : MonoBehaviour
     public Material[] geoMaterials_origin;
     public Material[] geoMaterials;
 
+    public Material color_origin;
+    public Material colorStencil;
+    public Material colorCancelDefault;
+
+    public GameObject[] stencilWindows;
+
+    Material targetMaterial;
+
+    public GameObject[] stencilSpheres;
+
     public enum scene {
         SELECT,
         WAITING,
@@ -165,6 +175,8 @@ public class MappingParameter : MonoBehaviour
                 geoMaterials[i] = new Material(geoMaterials_origin[i]);
             }
 
+            colorStencil = new Material(color_origin);
+
             previewCube.GetComponent<MeshRenderer>().material = geoMaterials[0];
 
             // Color
@@ -256,6 +268,21 @@ public class MappingParameter : MonoBehaviour
 
             }
         }
+        if (currentOpenMenu == 0)
+        {
+            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+
+        }
+        else if (currentOpenMenu == 1)
+        {
+            previewCube.GetComponent<Renderer>().material = colorStencil;
+
+        }else if(currentOpenMenu == 2)
+        {
+            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            SpeedColorSetColor(0f);
+
+        }
 
 
     }
@@ -286,6 +313,22 @@ public class MappingParameter : MonoBehaviour
             }
         }
 
+        if (currentOpenMenu == 0)
+        {
+            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+
+        }
+        else if (currentOpenMenu == 1)
+        {
+            previewCube.GetComponent<Renderer>().material = colorStencil;
+
+        }
+        else if (currentOpenMenu == 2)
+        {
+            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            SpeedColorSetColor(0f);
+
+        }
 
     }
 
@@ -319,9 +362,53 @@ public class MappingParameter : MonoBehaviour
     // match 버튼 클릭
     public void MatchButtonClicked()
     {
-        if(IsMappedEmotion(currentMatchEmotion)== false)
+        
+
+        if (IsMappedEmotion(currentMatchEmotion)== false)
         {
             matchType[currentOpenMenu] = currentMatchEmotion;
+
+            
+
+
+            switch (currentOpenMenu)
+            {
+                case 0:
+                    targetMaterial = geoMaterials[geometryType];
+                    break;
+                case 1:
+                    targetMaterial = colorStencil;
+                    colorValue = 0f;
+                    color_slider.value = 0f;
+                    LerpColorStencilSphere(0f);
+                    
+                    break;
+                case 2:
+                    targetMaterial = geoMaterials[geometryType];
+                    break;
+               
+            }
+
+            for(int i=0; i<3; i++)
+            {
+                if(i == currentMatchEmotion)
+                {
+                    stencilWindows[i-1].GetComponent<Renderer>().material.SetInt("_StencilRef", currentOpenMenu + 1);
+                    
+
+                }
+                else
+                {
+                    if (matchType[currentOpenMenu] == 0)
+                    {
+                        stencilWindows[i].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
+                        
+                    }
+                }
+            }
+
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material = targetMaterial;
+
             match_button.gameObject.SetActive(false);
             match_cancel_button.gameObject.SetActive(true);
 
@@ -420,6 +507,7 @@ public class MappingParameter : MonoBehaviour
         {
             geometryType += 1;
             previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
+            
         }
     }
 
@@ -609,8 +697,21 @@ public class MappingParameter : MonoBehaviour
     void LerpColorSetColor(float value)
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
+        previewCube.GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
+    }
+
+    void LerpColorStencilSphere(float value)
+    {
+        lerpColor = Color.Lerp(colorA, colorB, value);
+        stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_AlbedoColor", value);
+    }
+    // 스피드 일 경우 색깔 입히는 메소드
+    void SpeedColorSetColor(float value)
+    {
+        lerpColor = Color.Lerp(new Color(0,0,0), new Color(1,1,1), value);
         previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
+
 
     // vfx type 바꾸는 버튼 ->
     public void ChangeVFXType_Left()
