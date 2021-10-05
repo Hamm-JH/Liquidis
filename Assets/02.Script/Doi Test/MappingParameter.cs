@@ -40,6 +40,10 @@ public class MappingParameter : MonoBehaviour
 
     public Color colorA;
     public Color colorB;
+
+    Color fixedColorA = new Color(0,0,0);
+    Color fixedColorB = new Color(0, 0, 0);
+
     Color lerpColor;
 
     public float colorValue = 0f;
@@ -308,7 +312,7 @@ public class MappingParameter : MonoBehaviour
         }else if(currentOpenMenu == 2)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
-            SpeedColorSetColor(0f);
+            SpeedColorSetColor(colorValue);
 
         }
 
@@ -355,7 +359,7 @@ public class MappingParameter : MonoBehaviour
         else if (currentOpenMenu == 2)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
-            SpeedColorSetColor(0f);
+            SpeedColorSetColor(colorValue);
 
         }
 
@@ -408,11 +412,12 @@ public class MappingParameter : MonoBehaviour
                 case 1:
                     targetMaterial = colorStencil;
                     //LerpColorStencilSphere(colorValue);
-                    
+                    FixColor();
                     break;
                 case 2:
                     targetMaterial = stencilSpeedMaterials[geometryType];
-                    previewCube.GetComponent<Renderer>().material = targetMaterial;
+                    SpeedColorSetColor(colorValue);
+                    //previewCube.GetComponent<Renderer>().material = targetMaterial;
                     break;
                
             }
@@ -436,7 +441,7 @@ public class MappingParameter : MonoBehaviour
 
             stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material = targetMaterial;
 
-            if(currentOpenMenu == 2)
+            if(currentOpenMenu == 1)
             {
                 LerpColorStencilSphere(colorValue);
             }
@@ -777,6 +782,17 @@ public class MappingParameter : MonoBehaviour
         }
     }
 
+    void FixColor()
+    {
+        fixedColorA.r = color_A_R;
+        fixedColorA.g = color_A_G;
+        fixedColorA.b = color_A_B;
+
+        fixedColorB.r = color_B_R;
+        fixedColorB.g = color_B_G;
+        fixedColorB.b = color_B_B;
+    }
+
     // 프리뷰 큐브에 색깔 입히는 매소드
     void LerpColorSetColor(float value)
     {
@@ -789,12 +805,13 @@ public class MappingParameter : MonoBehaviour
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
         //colorStencil.SetFloat("_AlbedoColor", value);
+        Debug.Log("color value : " + value);
         stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
     }
     // 스피드 일 경우 색깔 입히는 메소드
     void SpeedColorSetColor(float value)
     {
-        lerpColor = Color.Lerp(colorA, colorB, value);
+        lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
         previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
 
