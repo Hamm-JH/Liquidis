@@ -60,8 +60,12 @@ public class MappingParameter : MonoBehaviour
     public GameObject[] menu_UI;
     public int[] matchType;
     //public bool[] typeUse;
-    public Material[] geoMaterials_origin;
-    public Material[] geoMaterials;
+    public Material[] geoMaterials_preview_origin;
+    public Material[] geoMaterials_stencil_origin;
+    public Material[] geoMaterials_speed_origin;
+    public Material[] geoPreviewMaterials;
+    public Material[] stencilStencilMaterials;
+    public Material[] stencilSpeedMaterials;
 
     public Material color_origin;
     public Material colorStencil;
@@ -89,6 +93,7 @@ public class MappingParameter : MonoBehaviour
     public Button match_cancel_button;
     public TextMeshProUGUI emotionText;
     public Image emotionSlider;
+    public Button ready_button;
 
     // Geometry
     public Button geo_left_button;
@@ -170,14 +175,31 @@ public class MappingParameter : MonoBehaviour
 
 
             // geo material 초기화 
-            for (int i = 0; i < geoMaterials_origin.Length; i++)
+            for (int i = 0; i < geoMaterials_preview_origin.Length; i++)
             {
-                geoMaterials[i] = new Material(geoMaterials_origin[i]);
+                geoPreviewMaterials[i] = new Material(geoMaterials_preview_origin[i]);
+               
+
             }
+            for (int i = 0; i < geoMaterials_stencil_origin.Length; i++)
+            {
+              
+                stencilStencilMaterials[i] = new Material(geoMaterials_stencil_origin[i]);
+              
+
+            }
+            for (int i = 0; i < geoMaterials_speed_origin.Length; i++)
+            {
+
+                stencilSpeedMaterials[i] = new Material(geoMaterials_speed_origin[i]);
+
+
+            }
+
 
             colorStencil = new Material(color_origin);
 
-            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[0];
+            previewCube.GetComponent<MeshRenderer>().material = geoPreviewMaterials[geometryType];
 
             // Color
             color_sub_button.onClick.AddListener(ColorValueSub);
@@ -233,12 +255,13 @@ public class MappingParameter : MonoBehaviour
         }else if(currentScene == scene.WAITING)
         {
             // geo material 초기화 
-            for (int i = 0; i < geoMaterials_origin.Length; i++)
+            for (int i = 0; i < geoMaterials_stencil_origin.Length; i++)
             {
-                geoMaterials[i] = new Material(geoMaterials_origin[i]);
+                geoPreviewMaterials[i] = new Material(geoMaterials_preview_origin[i]);
+               
             }
 
-            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<MeshRenderer>().material = geoMaterials_preview_origin[geometryType];
         }
         
     }
@@ -270,7 +293,7 @@ public class MappingParameter : MonoBehaviour
         }
         if (currentOpenMenu == 0)
         {
-            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
 
         }
         else if (currentOpenMenu == 1)
@@ -279,7 +302,7 @@ public class MappingParameter : MonoBehaviour
 
         }else if(currentOpenMenu == 2)
         {
-            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
             SpeedColorSetColor(0f);
 
         }
@@ -315,7 +338,7 @@ public class MappingParameter : MonoBehaviour
 
         if (currentOpenMenu == 0)
         {
-            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
 
         }
         else if (currentOpenMenu == 1)
@@ -325,7 +348,7 @@ public class MappingParameter : MonoBehaviour
         }
         else if (currentOpenMenu == 2)
         {
-            previewCube.GetComponent<Renderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
             SpeedColorSetColor(0f);
 
         }
@@ -374,7 +397,7 @@ public class MappingParameter : MonoBehaviour
             switch (currentOpenMenu)
             {
                 case 0:
-                    targetMaterial = geoMaterials[geometryType];
+                    targetMaterial = stencilStencilMaterials[geometryType];
                     break;
                 case 1:
                     targetMaterial = colorStencil;
@@ -384,7 +407,7 @@ public class MappingParameter : MonoBehaviour
                     
                     break;
                 case 2:
-                    targetMaterial = geoMaterials[geometryType];
+                    targetMaterial = stencilSpeedMaterials[geometryType];
                     break;
                
             }
@@ -414,7 +437,16 @@ public class MappingParameter : MonoBehaviour
 
             emotionSlider.fillAmount += 1f/3f;
         }
-       
+
+        // 모두 매치 되면 레디 버튼 활성화
+        if (AllMappedEmotionCheck())
+        {
+            ready_button.interactable = true;
+        }
+        else
+        {
+            ready_button.interactable = false;
+        }
 
     }
 
@@ -423,6 +455,12 @@ public class MappingParameter : MonoBehaviour
     {
         matchType[currentOpenMenu] = 0;
         stencilWindows[currentMatchEmotion-1].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
+
+        // 스텐실 디폴트 material으로 바꿈
+        stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material = colorCancelDefault;
+
+       
+
 
         if (matchType[currentOpenMenu] == 0)
         {
@@ -507,7 +545,7 @@ public class MappingParameter : MonoBehaviour
         if (geometryType < 2)
         {
             geometryType += 1;
-            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<MeshRenderer>().material = geoPreviewMaterials[geometryType];
             
         }
     }
@@ -519,7 +557,7 @@ public class MappingParameter : MonoBehaviour
         if (geometryType > 0)
         {
             geometryType -= 1;
-            previewCube.GetComponent<MeshRenderer>().material = geoMaterials[geometryType];
+            previewCube.GetComponent<MeshRenderer>().material = geoPreviewMaterials[geometryType];
 
         }
     }
