@@ -7,17 +7,42 @@ namespace API
 	using Looxid.Link;
 	using UnityEngine.Events;
 
+	/// <summary>
+	/// API 요청 목표
+	/// </summary>
+	public enum Objective
+	{
+		EEG,
+		Relaxation,
+		Attention
+	}
+
+	public enum MindIndex
+	{
+		Attention,
+		Relaxation
+	}
+
 	public sealed class Brainwave : _API
 	{
 		/// <summary>
 		/// 뇌파 인터페이스의 생성자. 필요 데이터를 생성자로 강제함
 		/// </summary>
+		/// <param name="objective"> 요청 목표 </param>
 		/// <param name="targetId"> 요청 센서데이터 </param>
 		/// <param name="targetSecond"> 요청 검출 초 간격 </param>
-		public Brainwave(EEGSensorID targetId, float targetSecond, UnityAction<Brainwave> targetCallBack)
+		/// <param name="targetCallBack"> 데이터 수집 후 실행 이벤트 </param>
+		public Brainwave(Objective obj, EEGSensorID targetId, float targetSecond, UnityAction<Brainwave> targetCallBack)
 		{
+			objective = obj;
 			id = targetId;
 			second = targetSecond;
+			callBack = targetCallBack;
+		}
+
+		public Brainwave(Objective obj, UnityAction<Brainwave> targetCallBack)
+		{
+			objective = obj;
 			callBack = targetCallBack;
 		}
 
@@ -38,9 +63,24 @@ namespace API
 			gamma = _gamma;
 		}
 
+		public void Set(Objective obj, float value)
+		{
+			if(obj == Objective.Attention)
+			{
+				attention = value;
+			}
+			else if(obj == Objective.Relaxation)
+			{
+				relaxation = value;
+			}
+		}
+
 		/// <summary>
 		/// 내부 데이터. 생성자, 메서드에 의해 데이터가 할당됨
 		/// </summary>
+		private Objective objective;
+
+		#region private EEG
 		private EEGSensorID id;
 		private float second;
 		private UnityAction<Brainwave> callBack;
@@ -50,10 +90,21 @@ namespace API
 		private float alpha;
 		private float beta;
 		private float gamma;
+		#endregion
+
+		#region private mind Index
+
+		private float relaxation;
+		private float attention;
+
+		#endregion
 
 		/// <summary>
 		/// 외부 출력 프로퍼티. 데이터를 읽어올때만 프로퍼티가 사용 가능하다.
 		/// </summary>
+		public Objective Objective { get => objective; } // 요청 수집 데이터 목표
+
+		#region public EEG
 		public EEGSensorID Id { get => id; }		// 요청 : EEG 센서정보
 		public float Second { get => second; }		// 요청 : 추출 시간간격
 		public UnityAction<Brainwave> CallBack { get => callBack;}	// 요청 : 데이터 반환 이벤트
@@ -63,5 +114,11 @@ namespace API
 		public float Alpha { get => alpha; }		// 출력 : 알파파 비중치 0 ~ 1
 		public float Beta { get => beta; }			// 출력 : 베타파 비중치 0 ~ 1
 		public float Gamma { get => gamma; }        // 출력 : 감마파 비중치 0 ~ 1
+		#endregion
+
+		#region public mind Index
+		public float Relaxation { get => relaxation; }  // 안정 상태 0 ~ 1
+		public float Attention { get => attention; }    // 집중 상태 0 ~ 1
+		#endregion
 	}
 }

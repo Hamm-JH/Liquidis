@@ -158,55 +158,10 @@ namespace Manager
 		// Update is called once per frame
 		void Update()
 		{
-			{
-				//leftActivity.value = Mathf.Lerp((float)leftActivity.value, (float)leftActivity.target, 0.2f);
-				//rightActivity.value = Mathf.Lerp((float)rightActivity.value, (float)rightActivity.target, 0.2f);
-				//attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
-				//relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
-
-				//delta.value = Mathf.Lerp((float)delta.value, (float)delta.target, 0.2f);
-				//theta.value = Mathf.Lerp((float)theta.value, (float)theta.target, 0.2f);
-				//alpha.value = Mathf.Lerp((float)alpha.value, (float)alpha.target, 0.2f);
-				//beta.value = Mathf.Lerp((float)beta.value, (float)beta.target, 0.2f);
-				//gamma.value = Mathf.Lerp((float)gamma.value, (float)gamma.target, 0.2f);
-			}
-
-			// 요청 데이터
-			// value는 실시간 이벤트로 업데이트 해주어야 한다.
-			// 1 센서 정보 : EEGSensorID  .AF3
-			// 2 타이머 정보 : float
-			
-			//int index = (int)EEGSensorID.AF3;
-
-			//Delta[index].value = Mathf.Lerp((float)Delta[index].value, (float)Delta[index].target, 0.2f);
-			//Theta[index].value = Mathf.Lerp((float)Theta[index].value, (float)Theta[index].target, 0.2f);
-			//Alpha[index].value = Mathf.Lerp((float)Alpha[index].value, (float)Alpha[index].target, 0.2f);
-			//Beta[index].value  = Mathf.Lerp((float)Beta[index].value, (float)Beta[index].target, 0.2f);
-			//Gamma[index].value = Mathf.Lerp((float)Gamma[index].value, (float)Gamma[index].target, 0.2f);
-
-			//// API.Brainwave로 가공된 정보 반환
-			//API.Brainwave bw = new API.Brainwave();
-			//bw.Id = EEGSensorID.AF3;
-			//bw.Delta = (float)Delta[index].value;
-			//bw.Theta = (float)Theta[index].value;
-			//bw.Alpha = (float)Alpha[index].value;
-			//bw.Beta  = (float)Beta[index].value;
-			//bw.Gamma = (float)Gamma[index].value;
-
-			//Debug.Log(Delta[index].value);
-
-			//deltaV = delta.value;
-			//thetaV = theta.value;
-			//alphaV = alpha.value;
-			//betaV = beta.value;
-			//gammaV = gamma.value;
-
-			//// TODO 0917 잠시 멈춤
-			//if (sizeLerpModule.isReached)
-			//{
-			//	sizeLerpModule.targetValue = (float)deltaV / 100;
-			//	speedLerpModule.targetValue = (float)thetaV * 3;
-			//}
+			leftActivity.value = Mathf.Lerp((float)leftActivity.value, (float)leftActivity.target, 0.2f);
+			rightActivity.value = Mathf.Lerp((float)rightActivity.value, (float)rightActivity.target, 0.2f);
+			attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
+			relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
 		}
 
 		/// <summary>
@@ -219,82 +174,86 @@ namespace Manager
 			//ThreadPool.QueueUserWorkItem(Request_Inside, api);
 
 			// 센서 인덱스
+			API.Objective objective = api.Objective;
 			EEGSensorID id = api.Id;
 			int sIndex = (int)id;
 
-			// EEGFeatureIndex 이벤트로 할당되는 EEG.value 값은 지속적으로 동작해야함
+			if(objective == API.Objective.EEG)
+			{
+				// EEGFeatureIndex 이벤트로 할당되는 EEG.value 값은 지속적으로 동작해야함
 
-			// 타이머별 데이터 수집코드		// 코루틴 코드 대체 (min, max 할당)
-			// 여기서 EEG.min, EEG.max값 할당
-			SetSingleEEG(api.Id, api.Second);
+				// 타이머별 데이터 수집코드		// 코루틴 코드 대체 (min, max 할당)
+				// 여기서 EEG.min, EEG.max값 할당
+				SetSingleEEG(api.Id, api.Second);
 
-			// 수집코드 할당				// Update 코드 대체 (value 할당)
-			float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
-			float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
-			float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
-			float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
-			float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
+				// 수집코드 할당				// Update 코드 대체 (value 할당)
+				float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
+				float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
+				float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
+				float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
+				float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
 
-			// 수집된 데이터 api에 할당
-			api.Set(_delta, _theta, _alpha, _beta, _gamma);
+				// 수집된 데이터 api에 할당
+				api.Set(_delta, _theta, _alpha, _beta, _gamma);
 
-			// 수집된 데이터를 콜백 이벤트에 실어보냄
-			api.CallBack.Invoke(api);
-
-			//string str = "";
-			//str += $"sensorID : {api.Id.ToString()}\n";
-			//str += $"delta : {api.Delta}\n";
-			//str += $"theta : {api.Theta}\n";
-			//str += $"alpha : {api.Alpha}\n";
-			//str += $"beta : {api.Beta}\n";
-			//str += $"gamma : {api.Gamma}\n";
-
-			//Debug.Log(str);
+				// 수집된 데이터를 콜백 이벤트에 실어보냄
+				api.CallBack.Invoke(api);
+			}
+			else if(objective == API.Objective.Relaxation)
+			{
+				api.Set(objective, (float)relaxation.value);
+				api.CallBack.Invoke(api);
+			}
+			else if(objective == API.Objective.Attention)
+			{
+				api.Set(objective, (float)attention.value);
+				api.CallBack.Invoke(api);
+			}
 		}
 
-		private void Request_Inside(object _api)
-		{
-			if (IsSensorConnected != true && IsSensorNoised != false) return;
+		//private void Request_Inside(object _api)
+		//{
+		//	if (IsSensorConnected != true && IsSensorNoised != false) return;
 
-			API.Brainwave api = _api as API.Brainwave;
+		//	API.Brainwave api = _api as API.Brainwave;
 
-			int sIndex = (int)api.Id;
+		//	int sIndex = (int)api.Id;
 
-			// 타이머별 데이터 수집코드		// 코루틴 코드 대체 (min, max 할당)
-			// 여기서 EEG.min, EEG.max값 할당
-			SetSingleEEG(api.Id, api.Second);
+		//	// 타이머별 데이터 수집코드		// 코루틴 코드 대체 (min, max 할당)
+		//	// 여기서 EEG.min, EEG.max값 할당
+		//	SetSingleEEG(api.Id, api.Second);
 
-			// 수집코드 할당				// Update 코드 대체 (value 할당)
-			float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
-			float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
-			float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
-			float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
-			float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
+		//	// 수집코드 할당				// Update 코드 대체 (value 할당)
+		//	float _delta = Mathf.Lerp((float)Delta[sIndex].value, (float)Delta[sIndex].target, 1);
+		//	float _theta = Mathf.Lerp((float)Theta[sIndex].value, (float)Theta[sIndex].target, 1);
+		//	float _alpha = Mathf.Lerp((float)Alpha[sIndex].value, (float)Alpha[sIndex].target, 1);
+		//	float _beta = Mathf.Lerp((float)Beta[sIndex].value, (float)Beta[sIndex].target, 1);
+		//	float _gamma = Mathf.Lerp((float)Gamma[sIndex].value, (float)Gamma[sIndex].target, 1);
 
-			// 수집된 데이터 api에 할당
-			api.Set(_delta, _theta, _alpha, _beta, _gamma);
+		//	// 수집된 데이터 api에 할당
+		//	api.Set(_delta, _theta, _alpha, _beta, _gamma);
 
 			
 
-			// 수집된 데이터를 콜백 이벤트에 실어보냄
-			api.CallBack.Invoke(api);
-			////Debug.Log($"Hello");
+		//	// 수집된 데이터를 콜백 이벤트에 실어보냄
+		//	api.CallBack.Invoke(api);
+		//	////Debug.Log($"Hello");
 			
-			//string str = "";
-			//str += $"sensorID : {api.Id.ToString()}\n";
-			//str += $"-- delta : {api.Delta}\n";
-			//str += $"-- theta : {api.Theta}\n";
-			//str += $"-- alpha : {api.Alpha}\n";
-			//str += $"-- beta : {api.Beta}\n";
-			//str += $"-- gamma : {api.Gamma}\n";
+		//	//string str = "";
+		//	//str += $"sensorID : {api.Id.ToString()}\n";
+		//	//str += $"-- delta : {api.Delta}\n";
+		//	//str += $"-- theta : {api.Theta}\n";
+		//	//str += $"-- alpha : {api.Alpha}\n";
+		//	//str += $"-- beta : {api.Beta}\n";
+		//	//str += $"-- gamma : {api.Gamma}\n";
 
-			//Debug.Log(str);
+		//	//Debug.Log(str);
 			
-			//str += $"second : {api.Second}\n";
-			//str += $"callback event : {api.CallBack}";
+		//	//str += $"second : {api.Second}\n";
+		//	//str += $"callback event : {api.CallBack}";
 
-			//Debug.Log(str);
-		}
+		//	//Debug.Log(str);
+		//}
 
 		private void SetSingleEEG(EEGSensorID id, float second)
 		{

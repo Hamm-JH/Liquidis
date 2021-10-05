@@ -25,15 +25,15 @@ public class TexManager : MonoBehaviour
 	private void Update()
 	{
         // 요청 예시
-        int index = Enum.GetValues(typeof(EEGSensorID)).Length;
-		for (int i = 0; i < index; i++)
-		{
-            Request(new API.Brainwave(
-                targetId: (EEGSensorID)i,
-                targetSecond: 10,
-                targetCallBack: biGetter)
-                );
-        }
+        //int index = Enum.GetValues(typeof(EEGSensorID)).Length;
+		//for (int i = 0; i < index; i++)
+		//{
+        //    Request(new API.Brainwave(
+        //        targetId: (EEGSensorID)i,
+        //        targetSecond: 10,
+        //        targetCallBack: biGetter)
+        //        );
+        //}
 	}
 
     /// <summary>
