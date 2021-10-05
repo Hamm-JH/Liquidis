@@ -422,6 +422,7 @@ public class MappingParameter : MonoBehaviour
     public void CancelButtonClicked()
     {
         matchType[currentOpenMenu] = 0;
+        stencilWindows[currentMatchEmotion-1].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
 
         if (matchType[currentOpenMenu] == 0)
         {
@@ -532,7 +533,18 @@ public class MappingParameter : MonoBehaviour
             geo_slider.value = geoValue;
 
             if (geometryType == 0)
+            {
                 previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                stencilSpheres[currentMatchEmotion-1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+
+            }
+            else if(geometryType == 1)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+            }
+
         }
     }
 
@@ -545,7 +557,17 @@ public class MappingParameter : MonoBehaviour
             geo_slider.value = geoValue;
 
             if (geometryType == 0)
+            {
                 previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+
+            }
+            else if (geometryType == 1)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+            }
         }
     }
     // Geometry Slider 에서 값 바꿀 때마다 호출
@@ -554,7 +576,17 @@ public class MappingParameter : MonoBehaviour
         geoValue = geo_slider.value;
 
         if (geometryType == 0)
+        {
             previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+
+        }
+        else if (geometryType == 1)
+        {
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+        }
     }
 
 
