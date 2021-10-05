@@ -453,11 +453,12 @@ public class MappingParameter : MonoBehaviour
     // cancel 버튼 클릭
     public void CancelButtonClicked()
     {
+        int tempEmotion = matchType[currentOpenMenu];
         matchType[currentOpenMenu] = 0;
-        stencilWindows[currentMatchEmotion-1].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
+        stencilWindows[tempEmotion-1].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
 
         // 스텐실 디폴트 material으로 바꿈
-        stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material = colorCancelDefault;
+        stencilSpheres[tempEmotion - 1].GetComponent<Renderer>().material = colorCancelDefault;
 
        
 

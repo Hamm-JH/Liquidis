@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotateCube : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class RotateCube : MonoBehaviour
     public bool isRotateNow;
     public float movedVector;
     public int indexLeftOrRight;
+
+    public Button left_button;
+    public Button right_button;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +27,14 @@ public class RotateCube : MonoBehaviour
         // 회전중일때
         if(isRotateNow)
 		{
+            if(left_button != null && right_button != null)
+            {
+                left_button.interactable = false;
+                right_button.interactable = false;
+            }
+           
+
+
             movedVector += 90 * Time.deltaTime * indexLeftOrRight;
             target.Rotate(new Vector3(0, 90 * Time.deltaTime * indexLeftOrRight, 0));
 
@@ -58,7 +70,12 @@ public class RotateCube : MonoBehaviour
         else
 		{
             movedVector = 0;
-		}
+            if (left_button != null && right_button != null)
+            {
+                left_button.interactable = true;
+                right_button.interactable = true;
+            }
+        }
     }
 
     public void OnRotate(int index)
