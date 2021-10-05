@@ -41,8 +41,8 @@ public class MappingParameter : MonoBehaviour
     public Color colorA;
     public Color colorB;
 
-    Color fixedColorA = new Color(0,0,0);
-    Color fixedColorB = new Color(0, 0, 0);
+    public Color fixedColorA;
+    public Color fixedColorB;
 
     Color lerpColor;
 
@@ -234,6 +234,9 @@ public class MappingParameter : MonoBehaviour
 
             colorA = new Color(1, 1, 1);
             colorB = new Color(0, 0, 0);
+            fixedColorA = new Color(0, 0, 0);
+            fixedColorB = new Color(0, 0, 0);
+
             lerpColor = Color.Lerp(colorA, colorB, 0f);
 
 
@@ -272,6 +275,11 @@ public class MappingParameter : MonoBehaviour
             previewCube.GetComponent<MeshRenderer>().material = geoMaterials_preview_origin[geometryType];
         }
         
+        // window stencil 초기화
+        for(int i=0; i<stencilWindows.Length; i++)
+        {
+            stencilWindows[i].GetComponent<Renderer>().material.SetInt("_StencilRef", 0);
+        }
     }
 
     // 전체 메뉴 <- 버튼
@@ -424,9 +432,9 @@ public class MappingParameter : MonoBehaviour
 
             for(int i=0; i<3; i++)
             {
-                if(i == currentMatchEmotion)
+                if(i == currentMatchEmotion-1)
                 {
-                    stencilWindows[i-1].GetComponent<Renderer>().material.SetInt("_StencilRef", currentOpenMenu + 1);
+                    stencilWindows[i].GetComponent<Renderer>().material.SetInt("_StencilRef", currentOpenMenu + 1);
 
                 }
                 else
@@ -805,14 +813,16 @@ public class MappingParameter : MonoBehaviour
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
         //colorStencil.SetFloat("_AlbedoColor", value);
-        Debug.Log("color value : " + value);
+       
         stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
     }
-    // 스피드 일 경우 색깔 입히는 메소드
+    // 스피드 일 경우 스텐실 스피드에 색깔 입히는 메소드
     void SpeedColorSetColor(float value)
     {
+        //Debug.Log("color value : " + value);
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
-        previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+
+        stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
 
 
