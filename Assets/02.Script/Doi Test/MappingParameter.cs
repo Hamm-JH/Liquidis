@@ -28,15 +28,15 @@ public class MappingParameter : MonoBehaviour
 
     // Color
 
-    //public float color_A_R = 1f;
-    //public float color_A_G = 1f;
-    //public float color_A_B = 1f;
-    //public float color_A_BW = 0f;
+    public float color_A_R = 1f;
+    public float color_A_G = 1f;
+    public float color_A_B = 1f;
+    public float color_A_BW = 0f;
 
-    //public float color_B_R = 0f;
-    //public float color_B_G = 0f;
-    //public float color_B_B = 0f;
-    //public float color_B_BW = 0f;
+    public float color_B_R = 0f;
+    public float color_B_G = 0f;
+    public float color_B_B = 0f;
+    public float color_B_BW = 0f;
 
     public Color colorA;
     public Color colorB;
@@ -104,15 +104,15 @@ public class MappingParameter : MonoBehaviour
 
 
     // Color
-    //public Slider color_A_R_slider;
-    //public Slider color_A_G_slider;
-    //public Slider color_A_B_slider;
-    //public Slider color_A_BW_slider;
+    public Slider color_A_R_slider;
+    public Slider color_A_G_slider;
+    public Slider color_A_B_slider;
+    public Slider color_A_BW_slider;
 
-    //public Slider color_B_R_slider;
-    //public Slider color_B_G_slider;
-    //public Slider color_B_B_slider;
-    //public Slider color_B_BW_slider;
+    public Slider color_B_R_slider;
+    public Slider color_B_G_slider;
+    public Slider color_B_B_slider;
+    public Slider color_B_BW_slider;
 
     public ColorPicker colorPicker;
     public Button setColorA_button;
@@ -204,8 +204,8 @@ public class MappingParameter : MonoBehaviour
             // Color
             color_sub_button.onClick.AddListener(ColorValueSub);
             color_add_button.onClick.AddListener(ColorValueAdd);
-            setColorA_button.onClick.AddListener(SetColorTargetA);
-            setColorB_button.onClick.AddListener(SetColorTargetB);
+            //setColorA_button.onClick.AddListener(SetColorTargetA);
+            //setColorB_button.onClick.AddListener(SetColorTargetB);
 
 
 
@@ -401,13 +401,12 @@ public class MappingParameter : MonoBehaviour
                     break;
                 case 1:
                     targetMaterial = colorStencil;
-                    colorValue = 0f;
-                    color_slider.value = 0f;
-                    LerpColorStencilSphere(0f);
+                    LerpColorStencilSphere(colorValue);
                     
                     break;
                 case 2:
                     targetMaterial = stencilSpeedMaterials[geometryType];
+                    previewCube.GetComponent<Renderer>().material = targetMaterial;
                     break;
                
             }
@@ -417,7 +416,6 @@ public class MappingParameter : MonoBehaviour
                 if(i == currentMatchEmotion)
                 {
                     stencilWindows[i-1].GetComponent<Renderer>().material.SetInt("_StencilRef", currentOpenMenu + 1);
-                    
 
                 }
                 else
@@ -630,115 +628,116 @@ public class MappingParameter : MonoBehaviour
 
 
 
-    // Color picker 에서 값 바꿀 때 호출
-    public void SetColor()
+    //// Color picker 에서 값 바꿀 때 호출
+    //public void SetColor()
+    //{
+    //    if (targetColor == 0)
+    //    {
+    //        colorA = colorPicker.pickedColor;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //    else
+    //    {
+    //        colorB = colorPicker.pickedColor;
+    //        LerpColorSetColor(colorValue);
+
+    //    }
+    //}
+
+    //public void SetColorTargetA()
+    //{
+    //    targetColor = 0;
+
+    //    //슬라이더 왼쪽으로
+    //    colorValue = 0f;
+    //    color_slider.value = colorValue;
+    //    LerpColorSetColor(colorValue);
+    //}
+    //public void SetColorTargetB()
+    //{
+    //    targetColor = 1;
+
+    //    //슬라이더 오른쪽으로
+    //    colorValue = 1f;
+    //    color_slider.value = colorValue;
+    //    LerpColorSetColor(colorValue);
+    //}
+
+    public void SetColor_R_Value(int targetColor)
     {
         if (targetColor == 0)
         {
-            colorA = colorPicker.pickedColor;
+            color_A_R = color_A_R_slider.value;
+            colorA.r = color_A_R_slider.value;
+            LerpColorSetColor(colorValue);
+        }
+        else
+        {
+            color_B_R = color_B_R_slider.value;
+            colorB.r = color_B_R_slider.value;
+            LerpColorSetColor(colorValue);
+
+        }
+    }
+    // Color value slider에서 값 바꿀 때 호출
+    public void SetColor_G_Value(int targetColor)
+    {
+        if (targetColor == 0)
+        {
+            color_A_G = color_A_G_slider.value;
+            colorA.g = color_A_G_slider.value;
             LerpColorSetColor(colorValue);
 
         }
         else
         {
-            colorB = colorPicker.pickedColor;
+            color_B_G = color_B_G_slider.value;
+            colorB.g = color_B_G_slider.value;
             LerpColorSetColor(colorValue);
 
         }
     }
-
-    public void SetColorTargetA()
-    {
-        targetColor = 0;
-
-        //슬라이더 왼쪽으로
-        colorValue = 0f;
-        color_slider.value = colorValue;
-        LerpColorSetColor(colorValue);
-    }
-    public void SetColorTargetB()
-    {
-        targetColor = 1;
-
-        //슬라이더 오른쪽으로
-        colorValue = 1f;
-        color_slider.value = colorValue;
-        LerpColorSetColor(colorValue);
-    }
-
-    //public void SetColor_R_Value(int targetColor)
-    //{
-    //    if(targetColor == 0)
-    //    {
-    //        color_A_R = color_A_R_slider.value;
-    //        colorA.r = color_A_R_slider.value;
-    //        LerpColorSetColor(colorValue);
-    //    }
-    //    else
-    //    {
-    //        color_B_R = color_B_R_slider.value;
-    //        colorB.r = color_B_R_slider.value;
-    //        LerpColorSetColor(colorValue);
-
-    //    }
-    //}
-    //// Color value slider에서 값 바꿀 때 호출
-    //public void SetColor_G_Value(int targetColor)
-    //{
-    //    if (targetColor == 0)
-    //    {
-    //        color_A_G = color_A_G_slider.value;
-    //        colorA.g = color_A_G_slider.value;
-    //        LerpColorSetColor(colorValue);
-
-    //    }
-    //    else
-    //    {
-    //        color_B_G = color_B_G_slider.value;
-    //        colorB.g = color_B_G_slider.value;
-    //        LerpColorSetColor(colorValue);
-
-    //    }
-    //}
-    //// Color value slider에서 값 바꿀 때 호출
-    //public void SetColor_B_Value(int targetColor)
-    //{
-    //    if (targetColor == 0)
-    //    {
-    //        color_A_B = color_A_B_slider.value;
-    //        colorA.b = color_B_B_slider.value;
-    //        LerpColorSetColor(colorValue);
-    //    }
-    //    else
-    //    {
-    //        color_B_B = color_B_B_slider.value;
-    //        colorB.b = color_B_B_slider.value;
-    //        LerpColorSetColor(colorValue);
-
-    //    }
-    //}
     // Color value slider에서 값 바꿀 때 호출
-    //public void SetColor_BW_Value(int targetColor)
-    //{
-    //    if (targetColor == 0)
-    //    {
-    //        color_A_BW = color_A_BW_slider.value;
-    //        colorA.a = color_A_BW_slider.value;
-    //        LerpColorSetColor(colorValue);
-    //    }
-    //    else
-    //    {
-    //        color_B_BW = color_B_BW_slider.value;
-    //        colorB.a = color_B_BW_slider.value;
-    //        LerpColorSetColor(colorValue);
-    //    }
-    //}
+    public void SetColor_B_Value(int targetColor)
+    {
+        if (targetColor == 0)
+        {
+            color_A_B = color_A_B_slider.value;
+            colorA.b = color_B_B_slider.value;
+            LerpColorSetColor(colorValue);
+        }
+        else
+        {
+            color_B_B = color_B_B_slider.value;
+            colorB.b = color_B_B_slider.value;
+            LerpColorSetColor(colorValue);
+
+        }
+    }
+    //Color value slider에서 값 바꿀 때 호출
+    public void SetColor_BW_Value(int targetColor)
+    {
+        if (targetColor == 0)
+        {
+            color_A_BW = color_A_BW_slider.value;
+            colorA.a = color_A_BW_slider.value;
+            LerpColorSetColor(colorValue);
+        }
+        else
+        {
+            color_B_BW = color_B_BW_slider.value;
+            colorB.a = color_B_BW_slider.value;
+            LerpColorSetColor(colorValue);
+        }
+    }
 
     // Color Slider 에서 값 바꿀 때 호출
     public void SetColorValue()
     {
         colorValue = color_slider.value;
         LerpColorSetColor(colorValue);
+        LerpColorStencilSphere(colorValue);
     }
 
     // Color 슬라이더 조작 -
@@ -749,6 +748,8 @@ public class MappingParameter : MonoBehaviour
             colorValue -= 0.1f;
             color_slider.value = colorValue;
             LerpColorSetColor(colorValue);
+            LerpColorStencilSphere(colorValue);
+
 
         }
     }
@@ -760,6 +761,7 @@ public class MappingParameter : MonoBehaviour
             colorValue += 0.1f;
             color_slider.value = colorValue;
             LerpColorSetColor(colorValue);
+            LerpColorStencilSphere(colorValue);
 
         }
     }
@@ -771,6 +773,7 @@ public class MappingParameter : MonoBehaviour
         previewCube.GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
     }
 
+    // 스텐실에 색깔 입히는 메소드 (match 버튼 클릭)
     void LerpColorStencilSphere(float value)
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
