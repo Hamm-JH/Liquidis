@@ -541,9 +541,10 @@ public class MappingParameter : MonoBehaviour
 
     }
     // meeting room 진입할 때 초기화
-    public void InitialMeeintRoomParameters(GameObject _meetinghead)
+    public void InitialMeeintRoomParameters(GameObject _meetinghead, VisualEffect _vfxObj)
     {
         meetingtHead = _meetinghead;
+        vfxObject = _vfxObj;
         currentScene = scene.MEETING;
 
         meetingtHead.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
@@ -964,6 +965,13 @@ public class MappingParameter : MonoBehaviour
     {
         vfxValue = vfx_slider.value;
         vfxObject.SetFloat("SpawnRate", vfxValue);
+    }
+
+    public void SetVFXValueMeeting(float _value)
+    {
+        vfxValue = _value;
+        vfxObject.SetFloat("SpawnRate", vfxValue);
+
     }
     // speed 타입 바꾸기 ->버튼
     public void SetSpeedType_Right()
