@@ -63,6 +63,9 @@ public class MappingParameter : MonoBehaviour
     public int currentMatchEmotion = 0;
     public GameObject[] menu_UI;
     public int[] matchType;
+
+    public GameObject waitingPreview;
+
     //public bool[] typeUse;
     public Material[] geoMaterials_preview_origin;
     public Material[] geoMaterials_stencil_origin;
@@ -283,7 +286,8 @@ public class MappingParameter : MonoBehaviour
 
             }
 
-            previewCube.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
+            //waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
+            //LerpColorWaitingCube(colorValue);
         }
         
         
@@ -516,8 +520,11 @@ public class MappingParameter : MonoBehaviour
     // waiting room 진입할 때 초기화
     public void InitialWaitingRoomParameters(GameObject targetSphere)
     {
-        previewCube = targetSphere;
+        waitingPreview = targetSphere;
         currentScene = scene.WAITING;
+
+        waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
+        LerpColorWaitingCube(colorValue);
 
     }
     //bool CheckTypeUse()
@@ -643,19 +650,36 @@ public class MappingParameter : MonoBehaviour
     // Geometry Slider 에서 값 바꿀 때마다 호출
     public void SetGeoValue()
     {
-        geoValue = geo_slider.value;
-
-        if (geometryType == 0)
+        if(currentScene == scene.SELECT)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+            geoValue = geo_slider.value;
 
-        }
-        else if (geometryType == 1)
+            if (geometryType == 0)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+
+            }
+            else if (geometryType == 1)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+            }
+        }else if(currentScene == scene.WAITING)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+            geoValue = geo_slider.value;
+     
+            if (geometryType == 0)
+            {
+                waitingPreview.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
 
+            }
+            else if (geometryType == 1)
+            {
+                waitingPreview.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+            }
         }
     }
 
@@ -768,9 +792,18 @@ public class MappingParameter : MonoBehaviour
     // Color Slider 에서 값 바꿀 때 호출
     public void SetColorValue()
     {
-        colorValue = color_slider.value;
-        LerpColorSetColor(colorValue);
-        LerpColorStencilSphere(colorValue);
+        if(currentScene == scene.SELECT)
+        {
+            colorValue = color_slider.value;
+            LerpColorSetColor(colorValue);
+            LerpColorStencilSphere(colorValue);
+
+        }else if(currentScene == scene.WAITING)
+        {
+            colorValue = color_slider.value;
+            LerpColorWaitingCube(colorValue);
+        }
+
     }
 
     // Color 슬라이더 조작 -
@@ -833,7 +866,13 @@ public class MappingParameter : MonoBehaviour
 
         stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
+    // waiting room stencil cube에 색깔 입히는 메소드
+    void LerpColorWaitingCube(float value)
+    {
+        lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
+        waitingPreview.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
 
+    }
 
     // vfx type 바꾸는 버튼 ->
     public void ChangeVFXType_Left()

@@ -15,7 +15,7 @@ public class WaitingRoom : MonoBehaviour
     public Slider sympathy_slider;
 
     [Header("Obj")]
-    public GameObject previewSphere;
+    public GameObject waitingPreview;
 
     private void Start()
     {
@@ -25,7 +25,7 @@ public class WaitingRoom : MonoBehaviour
     IEnumerator InitialMappingParameters()
     {
         yield return new WaitForEndOfFrame();
-        MappingParameter.instance.InitialWaitingRoomParameters(previewSphere);
+        MappingParameter.instance.InitialWaitingRoomParameters(waitingPreview);
         MappingSliders();
 
     }
@@ -43,61 +43,75 @@ public class WaitingRoom : MonoBehaviour
             if (MappingParameter.instance.matchType[i] == 1)
             {
                 MappingParameter.instance.geo_slider = concentration_slider;
+                MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetGeoValue(); });
 
-            }else if(MappingParameter.instance.matchType[i] == 2)
+            }
+            else if(MappingParameter.instance.matchType[i] == 2)
             {
-                MappingParameter.instance.color_slider = excitement_slider;
+                MappingParameter.instance.color_slider = positive_slider;
+                MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
+
 
             }
             else if (MappingParameter.instance.matchType[i] == 3)
             {
-                MappingParameter.instance.speed_slider = positive_slider;
+                MappingParameter.instance.speed_slider = excitement_slider;
+                MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
+
 
             }
         }
 
         MappingParameter.instance.vfx_slider = sympathy_slider;
     }
-    public void SetConcentrationValue()
+    public void SetGeoValue()
     {
-        for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-        {
-            if (MappingParameter.instance.matchType[i] == 1)
-            {
-                MappingParameter.instance.SetGeoValue();
+        //for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+        //{
+        //    if (MappingParameter.instance.matchType[i] == 1)
+        //    {
+        //        MappingParameter.instance.SetGeoValue();
 
-            }
+        //    }
             
-        }
+        //}
+
+        MappingParameter.instance.SetGeoValue();
     }
 
-    public void SetExcitementValue()
+    public void SetColorValue()
     {
-        for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-        {
-            if (MappingParameter.instance.matchType[i] == 2)
-            {
-                MappingParameter.instance.SetColorValue();
+        //for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+        //{
+        //    if (MappingParameter.instance.matchType[i] == 2)
+        //    {
+        //        MappingParameter.instance.SetColorValue();
 
-            }
+        //    }
 
-        }
+        //}
+
+        MappingParameter.instance.SetColorValue();
+
     }
 
-    public void SetPositiveValue()
+    public void SetSpeedValue()
     {
-        for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-        {
-            if (MappingParameter.instance.matchType[i] == 3)
-            {
-                MappingParameter.instance.SetSpeedValue();
+        //for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+        //{
+        //    if (MappingParameter.instance.matchType[i] == 3)
+        //    {
+        //        MappingParameter.instance.SetSpeedValue();
 
-            }
+        //    }
 
-        }
+        //}
+
+        MappingParameter.instance.SetSpeedValue();
+
     }
 
-    public void SetSympathyValue()
+    public void SetVFXValue()
     {
         MappingParameter.instance.SetVFXValue();
 
