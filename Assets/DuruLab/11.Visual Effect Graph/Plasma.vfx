@@ -64,7 +64,7 @@ MonoBehaviour:
   m_ParameterInfo:
   - name: SpawnRate
     path: SpawnRate
-    tooltip: 
+    tooltip: SpawnRate
     sheetType: m_Float
     realType: Single
     defaultValue:
@@ -3154,7 +3154,7 @@ MonoBehaviour:
   m_IsOutput: 0
   m_EnumValues: []
   m_ValueFilter: 1
-  m_Tooltip: 
+  m_Tooltip: SpawnRate
   m_Nodes:
   - m_Id: 0
     linkedSlots:
