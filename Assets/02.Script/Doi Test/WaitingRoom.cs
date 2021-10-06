@@ -63,6 +63,8 @@ public class WaitingRoom : MonoBehaviour
         }
 
         MappingParameter.instance.vfx_slider = sympathy_slider;
+        MappingParameter.instance.vfx_slider.onValueChanged.AddListener(delegate { SetVFXValue(); });
+
     }
     public void SetGeoValue()
     {

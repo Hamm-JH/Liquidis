@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.VFX;
 
 public class MappingParameter : MonoBehaviour
 {
@@ -63,6 +64,8 @@ public class MappingParameter : MonoBehaviour
     public int currentMatchEmotion = 0;
     public GameObject[] menu_UI;
     public int[] matchType;
+
+    public VisualEffect vfxObject;
 
     public GameObject waitingPreview;
     public GameObject meetingtHead;
@@ -941,6 +944,8 @@ public class MappingParameter : MonoBehaviour
         {
             vfxValue -= 0.1f;
             vfx_slider.value = vfxValue;
+            vfxObject.SetFloat("SpawnRate", vfxValue);
+
         }
     }
     // vfx 슬라이더 조작 +
@@ -950,12 +955,15 @@ public class MappingParameter : MonoBehaviour
         {
             vfxValue += 0.1f;
             vfx_slider.value = vfxValue;
+            vfxObject.SetFloat("SpawnRate", vfxValue);
+
         }
     }
     // vfx Slider 에서 값 바꿀 때마다 호출
     public void SetVFXValue()
     {
         vfxValue = vfx_slider.value;
+        vfxObject.SetFloat("SpawnRate", vfxValue);
     }
     // speed 타입 바꾸기 ->버튼
     public void SetSpeedType_Right()
