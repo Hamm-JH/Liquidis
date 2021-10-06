@@ -65,6 +65,7 @@ public class MappingParameter : MonoBehaviour
     public int[] matchType;
 
     public GameObject waitingPreview;
+    public GameObject meetingtHead;
 
     //public bool[] typeUse;
     public Material[] geoMaterials_preview_origin;
@@ -288,6 +289,15 @@ public class MappingParameter : MonoBehaviour
 
             //waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
             //LerpColorWaitingCube(colorValue);
+        }else if(currentScene == scene.MEETING)
+        {
+            // geo material 초기화 
+            for (int i = 0; i < geoMaterials_preview_origin.Length; i++)
+            {
+                geoPreviewMaterials[i] = new Material(geoMaterials_preview_origin[i]);
+
+
+            }
         }
         
         
@@ -527,6 +537,16 @@ public class MappingParameter : MonoBehaviour
         LerpColorWaitingCube(colorValue);
 
     }
+    // meeting room 진입할 때 초기화
+    public void InitialMeeintRoomParameters(GameObject _meetinghead)
+    {
+        meetingtHead = _meetinghead;
+        currentScene = scene.MEETING;
+
+        meetingtHead.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
+        LerpColorMeetingFace(colorValue);
+
+    }
     //bool CheckTypeUse()
     //{
     //    return typeUse[currentMatchEmotion];
@@ -682,7 +702,21 @@ public class MappingParameter : MonoBehaviour
             }
         }
     }
+    
+    // meeting room geo head 변경
+    public void SetVeoValueMeeting(float _value)
+    {
+        if (geometryType == 0)
+        {
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
 
+        }
+        else if (geometryType == 1)
+        {
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+
+        }
+    }
 
 
     //// Color picker 에서 값 바꿀 때 호출
@@ -871,6 +905,14 @@ public class MappingParameter : MonoBehaviour
     {
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
         waitingPreview.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+
+    }
+
+    // meeting room head에 색깔 입히는 메소드
+    void LerpColorMeetingFace(float _value)
+    {
+        lerpColor = Color.Lerp(fixedColorA, fixedColorB, _value);
+        meetingtHead.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
 
     }
 
