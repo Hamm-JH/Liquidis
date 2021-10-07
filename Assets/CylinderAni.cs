@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class CylinderAni : MonoBehaviour
 {
+    public Animator counterHead;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +36,10 @@ public class CylinderAni : MonoBehaviour
             gameObject.GetComponent<Animator>().SetTrigger("SelectStart");
 
         }
+    }
+
+    public void TriggerCounterHead()
+    {
+        counterHead.SetTrigger("MeetStart");
     }
 }

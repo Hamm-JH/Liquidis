@@ -531,9 +531,10 @@ public class MappingParameter : MonoBehaviour
 
     }
     // waiting room 진입할 때 초기화
-    public void InitialWaitingRoomParameters(GameObject targetSphere)
+    public void InitialWaitingRoomParameters(GameObject targetSphere, VisualEffect _vfx)
     {
         waitingPreview = targetSphere;
+        vfxObject = _vfx;
         currentScene = scene.WAITING;
 
         waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
