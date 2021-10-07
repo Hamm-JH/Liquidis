@@ -157,18 +157,19 @@ public class WaitingRoom : MonoBehaviour
         //StartCoroutine(WaitingAni());
         Debug.LogError("ani start");
         selectBox.SetTrigger("Start");
+        //selectBox.GetComponent<SelectBoxAni>().HelpUIStart();
         slider_canvas.SetTrigger("FadeStart");
         vfxEffect.SetFloat("SpawnRate", 0f);
     }
 
-    IEnumerator WaitingAni()
-    {
-        selectBox.SetTrigger("Start");
-        slider_canvas.SetTrigger("FadeStart");
-        vfxEffect.SetFloat("SpawnRate", 0f);
+    //IEnumerator WaitingAni()
+    //{
+    //    selectBox.SetTrigger("Start");
+    //    slider_canvas.SetTrigger("FadeStart");
+    //    vfxEffect.SetFloat("SpawnRate", 0f);
 
-        yield return null;
-    }
+    //    yield return null;
+    //}
 
     public void DisabledSelectBox()
     {
