@@ -31,6 +31,8 @@ public class CylinderAni : MonoBehaviour
         if (scene.name == "04_Play_WaitingRoom")
         {
             //
+            gameObject.GetComponent<Animator>().SetTrigger("SelectStart");
+
         }
     }
 }
