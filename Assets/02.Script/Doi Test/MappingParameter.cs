@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.VFX;
 
+
+
 public class MappingParameter : MonoBehaviour
 {
     private static MappingParameter _mappingParameter;
@@ -152,6 +154,7 @@ public class MappingParameter : MonoBehaviour
     public Button speed_sub_button;
     public Button speed_add_button;
 
+   
 
     private void Awake()
     {
@@ -168,7 +171,8 @@ public class MappingParameter : MonoBehaviour
             }
         }
 
-
+        // 이벤트에 메서드 연결
+        
     }
 
     private void Start()
@@ -709,7 +713,7 @@ public class MappingParameter : MonoBehaviour
     }
     
     // meeting room geo head 변경
-    public void SetVeoValueMeeting(float _value)
+    public void SetGeoValueMeeting(float _value)
     {
         if (geometryType == 0)
         {
@@ -914,7 +918,7 @@ public class MappingParameter : MonoBehaviour
     }
 
     // meeting room head에 색깔 입히는 메소드
-    void LerpColorMeetingFace(float _value)
+    public void LerpColorMeetingFace(float _value)
     {
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, _value);
         meetingtHead.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
@@ -1017,4 +1021,5 @@ public class MappingParameter : MonoBehaviour
         speedValue = speed_slider.value;
     }
 
+   
 }
