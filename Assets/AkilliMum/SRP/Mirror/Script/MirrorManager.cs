@@ -335,7 +335,7 @@ namespace AkilliMum.SRP.Mirror
             }
             catch (Exception ex)
             {
-                Debug.Log(ex);
+              //  Debug.Log(ex);
             }
             finally
             {

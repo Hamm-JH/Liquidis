@@ -26,6 +26,7 @@ public class SelectBoxAni : MonoBehaviour
 
         //GetComponent<Animator>().SetTrigger("GuideStart");
         GetComponent<Animator>().SetTrigger("1FadeIn");
+        Debug.Log("fadeStart?");
 
     }
 
@@ -44,25 +45,29 @@ public class SelectBoxAni : MonoBehaviour
             return;
         }
         
-            if (currentOpen < 2)
+            if (currentOpen < 2)//현재 창위치가 2보다 작으면
             {
 
-                currentOpen += 1;
-                if (!aniOpen[currentOpen])
-                    aniOpen[currentOpen] = true;
+                currentOpen += 1;//좌버튼 누를 때마다 숫자가 늘어난다.
+            Debug.Log("currentOpen:" + currentOpen);
+            if (!aniOpen[currentOpen]) //현재 숫자창이 참이 아니면
+                aniOpen[currentOpen] = true; //현재 숫자창을 참으로 한다.
 
-                switch (currentOpen)
+            switch (currentOpen)
                 {
                     case 1:
                         Debug.Log("ani trigger : " + currentOpen);
-                        GetComponent<Animator>().SetTrigger("2FadeOut");
-                        GetComponent<Animator>().SetTrigger("1FadeIn");
+                    GetComponent<Animator>().SetTrigger("1FadeOut");
+                    GetComponent<Animator>().SetTrigger("2FadeIn");
+
+                   
+                        
                         break;
                     case 2:
                         Debug.Log("ani trigger : " + currentOpen);
 
-                        GetComponent<Animator>().SetTrigger("3FadeOut");
-                        GetComponent<Animator>().SetTrigger("2FadeIn");
+                        GetComponent<Animator>().SetTrigger("2FadeOut");
+                        GetComponent<Animator>().SetTrigger("3FadeIn");
                         break;
                 }
 
@@ -89,23 +94,26 @@ public class SelectBoxAni : MonoBehaviour
             if (currentOpen > 0)
             {
                 currentOpen -= 1;
-                if (!aniOpen[currentOpen])
-                    aniOpen[currentOpen] = true;
+            Debug.Log("currentOpen:" + currentOpen);
+            if (!aniOpen[currentOpen])
+                aniOpen[currentOpen] = true;
 
-                switch (currentOpen)
+            switch (currentOpen)
                 {
                     case 0:
-                        Debug.Log("ani trigger : " + currentOpen);
+                        Debug.Log("Right ani trigger : " + currentOpen);
+                    GetComponent<Animator>().SetTrigger("2FadeOut");
+                    GetComponent<Animator>().SetTrigger("1FadeIn");
+                   
+                    break;
 
-                        GetComponent<Animator>().SetTrigger("1FadeOut");
-                        GetComponent<Animator>().SetTrigger("2FadeIn");
-                        break;
                     case 1:
-                        Debug.Log("ani trigger : " + currentOpen);
+                        Debug.Log("Rignt ani trigger : " + currentOpen);
 
-                        GetComponent<Animator>().SetTrigger("2FadeOut");
-                        GetComponent<Animator>().SetTrigger("3FadeIn");
-                        break;
+                       
+                        GetComponent<Animator>().SetTrigger("2FadeIn");
+                    GetComponent<Animator>().SetTrigger("3FadeOut");
+                    break;
                 }
 
             }
