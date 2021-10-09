@@ -525,7 +525,6 @@ GameObject:
   m_Component:
   - component: {fileID: 307277307}
   - component: {fileID: 307277306}
-  - component: {fileID: 307277308}
   m_Layer: 0
   m_Name: Meeting Room
   m_TagString: Untagged
@@ -547,9 +546,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meetingHead: {fileID: 908489617}
   vfxObject: {fileID: 1405483072}
-  counterHead_ani: {fileID: 0}
-  timer: {fileID: 0}
+  counterHead_ani: {fileID: 908489618}
+  timer: {fileID: 1839718663}
   timerStartTime: 2
+  targetSpeedLerp: 10
+  speedLerp: 2
+  duration:
+  - 2
+  - 2
+  - 2
+  - 1
+  - 2
+  volumeObj: {fileID: 849672584}
+  mirror_room_ani: {fileID: 1576751804}
+  concentrationCurrentValue: 0
+  excitementCurrentValue: 0
+  speedInterval: 3
 --- !u!4 &307277307
 Transform:
   m_ObjectHideFlags: 0
@@ -564,29 +576,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &307277308
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 307277305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71fb2d6b48c47ef44968328a3072c402, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obj: {fileID: 0}
-  render: {fileID: 0}
-  mat: {fileID: 0}
-  targetParameter: 
-  isUseMat: 0
-  currentValue: 0
-  targetValue: 0
-  boundary: 0
-  function: 0
-  interval: 0
-  isReached: 0
 --- !u!1 &373933916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1134,6 +1123,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1045d029e450a424292c91c7dfa8c1bf, type: 3}
+--- !u!1 &849672584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7836085374869126913, guid: 1045d029e450a424292c91c7dfa8c1bf, type: 3}
+  m_PrefabInstance: {fileID: 849672583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &866908896
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2753,6 +2747,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e61db3d55f1ca56498bd0f36f89bd68f, type: 3}
+--- !u!95 &1576751804 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4030615134530022193, guid: e61db3d55f1ca56498bd0f36f89bd68f, type: 3}
+  m_PrefabInstance: {fileID: 1576751803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1723355191
 GameObject:
   m_ObjectHideFlags: 0
