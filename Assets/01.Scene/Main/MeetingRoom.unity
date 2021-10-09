@@ -1256,7 +1256,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4258268071170621873, guid: 37755bddb15940b46a4786fc739eaf6b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501321524917378864, guid: 37755bddb15940b46a4786fc739eaf6b, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[26]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4501321524917378864, guid: 37755bddb15940b46a4786fc739eaf6b, type: 3}
+      propertyPath: m_BlendShapeWeights.Array.data[32]
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4524575049624501297, guid: 37755bddb15940b46a4786fc739eaf6b, type: 3}
       propertyPath: m_RootOrder
@@ -3054,7 +3062,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
