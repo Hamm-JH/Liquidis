@@ -9,6 +9,9 @@ public class SelectBoxAni : MonoBehaviour
     bool[] aniOpen;
     bool isAllCheck = false;
 
+    public GameObject mainCanvas;
+    bool isCanvasOn = false;
+
     private void Start()
     {
         
@@ -59,6 +62,12 @@ public class SelectBoxAni : MonoBehaviour
                         Debug.Log("ani trigger : " + currentOpen);
                     GetComponent<Animator>().SetTrigger("1FadeOut");
                     GetComponent<Animator>().SetTrigger("2FadeIn");
+
+                    if (!isCanvasOn)
+                    {
+                        mainCanvas.SetActive(true);
+                        isCanvasOn = true;
+                    }
 
                    
                         
