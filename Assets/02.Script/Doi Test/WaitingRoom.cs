@@ -142,7 +142,7 @@ public class WaitingRoom : MonoBehaviour
 
         //}
 
-        MappingParameter.instance.SetSpeedValue();
+        //MappingParameter.instance.SetSpeedValue();
 
     }
 

@@ -59,6 +59,7 @@ public class MappingParameter : MonoBehaviour
     // Speed
     public int speedType = 0;
     public float speedValue = 0f;
+    public float speedInterval = 3f;
 
 
     [Header("General")]
@@ -238,8 +239,8 @@ public class MappingParameter : MonoBehaviour
             // Speed
             speed_left_button.onClick.AddListener(SetSpeedType_Left);
             speed_right_button.onClick.AddListener(SetSpeedType_Right);
-            speed_sub_button.onClick.AddListener(SpeedValueSub);
-            speed_add_button.onClick.AddListener(SpeedValueAdd);
+            //speed_sub_button.onClick.AddListener(SpeedValueSub);
+            //speed_add_button.onClick.AddListener(SpeedValueAdd);
 
             //previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
 
@@ -444,14 +445,17 @@ public class MappingParameter : MonoBehaviour
             {
                 case 0:
                     targetMaterial = stencilStencilMaterials[geometryType];
+                    SetGeoValueToLerp(0, geoValue);
                     break;
                 case 1:
                     targetMaterial = colorStencil;
+                    SetColorValueToLerp(1, colorValue);
                     FixColor();
                     break;
                 case 2:
                     targetMaterial = stencilSpeedMaterials[geometryType];
                     SpeedColorSetColor(colorValue);
+                    SelectManager.instance.Request(currentMatchEmotion, speedInterval);
                     //previewCube.GetComponent<Renderer>().material = targetMaterial;
                     break;
                
@@ -711,7 +715,65 @@ public class MappingParameter : MonoBehaviour
             }
         }
     }
-    
+
+    // 감정지표와 셰이더를 맵핑시킨다
+    // value 는 현재 셰이더 값 보냄
+    public void SetGeoValueToLerp(int emotionType, float _value)
+    {
+        SelectManager.instance.Request(emotionType, _value);
+    }
+
+    // 감정지표와 셰이더를 맵핑시킨다
+    // value 는 현재 셰이더 값 보냄
+    public void SetColorValueToLerp(int emotionType, float _value)
+    {
+        SelectManager.instance.Request(emotionType, _value);
+    }
+    // select manager에서 러프 된 값이 들어온다
+    public void GetGeoValueFromLerp(float _value)
+    {
+        
+        if (geometryType == 0)
+        {
+            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+
+        }
+        else if (geometryType == 1)
+        {
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+
+        }
+    }
+  
+    public void SetSpeedTypeToLerp()
+    {
+        
+
+        SelectManager.instance.SetIntervalType(speedInterval, speedType);
+    }
+
+
+
+    public void RecieveGeoValueToSpeed(float _value)
+    {
+        
+        if (geometryType == 0)
+        {
+            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+
+        }
+        else if (geometryType == 1)
+        {
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+
+        }
+    }
+
+
     // meeting room geo head 변경
     public void SetGeoValueMeeting(float _value)
     {
@@ -727,7 +789,7 @@ public class MappingParameter : MonoBehaviour
         }
     }
 
-
+    #region 예전 컬러 피커
     //// Color picker 에서 값 바꿀 때 호출
     //public void SetColor()
     //{
@@ -763,6 +825,7 @@ public class MappingParameter : MonoBehaviour
     //    color_slider.value = colorValue;
     //    LerpColorSetColor(colorValue);
     //}
+    #endregion
 
     public void SetColor_R_Value(int targetColor)
     {
@@ -892,6 +955,12 @@ public class MappingParameter : MonoBehaviour
         lerpColor = Color.Lerp(colorA, colorB, value);
         previewCube.GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
     }
+    // 프리뷰 큐브가 스피드 일때 색깔 입히는 메소드
+    public void LerpColorSpeedSetColor(float value)
+    {
+        lerpColor = Color.Lerp(colorA, colorB, value);
+        previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+    }
 
     // 스텐실에 색깔 입히는 메소드 (match 버튼 클릭)
     void LerpColorStencilSphere(float value)
@@ -902,7 +971,7 @@ public class MappingParameter : MonoBehaviour
         stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_AlbedoColor", lerpColor);
     }
     // 스피드 일 경우 스텐실 스피드에 색깔 입히는 메소드
-    void SpeedColorSetColor(float value)
+    public void SpeedColorSetColor(float value)
     {
         //Debug.Log("color value : " + value);
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
@@ -996,30 +1065,44 @@ public class MappingParameter : MonoBehaviour
             speedType -= 1;
         }
     }
-    // Speed 슬라이더 조작 -
-    public void SpeedValueSub()
+
+    public void SetSpeedInterval(float value)
     {
-        if (speedValue > 0)
-        {
-            speedValue -= 0.1f;
-            speed_slider.value = speedValue;
-        }
+        speedInterval = value;
+        SetSpeedTypeToLerp();
     }
 
-    // Speed 슬라이더 조작 +
-    public void SpeedValueAdd()
+    public void SetSpeedType(int type)
     {
-        if (speedValue < 1f)
-        {
-            speedValue += 0.1f;
-            speed_slider.value = speedValue;
-        }
-    }
-    // Speed Slider 에서 값 바꿀 때마다 호출
-    public void SetSpeedValue()
-    {
-        speedValue = speed_slider.value;
-    }
+        speedType = type;
+        SetSpeedTypeToLerp();
 
-   
+    }
+    //// Speed 슬라이더 조작 -
+    //public void SpeedValueSub()
+    //{
+    //    if (speedValue > 0)
+    //    {
+    //        speedValue -= 0.1f;
+    //        speed_slider.value = speedValue;
+    //    }
+    //}
+
+    //// Speed 슬라이더 조작 +
+    //public void SpeedValueAdd()
+    //{
+    //    if (speedValue < 1f)
+    //    {
+    //        speedValue += 0.1f;
+    //        speed_slider.value = speedValue;
+    //    }
+    //}
+    //// Speed Slider 에서 값 바꿀 때마다 호출
+    //public void SetSpeedValue()
+    //{
+    //    speedValue = speed_slider.value;
+    //}
+
+
+
 }
