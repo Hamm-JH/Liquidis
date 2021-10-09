@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Manager
 {
@@ -201,13 +202,38 @@ namespace Manager
 			}
 			else if(objective == API.Objective.Relaxation)
 			{
-				api.Set(objective, (float)relaxation.value);
+				api.Set(objective, -1, (float)relaxation.value);
 				api.CallBack.Invoke(api);
 			}
 			else if(objective == API.Objective.Attention)
 			{
-				api.Set(objective, (float)attention.value);
+				api.Set(objective, -1, (float)attention.value);
 				api.CallBack.Invoke(api);
+			}
+			else if(objective == API.Objective.EEGRandom)
+			{
+				float _delta = Random.value;
+				float _theta = Random.value;
+				float _alpha = Random.value;
+				float _beta  = Random.value;
+				float _gamma = Random.value;
+
+				api.Set(_delta, _theta, _alpha, _beta, _gamma);
+
+				api.CallBack.Invoke(api);
+			}
+			else if(objective == API.Objective.MindRandom)
+			{
+				float val = Random.value;
+				
+				if(api.Option == 0)
+				{
+					api.Set(objective, api.Option, val);
+				}
+				else if(api.Option == 1)
+				{
+					api.Set(objective, api.Option, val);
+				}
 			}
 		}
 

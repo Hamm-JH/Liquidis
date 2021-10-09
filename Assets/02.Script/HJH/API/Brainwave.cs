@@ -14,7 +14,9 @@ namespace API
 	{
 		EEG,
 		Relaxation,
-		Attention
+		Attention,
+		EEGRandom,
+		MindRandom
 	}
 
 	public enum MindIndex
@@ -40,9 +42,25 @@ namespace API
 			callBack = targetCallBack;
 		}
 
+		public Brainwave(Objective obj, EEGSensorID targetId, float targetSecond, int option, UnityAction<Brainwave> targetCallBack)
+		{
+			objective = obj;
+			id = targetId;
+			second = targetSecond;
+			this.option = option;
+			callBack = targetCallBack;
+		}
+
 		public Brainwave(Objective obj, UnityAction<Brainwave> targetCallBack)
 		{
 			objective = obj;
+			callBack = targetCallBack;
+		}
+
+		public Brainwave(Objective obj, int option, UnityAction<Brainwave> targetCallBack)
+		{
+			objective = obj;
+			this.option = option;
 			callBack = targetCallBack;
 		}
 
@@ -63,7 +81,7 @@ namespace API
 			gamma = _gamma;
 		}
 
-		public void Set(Objective obj, float value)
+		public void Set(Objective obj, int option, float value)
 		{
 			if(obj == Objective.Attention)
 			{
@@ -73,12 +91,24 @@ namespace API
 			{
 				relaxation = value;
 			}
+			else if(obj == Objective.MindRandom)
+			{
+				if(option == 0)
+				{
+					relaxation = value;
+				}
+				else if(option == 1)
+				{
+					attention = value;
+				}
+			}
 		}
 
 		/// <summary>
 		/// 내부 데이터. 생성자, 메서드에 의해 데이터가 할당됨
 		/// </summary>
 		private Objective objective;
+		private int option;
 
 		#region private EEG
 		private EEGSensorID id;
@@ -103,6 +133,7 @@ namespace API
 		/// 외부 출력 프로퍼티. 데이터를 읽어올때만 프로퍼티가 사용 가능하다.
 		/// </summary>
 		public Objective Objective { get => objective; } // 요청 수집 데이터 목표
+		public int Option { get => option; }
 
 		#region public EEG
 		public EEGSensorID Id { get => id; }		// 요청 : EEG 센서정보

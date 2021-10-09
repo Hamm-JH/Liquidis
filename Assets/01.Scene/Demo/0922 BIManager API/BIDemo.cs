@@ -20,33 +20,33 @@ public class BIDemo : MonoBehaviour
 
 	private void Update()
 	{
-		#region EEG 데이터 요청
+		#region 1. EEG 데이터 요청
 		// 데이터 요청시 api를 생성한다.
 		// 뇌파 데이터 api 생성시 필수 할당 데이터
 		// 1. targetId : 룩시드랩스 6개 센서중의 한 개의 센서데이터
 		// 2. targetSecond : 메서드 실행 시점에서 과거 n초까지의 데이터 수집
 		// 3. 데이터 수집 완료시 실행할 이벤트
-		API.Brainwave api = new API.Brainwave(
+		API.Brainwave api_EEG = new API.Brainwave(
             obj: API.Objective.EEG,
             targetId: Looxid.Link.EEGSensorID.AF3,
             targetSecond: 10,
             targetCallBack: biGetter
             );
 
-        //Request(api);
+        //Request(api_EEG);
         #endregion
 
-        #region 안정상태 데이터 요청
+        #region 2. 안정상태 데이터 요청
 
         API.Brainwave api_relaxation = new API.Brainwave(
             obj: API.Objective.Relaxation,
             targetCallBack: biGetter
             );
 
-		Request(api_relaxation);
+		//Request(api_relaxation);
 		#endregion
 
-		#region 집중상태 데이터 요청
+		#region 3. 집중상태 데이터 요청
 
 		API.Brainwave api_attention = new API.Brainwave(
             obj: API.Objective.Attention,
@@ -54,6 +54,39 @@ public class BIDemo : MonoBehaviour
             );
 
 		//Request(api_attention);
+        #endregion
+
+        #region 4. 디버깅용 랜덤 EEG
+
+        API.Brainwave api_randomEEG = new API.Brainwave(
+            obj: API.Objective.EEGRandom,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomEEG);
+        #endregion
+
+        #region 5. 디버깅용 이완 랜덤 마인드값
+
+        API.Brainwave api_randomMindRelaxation = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 0,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindRelaxation);
+        #endregion
+
+        #region 6. 디버깅용 집중 랜덤 마인드값
+
+        API.Brainwave api_randomMindAttention = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 1,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindAttention);
+
 		#endregion
 	}
 
@@ -94,6 +127,31 @@ public class BIDemo : MonoBehaviour
         else if(api.Objective == API.Objective.Attention)
 		{
             Debug.Log($"Attention : {api.Attention.ToString()}");
+		}
+        else if(api.Objective == API.Objective.EEGRandom)
+		{
+            string str = "";
+            str += $"Sensor ID : {api.Id.ToString()}\n";
+            str += $"interval seconds : {api.Second.ToString()}\n";
+
+            str += $"Delta : {api.Delta}\n";
+            str += $"Theta : {api.Theta}\n";
+            str += $"Alpha : {api.Alpha}\n";
+            str += $"Beta : {api.Beta} \n";
+            str += $"Gamma : {api.Gamma}\n";
+
+            Debug.Log(str);
+        }
+        else if(api.Objective == API.Objective.MindRandom)
+		{
+            if(api.Option == 0)
+			{
+                Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
+			}
+            else if(api.Option == 1)
+			{
+                Debug.Log($"Attention : {api.Attention.ToString()}");
+            }
 		}
     }
 }

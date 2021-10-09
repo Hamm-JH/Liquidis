@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace API
 {
-	public interface _API
+	internal interface _API
 	{
 		
 	}
