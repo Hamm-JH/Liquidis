@@ -240,6 +240,7 @@ MonoBehaviour:
   vfxValue: 0
   speedType: 0
   speedValue: 0
+  speedInterval: 3
   currentOpenMenu: 0
   currentMatchEmotion: 0
   menu_UI:
