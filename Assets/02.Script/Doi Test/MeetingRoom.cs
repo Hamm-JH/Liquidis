@@ -11,12 +11,47 @@ public class MeetingRoom : MonoBehaviour
 
     public UnityAction<API.Brainwave> biGetter;
 
+    [Header("Ani")]
+    public GameObject counterHead_ani;
+    public GameObject timer;
+    public float timerStartTime = 2f;
+
+    // 게임 시작하면 시간 재기, 5분, 10분이 되면 타이머 박스 애니 트리거
+    // 타이머 박스 애니에 접근해서 부르기
+
+
+    // 게임 강종 하면
+    // TimerGameOver_Shake 하나로 끝낸다.(Trigger: GameOverShake)
+    // TimerBox 애니에서 timer loop 끈다
+    // 
+
+    // 마지막 엔딩
+    // speed interval current -> targetSpeed 로 lerp (N초동안 lerp)(10초)
+    // geo 값 변경 -> targetValue로 바꿈(2나 3)
+    // 임의의 duration 후에 (2초)
+    // 동시에 MirrorRoom - Set trigger: MirrorRoomShake
+    // 임의의 duration 후에 (2초)
+    // Volume 에 VolumeManager에서 isEnd = true 로 targetDuration 설정 필요
+    // 임의의 duration 후에 (2초)
+    // CounterHead(Set tirgger: PlayerHeadOut)
+    // 임의의 duration 후에 (1초)
+    // CounterHead(Set trigger: CounterHeadBye)
+    // 임의의 duration 후에 (2초)
+    // 인트로씬 로드
+
+
+    // VFX랑 같이 맵핑
+    // CounterHead>MirrorGoup>Mirror1,2,3의 셰이더 프로퍼티에 접근. 
+    // <Renderer>().SetFloat  "Reflection Intensity" : 0~1 .
 
     private void Start()
     {
         StartCoroutine(InitialMappingParameters());
 
-        biGetter += Receive;
+
+        // ani sequence
+        counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
+        StartCoroutine(StartTimerAni());
     }
 
     IEnumerator InitialMappingParameters()
@@ -28,78 +63,14 @@ public class MeetingRoom : MonoBehaviour
     }
     private void Update()
     {
-        #region EEG 데이터 요청
-        // 데이터 요청시 api를 생성한다.
-        // 뇌파 데이터 api 생성시 필수 할당 데이터
-        // 1. targetId : 룩시드랩스 6개 센서중의 한 개의 센서데이터
-        // 2. targetSecond : 메서드 실행 시점에서 과거 n초까지의 데이터 수집
-        // 3. 데이터 수집 완료시 실행할 이벤트
-        API.Brainwave api = new API.Brainwave(
-            obj: API.Objective.EEG,
-            targetId: Looxid.Link.EEGSensorID.AF3,
-            targetSecond: 10,
-            targetCallBack: biGetter
-            );
-
-        Request(api);
-        #endregion
-
-        #region 안정상태 데이터 요청
-
-        API.Brainwave api_relaxation = new API.Brainwave(
-            obj: API.Objective.Relaxation,
-            targetCallBack: biGetter
-            );
-
-        Request(api_relaxation);
-        #endregion
-
-        #region 집중상태 데이터 요청
-
-        API.Brainwave api_attention = new API.Brainwave(
-            obj: API.Objective.Attention,
-            targetCallBack: biGetter
-            );
-
-        Request(api_attention);
-        #endregion
+     
     }
 
-    /// <summary>
-	/// 뇌파 데이터 관리자(BIManager)로 데이터 수집 요청을 한다.
-	/// </summary>
-	/// <param name="api"></param>
-	private void Request(API.Brainwave api)
+    IEnumerator StartTimerAni()
     {
-        Manager.BIManager.Instance.Request(api);
-    }
+        yield return new WaitForSeconds(timerStartTime);
 
-    private void Receive(API.Brainwave api)
-    {
-        if (api.Objective == API.Objective.EEG)
-        {
-            string str = "";
-            str += $"Sensor ID : {api.Id.ToString()}\n";
-            str += $"interval seconds : {api.Second.ToString()}\n";
-
-            str += $"Delta : {api.Delta}\n";
-            str += $"Theta : {api.Theta}\n";
-            str += $"Alpha : {api.Alpha}\n";
-            str += $"Beta : {api.Beta} \n";
-            str += $"Gamma : {api.Gamma}\n";
-
-            Debug.Log(str);
-        }
-        else if (api.Objective == API.Objective.Relaxation)
-        {
-            Debug.Log($"Relaxation : {api.Relaxation.ToString()}");
-            
-            // mapping parameter
-        }
-        else if (api.Objective == API.Objective.Attention)
-        {
-            Debug.Log($"Attention : {api.Attention.ToString()}");
-        }
+        timer.SetActive(true);
     }
 
 }

@@ -254,7 +254,7 @@ public class SelectManager : MonoBehaviour
                     // 흥분으로 맵핑된 항목 찾기
                     if (MappingParameter.instance.matchType[i] == 2)
                     {
-                        if(MappingParameter.instance.currentOpenMenu == 2)
+                        if (MappingParameter.instance.currentOpenMenu == 2)
                         {
                             // geo
                             if (i == 0)
@@ -269,7 +269,7 @@ public class SelectManager : MonoBehaviour
 
                             }
                         }
-                        
+
 
                     }
                 }
@@ -300,7 +300,7 @@ public class SelectManager : MonoBehaviour
 
                             }
                         }
-                         
+
 
                     }
                 }

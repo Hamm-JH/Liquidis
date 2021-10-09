@@ -60,6 +60,14 @@ public class MappingParameter : MonoBehaviour
     public int speedType = 0;
     public float speedValue = 0f;
     public float speedInterval = 3f;
+    public float speedLerpInterval = 0f;
+    public int speedIntervalType = 0;
+    public float speedIntervalAMin = 0.1f;
+    public float speedIntervalAMax = 2f;
+    public float speedIntervalBMin = 2f;
+    public float speedIntervalBMax = 0.1f;
+
+
 
 
     [Header("General")]
@@ -148,14 +156,16 @@ public class MappingParameter : MonoBehaviour
     public Slider vfx_slider;
 
 
+
     // Speed
     public Button speed_left_button;
     public Button speed_right_button;
     public Slider speed_slider;
     public Button speed_sub_button;
     public Button speed_add_button;
+    public Button speed_interval_left_button;
+    public Button speed_interval_right_button;
 
-   
 
     private void Awake()
     {
@@ -239,8 +249,10 @@ public class MappingParameter : MonoBehaviour
             // Speed
             speed_left_button.onClick.AddListener(SetSpeedType_Left);
             speed_right_button.onClick.AddListener(SetSpeedType_Right);
-            //speed_sub_button.onClick.AddListener(SpeedValueSub);
-            //speed_add_button.onClick.AddListener(SpeedValueAdd);
+            speed_sub_button.onClick.AddListener(SpeedValueSub);
+            speed_add_button.onClick.AddListener(SpeedValueAdd);
+            speed_interval_left_button.onClick.AddListener(SetSpeedIntervalType_Left);
+            speed_interval_right_button.onClick.AddListener(SetSpeedIntervalType_Right);
 
             //previewCube.GetComponent<MeshRenderer>().material = new Material(refMaterial);
 
@@ -271,6 +283,8 @@ public class MappingParameter : MonoBehaviour
             //    typeUse[i] = false;
             //}
 
+            // speed interval 초기화
+            InitialSpeedIntervalValue();
 
             // window stencil 초기화
             for (int i = 0; i < stencilWindows.Length; i++)
@@ -1050,7 +1064,7 @@ public class MappingParameter : MonoBehaviour
     // speed 타입 바꾸기 ->버튼
     public void SetSpeedType_Right()
     {
-        if (speedType < 3)
+        if (speedType < 2)
         {
             speedType += 1;
         }
@@ -1066,7 +1080,28 @@ public class MappingParameter : MonoBehaviour
         }
     }
 
-    public void SetSpeedInterval(float value)
+    // speed interval 타입 바꾸기 ->버튼
+    public void SetSpeedIntervalType_Right()
+    {
+        if (speedIntervalType < 1)
+        {
+            speedIntervalType += 1;
+            InitialSpeedIntervalValue();
+        }
+    }
+
+    // Speed interval 타입 바꾸기 <-버튼
+
+    public void SetSpeedIntervalType_Left()
+    {
+        if (speedIntervalType > 0)
+        {
+            speedIntervalType -= 1;
+            InitialSpeedIntervalValue();
+        }
+    }
+
+    void SetSpeedInterval(float value)
     {
         speedInterval = value;
         SetSpeedTypeToLerp();
@@ -1078,30 +1113,81 @@ public class MappingParameter : MonoBehaviour
         SetSpeedTypeToLerp();
 
     }
-    //// Speed 슬라이더 조작 -
-    //public void SpeedValueSub()
-    //{
-    //    if (speedValue > 0)
-    //    {
-    //        speedValue -= 0.1f;
-    //        speed_slider.value = speedValue;
-    //    }
-    //}
 
-    //// Speed 슬라이더 조작 +
-    //public void SpeedValueAdd()
-    //{
-    //    if (speedValue < 1f)
-    //    {
-    //        speedValue += 0.1f;
-    //        speed_slider.value = speedValue;
-    //    }
-    //}
-    //// Speed Slider 에서 값 바꿀 때마다 호출
-    //public void SetSpeedValue()
-    //{
-    //    speedValue = speed_slider.value;
-    //}
+    void InitialSpeedIntervalValue()
+    {
+        if(speedIntervalType == 0)
+            speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+        else
+            speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+
+        SetSpeedInterval(speedLerpInterval);
+    }
+
+    // Speed 슬라이더 조작 -
+    public void SpeedValueSub()
+    {
+        if (speedValue > 0)
+        {
+            speedValue -= 0.1f;
+            speed_slider.value = speedValue;
+
+            if(speedIntervalType == 0)
+            {
+                speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+
+            }else if(speedIntervalType == 1)
+            {
+                speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+
+            }
+
+            SetSpeedInterval(speedLerpInterval);
+        }
+    }
+
+    // Speed 슬라이더 조작 +
+    public void SpeedValueAdd()
+    {
+        if (speedValue < 1f)
+        {
+            speedValue += 0.1f;
+            speed_slider.value = speedValue;
+
+            if (speedIntervalType == 0)
+            {
+                speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+
+            }
+            else if (speedIntervalType == 1)
+            {
+                speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+
+            }
+
+            SetSpeedInterval(speedLerpInterval);
+
+        }
+    }
+    // Speed Slider 에서 값 바꿀 때마다 호출
+    public void SetSpeedValue()
+    {
+        speedValue = speed_slider.value;
+
+        if (speedIntervalType == 0)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+
+        }
+        else if (speedIntervalType == 1)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+
+        }
+
+        SetSpeedInterval(speedLerpInterval);
+
+    }
 
 
 
