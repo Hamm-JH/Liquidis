@@ -242,72 +242,65 @@ public class SelectManager : MonoBehaviour
         {
             float concentrationValue = 0;
             float excitementValue = 0;
+            
 
             if (api.Option == 0)
             {
                 //Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
                 excitementCurrentValue = api.Relaxation;
+                float current = excitementCurrentValue;
+                float target = api.Relaxation;
 
-                // mapping parameter
-                for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-                {
-                    // 흥분으로 맵핑된 항목 찾기
-                    if (MappingParameter.instance.matchType[i] == 2)
-                    {
-                        if (MappingParameter.instance.currentOpenMenu == 2)
-                        {
-                            // geo
-                            if (i == 0)
-                            {
-                                MappingParameter.instance.GetGeoValueFromLerp(excitementValue);
-                            }
-                            else if (i == 1) // color
-                            {
-                                MappingParameter.instance.SpeedColorSetColor(excitementValue);
-                                MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
-
-
-                            }
-                        }
-
-
-                    }
-                }
+                Request(1, current, target);
+               
+               
             }
             else if (api.Option == 1)
             {
                 //Debug.Log($"Attention : {api.Attention.ToString()}");
                 concentrationCurrentValue = api.Attention;
 
-                // mapping parameter
-                for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-                {
-                    // 집중으로 맵핑된 항목 찾기
-                    if (MappingParameter.instance.matchType[i] == 1)
-                    {
-                        if (MappingParameter.instance.currentOpenMenu == 2)
-                        {
-                            // geo
-                            if (i == 0)
-                            {
-                                MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
-                            }
-                            else if (i == 1) // color
-                            {
-                                MappingParameter.instance.SpeedColorSetColor(concentrationValue);
-                                MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
+                float current = concentrationCurrentValue;
+                float target = api.Attention;
 
+                Request(0, current, target);
 
-                            }
-                        }
-
-
-                    }
-                }
             }
         }
     }
    
+    public void Request(int index, float current, float value)
+    {
+        if (index == 0)
+        {
+            API.Lerp lerp_concentration = new API.Lerp(
+          _requestIndex: 0,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: current,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
+
+            Request(lerp_concentration);
+
+        }
+        else if (index == 1)
+        {
+            API.Lerp lerp_excitement = new API.Lerp(
+          _requestIndex: 1,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: current,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
+
+            Request(lerp_excitement);
+        }
+
+    }
+
     public void Request(int index, float value)
     {
         if(index == 0)

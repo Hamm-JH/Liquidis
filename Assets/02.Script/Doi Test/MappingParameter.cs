@@ -750,13 +750,15 @@ public class MappingParameter : MonoBehaviour
         if (geometryType == 0)
         {
             previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+            if(currentScene == scene.SELECT)
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
 
         }
         else if (geometryType == 1)
         {
             previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+            if (currentScene == scene.SELECT)
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
         }
     }
@@ -990,7 +992,8 @@ public class MappingParameter : MonoBehaviour
         //Debug.Log("color value : " + value);
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
 
-        stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+        if (currentScene == scene.SELECT)
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
     // waiting room stencil cube에 색깔 입히는 메소드
     void LerpColorWaitingCube(float value)
@@ -1189,7 +1192,7 @@ public class MappingParameter : MonoBehaviour
 
     }
 
-   
+  
 
 
 }
