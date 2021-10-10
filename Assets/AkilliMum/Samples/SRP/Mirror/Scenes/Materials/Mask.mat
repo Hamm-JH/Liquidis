@@ -22,7 +22,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Mask
   m_Shader: {fileID: 4800000, guid: 0bf18e0e5b650464daaea5ba8c0ea6d0, type: 3}
-  m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _NORMALMAP
+  m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -34,7 +34,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: ab52be1c89c284d53bd70c52666f8bb3, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 10, y: 10}
         m_Offset: {x: 0, y: 0}
     - _BaseTexture:
@@ -42,7 +42,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 9b4969f3aaaeb417aaf43b9e2bc11e55, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ClearCoatMap:
@@ -78,7 +78,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
-        m_Texture: {fileID: 2800000, guid: 7ccc90e8f5d564d35b22823593e4d5ad, type: 3}
+        m_Texture: {fileID: 2800000, guid: 46c6d88ae0d07b94783cf3cf7ecd881c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -161,8 +161,8 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _LODLevel: 0
-    - _MaskCutoff: 0.197
-    - _MaskEdgeDarkness: 4.2
+    - _MaskCutoff: 0
+    - _MaskEdgeDarkness: 1
     - _Metallic: 0
     - _MixBlackColor: 0
     - _NearClip: 0.3
@@ -199,6 +199,6 @@ Material:
     - _EnviCubeMapPos: {r: 0, g: 0, b: 0, a: 0}
     - _EnviPosition: {r: 0, g: 0, b: 0, a: 0}
     - _EnviRotation: {r: 0, g: 0, b: 0, a: 0}
-    - _MaskTiling: {r: 2.85, g: 4.42, b: 1, a: 1}
+    - _MaskTiling: {r: 10, g: 10, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []

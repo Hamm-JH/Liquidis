@@ -166,6 +166,9 @@ GameObject:
   - component: {fileID: 1909502998}
   - component: {fileID: 1909502997}
   - component: {fileID: 1909503000}
+  - component: {fileID: 1357967589}
+  - component: {fileID: 1357967590}
+  - component: {fileID: 1357967592}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -180,13 +183,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1909502996}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.14086865}
+  m_LocalRotation: {x: -0, y: -0.12304922, z: -0, w: 0.99240065}
+  m_LocalPosition: {x: 0.000000018549674, y: 0, z: 0.1408686}
   m_LocalScale: {x: 0.03902179, y: 0.03902179, z: 0.03902179}
   m_Children: []
   m_Father: {fileID: 4728415033573391548}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 345.864, z: 0}
 --- !u!20 &1909502998
 Camera:
   m_ObjectHideFlags: 0
@@ -270,6 +273,123 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!114 &1357967589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909502996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a56bad702cea3047ad620f20a58ec5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEnabled: 1
+  Name: Mirror3
+  IsMirrorInMirror: 0
+  MirrorInMirrorId: 
+  TurnOffOcclusion: 0
+  Platform: 0
+  WorkingType: 1
+  TransparencyClearColor: {r: 0, g: 0, b: 0, a: 0}
+  UpVector: 2
+  CameraLODLevel: 0
+  HDR: 0
+  MSAALevel: 0
+  FilterMode: 1
+  DisablePixelLights: 0
+  Shadow: 0
+  Cull: 0
+  CullDistance: 0
+  RenderTextureSize: 1
+  ManualSize: 256
+  ClipPlaneOffset: 0.02
+  ReflectLayers:
+    serializedVersion: 2
+    m_Bits: 3762290743
+  ReflectiveObjects:
+  - {fileID: 0}
+  EnableDepth: 0
+  CustomShaders: []
+--- !u!114 &1357967590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909502996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a56bad702cea3047ad620f20a58ec5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEnabled: 1
+  Name: Mirror2
+  IsMirrorInMirror: 0
+  MirrorInMirrorId: 
+  TurnOffOcclusion: 0
+  Platform: 0
+  WorkingType: 1
+  TransparencyClearColor: {r: 0, g: 0, b: 0, a: 0}
+  UpVector: 2
+  CameraLODLevel: 0
+  HDR: 0
+  MSAALevel: 0
+  FilterMode: 1
+  DisablePixelLights: 0
+  Shadow: 0
+  Cull: 0
+  CullDistance: 0
+  RenderTextureSize: 1
+  ManualSize: 256
+  ClipPlaneOffset: 0.02
+  ReflectLayers:
+    serializedVersion: 2
+    m_Bits: 3760193591
+  ReflectiveObjects:
+  - {fileID: 0}
+  EnableDepth: 0
+  CustomShaders: []
+--- !u!114 &1357967592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909502996}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a56bad702cea3047ad620f20a58ec5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsEnabled: 1
+  Name: Mirror1
+  IsMirrorInMirror: 0
+  MirrorInMirrorId: 
+  TurnOffOcclusion: 0
+  Platform: 0
+  WorkingType: 1
+  TransparencyClearColor: {r: 0, g: 0, b: 0, a: 0}
+  UpVector: 2
+  CameraLODLevel: 0
+  HDR: 0
+  MSAALevel: 0
+  FilterMode: 1
+  DisablePixelLights: 0
+  Shadow: 0
+  Cull: 0
+  CullDistance: 0
+  RenderTextureSize: 1
+  ManualSize: 256
+  ClipPlaneOffset: 0.02
+  ReflectLayers:
+    serializedVersion: 2
+    m_Bits: 3759145015
+  ReflectiveObjects:
+  - {fileID: 0}
+  EnableDepth: 0
+  CustomShaders: []
 --- !u!1 &2683479688362594292
 GameObject:
   m_ObjectHideFlags: 0
@@ -864,7 +984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2683479689401468279}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0379, z: -0.0099}
+  m_LocalPosition: {x: 0, y: -0.0379, z: -0.0079}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8636363475690924584}
@@ -1564,7 +1684,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd7bca6100f6f5c458859d77a6b8a4ea, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.0022678755
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd7bca6100f6f5c458859d77a6b8a4ea, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1572,7 +1692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd7bca6100f6f5c458859d77a6b8a4ea, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.024244668
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: dd7bca6100f6f5c458859d77a6b8a4ea, type: 3}
       propertyPath: m_LocalRotation.w
