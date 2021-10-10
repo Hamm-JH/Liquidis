@@ -18,6 +18,17 @@ namespace Demo
 		public GameObject laser;
 		public Transform laserTransform;
 
+		public enum scene
+        {
+			INTRO,
+			GUIDE,
+			SELECT,
+			WAITING,
+			MEETING
+        }
+
+		public scene currentScene;
+
 		// Start is called before the first frame update
 		void Start()
 		{
@@ -49,6 +60,12 @@ namespace Demo
 					{
 						_coll.enabled = false;
 					}
+
+					if(currentScene == scene.INTRO)
+                    {
+						if(_coll.gameObject.tag == "sphere")
+							IntroManager.instance.TriggerTitleAni();
+                    }
 				}
 			}
 			else
