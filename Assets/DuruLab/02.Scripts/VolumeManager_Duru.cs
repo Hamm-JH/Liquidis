@@ -11,11 +11,13 @@ public class VolumeManager_Duru : MonoBehaviour
     DepthOfField dof;
     public bool isEnd = false;
     public float targetDuration = 10f;
+    float currentDOF;
 
     // Start is called before the first frame update
     void Start()
     {
         postFxProfile.TryGet<DepthOfField>(out dof);
+        currentDOF = dof.focusDistance.value;
       
     }
 
@@ -38,7 +40,7 @@ public class VolumeManager_Duru : MonoBehaviour
         while(time<targetDuration)
         {
             //focusDistance가 10에서 1이 되어야 한다.
-            dof.focusDistance.value = targetDuration - (targetDuration * time / targetDuration);
+            dof.focusDistance.value = currentDOF - (currentDOF * time / targetDuration);//20-20
             time += Time.deltaTime;
             Debug.Log("time is " + dof.focusDistance.value);
             yield return null;

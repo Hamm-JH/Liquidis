@@ -6,40 +6,40 @@ using UnityEngine.Events;
 
 public class MeetingRoom : MonoBehaviour
 {
-    public GameObject meetingHead;
-    public VisualEffect vfxObject;
+    public GameObject meetingHead;//playerHead의 본체 
+    public VisualEffect vfxObject;//공감용 vfx
 
-    public UnityAction<API.Brainwave> biGetter;
+    public UnityAction<API.Brainwave> biGetter; //뇌파 데이터
 
     [Header("Ani")]
-    public GameObject counterHead_ani;
-    public GameObject timer;
-    public float timerStartTime = 2f;
-    public float currentSpeedValue = 0f;
-    public float targetSpeedLerp = 10f;
-    public float speedLerp = 2f;
-    public float[] duration;
-    public GameObject volumeObj;
-
-    public Animator mirror_room_ani;
-    public AnimationClip timerBox_animation;
+    public GameObject counterHead_ani; //카운터 헤드
+    public GameObject timer; //타이머 오브젝트
+    public float timerStartTime = 5f; //타이머 시작 시간
+    public float currentSpeedValue = 0f; //현재 속도값
+    public float targetSpeedLerp = 10f; //목표속도러프
+    public float speedLerp = 2f; //속도 러프
+    public float[] duration; //경과시간 배열
+    public GameObject volumeObj; //포스트 프로세싱
+     
+    public Animator mirror_room_ani; //미러룸 애니
+    public AnimationClip timerBox_animation; //타이머 애니 애니메이션클립
    
 
     [Header("General Value")]
-    float currentTime = 0f;
-    bool timeStart = false;
-    float time_5min = 300f;
+    float currentTime = 0f;//현재 시간.
+    bool timeStart = false; 
+    float time_5min = 300f; //5분
     bool pass5min = false;
-    float time_10min = 600f;
-    bool pass10min = false;
-    float time_15min = 900f;
+    float time_10min = 600f;//10분
+    bool pass10min = false; 
+    float time_15min = 900f; //15분
     bool pass15min = false;
-    public float concentrationCurrentValue = 0f;
-    public float excitementCurrentValue = 0f;
+    public float concentrationCurrentValue = 0f;//집중현재값
+    public float excitementCurrentValue = 0f;//흥분현재값
 
-    UnityAction<API.Lerp> lerpGetter;
-    public float speedInterval = 3f;
-    API.Lerp.Function functionType;
+    UnityAction<API.Lerp> lerpGetter;//러프
+    public float speedInterval = 3f; //속도인터벌
+    API.Lerp.Function functionType; //러프타입
 
 
     // 게임 시작하면 시간 재기, 5분, 10분이 되면 타이머 박스 애니 트리거
@@ -72,7 +72,7 @@ public class MeetingRoom : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(InitialMappingParameters());
+        StartCoroutine(InitialMappingParameters());//?
 
         // 이벤트에 메서드 연결
         biGetter += Receive;
@@ -446,6 +446,7 @@ public class MeetingRoom : MonoBehaviour
         yield return new WaitForSeconds(timerStartTime);
 
         timer.SetActive(true);
+       // timer.GetComponent<Animator>().SetTrigger("TimerLoop");
     }
 
     public void ForceEndGame()
@@ -461,8 +462,9 @@ public class MeetingRoom : MonoBehaviour
 
     void EndingAniStart()
     {
-        Debug.LogError("ending start");
+        Debug.Log("ending start");
         StartCoroutine(EndingAniSequence());
+        timer.GetComponent<Animator>().SetTrigger("GameOverShake");
     }
 
     
@@ -490,24 +492,24 @@ public class MeetingRoom : MonoBehaviour
 
         MappingParameter.instance.SetGeoValueMeeting(2f);
 
-        yield return new WaitForSeconds(duration[0]);
+        yield return new WaitForSeconds(duration[0]);//?
 
-        mirror_room_ani.SetTrigger("MirrorRoomShake");
+        mirror_room_ani.SetTrigger("MirrorRoomShake");//미러룸셰이크
 
-        yield return new WaitForSeconds(duration[1]);
+        yield return new WaitForSeconds(duration[1]);//미러룸셰이크>포스트프로세스
 
         volumeObj.GetComponent<VolumeManager_Duru>().isEnd = true;
         // target duration 설정은 volume manager 외부에서 직접 쓰기
 
-        yield return new WaitForSeconds(duration[2]);
+        yield return new WaitForSeconds(duration[2]);//포스트 프로세스>플레이어헤드아웃
 
-        counterHead_ani.GetComponent<Animator>().SetTrigger("PlayerHeadOut");
+        counterHead_ani.GetComponent<Animator>().SetTrigger("PlayerHeadOut");//플레이어헤드아웃
 
-        yield return new WaitForSeconds(duration[3]);
+        yield return new WaitForSeconds(duration[3]);//플레이어헤드아웃>카운터헤드바이
 
-        counterHead_ani.GetComponent<Animator>().SetTrigger("CounterHeadBye");
+        counterHead_ani.GetComponent<Animator>().SetTrigger("CounterHeadBye");//카운터헤드바이
 
-        yield return new WaitForSeconds(duration[4]);
+        yield return new WaitForSeconds(duration[4]);//카운터헤드바이>인트로씬로드
 
         // 인트로씬 로드
     }
