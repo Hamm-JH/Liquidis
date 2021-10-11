@@ -255,10 +255,24 @@ public class MeetingRoom : MonoBehaviour
         else if (api.Objective == API.Objective.Relaxation)
         {
             //Debug.Log($"Relaxation : {api.Relaxation.ToString()}");
+
+            excitementCurrentValue = api.Relaxation;
+            float current = excitementCurrentValue;
+            float target = api.Relaxation;
+
+            Request(1, current, target);
+
         }
         else if (api.Objective == API.Objective.Attention)
         {
             //Debug.Log($"Attention : {api.Attention.ToString()}");
+
+            concentrationCurrentValue = api.Attention;
+
+            float current = concentrationCurrentValue;
+            float target = api.Attention;
+
+            Request(0, current, target);
         }
         else if (api.Objective == API.Objective.EEGRandom)
         {
@@ -283,23 +297,23 @@ public class MeetingRoom : MonoBehaviour
             if (api.Option == 0)
             {
                 //Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
-                excitementCurrentValue = api.Relaxation;
-                float current = excitementCurrentValue;
-                float target = api.Relaxation;
+                //excitementCurrentValue = api.Relaxation;
+                //float current = excitementCurrentValue;
+                //float target = api.Relaxation;
 
-                Request(1, current, target);
+                //Request(1, current, target);
 
 
             }
             else if (api.Option == 1)
             {
                 //Debug.Log($"Attention : {api.Attention.ToString()}");
-                concentrationCurrentValue = api.Attention;
+                //concentrationCurrentValue = api.Attention;
 
-                float current = concentrationCurrentValue;
-                float target = api.Attention;
+                //float current = concentrationCurrentValue;
+                //float target = api.Attention;
 
-                Request(0, current, target);
+                //Request(0, current, target);
 
             }
         }
@@ -381,6 +395,7 @@ public class MeetingRoom : MonoBehaviour
 
         float concentrationValue = 0;
         float excitementValue = 0;
+        float sympathyValue = 0;
 
         // 요청 인덱스는 int 값이기만 하면 제한없이 사용 가능합니다. (예시용으로 0, 1, 2만 넣어둠)
         if (api.RequestIndex == 0)
@@ -438,6 +453,9 @@ public class MeetingRoom : MonoBehaviour
         else if (api.RequestIndex == 2)
         {
             //vfxValue = api.Value;
+            sympathyValue = api.Value;
+
+            MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
         }
 
     }

@@ -77,10 +77,7 @@ public class WaitingRoom : MonoBehaviour
 
     }
 
-    public void LoadMeetingRoom()
-    {
-        PhotonNetwork.LoadLevel("MeetingRoom");
-    }
+   
     
     void SliderAni()
     {
@@ -173,14 +170,23 @@ public class WaitingRoom : MonoBehaviour
 
     }
 
-    void WaitingAniSequence()
+    public void WaitingAniSequence()
     {
         //StartCoroutine(WaitingAni());
         Debug.LogError("ani start");
         selectBox.SetTrigger("Start");
         //selectBox.GetComponent<SelectBoxAni>().HelpUIStart();
         slider_canvas.SetTrigger("FadeStart");
-        vfxEffect.SetFloat("SpawnRate", 0f);
+        vfxEffect.SetFloat("SpawnRate", 0f); // -> 몇초?
+
+        //photon call
+        StartCoroutine(LoadMeetingRoom());
+
+    }
+    IEnumerator LoadMeetingRoom()
+    {
+        yield return new WaitForSeconds(2f);
+        PhotonNetwork.LoadLevel("MeetingRoom");
     }
 
     //IEnumerator WaitingAni()
@@ -398,6 +404,7 @@ public class WaitingRoom : MonoBehaviour
 
     }
 
+    // select 에서 슬라이더 할당할 때 사용
     public void Request(int index, float value)
     {
         if (index == 0)
@@ -442,6 +449,7 @@ public class WaitingRoom : MonoBehaviour
 
         float concentrationValue = 0;
         float excitementValue = 0;
+        float sympathyValue = 0;
 
         // 요청 인덱스는 int 값이기만 하면 제한없이 사용 가능합니다. (예시용으로 0, 1, 2만 넣어둠)
         if (api.RequestIndex == 0)
@@ -499,6 +507,8 @@ public class WaitingRoom : MonoBehaviour
         else if (api.RequestIndex == 2)
         {
             //vfxValue = api.Value;
+            sympathyValue = api.Value;
+            MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
         }
 
     }
