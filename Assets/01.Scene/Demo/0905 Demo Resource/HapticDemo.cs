@@ -33,7 +33,7 @@ namespace Demo
 					vibration.Execute(
 						secondsFromNow: 0,
 						durationSeconds: Time.deltaTime,
-						frequency: 0.01f,
+						frequency: 50f,
 						amplitude: 0.1f,
 						inputSource: handType);
 				}

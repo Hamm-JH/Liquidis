@@ -56,12 +56,12 @@ namespace Demo
 					isSelected = true;
 
 					Collider _coll;
-					if (targetTransform.TryGetComponent<Collider>(out _coll))
-					{
-						_coll.enabled = false;
-					}
+                    if (targetTransform.TryGetComponent<Collider>(out _coll))
+                    {
+                        _coll.enabled = false;
+                    }
 
-					if(currentScene == scene.INTRO)
+                    if (currentScene == scene.INTRO)
                     {
 						if(_coll.gameObject.tag == "sphere")
 							IntroManager.instance.TriggerTitleAni();
@@ -80,10 +80,14 @@ namespace Demo
 				{
 					if (LayerMask.LayerToName(hit.transform.gameObject.layer) == "TriggerQuad" && targetTransform != null)
 					{
+						float xPos = 0f;
+						xPos = hit.point.x;
+
 						Debug.Log(LayerMask.LayerToName(hit.transform.gameObject.layer));
 
+						xPos = Mathf.Clamp(xPos, -8.8f, 8.8f);
 						targetTransform.position = new Vector3(
-							hit.point.x,
+							xPos,
 							targetTransform.position.y,
 							hit.point.z
 							);
