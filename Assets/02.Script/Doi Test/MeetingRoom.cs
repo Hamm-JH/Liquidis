@@ -36,6 +36,8 @@ public class MeetingRoom : MonoBehaviour
     bool pass15min = false;
     public float concentrationCurrentValue = 0f;//집중현재값
     public float excitementCurrentValue = 0f;//흥분현재값
+    public float positiveCurrentValue = 0f;
+    public float sympathyCurrentValue = 0f;
 
     UnityAction<API.Lerp> lerpGetter;//러프
     public float speedInterval = 3f; //속도인터벌
@@ -226,6 +228,31 @@ public class MeetingRoom : MonoBehaviour
         Request(api_randomMindAttention);
 
         #endregion
+
+        #region 7. 디버깅용 긍부정 랜덤 마인드값
+
+        API.Brainwave api_randomMindPositive = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 2,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindAttention);
+
+        #endregion
+
+
+        #region 8. 디버깅용 공감 랜덤 마인드값
+
+        API.Brainwave api_randomMindSympathy = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 3,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindAttention);
+
+        #endregion
     }
     private void Request(API.Brainwave api)
     {
@@ -315,7 +342,36 @@ public class MeetingRoom : MonoBehaviour
 
                 //Request(0, current, target);
 
+                
+
             }
+            else if(api.Option == 2)
+            {
+                // 여기가 몬가 잘못된 것 같은데
+                Debug.Log($"Positive : {api.Attention.ToString()}");
+
+                positiveCurrentValue = api.Attention;
+
+                float current = positiveCurrentValue;
+                float target = api.Attention;
+
+                Request(2, current, target);
+
+            }
+            else if(api.Option == 3)
+            {
+                Debug.Log($"Sympathy : {api.Attention.ToString()}");
+
+                sympathyCurrentValue = api.Attention;
+
+                float current = sympathyCurrentValue = api.Attention;
+                ;
+                float target = api.Attention;
+
+                Request(3, current, target);
+            }
+
+
         }
     }
 
@@ -347,42 +403,66 @@ public class MeetingRoom : MonoBehaviour
           );
 
             Request(lerp_excitement);
+        }else if (index == 2)
+        {
+            API.Lerp lerp_positive = new API.Lerp(
+         _requestIndex: 2,
+         _Function: functionType,
+         _interval: speedInterval,
+         _currValue: current,
+         _targetValue: value,
+         _callback: lerpGetter
+         );
+
+            Request(lerp_positive);
+        }
+        else if (index == 3)
+        {
+            API.Lerp lerp_sympathy = new API.Lerp(
+         _requestIndex: 3,
+         _Function: functionType,
+         _interval: speedInterval,
+         _currValue: current,
+         _targetValue: value,
+         _callback: lerpGetter
+         );
+            Request(lerp_sympathy);
         }
 
     }
 
-    public void Request(int index, float value)
-    {
-        if (index == 0)
-        {
-            API.Lerp lerp_concentration = new API.Lerp(
-          _requestIndex: 0,
-          _Function: functionType,
-          _interval: speedInterval,
-          _currValue: concentrationCurrentValue,
-          _targetValue: value,
-          _callback: lerpGetter
-          );
+    //public void Request(int index, float value)
+    //{
+    //    if (index == 0)
+    //    {
+    //        API.Lerp lerp_concentration = new API.Lerp(
+    //      _requestIndex: 0,
+    //      _Function: functionType,
+    //      _interval: speedInterval,
+    //      _currValue: concentrationCurrentValue,
+    //      _targetValue: value,
+    //      _callback: lerpGetter
+    //      );
 
-            Request(lerp_concentration);
+    //        Request(lerp_concentration);
 
-        }
-        else if (index == 1)
-        {
-            API.Lerp lerp_excitement = new API.Lerp(
-          _requestIndex: 1,
-          _Function: functionType,
-          _interval: speedInterval,
-          _currValue: excitementCurrentValue,
-          _targetValue: value,
-          _callback: lerpGetter
-          );
+    //    }
+    //    else if (index == 1)
+    //    {
+    //        API.Lerp lerp_excitement = new API.Lerp(
+    //      _requestIndex: 1,
+    //      _Function: functionType,
+    //      _interval: speedInterval,
+    //      _currValue: excitementCurrentValue,
+    //      _targetValue: value,
+    //      _callback: lerpGetter
+    //      );
 
-            Request(lerp_excitement);
-        }
+    //        Request(lerp_excitement);
+    //    }
+      
 
-
-    }
+    //}
 
     public void Request(API.Lerp api)
     {
@@ -395,6 +475,8 @@ public class MeetingRoom : MonoBehaviour
 
         float concentrationValue = 0;
         float excitementValue = 0;
+        float positiveValue = 0;
+
         float sympathyValue = 0;
 
         // 요청 인덱스는 int 값이기만 하면 제한없이 사용 가능합니다. (예시용으로 0, 1, 2만 넣어둠)
@@ -419,7 +501,10 @@ public class MeetingRoom : MonoBehaviour
 
 
                     }
-
+                    else if(i == 2) // speed
+                    {
+                        // ????
+                    }
                 }
             }
 
@@ -446,11 +531,46 @@ public class MeetingRoom : MonoBehaviour
 
 
                     }
-
+                    else if (i == 2) // speed
+                    {
+                        // ????
+                    }
                 }
             }
         }
         else if (api.RequestIndex == 2)
+        {
+            positiveValue = api.Value;
+                
+            // mapping parameter
+            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+            {
+                // 긍부정으로 맵핑된 항목 찾기
+                if (MappingParameter.instance.matchType[i] == 2)
+                {
+                    // geo
+                    if (i == 0)
+                    {
+                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+                    }
+                    else if (i == 1) // color
+                    {
+                        MappingParameter.instance.SpeedColorSetColor(positiveValue);
+                        MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
+
+
+                    }
+                    else if (i == 2) // speed
+                    {
+                        // ????
+                    }
+                }
+            }
+
+
+        
+    } //공감도
+        else if(api.RequestIndex == 3)
         {
             //vfxValue = api.Value;
             sympathyValue = api.Value;

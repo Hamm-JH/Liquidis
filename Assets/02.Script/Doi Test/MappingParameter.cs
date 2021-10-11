@@ -765,9 +765,21 @@ public class MappingParameter : MonoBehaviour
   
     public void SetSpeedTypeToLerp()
     {
-        
+       // ??????
 
-        SelectManager.instance.SetIntervalType(speedInterval, speedType);
+        if(currentScene == scene.SELECT)
+        {
+            SelectManager.instance.SetIntervalType(speedInterval, speedType);
+
+        }
+        else if(currentScene == scene.WAITING)
+        {
+
+        }
+        else if(currentScene == scene.MEETING)
+        {
+
+        }
     }
 
 
@@ -1104,7 +1116,7 @@ public class MappingParameter : MonoBehaviour
         }
     }
 
-    void SetSpeedInterval(float value)
+    public void SetSpeedInterval(float value)
     {
         speedInterval = value;
         SetSpeedTypeToLerp();
