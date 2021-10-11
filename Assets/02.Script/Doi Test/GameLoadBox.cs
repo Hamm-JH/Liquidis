@@ -44,12 +44,13 @@ public class GameLoadBox : MonoBehaviour
 
                 if(boxType == _boxType.LEFT)
                 {
-                    // 왼쪽 블럭일 경우 플레이씬 로드
-                    SceneManager.LoadScene("02_Play_Guide");
+                    // 왼쪽 블럭일 경우 무비씬 로드
+                    
                     
                 }else if (boxType == _boxType.RIGHT)
                 {
-                    // 오른쪽 블럭일 경우 무비씬 로드
+                    // 오른쪽 블럭일 경우 가이드씬 로드
+                    SceneManager.LoadScene("02_Play_Guide");
                 }
                 firstEnter = false;
                 return;

@@ -19,19 +19,18 @@ public class BallAniTest_Duru : MonoBehaviour
         x = gameObject.transform.position.x;
         XAxisMove();
       
-        if(isTriggered)
-        {
-            TitleAni();
-            isTriggered = false;
-        }
+        
     }
   
     // 트리거 클릭 시(은지씨 확인 필!)_
     public void TitleAni()
     {
+        if (!isTriggered)
+        {
+            liquidis.GetComponent<Animator>().SetTrigger("Liquidis");
+            isTriggered = true;
+        }
 
-        liquidis.GetComponent<Animator>().SetTrigger("Liquidis");
-        
     }
 
 

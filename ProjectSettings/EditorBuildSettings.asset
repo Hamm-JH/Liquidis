@@ -5,18 +5,18 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Items/URP/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
   - enabled: 1
-    path: Assets/01.Scene/Main/Backup/0927__01_Intro.unity
-    guid: 337af64afce53ca4c96b00a73df07ea4
+    path: Assets/01.Scene/Main/01_Intro.unity
+    guid: 442ee56f70f49d1488a9916cc758ab04
   - enabled: 1
-    path: Assets/01.Scene/Main/Backup/0927__02_Play_Guide.unity
-    guid: bc1a7e5ae76424a93a9c0e6afaa3461c
+    path: Assets/01.Scene/Main/02_Play_Guide.unity
+    guid: 38fc558dcfe9d5643bbc8bcffc9f0b7f
   - enabled: 1
-    path: Assets/01.Scene/Main/Backup/0929__03_Play_Select.unity
-    guid: b296347f040ff4045b98c828358506e9
+    path: Assets/01.Scene/Main/03_Play_Select.unity
+    guid: f73baa89ab26ef94489309e34b520431
   - enabled: 1
     path: Assets/01.Scene/Main/04_Play_WaitingRoom.unity
     guid: 9ca988c560968da45bc7eb39ed26a8ad
