@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SpatialTracking;
 
 public class GuidePlayerMove : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class GuidePlayerMove : MonoBehaviour
     public Animator camera_rig_ani;
 
     bool done = false;
+    public bool headOn = false;
+    bool headCheck = false;
+
+    float headOnTime = 0f;
+    public Transform camera;
 
     // Update is called once per frame
     void Update()
@@ -38,6 +44,24 @@ public class GuidePlayerMove : MonoBehaviour
 
             }
         }
+
+        if (!headCheck)
+        {
+            if (headOn)
+            {
+                headOnTime += Time.deltaTime;
+                if (headOnTime > 2f)
+                {
+                    camera.GetComponent<TrackedPoseDriver>().enabled = true;
+                    headCheck = true;
+
+                }
+
+            }
+            
+        }
+       
+
     }
 
     void MoveAniStart()

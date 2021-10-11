@@ -26,6 +26,7 @@ namespace Manager
 		#endregion
 
 		public UnityAction<bool> isHeadEquiped;
+		public GuidePlayerMove guidePlayerMove;
 
 		// Start is called before the first frame update
 		void Start()
@@ -36,6 +37,7 @@ namespace Manager
 		public void CheckHeadsetEquiped(bool isEquiped)
 		{
 			Debug.Log($"Headset equip state : {isEquiped}");
+			guidePlayerMove.headOn = isEquiped;
 		}
 	}
 }

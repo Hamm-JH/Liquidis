@@ -21,7 +21,7 @@ public class TrackpadMove : MonoBehaviour
     void Update()
     {
         float y = Rt_TrackpadPos.axis.y;
-        Debug.Log("y" + y);
+        //Debug.Log("y" + y);
         targetTransform.Translate(Vector3.forward * y);
     }
 }
