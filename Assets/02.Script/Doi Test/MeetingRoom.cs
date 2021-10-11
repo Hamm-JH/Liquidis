@@ -233,7 +233,7 @@ public class MeetingRoom : MonoBehaviour
 
         API.Brainwave api_randomMindPositive = new API.Brainwave(
             obj: API.Objective.MindRandom,
-            option: 2,
+            option: 0,
             targetCallBack: biGetter
             );
 
@@ -246,7 +246,7 @@ public class MeetingRoom : MonoBehaviour
 
         API.Brainwave api_randomMindSympathy = new API.Brainwave(
             obj: API.Objective.MindRandom,
-            option: 3,
+            option: 1,
             targetCallBack: biGetter
             );
 
@@ -283,7 +283,7 @@ public class MeetingRoom : MonoBehaviour
         {
             //Debug.Log($"Relaxation : {api.Relaxation.ToString()}");
 
-            excitementCurrentValue = api.Relaxation;
+            //excitementCurrentValue = api.Relaxation;
             float current = excitementCurrentValue;
             float target = api.Relaxation;
 
@@ -294,8 +294,7 @@ public class MeetingRoom : MonoBehaviour
         {
             //Debug.Log($"Attention : {api.Attention.ToString()}");
 
-            concentrationCurrentValue = api.Attention;
-
+            //concentrationCurrentValue = api.Attention;
             float current = concentrationCurrentValue;
             float target = api.Attention;
 
@@ -330,7 +329,15 @@ public class MeetingRoom : MonoBehaviour
 
                 //Request(1, current, target);
 
+                // 여기가 몬가 잘못된 것 같은데
+                Debug.Log($"Positive : {api.Attention.ToString()}");
 
+                //positiveCurrentValue = api.Attention;
+
+                float current = positiveCurrentValue;
+                float target = api.Attention;
+
+                Request(2, current, target);
             }
             else if (api.Option == 1)
             {
@@ -342,33 +349,38 @@ public class MeetingRoom : MonoBehaviour
 
                 //Request(0, current, target);
 
-                
+                Debug.Log($"Sympathy : {api.Attention.ToString()}");
 
+                //sympathyCurrentValue = api.Attention;
+
+                float current = sympathyCurrentValue;
+                float target = api.Attention;
+
+                Request(3, current, target);
             }
             else if(api.Option == 2)
             {
-                // 여기가 몬가 잘못된 것 같은데
-                Debug.Log($"Positive : {api.Attention.ToString()}");
+                //// 여기가 몬가 잘못된 것 같은데
+                //Debug.Log($"Positive : {api.Attention.ToString()}");
 
-                positiveCurrentValue = api.Attention;
+                ////positiveCurrentValue = api.Attention;
 
-                float current = positiveCurrentValue;
-                float target = api.Attention;
+                //float current = positiveCurrentValue;
+                //float target = api.Attention;
 
-                Request(2, current, target);
+                //Request(2, current, target);
 
             }
             else if(api.Option == 3)
             {
-                Debug.Log($"Sympathy : {api.Attention.ToString()}");
+                //Debug.Log($"Sympathy : {api.Attention.ToString()}");
 
-                sympathyCurrentValue = api.Attention;
+                ////sympathyCurrentValue = api.Attention;
 
-                float current = sympathyCurrentValue = api.Attention;
-                ;
-                float target = api.Attention;
+                //float current = sympathyCurrentValue = api.Attention;
+                //float target = api.Attention;
 
-                Request(3, current, target);
+                //Request(3, current, target);
             }
 
 
@@ -501,7 +513,7 @@ public class MeetingRoom : MonoBehaviour
 
 
                     }
-                    else if(i == 2) // speed
+                    else if (i == 2) // speed
                     {
                         // ????
                     }
@@ -540,8 +552,9 @@ public class MeetingRoom : MonoBehaviour
         }
         else if (api.RequestIndex == 2)
         {
-            positiveValue = api.Value;
-                
+            positiveCurrentValue = api.Value;
+            //positiveValue = api.Value;
+
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
             {
@@ -551,12 +564,12 @@ public class MeetingRoom : MonoBehaviour
                     // geo
                     if (i == 0)
                     {
-                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+                        MappingParameter.instance.GetGeoValueFromLerp(positiveCurrentValue);
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(positiveValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
+                        MappingParameter.instance.SpeedColorSetColor(positiveCurrentValue);
+                        MappingParameter.instance.LerpColorSpeedSetColor(positiveCurrentValue);
 
 
                     }
@@ -566,16 +579,15 @@ public class MeetingRoom : MonoBehaviour
                     }
                 }
             }
-
-
-        
-    } //공감도
+        }
+        //공감도
         else if(api.RequestIndex == 3)
         {
             //vfxValue = api.Value;
-            sympathyValue = api.Value;
+            //sympathyValue = api.Value;
+            sympathyCurrentValue = api.Value;
 
-            MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
+            MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
         }
 
     }
