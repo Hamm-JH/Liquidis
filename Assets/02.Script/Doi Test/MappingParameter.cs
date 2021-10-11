@@ -763,25 +763,7 @@ public class MappingParameter : MonoBehaviour
         }
     }
   
-    public void SetSpeedTypeToLerp()
-    {
-       // ??????
-
-        if(currentScene == scene.SELECT)
-        {
-            SelectManager.instance.SetIntervalType(speedInterval, speedType);
-
-        }
-        else if(currentScene == scene.WAITING)
-        {
-
-        }
-        else if(currentScene == scene.MEETING)
-        {
-
-        }
-    }
-
+   
 
 
     public void RecieveGeoValueToSpeed(float _value)
@@ -1115,6 +1097,26 @@ public class MappingParameter : MonoBehaviour
             InitialSpeedIntervalValue();
         }
     }
+
+    public void SetSpeedTypeToLerp()
+    {
+        // ??????
+
+        if (currentScene == scene.SELECT)
+        {
+            SelectManager.instance.SetIntervalType(speedInterval, speedType);
+
+        }
+        else if (currentScene == scene.WAITING)
+        {
+            WaitingRoom.instance.SetIntervalType(speedInterval);
+        }
+        else if (currentScene == scene.MEETING)
+        {
+            MeetingRoom.instance.SetIntervalType(speedInterval);
+        }
+    }
+
 
     public void SetSpeedInterval(float value)
     {

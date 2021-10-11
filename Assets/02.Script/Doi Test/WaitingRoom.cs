@@ -163,6 +163,12 @@ public class WaitingRoom : MonoBehaviour
         MappingParameter.instance.SetSpeedValue();
 
     }
+    public void SetIntervalType(float _interval)
+    {
+        speedInterval = _interval;
+
+
+    }
 
     public void SetVFXValue()
     {

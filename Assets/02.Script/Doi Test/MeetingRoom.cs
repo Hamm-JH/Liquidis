@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.Events;
+using Photon.Pun;
 
 public class MeetingRoom : MonoBehaviour
 {
@@ -43,6 +44,7 @@ public class MeetingRoom : MonoBehaviour
     public float speedInterval = 3f; //속도인터벌
     API.Lerp.Function functionType; //러프타입
 
+    public int playerNum = 0;
 
     // 게임 시작하면 시간 재기, 5분, 10분이 되면 타이머 박스 애니 트리거
     // 타이머 박스 애니에 접근해서 부르기
@@ -72,6 +74,23 @@ public class MeetingRoom : MonoBehaviour
     // CounterHead>MirrorGoup>Mirror1,2,3의 셰이더 프로퍼티에 접근. 
     // <Renderer>().SetFloat  "Reflection Intensity" : 0~1 .
 
+    private static MeetingRoom _meetingRoom;
+    public static MeetingRoom instance
+    {
+        get
+        {
+            if (_meetingRoom == null)
+                return null;
+            else
+                return _meetingRoom;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_meetingRoom == null)
+            _meetingRoom = this;
+    }
     private void Start()
     {
         StartCoroutine(InitialMappingParameters());//?
@@ -84,6 +103,9 @@ public class MeetingRoom : MonoBehaviour
         // ani sequence
         counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
         StartCoroutine(StartTimerAni());
+
+        playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+       
     }
 
     IEnumerator InitialMappingParameters()
@@ -94,31 +116,11 @@ public class MeetingRoom : MonoBehaviour
 
     }
 
-    public void SetIntervalType(float _interval, int type)
+    public void SetIntervalType(float _interval)
     {
         speedInterval = _interval;
 
-        // 0 = linear
-        // 1 = log
-        // 2 = power
-
-
-        if (type == 0)
-        {
-            functionType = API.Lerp.Function.Linear;
-
-        }
-        else if (type == 1)
-        {
-
-            functionType = API.Lerp.Function.Log;
-
-        }
-        else if (type == 2)
-        {
-            functionType = API.Lerp.Function.Power;
-
-        }
+      
     }
 
     private void Update()
@@ -515,7 +517,7 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        // ????
+                        MappingParameter.instance.SetSpeedInterval(concentrationValue);
                     }
                 }
             }
@@ -545,7 +547,8 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        // ????
+                        MappingParameter.instance.SetSpeedInterval(excitementValue);
+
                     }
                 }
             }
@@ -575,7 +578,8 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        // ????
+                        MappingParameter.instance.SetSpeedInterval(positiveCurrentValue);
+
                     }
                 }
             }
@@ -587,7 +591,10 @@ public class MeetingRoom : MonoBehaviour
             //sympathyValue = api.Value;
             sympathyCurrentValue = api.Value;
 
-            MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
+
+            DataSyncronize.instance.SetSympathy(playerNum, sympathyCurrentValue);
+
+            //MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
         }
 
     }

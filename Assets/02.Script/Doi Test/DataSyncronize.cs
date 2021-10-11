@@ -54,5 +54,15 @@ public class DataSyncronize : MonoBehaviourPunCallbacks
         {
             sympathy_p2 = value;
         }
+
+        if(MeetingRoom.instance.playerNum == 0)
+        {
+            MappingParameter.instance.SetVFXValueMeeting(sympathy_p2);
+        }
+        else
+        {
+            MappingParameter.instance.SetVFXValueMeeting(sympathy_p1);
+
+        }
     }
 }
