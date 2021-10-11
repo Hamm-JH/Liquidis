@@ -26,7 +26,7 @@ public class WaitingRoom : MonoBehaviour
     public VisualEffect vfxEffect;
     public Animator cylinderHall;
     public float cylinderAniTime = 5f;
-
+    public Animator light_group_ani;
 
     [Header("API")]
     public UnityAction<API.Brainwave> biGetter;
@@ -67,6 +67,9 @@ public class WaitingRoom : MonoBehaviour
 
         StartCoroutine(InitialMappingParameters());
         SliderAni();
+
+        light_group_ani.SetTrigger("SceneStart");
+
     }
 
     IEnumerator InitialMappingParameters()
@@ -82,7 +85,10 @@ public class WaitingRoom : MonoBehaviour
     void SliderAni()
     {
         slider_canvas.SetTrigger("GuideStart");
+        slider_canvas.SetTrigger("SceneStart");
     }
+
+
 
     // UI Slider ¡∂¿€
     void MappingSliders()
