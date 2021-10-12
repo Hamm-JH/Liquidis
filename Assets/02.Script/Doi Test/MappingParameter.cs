@@ -1190,7 +1190,7 @@ public class MappingParameter : MonoBehaviour
     public void SetSpeedValue()
     {
         speedValue = speed_slider.value;
-
+        
         if (speedIntervalType == 0)
         {
             speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
