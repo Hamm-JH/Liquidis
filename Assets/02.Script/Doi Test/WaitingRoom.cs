@@ -84,7 +84,11 @@ public class WaitingRoom : MonoBehaviour
     
     void SliderAni()
     {
-        slider_canvas.SetTrigger("GuideStart");
+        if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        {
+            slider_canvas.SetTrigger("GuideStart");
+
+        }
         slider_canvas.SetTrigger("SceneStart");
     }
 

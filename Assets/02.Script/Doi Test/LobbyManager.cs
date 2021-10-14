@@ -90,6 +90,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
           status_text.text = "방에 입장하는 중입니다";
 
+        MappingParameter.instance.playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+
         // initial mapping parameters
         MappingParameter.instance.RemoveWaitingRoomParameters();
 
