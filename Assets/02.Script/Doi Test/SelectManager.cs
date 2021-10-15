@@ -349,6 +349,7 @@ public class SelectManager : MonoBehaviour
         if (api.RequestIndex == 0)
         {
             concentrationValue = api.Value;
+            Debug.Log("concentration : " + concentrationValue);
             // mapping parameter
             for(int i=0; i<MappingParameter.instance.matchType.Length; i++)
             {

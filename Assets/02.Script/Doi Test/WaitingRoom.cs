@@ -84,12 +84,17 @@ public class WaitingRoom : MonoBehaviour
     
     void SliderAni()
     {
-        if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
-        {
-            slider_canvas.SetTrigger("GuideStart");
 
-        }
-        slider_canvas.SetTrigger("SceneStart");
+        // debug disabled
+        //if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        //{
+        //    slider_canvas.gameObject.SetActive(true);
+        //    slider_canvas.SetTrigger("GuideStart");
+        //    slider_canvas.SetTrigger("SceneStart");
+
+        //}
+       
+        
     }
 
 
@@ -471,6 +476,8 @@ public class WaitingRoom : MonoBehaviour
         if (api.RequestIndex == 0)
         {
             concentrationValue = api.Value;
+
+            Debug.Log("concentration : " + concentrationValue);
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
             {
