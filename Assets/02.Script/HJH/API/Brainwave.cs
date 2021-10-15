@@ -15,6 +15,10 @@ namespace API
 		EEG,
 		Relaxation,
 		Attention,
+		Concentration,  // 집중
+		Excitement,     // 흥분
+		Positiveness,   // 긍부정
+		Empathy,        // 공감
 		EEGRandom,
 		MindRandom
 	}
@@ -22,7 +26,11 @@ namespace API
 	public enum MindIndex
 	{
 		Attention,
-		Relaxation
+		Relaxation,
+		Concentration,	// 집중
+		Excitement,		// 흥분
+		Positiveness,	// 긍부정
+		Empathy			// 공감
 	}
 
 	public sealed class Brainwave : _API
@@ -91,6 +99,22 @@ namespace API
 			{
 				relaxation = value;
 			}
+			else if (obj == Objective.Concentration)
+			{
+				concentration = value;
+			}
+			else if (obj == Objective.Excitement)
+			{
+				excitement = value;
+			}
+			else if (obj == Objective.Positiveness)
+			{
+				positiveness = value;
+			}
+			else if (obj == Objective.Empathy)
+			{
+				empathy = value;
+			}
 			else if(obj == Objective.MindRandom)
 			{
 				if(option == 0)
@@ -126,6 +150,10 @@ namespace API
 
 		private float relaxation;
 		private float attention;
+		private float concentration;
+		private float excitement;
+		private float positiveness;
+		private float empathy;
 
 		#endregion
 
@@ -150,6 +178,10 @@ namespace API
 		#region public mind Index
 		public float Relaxation { get => relaxation; }  // 안정 상태 0 ~ 1
 		public float Attention { get => attention; }    // 집중 상태 0 ~ 1
+		public float Concentration { get => concentration; }
+		public float Excitement { get => excitement; }
+		public float Positiveness { get => positiveness; }
+		public float Empathy { get => empathy; }
 		#endregion
 	}
 }

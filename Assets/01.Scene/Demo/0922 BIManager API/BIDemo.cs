@@ -87,14 +87,50 @@ public class BIDemo : MonoBehaviour
 
         Request(api_randomMindAttention);
 
-		#endregion
-	}
+        #endregion
 
-	/// <summary>
-	/// 뇌파 데이터 관리자(BIManager)로 데이터 수집 요청을 한다.
-	/// </summary>
-	/// <param name="api"></param>
-	private void Request(API.Brainwave api)
+        #region 11. Concentration 집중
+        API.Brainwave api1 = new API.Brainwave(
+            obj: API.Objective.Concentration,
+            targetCallBack: biGetter
+            );
+
+        Request(api1);
+        #endregion
+
+        #region 12. Excitement 흥분
+        API.Brainwave api2 = new API.Brainwave(
+            obj: API.Objective.Excitement,
+            targetCallBack: biGetter
+            );
+
+        Request(api2);
+        #endregion
+
+        #region 13. Positiveness 긍부정
+        API.Brainwave api3 = new API.Brainwave(
+            obj: API.Objective.Positiveness,
+            targetCallBack: biGetter
+            );
+
+        Request(api3);
+        #endregion
+
+        #region 14. Empathy 공감
+        API.Brainwave api4 = new API.Brainwave(
+            obj: API.Objective.Empathy,
+            targetCallBack: biGetter
+            );
+
+        Request(api4);
+        #endregion
+    }
+
+    /// <summary>
+    /// 뇌파 데이터 관리자(BIManager)로 데이터 수집 요청을 한다.
+    /// </summary>
+    /// <param name="api"></param>
+    private void Request(API.Brainwave api)
 	{
         Manager.BIManager.Instance.Request(api);
 	}
@@ -128,6 +164,22 @@ public class BIDemo : MonoBehaviour
 		{
             Debug.Log($"Attention : {api.Attention.ToString()}");
 		}
+        else if (api.Objective == API.Objective.Concentration)
+        {
+            //Debug.Log($"Concentration : {api..ToString()}");
+        }
+        else if (api.Objective == API.Objective.Excitement)
+        {
+            //Debug.Log($"Excitement : {api..ToString()}");
+        }
+        else if (api.Objective == API.Objective.Positiveness)
+        {
+            //Debug.Log($"Positiveness : {api..ToString()}");
+        }
+        else if (api.Objective == API.Objective.Empathy)
+        {
+            //Debug.Log($"Empathy : {api..ToString()}");
+        }
         else if(api.Objective == API.Objective.EEGRandom)
 		{
             string str = "";
