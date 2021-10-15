@@ -81,6 +81,8 @@ public class MappingParameter : MonoBehaviour
     public GameObject waitingPreview;
     public GameObject meetingtHead;
 
+    public int playerNum = 0;
+
     //public bool[] typeUse;
     public Material[] geoMaterials_preview_origin;
     public Material[] geoMaterials_stencil_origin;
@@ -1190,7 +1192,7 @@ public class MappingParameter : MonoBehaviour
     public void SetSpeedValue()
     {
         speedValue = speed_slider.value;
-
+        
         if (speedIntervalType == 0)
         {
             speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);

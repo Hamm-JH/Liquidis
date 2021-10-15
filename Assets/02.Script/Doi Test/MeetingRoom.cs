@@ -104,7 +104,8 @@ public class MeetingRoom : MonoBehaviour
         counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
         StartCoroutine(StartTimerAni());
 
-        playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+        // waiting room 
+        //playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
        
     }
 
@@ -340,6 +341,8 @@ public class MeetingRoom : MonoBehaviour
                 float target = api.Attention;
 
                 Request(2, current, target);
+
+             
             }
             else if (api.Option == 1)
             {
@@ -558,6 +561,7 @@ public class MeetingRoom : MonoBehaviour
             positiveCurrentValue = api.Value;
             //positiveValue = api.Value;
 
+            Debug.Log("positive  value : " + positiveCurrentValue);
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
             {

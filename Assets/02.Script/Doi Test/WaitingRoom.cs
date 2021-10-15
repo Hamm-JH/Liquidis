@@ -84,7 +84,11 @@ public class WaitingRoom : MonoBehaviour
     
     void SliderAni()
     {
-        slider_canvas.SetTrigger("GuideStart");
+        if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        {
+            slider_canvas.SetTrigger("GuideStart");
+
+        }
         slider_canvas.SetTrigger("SceneStart");
     }
 
@@ -104,14 +108,14 @@ public class WaitingRoom : MonoBehaviour
             else if(MappingParameter.instance.matchType[i] == 2)
             {
                 MappingParameter.instance.color_slider = positive_slider;
-                MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
+                MappingParameter.instance.color_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
 
 
             }
             else if (MappingParameter.instance.matchType[i] == 3)
             {
                 MappingParameter.instance.speed_slider = excitement_slider;
-                MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
+                MappingParameter.instance.speed_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
 
 
             }
