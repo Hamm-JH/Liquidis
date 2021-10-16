@@ -17,16 +17,33 @@ public class WaitingRoom : MonoBehaviour
     public Slider positive_slider;
     public Slider sympathy_slider;
 
+    public GameObject[] concentration_subTexts;
+    public GameObject[] excitement_subTexts;
+    public GameObject[] positive_subTexts;
+
+
+
     [Header("Obj")]
     public GameObject waitingPreview;
 
     [Header("Animator")]
     public Animator slider_canvas;
+    
     public Animator selectBox;
     public VisualEffect vfxEffect;
     public Animator cylinderHall;
-    public float cylinderAniTime = 5f;
+   
     public Animator light_group_ani;
+    public Animator counterHead_ani;
+
+    public float afterSliderFadeIn = 1f;
+    public float afterSelectBoxShake = 7f;
+    public float selectBoxFalseTime = 9f;
+    public float afterSelectBox = 1f;
+    public float cylinderAniTime = 5f;
+    public float afterWaitingLight = 1f;
+    public float meetStartTime = 3.3f;
+    public float counterHeadTime = 12.8f;
 
     [Header("API")]
     public UnityAction<API.Brainwave> biGetter;
@@ -66,10 +83,10 @@ public class WaitingRoom : MonoBehaviour
         lerpGetter += Receive;
 
         StartCoroutine(InitialMappingParameters());
-        SliderAni();
+        
 
         light_group_ani.SetTrigger("SceneStart");
-
+        SliderAni();
     }
 
     IEnumerator InitialMappingParameters()
@@ -86,15 +103,25 @@ public class WaitingRoom : MonoBehaviour
     {
 
         // debug disabled
-        //if(PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        //if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
         //{
         //    slider_canvas.gameObject.SetActive(true);
-        //    slider_canvas.SetTrigger("GuideStart");
         //    slider_canvas.SetTrigger("SceneStart");
+        //    StartCoroutine(SliderGuide());
 
         //}
-       
-        
+        // debug enabled
+        slider_canvas.gameObject.SetActive(true);
+        slider_canvas.SetTrigger("SceneStart");
+        StartCoroutine(SliderGuide());
+
+    }
+
+    IEnumerator SliderGuide()
+    {
+        yield return new WaitForSeconds(afterSliderFadeIn);
+        slider_canvas.SetTrigger("GuideStart");
+
     }
 
 
@@ -102,17 +129,28 @@ public class WaitingRoom : MonoBehaviour
     // UI Slider 조작
     void MappingSliders()
     {
+
+        // match type 0 = geo
+        // match type 1 = color
+        // match type 2 = speed
+
+        // match value 1 = concentration
+        // match value 2 = positive
+        // match value 3 = excitement
+
         for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
         {
             if (MappingParameter.instance.matchType[i] == 1)
             {
                 MappingParameter.instance.geo_slider = concentration_slider;
+                concentration_subTexts[i].SetActive(true);
                 MappingParameter.instance.geo_slider.onValueChanged.AddListener(delegate { SetGeoValue(); });
 
             }
             else if(MappingParameter.instance.matchType[i] == 2)
             {
                 MappingParameter.instance.color_slider = positive_slider;
+                positive_subTexts[i].SetActive(true);
                 MappingParameter.instance.color_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
 
 
@@ -120,6 +158,7 @@ public class WaitingRoom : MonoBehaviour
             else if (MappingParameter.instance.matchType[i] == 3)
             {
                 MappingParameter.instance.speed_slider = excitement_slider;
+                excitement_subTexts[i].SetActive(true);
                 MappingParameter.instance.speed_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
 
 
@@ -198,11 +237,39 @@ public class WaitingRoom : MonoBehaviour
         Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Reference;
 
         //StartCoroutine(WaitingAni());
-        Debug.LogError("ani start");
+        Debug.Log("ani start");
         selectBox.SetTrigger("Start");
-        //selectBox.GetComponent<SelectBoxAni>().HelpUIStart();
+        Invoke("SelectBoxFalse", selectBoxFalseTime);
+
+
         slider_canvas.SetTrigger("FadeStart");
         vfxEffect.SetFloat("SpawnRate", 0f); // -> 몇초?
+
+        StartCoroutine(WaitingAniSequenceAfterShake());
+
+
+       
+
+    }
+
+    void SelectBoxFalse()
+    {
+        selectBox.gameObject.SetActive(false);
+        StartCoroutine(CylinderHallStart());
+    }
+
+    IEnumerator CylinderHallStart()
+    {
+        yield return new WaitForSeconds(afterSelectBox);
+        cylinderHall.SetTrigger("WaitingRoomLight");
+
+        yield return new WaitForSeconds(afterWaitingLight);
+        cylinderHall.SetTrigger("WaitingRoomMove");
+
+        yield return new WaitForSeconds(meetStartTime);
+        counterHead_ani.SetTrigger("MeetStart");
+
+        yield return new WaitForSeconds(counterHeadTime);
 
         // 영상 종료시 Stanby(대기) 상태로 전환
         // 대기 상태에서는 데이터 할당 코드를 업데이트하지 않아 성능 낭비를 하지않음
@@ -210,6 +277,13 @@ public class WaitingRoom : MonoBehaviour
 
         //photon call
         StartCoroutine(LoadMeetingRoom());
+    }
+
+    IEnumerator WaitingAniSequenceAfterShake()
+    {
+        yield return new WaitForSeconds(afterSelectBoxShake);
+        light_group_ani.SetTrigger("Start");
+
 
     }
     IEnumerator LoadMeetingRoom()
@@ -218,28 +292,21 @@ public class WaitingRoom : MonoBehaviour
         PhotonNetwork.LoadLevel("MeetingRoom");
     }
 
-    //IEnumerator WaitingAni()
-    //{
-    //    selectBox.SetTrigger("Start");
-    //    slider_canvas.SetTrigger("FadeStart");
-    //    vfxEffect.SetFloat("SpawnRate", 0f);
+  
 
-    //    yield return null;
+    //public void DisabledSelectBox()
+    //{
+    //    selectBox.gameObject.SetActive(false);
+    //    cylinderHall.SetTrigger("WaitingRoomLight");
+    //    StartCoroutine(CylinderSequence());
     //}
 
-    public void DisabledSelectBox()
-    {
-        selectBox.gameObject.SetActive(false);
-        cylinderHall.SetTrigger("WaitingRoomLight");
-        StartCoroutine(CylinderSequence());
-    }
+    //IEnumerator CylinderSequence()
+    //{
+    //    yield return new WaitForSeconds(cylinderAniTime);
+    //    cylinderHall.SetTrigger("WaitingRoomMove");
 
-    IEnumerator CylinderSequence()
-    {
-        yield return new WaitForSeconds(cylinderAniTime);
-        cylinderHall.SetTrigger("WaitingRoomMove");
-
-    }
+    //}
 
     private void Update()
     {

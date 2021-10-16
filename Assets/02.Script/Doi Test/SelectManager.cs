@@ -16,6 +16,9 @@ public class SelectManager : MonoBehaviour
     public float speedInterval = 3f;
     API.Lerp.Function functionType;
 
+    [Header("Animator")]
+    public Animator lightgroup_ani;
+
     private static SelectManager _selectManager;
     public static SelectManager instance
     {
@@ -67,8 +70,16 @@ public class SelectManager : MonoBehaviour
 
         lerpGetter += Receive;
 
+
+        // animation
+        StartSelectAniSequence();
     }
 
+
+    void StartSelectAniSequence()
+    {
+        lightgroup_ani.SetTrigger("SceneStart");
+    }
     private void Update()
     {
         #region 1. EEG 데이터 요청
