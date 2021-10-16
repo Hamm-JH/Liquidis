@@ -15,6 +15,7 @@ public class MeetingRoom : MonoBehaviour
     [Header("Ani")]
     public GameObject counterHead_ani; //카운터 헤드
     public GameObject timer; //타이머 오브젝트
+    public GameObject timer_canvas;
     
     public float currentSpeedValue = 0f; //현재 속도값
     public float targetSpeedLerp = 10f; //목표속도러프
@@ -139,7 +140,7 @@ public class MeetingRoom : MonoBehaviour
 
         yield return new WaitForSeconds(timerStartTime);
         timer.SetActive(true);
-
+        timer_canvas.SetActive(true);
     }
 
     //IEnumerator StartTimerAni()
