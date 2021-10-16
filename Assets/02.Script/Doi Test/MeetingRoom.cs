@@ -15,7 +15,7 @@ public class MeetingRoom : MonoBehaviour
     [Header("Ani")]
     public GameObject counterHead_ani; //카운터 헤드
     public GameObject timer; //타이머 오브젝트
-    public float timerStartTime = 5f; //타이머 시작 시간
+    
     public float currentSpeedValue = 0f; //현재 속도값
     public float targetSpeedLerp = 10f; //목표속도러프
     public float speedLerp = 2f; //속도 러프
@@ -23,8 +23,14 @@ public class MeetingRoom : MonoBehaviour
     public GameObject volumeObj; //포스트 프로세싱
      
     public Animator mirror_room_ani; //미러룸 애니
-    public AnimationClip timerBox_animation; //타이머 애니 애니메이션클립
-   
+    public Animator camera_rig_ani;
+
+    [Header("Ani Time")]
+    public float afterMirror = 2f;
+    public float afterPlayerLight = 1f;
+    public float afterPlayerHeadStart = 1f;
+    public float timerStartTime = 5f; //타이머 시작 시간
+
 
     [Header("General Value")]
     float currentTime = 0f;//현재 시간.
@@ -101,8 +107,9 @@ public class MeetingRoom : MonoBehaviour
         lerpGetter += Receive;
 
         // ani sequence
-        counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
-        StartCoroutine(StartTimerAni());
+        StartCoroutine(PlayerLightSequence());
+
+      
 
         // waiting room 
         //playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
@@ -117,6 +124,32 @@ public class MeetingRoom : MonoBehaviour
         
 
     }
+
+   IEnumerator PlayerLightSequence()
+    {
+        yield return new WaitForSeconds(afterMirror);
+        counterHead_ani.GetComponent<Animator>().SetTrigger("PlayerLight");
+
+        yield return new WaitForSeconds(afterPlayerLight);
+        camera_rig_ani.SetTrigger("PlayerHeadStart");
+
+        yield return new WaitForSeconds(afterPlayerHeadStart);
+        counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
+        mirror_room_ani.SetTrigger("LightOn");
+
+        yield return new WaitForSeconds(timerStartTime);
+        timer.SetActive(true);
+
+    }
+
+    //IEnumerator StartTimerAni()
+    //{
+    //    yield return new WaitForSeconds(timerStartTime);
+
+        
+    //    // timer.GetComponent<Animator>().SetTrigger("TimerLoop");
+    //}
+
 
     public void SetIntervalType(float _interval)
     {
@@ -603,13 +636,7 @@ public class MeetingRoom : MonoBehaviour
         }
 
     }
-    IEnumerator StartTimerAni()
-    {
-        yield return new WaitForSeconds(timerStartTime);
-
-        timer.SetActive(true);
-       // timer.GetComponent<Animator>().SetTrigger("TimerLoop");
-    }
+   
 
     public void ForceEndGame()
     {
