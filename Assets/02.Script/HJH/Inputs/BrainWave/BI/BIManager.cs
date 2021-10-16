@@ -11,10 +11,9 @@ namespace Manager
 {
 	public enum CollectionStatus
 	{
-		State1 = 0,
-		State2 = 1,
-		State3 = 2,
-		Contents = 3
+		Stanby = 0,
+		Reference = 1,
+		Contents = 2,
 	}
 
 	[Serializable]
@@ -29,6 +28,11 @@ namespace Manager
 		public double DataSum { get => dataSum; set => dataSum=value; }
 		public List<double> Datas { get => datas; set => datas=value; }
 		public double Result { get => result; set => result=value; }
+
+		public void SetResult()
+		{
+			result = dataSum / dataCount;
+		}
 	}
 
 	public partial class BIManager : MonoBehaviour
@@ -76,7 +80,11 @@ namespace Manager
 		public CollectionStatus _CollectionStatus
 		{
 			get => collectionStatus;
-			set => collectionStatus = value;
+			set
+			{
+				SetMindResult(collectionStatus);
+				collectionStatus = value;
+			}
 		}
 
 		[Header("Feature Index")]
@@ -93,10 +101,15 @@ namespace Manager
 		private LinkDataValue attention;
 		private LinkDataValue relaxation;
 
-		private mindData[] concentration;   // 집중
-		private mindData[] excitement;      // 흥분
-		private mindData[] positiveness;    // 긍부정
-		private mindData[] empathy;		  // 공감
+		private double concentration;   // 집중
+		private double excitement;		// 흥분
+		private double positiveness;	// 긍부정
+		private double empathy;			// 공감
+
+		private mindData[] result_concentration;   // 집중
+		private mindData[] result_excitement;      // 흥분
+		private mindData[] result_positiveness;    // 긍부정
+		private mindData[] result_empathy;		   // 공감
 
 		private LinkDataValue[] delta;
 		private LinkDataValue[] theta;
@@ -104,17 +117,17 @@ namespace Manager
 		private LinkDataValue[] beta;
 		private LinkDataValue[] gamma;
 
+		public double Concentration { get => concentration; }
+		public double Excitement { get => excitement; }
+		public double Positiveness { get => positiveness; }
+		public double Empathy { get => empathy; }
+
 		// TODO 1015 : 뇌파 수집코드 추후 계산코드 배치
 		// concentration[(int)CollectionStatus.Contents].Result; <- 임시 할당임
-		public double Concentration	{ get => concentration[(int)_CollectionStatus].Result; }
-		public double Excitement	   { get => excitement[(int)_CollectionStatus].Result; }
-		public double Positiveness   { get => positiveness[(int)_CollectionStatus].Result; }
-		public double Empathy			  { get => empathy[(int)_CollectionStatus].Result; }
-
-		//public double Concentration { get => concentration[(int)CollectionStatus.Contents].Result; }
-		//public double Excitement { get => excitement[(int)CollectionStatus.Contents].Result; }
-		//public double Positiveness { get => positiveness[(int)CollectionStatus.Contents].Result; }
-		//public double Empathy { get => empathy[(int)CollectionStatus.Contents].Result; }
+		public mindData[] Result_concentration { get => result_concentration; }
+		public mindData[] Result_excitement { get => result_excitement; }
+		public mindData[] Result_positiveness { get => result_positiveness; }
+		public mindData[] Result_empathy { get => result_empathy; }
 
 		public LinkDataValue[] Delta { get => delta; set => delta = value; }
 		public LinkDataValue[] Theta { get => theta; set => theta = value; }
@@ -125,6 +138,8 @@ namespace Manager
 		public bool IsSensorConnected { get => isSensorConnected;}
 		public bool IsSensorNoised { get => isSensorNoised;}
 		
+
+
 
 		#endregion
 
@@ -142,11 +157,20 @@ namespace Manager
 			rightActivity = new LinkDataValue();
 			attention = new LinkDataValue();
 			relaxation = new LinkDataValue();
+			
+			result_concentration	= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
+			result_excitement		= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
+			result_positiveness		= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
+			result_empathy			= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
 
-			concentration   = new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
-			excitement		= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
-			positiveness	= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
-			empathy			= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
+			int index = Enum.GetValues(typeof(CollectionStatus)).Length;
+			for (int i = 0; i < index; i++)
+			{
+				result_concentration[i] = new mindData();
+				result_excitement[i] = new mindData();
+				result_positiveness[i] = new mindData();
+				result_empathy[i] = new mindData();
+			}
 
 			Delta = InitIndexArray();
 			Theta = InitIndexArray();
@@ -189,6 +213,7 @@ namespace Manager
 			LooxidLinkData.OnReceiveEEGFeatureIndexes += OnReceiveEEGFeatureIndexes;
 
 			//StartCoroutine(SetEEG());
+			StartCoroutine(SetMindIndex());
 		}
 
 		private void OnDisable()
@@ -210,6 +235,8 @@ namespace Manager
 
 		#endregion
 
+		#region Update
+
 		// Update is called once per frame
 		void Update()
 		{
@@ -218,8 +245,73 @@ namespace Manager
 			attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
 			relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
 
-			
+			UpdateMindIndex();
 		}
+
+		private void UpdateMindIndex()
+		{
+			UpdateConcentration();
+			UpdateExcitement();
+			UpdatePositiveness();
+			UpdateEmpathy();
+		}
+
+		/// <summary>
+		/// 집중
+		/// </summary>
+		private void UpdateConcentration()
+		{
+			concentration = attention.value;
+		}
+
+		/// <summary>
+		/// 흥분
+		/// </summary>
+		private void UpdateExcitement()
+		{
+			double value = (
+				Gamma[(int)EEGSensorID.AF3].target +
+				Gamma[(int)EEGSensorID.AF4].target +
+				Gamma[(int)EEGSensorID.Fp1].target +
+				Gamma[(int)EEGSensorID.Fp2].target +
+				Gamma[(int)EEGSensorID.AF7].target +
+				Gamma[(int)EEGSensorID.AF8].target) / 6;
+
+			excitement = value;
+		}
+
+		/// <summary>
+		/// 긍부정
+		/// </summary>
+		private void UpdatePositiveness()
+		{
+			double value = (
+				Theta[(int)EEGSensorID.AF3].target +
+				Theta[(int)EEGSensorID.AF4].target +
+				Theta[(int)EEGSensorID.Fp1].target +
+				Theta[(int)EEGSensorID.Fp2].target +
+				Theta[(int)EEGSensorID.AF7].target +
+				Theta[(int)EEGSensorID.AF8].target) / 6;
+
+			positiveness = value;
+		}
+
+		private void UpdateEmpathy()
+		{
+			// 공감
+			//empathy = 
+
+			double value = (
+				Alpha[(int)EEGSensorID.AF3].target +
+				Alpha[(int)EEGSensorID.AF4].target +
+				Alpha[(int)EEGSensorID.Fp1].target +
+				Alpha[(int)EEGSensorID.Fp2].target +
+				Alpha[(int)EEGSensorID.AF7].target +
+				Alpha[(int)EEGSensorID.AF8].target) / 6;
+
+			empathy = value;
+		}
+		#endregion
 
 		/// <summary>
 		/// 타이머값과, 센서값을 조합해 한 개의 EEG 값을 반환한다.
@@ -305,12 +397,43 @@ namespace Manager
 				if(api.Option == 0)
 				{
 					api.Set(objective, api.Option, val);
+					api.CallBack.Invoke(api);
 				}
 				else if(api.Option == 1)
 				{
 					api.Set(objective, api.Option, val);
+					api.CallBack.Invoke(api);
 				}
 			}
+			else if(objective == API.Objective.Result_Concentration)
+			{
+				double val1 = Result_concentration[(int)CollectionStatus.Reference].Result;
+				double val2 = Result_concentration[(int)CollectionStatus.Contents].Result;
+				double result = val2;
+				api.Set(objective, api.Option, (float)result);
+			}
+			else if (objective == API.Objective.Result_Excitement)
+			{
+				double val1 = Result_excitement[(int)CollectionStatus.Reference].Result;
+				double val2 = Result_excitement[(int)CollectionStatus.Contents].Result;
+				double result = (val2 - val1 + 1) / 2;
+				api.Set(objective, api.Option, (float)result);
+			}
+			else if (objective == API.Objective.Result_Positiveness)
+			{
+				double val1 = Result_positiveness[(int)CollectionStatus.Reference].Result;
+				double val2 = Result_positiveness[(int)CollectionStatus.Contents].Result;
+				double result = 0.5 + (val2 - val1) / 2;
+				api.Set(objective, api.Option, (float)result);
+			}
+			else if (objective == API.Objective.Result_Empathy)
+			{
+				double val1 = Result_empathy[(int)CollectionStatus.Reference].Result;
+				double val2 = Result_empathy[(int)CollectionStatus.Contents].Result;
+				double result = 0.5 + (val2 - val1) / 2;
+				api.Set(objective, api.Option, (float)result);
+			}
+
 		}
 
 		private void SetSingleEEG(EEGSensorID id, float second)
@@ -420,28 +543,64 @@ namespace Manager
 			//excitement;
 			//positiveness;
 			//empathy;
-			// MindIndex의 값을 할당한다.
-			switch (_CollectionStatus)
+			while(gameObject.activeSelf)
 			{
-				case CollectionStatus.State1:
-					{
-						//concentration[(int)collectionStatus]
-					}	break;
+				yield return null;
 
-				case CollectionStatus.State2:
-					{
-					}	break;
+				// MindIndex의 값을 할당한다.
+				switch (_CollectionStatus)
+				{
+					case CollectionStatus.Stanby:
+						{
+							//concentration[(int)collectionStatus]
+						}
+						break;
 
-				case CollectionStatus.State3:
-					{
-					}	break;
+					case CollectionStatus.Reference:
+						{
+							result_concentration[(int)_CollectionStatus].DataCount++;
+							result_concentration[(int)_CollectionStatus].DataSum += concentration;
 
-				case CollectionStatus.Contents:
-					{
-					}	break;
+							result_excitement[(int)_CollectionStatus].DataCount++;
+							result_excitement[(int)_CollectionStatus].DataSum += excitement;
+
+							result_positiveness[(int)_CollectionStatus].DataCount++;
+							result_positiveness[(int)_CollectionStatus].DataSum += positiveness;
+
+							result_empathy[(int)_CollectionStatus].DataCount++;
+							result_empathy[(int)_CollectionStatus].DataSum += empathy;
+						}
+						break;
+
+					case CollectionStatus.Contents:
+						{
+							result_concentration[(int)_CollectionStatus].DataCount++;
+							result_concentration[(int)_CollectionStatus].DataSum += concentration;
+
+							result_excitement[(int)_CollectionStatus].DataCount++;
+							result_excitement[(int)_CollectionStatus].DataSum += excitement;
+
+							result_positiveness[(int)_CollectionStatus].DataCount++;
+							result_positiveness[(int)_CollectionStatus].DataSum += positiveness;
+
+							result_empathy[(int)_CollectionStatus].DataCount++;
+							result_empathy[(int)_CollectionStatus].DataSum += empathy;
+
+							SetMindResult(_CollectionStatus);
+						}
+						break;
+				}
 			}
 
-			yield return new WaitForEndOfFrame();
+			yield break;
+		}
+
+		private void SetMindResult(CollectionStatus _status)
+		{
+			result_concentration[(int)_status].SetResult();
+			result_excitement[(int)_status].SetResult();
+			result_positiveness[(int)_status].SetResult();
+			result_empathy[(int)_status].SetResult();
 		}
 	}
 }

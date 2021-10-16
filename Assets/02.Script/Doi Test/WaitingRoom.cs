@@ -193,12 +193,20 @@ public class WaitingRoom : MonoBehaviour
 
     public void WaitingAniSequence()
     {
+        // 영상 시작할때
+        // BIManager.Status = Status.영상시작구간;
+        Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Reference;
+
         //StartCoroutine(WaitingAni());
         Debug.LogError("ani start");
         selectBox.SetTrigger("Start");
         //selectBox.GetComponent<SelectBoxAni>().HelpUIStart();
         slider_canvas.SetTrigger("FadeStart");
         vfxEffect.SetFloat("SpawnRate", 0f); // -> 몇초?
+
+        // 영상 종료시 Stanby(대기) 상태로 전환
+        // 대기 상태에서는 데이터 할당 코드를 업데이트하지 않아 성능 낭비를 하지않음
+        //Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Stanby; 
 
         //photon call
         StartCoroutine(LoadMeetingRoom());

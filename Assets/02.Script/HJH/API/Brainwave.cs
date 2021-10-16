@@ -13,14 +13,20 @@ namespace API
 	public enum Objective
 	{
 		EEG,
+		EEGRandom,
+
+		MindRandom,
 		Relaxation,
 		Attention,
 		Concentration,  // ÁýÁß
 		Excitement,     // ÈïºÐ
 		Positiveness,   // ±àºÎÁ¤
 		Empathy,        // °ø°¨
-		EEGRandom,
-		MindRandom
+
+		Result_Concentration,
+		Result_Excitement,
+		Result_Positiveness,
+		Result_Empathy
 	}
 
 	public enum MindIndex
@@ -99,19 +105,19 @@ namespace API
 			{
 				relaxation = value;
 			}
-			else if (obj == Objective.Concentration)
+			else if (obj == Objective.Concentration || obj == Objective.Result_Concentration)
 			{
 				concentration = value;
 			}
-			else if (obj == Objective.Excitement)
+			else if (obj == Objective.Excitement || obj == Objective.Result_Excitement)
 			{
 				excitement = value;
 			}
-			else if (obj == Objective.Positiveness)
+			else if (obj == Objective.Positiveness || obj == Objective.Result_Positiveness)
 			{
 				positiveness = value;
 			}
-			else if (obj == Objective.Empathy)
+			else if (obj == Objective.Empathy || obj == Objective.Result_Empathy)
 			{
 				empathy = value;
 			}
