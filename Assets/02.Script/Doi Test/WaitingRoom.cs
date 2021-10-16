@@ -111,7 +111,7 @@ public class WaitingRoom : MonoBehaviour
 
         //}
         // debug enabled
-        slider_canvas.gameObject.SetActive(true);
+        //slider_canvas.gameObject.SetActive(true);
         slider_canvas.SetTrigger("SceneStart");
         StartCoroutine(SliderGuide());
 
