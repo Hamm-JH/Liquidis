@@ -239,23 +239,43 @@ public class WaitingRoom : MonoBehaviour
         //StartCoroutine(WaitingAni());
         Debug.Log("ani start");
         selectBox.SetTrigger("Start");
-        Invoke("SelectBoxFalse", selectBoxFalseTime);
+        StartCoroutine(WaitingAniSequenceAfterShake());
+
+        StartCoroutine(SelectBoxFalseSequence());
 
 
         slider_canvas.SetTrigger("FadeStart");
+        StartCoroutine(SliderCanvasFalse());
         vfxEffect.SetFloat("SpawnRate", 0f); // -> 몇초?
 
-        StartCoroutine(WaitingAniSequenceAfterShake());
 
 
        
 
     }
 
-    void SelectBoxFalse()
+    IEnumerator WaitingAniSequenceAfterShake()
     {
+        Debug.Log("light start waiting");
+        yield return new WaitForSeconds(afterSelectBoxShake);
+        light_group_ani.SetTrigger("Start");
+        Debug.Log("light done");
+
+
+    }
+
+    IEnumerator SelectBoxFalseSequence()
+    {
+        yield return new WaitForSeconds(selectBoxFalseTime);
+        
         selectBox.gameObject.SetActive(false);
         StartCoroutine(CylinderHallStart());
+    }
+
+   IEnumerator SliderCanvasFalse()
+    {
+        yield return new WaitForSeconds(1f);
+        slider_canvas.gameObject.SetActive(false);
     }
 
     IEnumerator CylinderHallStart()
@@ -268,7 +288,7 @@ public class WaitingRoom : MonoBehaviour
 
         yield return new WaitForSeconds(meetStartTime);
         counterHead_ani.SetTrigger("MeetStart");
-
+        Debug.Log("counter head start");
         yield return new WaitForSeconds(counterHeadTime);
 
         // 영상 종료시 Stanby(대기) 상태로 전환
@@ -279,13 +299,7 @@ public class WaitingRoom : MonoBehaviour
         StartCoroutine(LoadMeetingRoom());
     }
 
-    IEnumerator WaitingAniSequenceAfterShake()
-    {
-        yield return new WaitForSeconds(afterSelectBoxShake);
-        light_group_ani.SetTrigger("Start");
-
-
-    }
+   
     IEnumerator LoadMeetingRoom()
     {
         yield return new WaitForSeconds(2f);
@@ -310,7 +324,7 @@ public class WaitingRoom : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             WaitingAniSequence();
             Debug.Log("f");
