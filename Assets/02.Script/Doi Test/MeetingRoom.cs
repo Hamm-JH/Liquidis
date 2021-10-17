@@ -555,7 +555,7 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedInterval(concentrationValue);
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(concentrationValue);
                     }
                 }
             }
@@ -585,7 +585,7 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedInterval(excitementValue);
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(excitementValue);
 
                     }
                 }
@@ -617,7 +617,7 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedInterval(positiveCurrentValue);
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveCurrentValue);
 
                     }
                 }

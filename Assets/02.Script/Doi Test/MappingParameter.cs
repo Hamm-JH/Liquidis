@@ -793,7 +793,7 @@ public class MappingParameter : MonoBehaviour
     // select manager에서 러프 된 값이 들어온다
     public void GetGeoValueFromLerp(float _value)
     {
-        
+        geoValue = _value;
         if (geometryType == 0)
         {
             previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
@@ -834,6 +834,7 @@ public class MappingParameter : MonoBehaviour
     // meeting room geo head 변경
     public void SetGeoValueMeeting(float _value)
     {
+        geoValue = _value;
         if (geometryType == 0)
         {
             meetingtHead.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
@@ -1030,6 +1031,7 @@ public class MappingParameter : MonoBehaviour
     // 스피드 일 경우 스텐실 스피드에 색깔 입히는 메소드
     public void SpeedColorSetColor(float value)
     {
+       
         //Debug.Log("color value : " + value);
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
 
@@ -1037,8 +1039,9 @@ public class MappingParameter : MonoBehaviour
             stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
     // waiting room stencil cube에 색깔 입히는 메소드
-    void LerpColorWaitingCube(float value)
+    public void LerpColorWaitingCube(float value)
     {
+        colorValue = value;
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
         waitingPreview.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
 
@@ -1047,6 +1050,7 @@ public class MappingParameter : MonoBehaviour
     // meeting room head에 색깔 입히는 메소드
     public void LerpColorMeetingFace(float _value)
     {
+        colorValue = _value;
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, _value);
         meetingtHead.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
 
@@ -1165,6 +1169,7 @@ public class MappingParameter : MonoBehaviour
     }
 
 
+    
     public void SetSpeedInterval(float value)
     {
         speedInterval = value;
@@ -1251,6 +1256,23 @@ public class MappingParameter : MonoBehaviour
 
         SetSpeedInterval(speedLerpInterval);
 
+    }
+
+    // set speed interval from external
+    public void SetSpeedValueWaitingMeeting(float value)
+    {
+        if (speedIntervalType == 0)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, value);
+
+        }
+        else if (speedIntervalType == 1)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, value);
+
+        }
+
+        SetSpeedInterval(speedLerpInterval);
     }
 
   

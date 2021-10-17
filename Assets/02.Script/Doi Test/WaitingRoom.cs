@@ -559,6 +559,7 @@ public class WaitingRoom : MonoBehaviour
 
         float concentrationValue = 0;
         float excitementValue = 0;
+        float positiveValue = 0;
         float sympathyValue = 0;
 
         // 요청 인덱스는 int 값이기만 하면 제한없이 사용 가능합니다. (예시용으로 0, 1, 2만 넣어둠)
@@ -566,7 +567,7 @@ public class WaitingRoom : MonoBehaviour
         {
             concentrationValue = api.Value;
 
-            Debug.Log("concentration : " + concentrationValue);
+            //Debug.Log("concentration : " + concentrationValue);
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
             {
@@ -585,6 +586,12 @@ public class WaitingRoom : MonoBehaviour
 
 
                     }
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(concentrationValue);
+
+
+                    }
 
                 }
             }
@@ -594,6 +601,8 @@ public class WaitingRoom : MonoBehaviour
         else if (api.RequestIndex == 1)
         {
             excitementValue = api.Value;
+            //Debug.Log("excitement : " + excitementValue);
+
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
             {
@@ -607,8 +616,15 @@ public class WaitingRoom : MonoBehaviour
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(excitementValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
+                        //MappingParameter.instance.SpeedColorSetColor(excitementValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
+                        MappingParameter.instance.LerpColorWaitingCube(excitementValue);
+
+
+                    }
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(excitementValue);
 
 
                     }
@@ -618,10 +634,42 @@ public class WaitingRoom : MonoBehaviour
         }
         else if (api.RequestIndex == 2)
         {
-            //vfxValue = api.Value;
+            positiveValue = api.Value;
+            Debug.Log("positive : " + positiveValue);
+
+            // mapping parameter
+            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+            {
+                // positive으로 맵핑된 항목 찾기
+                if (MappingParameter.instance.matchType[i] == 3)
+                {
+                    // geo
+                    if (i == 0)
+                    {
+                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+                    }
+                    else if (i == 1) // color
+                    {
+                        //MappingParameter.instance.SpeedColorSetColor(excitementValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
+                        MappingParameter.instance.LerpColorWaitingCube(positiveValue);
+
+
+                    }
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveValue);
+
+
+                    }
+
+                }
+            }
+        }
+        else if (api.RequestIndex == 3)
+        {
             sympathyValue = api.Value;
             MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
         }
-
     }
 }
