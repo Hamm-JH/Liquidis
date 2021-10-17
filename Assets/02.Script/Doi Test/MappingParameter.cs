@@ -706,8 +706,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
-                stencilSpheres[currentMatchEmotion-1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                stencilSpheres[currentMatchEmotion-1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
 
             }
             else if(geometryType == 1)
@@ -730,8 +730,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
 
             }
             else if (geometryType == 1)
@@ -751,8 +751,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
 
             }
             else if (geometryType == 1)
@@ -767,7 +767,7 @@ public class MappingParameter : MonoBehaviour
      
             if (geometryType == 0)
             {
-                waitingPreview.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+                waitingPreview.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
 
             }
             else if (geometryType == 1)
@@ -797,9 +797,9 @@ public class MappingParameter : MonoBehaviour
         geoValue = _value;
         if (geometryType == 0)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", _value);
             if(currentScene == scene.SELECT)
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", _value);
 
         }
         else if (geometryType == 1)
@@ -819,8 +819,8 @@ public class MappingParameter : MonoBehaviour
         
         if (geometryType == 0)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScale", geoValue);
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
 
         }
         else if (geometryType == 1)
@@ -838,7 +838,7 @@ public class MappingParameter : MonoBehaviour
         geoValue = _value;
         if (geometryType == 0)
         {
-            meetingtHead.GetComponent<Renderer>().material.SetFloat("_NoiseScale", _value);
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Speed", _value);
 
         }
         else if (geometryType == 1)
@@ -1018,6 +1018,7 @@ public class MappingParameter : MonoBehaviour
     public void LerpColorSpeedSetColor(float value)
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
+
         previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
 
