@@ -386,7 +386,7 @@ public class SelectManager : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValue(concentrationValue);
+                        //MappingParameter.instance.SetSpeedValue(concentrationValue);
 
 
                     }
@@ -419,7 +419,7 @@ public class SelectManager : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValue(excitementValue);
+                        //MappingParameter.instance.SetSpeedValue(excitementValue);
 
 
                     }
@@ -449,7 +449,7 @@ public class SelectManager : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValue(positiveValue);
+                        //MappingParameter.instance.SetSpeedValue(positiveValue);
 
 
                     }

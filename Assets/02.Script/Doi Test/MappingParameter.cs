@@ -706,8 +706,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
-                stencilSpheres[currentMatchEmotion-1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion-1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
             }
             else if(geometryType == 1)
@@ -730,8 +730,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
             }
             else if (geometryType == 1)
@@ -751,8 +751,8 @@ public class MappingParameter : MonoBehaviour
 
             if (geometryType == 0)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
             }
             else if (geometryType == 1)
@@ -767,7 +767,7 @@ public class MappingParameter : MonoBehaviour
      
             if (geometryType == 0)
             {
-                waitingPreview.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+                waitingPreview.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
             }
             else if (geometryType == 1)
@@ -794,12 +794,12 @@ public class MappingParameter : MonoBehaviour
     // select manager에서 러프 된 값이 들어온다
     public void GetGeoValueFromLerp(float _value)
     {
-        geoValue = _value;
+        //geoValue = _value;
         if (geometryType == 0)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", _value);
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
             if(currentScene == scene.SELECT)
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", _value);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
         }
         else if (geometryType == 1)
@@ -819,8 +819,8 @@ public class MappingParameter : MonoBehaviour
         
         if (geometryType == 0)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
-            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Speed", geoValue);
+            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
+            stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
         }
         else if (geometryType == 1)
@@ -838,7 +838,7 @@ public class MappingParameter : MonoBehaviour
         geoValue = _value;
         if (geometryType == 0)
         {
-            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Speed", _value);
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
         }
         else if (geometryType == 1)
@@ -1260,24 +1260,24 @@ public class MappingParameter : MonoBehaviour
 
     }
 
-    public void SetSpeedValue(float value)
-    {
-        speedValue = value;
+    //public void SetSpeedValue(float value)
+    //{
+    //    //speedValue = value;
 
-        if (speedIntervalType == 0)
-        {
-            speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+    //    if (speedIntervalType == 0)
+    //    {
+    //        speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
 
-        }
-        else if (speedIntervalType == 1)
-        {
-            speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+    //    }
+    //    else if (speedIntervalType == 1)
+    //    {
+    //        speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
 
-        }
+    //    }
 
-        SetSpeedInterval(speedLerpInterval);
+    //    SetSpeedInterval(speedLerpInterval);
 
-    }
+    //}
 
     // set speed interval from external
     public void SetSpeedValueWaitingMeeting(float value)

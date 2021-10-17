@@ -662,7 +662,7 @@ public class WaitingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValueWaitingMeeting(concentrationValue);
+                        //MappingParameter.instance.SetSpeedValueWaitingMeeting(concentrationValue);
 
 
                     }
@@ -698,7 +698,7 @@ public class WaitingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValueWaitingMeeting(excitementValue);
+                        //MappingParameter.instance.SetSpeedValueWaitingMeeting(excitementValue);
 
 
                     }
@@ -732,7 +732,7 @@ public class WaitingRoom : MonoBehaviour
                     }
                     else if (i == 2) // speed
                     {
-                        MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveValue);
+                        //MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveValue);
 
 
                     }
