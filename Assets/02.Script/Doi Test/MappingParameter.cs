@@ -301,11 +301,11 @@ public class MappingParameter : MonoBehaviour
             }
 
             // initialize vFX
-            vfxObject.SetFloat("SphereRadius", 0.1f);
-            vfxObject.SetFloat("MinLifeTime", 0.1f);
-            vfxObject.SetFloat("MaxLifeTime", 1f);
-            vfxObject.SetFloat("ConformSphere", 0.2f);
-            vfxObject.SetInt("AnimationCurve", 0);
+            //vfxObject.SetFloat("SphereRadius", 0.1f);
+            //vfxObject.SetFloat("MinLifeTime", 0.1f);
+            //vfxObject.SetFloat("MaxLifeTime", 1f);
+            //vfxObject.SetFloat("ConformSphere", 0.2f);
+            //vfxObject.SetInt("AnimationCurve", 0);
 
 
         }
@@ -326,6 +326,7 @@ public class MappingParameter : MonoBehaviour
             vfxObject.SetFloat("MinLifeTime", 0.1f);
             vfxObject.SetFloat("MaxLifeTime", 1f);
             vfxObject.SetFloat("ConformSphere", 0.2f);
+            vfxObject.SetFloat("ParticleSize", 0.1f);
             vfxObject.SetInt("AnimationCurve", 0);
 
             //waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
@@ -460,20 +461,20 @@ public class MappingParameter : MonoBehaviour
             match_cancel_button.gameObject.SetActive(false);
         }
 
-        if(currentMatchEmotion == 1)
-        {
-            emotionText.text = "¡˝¡ﬂ";
+        //if(currentMatchEmotion == 1)
+        //{
+        //    emotionText.text = "¡˝¡ﬂ";
 
-        }else if(currentMatchEmotion == 2)
-        {
-            emotionText.text = "±‡/∫Œ¡§";
+        //}else if(currentMatchEmotion == 2)
+        //{
+        //    emotionText.text = "±‡/∫Œ¡§";
 
-        }
-        else if(currentMatchEmotion == 3)
-        {
-            emotionText.text = "»Ô∫–";
+        //}
+        //else if(currentMatchEmotion == 3)
+        //{
+        //    emotionText.text = "»Ô∫–";
 
-        }
+        //}
     }
 
     // match πˆ∆∞ ≈¨∏Ø
