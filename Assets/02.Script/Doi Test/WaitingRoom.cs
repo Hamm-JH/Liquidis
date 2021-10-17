@@ -240,12 +240,12 @@ public class WaitingRoom : MonoBehaviour
         Debug.Log("ani start");
         selectBox.SetTrigger("Start");
         StartCoroutine(WaitingAniSequenceAfterShake());
-
+        
         StartCoroutine(SelectBoxFalseSequence());
-
-
         slider_canvas.SetTrigger("FadeStart");
-        StartCoroutine(SliderCanvasFalse());
+
+
+       // StartCoroutine(SliderCanvasFalse());
         vfxEffect.SetFloat("SpawnRate", 0f); // -> ∏Ó√ ?
 
 
@@ -272,11 +272,11 @@ public class WaitingRoom : MonoBehaviour
         StartCoroutine(CylinderHallStart());
     }
 
-   IEnumerator SliderCanvasFalse()
-    {
-        yield return new WaitForSeconds(1f);
-        slider_canvas.gameObject.SetActive(false);
-    }
+    //IEnumerator SliderCanvasFalse()
+    //{
+    //    yield return new WaitForSeconds(2f);
+    //    slider_canvas.gameObject.SetActive(false);
+    //}
 
     IEnumerator CylinderHallStart()
     {
