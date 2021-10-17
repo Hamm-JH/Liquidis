@@ -249,11 +249,6 @@ public class WaitingRoom : MonoBehaviour
 
        // StartCoroutine(SliderCanvasFalse());
         vfxEffect.SetFloat("SpawnRate", 0f); // -> 몇초?
-
-
-
-       
-
     }
 
     IEnumerator WaitingAniSequenceAfterShake()
@@ -293,12 +288,12 @@ public class WaitingRoom : MonoBehaviour
         Debug.Log("counter head start");
         yield return new WaitForSeconds(counterHeadTime);
 
-        // 영상 종료시 Stanby(대기) 상태로 전환
-        // 대기 상태에서는 데이터 할당 코드를 업데이트하지 않아 성능 낭비를 하지않음
-        //Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Stanby; 
+		// 영상 종료시 Stanby(대기) 상태로 전환
+		// 대기 상태에서는 데이터 할당 코드를 업데이트하지 않아 성능 낭비를 하지않음
+		Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Stanby;
 
-        //photon call
-        StartCoroutine(LoadMeetingRoom());
+		//photon call
+		StartCoroutine(LoadMeetingRoom());
     }
 
    
