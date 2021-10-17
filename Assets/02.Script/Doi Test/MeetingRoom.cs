@@ -138,9 +138,11 @@ public class MeetingRoom : MonoBehaviour
         counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
         mirror_room_ani.SetTrigger("LightOn");
 
-        yield return new WaitForSeconds(timerStartTime);
-        timer.SetActive(true);
-        timer_canvas.SetActive(true);
+        //yield return new WaitForSeconds(timerStartTime);
+        //timer.SetActive(true);
+        //timer_canvas.SetActive(true);
+
+
     }
 
     //IEnumerator StartTimerAni()
