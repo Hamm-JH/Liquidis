@@ -12,6 +12,7 @@ public class SelectManager : MonoBehaviour
 
     public float concentrationCurrentValue = 0f;
     public float excitementCurrentValue = 0f;
+    public float positiveCurrentValue = 0f;
 
     public float speedInterval = 3f;
     API.Lerp.Function functionType;
@@ -151,50 +152,19 @@ public class SelectManager : MonoBehaviour
 
         #endregion
 
-        //#region 1. demo 요소에 대한 좌우 러프 수행
+        #region 7. 디버깅용 positive 랜덤 마인드값
 
-        //API.Lerp lerp_concentration = new API.Lerp(
-        //    _requestIndex: 0,
-        //    _Function: API.Lerp.Function.Log,
-        //    _interval: speedInterval,
-        //    _currValue: concentrationCurrentValue,
-        //    _targetValue: (Random.value * 2) - 1,
-        //    _callback: lerpGetter
-        //    ) ;
+        API.Brainwave api_randomMindPositive = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 2,
+            targetCallBack: biGetter
+            );
 
-        //Request(lerp_concentration);
+        Request(api_randomMindPositive);
 
-        //#endregion
+        #endregion
 
-        //#region 2. demo 요소에 대한 상하 러프 수행
-
-        //API.Lerp lerp_excitement = new API.Lerp(
-        //    _requestIndex: 1,
-        //    _Function: API.Lerp.Function.Log,
-        //    _interval: speedInterval,
-        //    _currValue: excitementCurrentValue,
-        //    _targetValue: (Random.value * 2) - 1,
-        //    _callback: lerpGetter
-        //    );
-
-        //Request(lerp_excitement);
-
-        //#endregion
-
-        //#region 3. demo 요소에 대한 앞뒤 러프 수행
-
-        //API.Lerp lerp_sphereFrontBack = new API.Lerp(
-        //    _requestIndex: 2,
-        //    _Function: API.Lerp.Function.Log,
-        //    _interval: speedValue,
-        //    _currValue: demoSphere.position.z,
-        //    _targetValue: (Random.value * 2) - 1,
-        //    _callback: lerpGetter
-        //    );
-
-        //Request(lerp_sphereFrontBack);
-
-        //#endregion
+      
     }
 
     /// <summary>
@@ -251,14 +221,13 @@ public class SelectManager : MonoBehaviour
         }
         else if (api.Objective == API.Objective.MindRandom)
         {
-            float concentrationValue = 0;
-            float excitementValue = 0;
+          
             
 
             if (api.Option == 0)
             {
                 //Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
-                excitementCurrentValue = api.Relaxation;
+                //excitementCurrentValue = api.Relaxation;
                 float current = excitementCurrentValue;
                 float target = api.Relaxation;
 
@@ -269,12 +238,23 @@ public class SelectManager : MonoBehaviour
             else if (api.Option == 1)
             {
                 //Debug.Log($"Attention : {api.Attention.ToString()}");
-                concentrationCurrentValue = api.Attention;
+                //concentrationCurrentValue = api.Attention;
 
                 float current = concentrationCurrentValue;
                 float target = api.Attention;
 
                 Request(0, current, target);
+
+            }
+            else if (api.Option == 2)
+            {
+                //Debug.Log($"Attention : {api.Attention.ToString()}");
+                //positiveCurrentValue = api.Positiveness;
+
+                float current = positiveCurrentValue;
+                float target = api.Positiveness;
+
+                Request(2, current, target);
 
             }
         }
@@ -309,7 +289,19 @@ public class SelectManager : MonoBehaviour
 
             Request(lerp_excitement);
         }
+        else if (index == 2)
+        {
+            API.Lerp lerp_positive = new API.Lerp(
+          _requestIndex: 2,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: current,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
 
+            Request(lerp_positive);
+        }
     }
 
     public void Request(int index, float value)
@@ -340,8 +332,20 @@ public class SelectManager : MonoBehaviour
 
             Request(lerp_excitement);
         }
+        else if (index == 2)
+        {
+            API.Lerp lerp_positive = new API.Lerp(
+          _requestIndex: 2,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: positiveCurrentValue,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
 
-       
+            Request(lerp_positive);
+        }
+
     }
 
     public void Request(API.Lerp api)
@@ -361,7 +365,7 @@ public class SelectManager : MonoBehaviour
         if (api.RequestIndex == 0)
         {
             concentrationValue = api.Value;
-            Debug.Log("concentration : " + concentrationValue);
+            //Debug.Log("concentration : " + concentrationValue);
             // mapping parameter
             for(int i=0; i<MappingParameter.instance.matchType.Length; i++)
             {
@@ -380,7 +384,13 @@ public class SelectManager : MonoBehaviour
 
 
                     }
-                    
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValue(concentrationValue);
+
+
+                    }
+
                 }
             }
             
@@ -407,7 +417,12 @@ public class SelectManager : MonoBehaviour
 
 
                     }
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValue(excitementValue);
 
+
+                    }
                 }
             }
         }
@@ -429,6 +444,12 @@ public class SelectManager : MonoBehaviour
                     {
                         MappingParameter.instance.SpeedColorSetColor(positiveValue);
                         MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
+
+
+                    }
+                    else if (i == 2) // speed
+                    {
+                        MappingParameter.instance.SetSpeedValue(positiveValue);
 
 
                     }

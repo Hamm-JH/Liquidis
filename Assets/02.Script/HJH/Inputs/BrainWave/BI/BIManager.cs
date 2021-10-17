@@ -394,16 +394,29 @@ namespace Manager
 			{
 				float val = Random.value;
 				
-				if(api.Option == 0)
-				{
-					api.Set(objective, api.Option, val);
-					api.CallBack.Invoke(api);
-				}
-				else if(api.Option == 1)
-				{
-					api.Set(objective, api.Option, val);
-					api.CallBack.Invoke(api);
-				}
+				//if(api.Option == 0)
+				//{
+				//	api.Set(objective, api.Option, val);
+				//	api.CallBack.Invoke(api);
+				//}
+				//else if(api.Option == 1)
+				//{
+				//	api.Set(objective, api.Option, val);
+				//	api.CallBack.Invoke(api);
+				//}
+				//else if (api.Option == 2)
+				//{
+				//	api.Set(objective, api.Option, val);
+				//	api.CallBack.Invoke(api);
+				//}
+				//else if (api.Option == 3)
+				//{
+				//	api.Set(objective, api.Option, val);
+				//	api.CallBack.Invoke(api);
+				//}
+
+				api.Set(objective, api.Option, val);
+				api.CallBack.Invoke(api);
 			}
 			else if(objective == API.Objective.Result_Concentration)
 			{

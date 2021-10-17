@@ -51,6 +51,8 @@ public class WaitingRoom : MonoBehaviour
 
     public float concentrationCurrentValue = 0f;
     public float excitementCurrentValue = 0f;
+    public float positiveCurrentValue = 0f;
+    public float sympathyCurrentValue = 0f;
 
     public float speedInterval = 3f;
     API.Lerp.Function functionType;
@@ -398,6 +400,30 @@ public class WaitingRoom : MonoBehaviour
         Request(api_randomMindAttention);
 
         #endregion
+
+        #region 7. 디버깅용 positive 랜덤 마인드값
+
+        API.Brainwave api_randomMindPositive = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 2,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindPositive);
+
+        #endregion
+
+        #region 8. 디버깅용 positive 랜덤 마인드값
+
+        API.Brainwave api_randomMindEmpathy = new API.Brainwave(
+            obj: API.Objective.MindRandom,
+            option: 3,
+            targetCallBack: biGetter
+            );
+
+        Request(api_randomMindEmpathy);
+
+        #endregion
     }
     /// <summary>
     /// 뇌파 데이터 관리자(BIManager)로 데이터 수집 요청을 한다.
@@ -453,14 +479,12 @@ public class WaitingRoom : MonoBehaviour
         }
         else if (api.Objective == API.Objective.MindRandom)
         {
-            float concentrationValue = 0;
-            float excitementValue = 0;
-
+          
 
             if (api.Option == 0)
             {
                 //Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
-                excitementCurrentValue = api.Relaxation;
+                //excitementCurrentValue = api.Relaxation;
                 float current = excitementCurrentValue;
                 float target = api.Relaxation;
 
@@ -471,12 +495,34 @@ public class WaitingRoom : MonoBehaviour
             else if (api.Option == 1)
             {
                 //Debug.Log($"Attention : {api.Attention.ToString()}");
-                concentrationCurrentValue = api.Attention;
+                //concentrationCurrentValue = api.Attention;
 
                 float current = concentrationCurrentValue;
                 float target = api.Attention;
 
                 Request(0, current, target);
+
+            }
+            else if (api.Option == 2)
+            {
+                //Debug.Log($"Attention : {api.Attention.ToString()}");
+                //positiveCurrentValue = api.Positiveness;
+
+                float current = positiveCurrentValue;
+                float target = api.Positiveness;
+
+                Request(2, current, target);
+
+            }
+            else if (api.Option == 3)
+            {
+                //Debug.Log($"Attention : {api.Attention.ToString()}");
+                //sympathyCurrentValue = api.Empathy;
+
+                float current = sympathyCurrentValue;
+                float target = api.Empathy;
+
+                Request(3, current, target);
 
             }
         }
@@ -511,10 +557,37 @@ public class WaitingRoom : MonoBehaviour
 
             Request(lerp_excitement);
         }
+        else if (index == 2)
+        {
+            API.Lerp lerp_positive = new API.Lerp(
+          _requestIndex: 2,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: current,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
+
+            Request(lerp_positive);
+        }
+        else if (index == 3)
+        {
+            API.Lerp lerp_sympathy = new API.Lerp(
+          _requestIndex: 3,
+          _Function: functionType,
+          _interval: speedInterval,
+          _currValue: current,
+          _targetValue: value,
+          _callback: lerpGetter
+          );
+
+            Request(lerp_sympathy);
+        }
 
     }
 
     // select 에서 슬라이더 할당할 때 사용
+    #region slider??
     public void Request(int index, float value)
     {
         if (index == 0)
@@ -547,6 +620,7 @@ public class WaitingRoom : MonoBehaviour
 
 
     }
+    #endregion
 
     public void Request(API.Lerp api)
     {
@@ -635,7 +709,7 @@ public class WaitingRoom : MonoBehaviour
         else if (api.RequestIndex == 2)
         {
             positiveValue = api.Value;
-            Debug.Log("positive : " + positiveValue);
+            //Debug.Log("positive : " + positiveValue);
 
             // mapping parameter
             for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)

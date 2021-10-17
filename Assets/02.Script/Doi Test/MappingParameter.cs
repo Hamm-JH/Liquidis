@@ -1260,6 +1260,25 @@ public class MappingParameter : MonoBehaviour
 
     }
 
+    public void SetSpeedValue(float value)
+    {
+        speedValue = value;
+
+        if (speedIntervalType == 0)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalAMin, speedIntervalAMax, speedValue);
+
+        }
+        else if (speedIntervalType == 1)
+        {
+            speedLerpInterval = Mathf.Lerp(speedIntervalBMin, speedIntervalBMax, speedValue);
+
+        }
+
+        SetSpeedInterval(speedLerpInterval);
+
+    }
+
     // set speed interval from external
     public void SetSpeedValueWaitingMeeting(float value)
     {

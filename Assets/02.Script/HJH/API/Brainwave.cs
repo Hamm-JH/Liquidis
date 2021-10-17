@@ -131,6 +131,14 @@ namespace API
 				{
 					attention = value;
 				}
+				else if (option == 2)
+				{
+					positiveness = value;
+				}
+				else if (option == 3)
+				{
+					empathy = value;
+				}
 			}
 		}
 
