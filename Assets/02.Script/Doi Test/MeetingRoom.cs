@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.Events;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class MeetingRoom : MonoBehaviour
+public class MeetingRoom : MonoBehaviourPunCallbacks
 {
     public GameObject meetingHead;//playerHead의 본체 
     public VisualEffect vfxObject;//공감용 vfx
@@ -53,6 +54,9 @@ public class MeetingRoom : MonoBehaviour
 
     public int playerNum = 0;
 
+    private string roomCode = "ABCD";
+
+    public VoiceControl voiceControl;
     // 게임 시작하면 시간 재기, 5분, 10분이 되면 타이머 박스 애니 트리거
     // 타이머 박스 애니에 접근해서 부르기
 
@@ -110,14 +114,51 @@ public class MeetingRoom : MonoBehaviour
         // ani sequence
         StartCoroutine(PlayerLightSequence());
 
-      
+
 
         // waiting room 
         //playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
-       
+        //RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+
+        //if (PhotonNetwork.IsConnected)
+        //{
+        //    PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+        //}
+        //else
+        //{
+        //    PhotonNetwork.ConnectUsingSettings();
+
+        //}
+
+
+
     }
 
-  
+    //public override void OnJoinRoomFailed(short returnCode, string message)
+    //{
+
+        
+    //    PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = 2 });
+
+    //}
+    //public override void OnJoinedRoom()
+    //{
+    //    //base.OnJoinedRoom();
+
+     
+
+    //    MappingParameter.instance.playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
+    //    voiceControl.GenPlayerSpeaker();
+
+        
+
+
+
+
+
+
+    //}
+
     IEnumerator InitialMappingParameters()
     {
         yield return new WaitForEndOfFrame();

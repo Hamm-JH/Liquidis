@@ -15,5 +15,10 @@ public class VoiceControl : MonoBehaviour
         PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
     }
 
-   
+    public void GenPlayerSpeaker()
+    {
+        PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
+
+    }
+
 }
