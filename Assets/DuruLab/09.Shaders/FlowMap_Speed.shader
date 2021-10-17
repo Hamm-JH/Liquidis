@@ -9,7 +9,7 @@ Shader "FlowMap_Speed"
 		[ASEBegin]_TextureSample0("Texture Sample 0", 2D) = "white" {}
 		_TextureSample1("Texture Sample 1", 2D) = "white" {}
 		_Speed("Speed", Float) = 0.2
-		[ASEEnd]_Color0("Color 0", Color) = (0,0,0,0)
+		[ASEEnd]_TextureColor("_TextureColor", Color) = (0,0,0,0)
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
 
 		//_TransmissionShadow( "Transmission Shadow", Range( 0, 1 ) ) = 0.5
@@ -243,7 +243,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -471,7 +471,7 @@ Shader "FlowMap_Speed"
 				float2 uv_TextureSample1 = IN.ase_texcoord7.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float temp_output_1_0_g2 = ( _TimeParameters.x * _Speed );
 				
-				float3 Albedo = ( _Color0 * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
+				float3 Albedo = ( _TextureColor * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
 				float3 Emission = 0;
 				float3 Specular = 0.5;
@@ -688,7 +688,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -952,7 +952,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -1203,7 +1203,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -1381,7 +1381,7 @@ Shader "FlowMap_Speed"
 				float temp_output_1_0_g2 = ( _TimeParameters.x * _Speed );
 				
 				
-				float3 Albedo = ( _Color0 * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
+				float3 Albedo = ( _TextureColor * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
 				float3 Emission = 0;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
@@ -1460,7 +1460,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -1635,7 +1635,7 @@ Shader "FlowMap_Speed"
 				float temp_output_1_0_g2 = ( _TimeParameters.x * _Speed );
 				
 				
-				float3 Albedo = ( _Color0 * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
+				float3 Albedo = ( _TextureColor * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
 				float Alpha = 1;
 				float AlphaClipThreshold = 0.5;
 
@@ -1708,7 +1708,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -2000,7 +2000,7 @@ Shader "FlowMap_Speed"
 			};
 
 			CBUFFER_START(UnityPerMaterial)
-			float4 _Color0;
+			float4 _TextureColor;
 			float4 _TextureSample1_ST;
 			float _Speed;
 			#ifdef _TRANSMISSION_ASE
@@ -2227,7 +2227,7 @@ Shader "FlowMap_Speed"
 				float2 uv_TextureSample1 = IN.ase_texcoord7.xy * _TextureSample1_ST.xy + _TextureSample1_ST.zw;
 				float temp_output_1_0_g2 = ( _TimeParameters.x * _Speed );
 				
-				float3 Albedo = ( _Color0 * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
+				float3 Albedo = ( _TextureColor * tex2D( _TextureSample0, ( float4( texCoord14, 0.0 , 0.0 ) + ( (tex2D( _TextureSample1, uv_TextureSample1 )).rgba * ( ( temp_output_1_0_g2 - floor( ( temp_output_1_0_g2 + 0.5 ) ) ) * 2 ) ) ).rg ) ).rgb;
 				float3 Normal = float3(0, 0, 1);
 				float3 Emission = 0;
 				float3 Specular = 0.5;
@@ -2389,7 +2389,7 @@ Shader "FlowMap_Speed"
 }
 /*ASEBEGIN
 Version=18912
--1920;352;1920;1019;1197.221;710.8375;1.44019;True;True
+-1920;352;1920;1019;627.5659;1018.21;1;True;True
 Node;AmplifyShaderEditor.SimpleTimeNode;18;-76.75317,199.3628;Inherit;False;1;0;FLOAT;1;False;1;FLOAT;0
 Node;AmplifyShaderEditor.RangedFloatNode;19;-134.3608,317.4584;Inherit;False;Property;_Speed;Speed;2;0;Create;True;0;0;0;False;0;False;0.2;0;0;0;0;1;FLOAT;0
 Node;AmplifyShaderEditor.SamplerNode;16;-651.7,-258.6;Inherit;True;Property;_TextureSample1;Texture Sample 1;1;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
@@ -2399,8 +2399,8 @@ Node;AmplifyShaderEditor.ComponentMaskNode;9;-268,-163.5;Inherit;False;True;True
 Node;AmplifyShaderEditor.TextureCoordinatesNode;14;127,-361.5;Inherit;False;0;-1;2;3;2;SAMPLER2D;;False;0;FLOAT2;1,1;False;1;FLOAT2;0,0;False;5;FLOAT2;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;10;92,-118.5;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;FLOAT;0;False;1;COLOR;0
 Node;AmplifyShaderEditor.SimpleAddOpNode;13;341,-164.5;Inherit;False;2;2;0;FLOAT2;0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
-Node;AmplifyShaderEditor.ColorNode;22;509.4042,-589.8616;Inherit;False;Property;_Color0;Color 0;3;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SamplerNode;15;372,-388.5;Inherit;True;Property;_TextureSample0;Texture Sample 0;0;0;Create;True;0;0;0;False;0;False;-1;None;None;True;0;False;white;Auto;False;Object;-1;Auto;Texture2D;8;0;SAMPLER2D;;False;1;FLOAT2;0,0;False;2;FLOAT;0;False;3;FLOAT2;0,0;False;4;FLOAT2;0,0;False;5;FLOAT;1;False;6;FLOAT;0;False;7;SAMPLERSTATE;;False;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
+Node;AmplifyShaderEditor.ColorNode;22;509.4042,-589.8616;Inherit;False;Property;_TextureColor;_TextureColor;3;0;Create;True;0;0;0;False;0;False;0,0,0,0;0,0,0,0;True;0;5;COLOR;0;FLOAT;1;FLOAT;2;FLOAT;3;FLOAT;4
 Node;AmplifyShaderEditor.SimpleMultiplyOpNode;23;762.8776,-553.8568;Inherit;False;2;2;0;COLOR;0,0,0,0;False;1;COLOR;0,0,0,0;False;1;COLOR;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;0;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;2;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ExtraPrePass;0;0;ExtraPrePass;5;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;-1;False;True;0;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;True;17;d3d9;d3d11;glcore;gles;gles3;metal;vulkan;xbox360;xboxone;xboxseries;ps4;playstation;psp2;n3ds;wiiu;switch;nomrt;0;False;True;1;1;False;-1;0;False;-1;0;1;False;-1;0;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;-1;False;True;True;True;True;True;0;False;-1;False;False;False;False;False;False;False;True;False;255;False;-1;255;False;-1;255;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;7;False;-1;1;False;-1;1;False;-1;1;False;-1;False;True;1;False;-1;True;3;False;-1;True;True;0;False;-1;0;False;-1;True;0;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
 Node;AmplifyShaderEditor.TemplateMultiPassMasterNode;2;0,0;Float;False;False;-1;2;UnityEditor.ShaderGraph.PBRMasterGUI;0;2;New Amplify Shader;94348b07e5e8bab40bd6c8a1e3df54cd;True;ShadowCaster;0;2;ShadowCaster;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;-1;False;True;0;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;False;False;True;3;RenderPipeline=UniversalPipeline;RenderType=Opaque=RenderType;Queue=Geometry=Queue=0;True;0;True;17;d3d9;d3d11;glcore;gles;gles3;metal;vulkan;xbox360;xboxone;xboxseries;ps4;playstation;psp2;n3ds;wiiu;switch;nomrt;0;False;False;False;False;False;False;False;False;False;False;False;False;True;0;False;-1;False;False;False;False;False;False;False;False;False;False;False;False;False;True;1;False;-1;True;3;False;-1;False;True;1;LightMode=ShadowCaster;False;False;0;Hidden/InternalErrorShader;0;0;Standard;0;False;0
@@ -2423,4 +2423,4 @@ WireConnection;23;0;22;0
 WireConnection;23;1;15;0
 WireConnection;1;0;23;0
 ASEEND*/
-//CHKSM=9DB6D32AEE4B811130C6FE0A377629E79ABD4217
+//CHKSM=CBEF0BAFA2FF521B51B0F1FACCC7C0C35693C2AD
