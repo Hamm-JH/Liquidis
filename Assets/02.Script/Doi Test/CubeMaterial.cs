@@ -26,6 +26,9 @@ public class CubeMaterial : MonoBehaviour
 
     public MappingParameter mappingParameter;
 
+    [Header("UI")]
+    public GameObject[] emotion_images;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,14 @@ public class CubeMaterial : MonoBehaviour
             currentEmotion += 1;
             mappingParameter.SetCurrentEmotion(currentEmotion);
 
+
+            // active images
+            foreach(GameObject _image in emotion_images)
+            {
+                _image.SetActive(false);
+            }
+            emotion_images[currentEmotion - 1].SetActive(true);
+
             rotateCube.OnRotate(0);
             //targetRotation = cubeObj.transform.eulerAngles.y + 90f;
             //rotateLeft = true;
@@ -61,6 +72,13 @@ public class CubeMaterial : MonoBehaviour
         {
             currentEmotion -= 1;
             mappingParameter.SetCurrentEmotion(currentEmotion);
+
+            // active images
+            foreach (GameObject _image in emotion_images)
+            {
+                _image.SetActive(false);
+            }
+            emotion_images[currentEmotion - 1].SetActive(true);
 
             rotateCube.OnRotate(1);
 

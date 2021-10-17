@@ -11,7 +11,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public Button enterLobby_button;
     public Text status_text;
-    
+
+    public Animator lightgroup_ani;
 
   private string roomCode = "ABCD";
       void Start()
@@ -39,7 +40,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
-                PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+                StartCoroutine(LoadWaitingAni(roomOptions));
+                // linked to the coroutine
+                //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
 
             }
@@ -64,10 +67,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
       }
 
+    IEnumerator LoadWaitingAni(RoomOptions roomOptions)
+    {
+        lightgroup_ani.SetTrigger("Start");
+        yield return new WaitForSeconds(1.3f);
+        PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
 
-      #region Photon Callback Methods
-      public override void OnConnectedToMaster()
+    }
+
+    #region Photon Callback Methods
+    public override void OnConnectedToMaster()
       {
           status_text.text = "서버에 연결되었습니다.";
             enterLobby_button.interactable = true;

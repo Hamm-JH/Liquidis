@@ -131,15 +131,15 @@ public class SelectBoxAni : MonoBehaviour
     }
 
 
-    public void TriggerLightGroup()
-    {
-        lightGroup_ani.SetTrigger("Start");
-    }
+    //public void TriggerLightGroup()
+    //{
+    //    lightGroup_ani.SetTrigger("Start");
+    //}
 
-    public void SelectAniEnd()
-    {
-        WaitingRoom.instance.DisabledSelectBox();
-    }
+    //public void SelectAniEnd()
+    //{
+    //    WaitingRoom.instance.DisabledSelectBox();
+    //}
 
     bool CheckAllTrue()
     {

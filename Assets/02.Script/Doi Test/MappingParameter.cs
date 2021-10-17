@@ -299,7 +299,17 @@ public class MappingParameter : MonoBehaviour
             {
                 match_button.gameObject.SetActive(true);
             }
-        }else if(currentScene == scene.WAITING)
+
+            // initialize vFX
+            vfxObject.SetFloat("SphereRadius", 0.1f);
+            vfxObject.SetFloat("MinLifeTime", 0.1f);
+            vfxObject.SetFloat("MaxLifeTime", 1f);
+            vfxObject.SetFloat("ConformSphere", 0.2f);
+            vfxObject.SetInt("AnimationCurve", 0);
+
+
+        }
+        else if(currentScene == scene.WAITING)
         {
             // geo material 초기화 
             // 해야 되는지?
@@ -311,9 +321,17 @@ public class MappingParameter : MonoBehaviour
 
             }
 
+            // initialize vFX
+            vfxObject.SetFloat("SphereRadius", 0.1f);
+            vfxObject.SetFloat("MinLifeTime", 0.1f);
+            vfxObject.SetFloat("MaxLifeTime", 1f);
+            vfxObject.SetFloat("ConformSphere", 0.2f);
+            vfxObject.SetInt("AnimationCurve", 0);
+
             //waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
             //LerpColorWaitingCube(colorValue);
-        }else if(currentScene == scene.MEETING)
+        }
+        else if(currentScene == scene.MEETING)
         {
             // geo material 초기화 
             for (int i = 0; i < geoMaterials_preview_origin.Length; i++)
@@ -322,9 +340,22 @@ public class MappingParameter : MonoBehaviour
 
 
             }
+
+            // initialize vFX
+            vfxObject.SetFloat("SphereRadius", 30f);
+            vfxObject.SetFloat("MinLifeTime", 5f);
+            vfxObject.SetFloat("MaxLifeTime", 10f);
+            vfxObject.SetFloat("ConformSphere", 40f);
+            vfxObject.SetInt("AnimationCurve", 1);
         }
-        
-        
+
+       
+
+
+
+
+
+
     }
 
     // 전체 메뉴 <- 버튼
@@ -561,6 +592,13 @@ public class MappingParameter : MonoBehaviour
         vfxObject = _vfx;
         currentScene = scene.WAITING;
 
+        // initialize vFX
+        vfxObject.SetFloat("SphereRadius", 0.1f);
+        vfxObject.SetFloat("MinLifeTime", 0.1f);
+        vfxObject.SetFloat("MaxLifeTime", 1f);
+        vfxObject.SetFloat("ConformSphere", 0.2f);
+        vfxObject.SetInt("AnimationCurve", 0);
+
         waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
         LerpColorWaitingCube(colorValue);
 
@@ -571,6 +609,13 @@ public class MappingParameter : MonoBehaviour
         meetingtHead = _meetinghead;
         vfxObject = _vfxObj;
         currentScene = scene.MEETING;
+
+        // initialize vFX
+        vfxObject.SetFloat("SphereRadius", 30f);
+        vfxObject.SetFloat("MinLifeTime", 5f);
+        vfxObject.SetFloat("MaxLifeTime", 10f);
+        vfxObject.SetFloat("ConformSphere", 40f);
+        vfxObject.SetInt("AnimationCurve", 1);
 
         meetingtHead.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
         LerpColorMeetingFace(colorValue);
