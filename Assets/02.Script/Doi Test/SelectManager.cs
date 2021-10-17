@@ -355,6 +355,7 @@ public class SelectManager : MonoBehaviour
       
         float concentrationValue = 0;
         float excitementValue = 0;
+        float positiveValue = 0;
 
         // 요청 인덱스는 int 값이기만 하면 제한없이 사용 가능합니다. (예시용으로 0, 1, 2만 넣어둠)
         if (api.RequestIndex == 0)
@@ -412,7 +413,28 @@ public class SelectManager : MonoBehaviour
         }
         else if (api.RequestIndex == 2)
         {
-            //vfxValue = api.Value;
+            positiveValue = api.Value;
+            // mapping parameter
+            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+            {
+                // 흥분으로 맵핑된 항목 찾기
+                if (MappingParameter.instance.matchType[i] == 3)
+                {
+                    // geo
+                    if (i == 0)
+                    {
+                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+                    }
+                    else if (i == 1) // color
+                    {
+                        MappingParameter.instance.SpeedColorSetColor(positiveValue);
+                        MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
+
+
+                    }
+
+                }
+            }
         }
 
     }
