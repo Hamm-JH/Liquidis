@@ -550,8 +550,8 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(concentrationValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
+                        MappingParameter.instance.LerpColorMeetingFace(concentrationValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
 
 
                     }
@@ -580,8 +580,8 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(excitementValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
+                        MappingParameter.instance.LerpColorMeetingFace(excitementValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
 
 
                     }
@@ -612,8 +612,8 @@ public class MeetingRoom : MonoBehaviour
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(positiveCurrentValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(positiveCurrentValue);
+                        MappingParameter.instance.LerpColorMeetingFace(positiveCurrentValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(positiveCurrentValue);
 
 
                     }
