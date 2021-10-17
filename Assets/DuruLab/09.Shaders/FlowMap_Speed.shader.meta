@@ -1,9 +1,8 @@
 fileFormatVersion: 2
-guid: 5ce825b63689f664b841e91fbbbb33ca
+guid: 212a44a778c8caa4a8b794fd2322ae19
 ShaderImporter:
   externalObjects: {}
-  defaultTextures:
-  - _ScrollingElectricWaveTexture: {fileID: 2800000, guid: db9212b3e5986d2439ed56179da917f6, type: 3}
+  defaultTextures: []
   nonModifiableTextures: []
   preprocessorOverride: 0
   userData: 

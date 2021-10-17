@@ -276,20 +276,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "36a622e4f9a9ea81b47bb5ea5fa48db9"
-                },
-                "m_SlotId": 2
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "b09562ce8f917e87877165cd25b69205"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "3708ca688fe9718b8a24fce8a10f0e81"
                 },
                 "m_SlotId": 2
@@ -1637,7 +1623,7 @@
     },
     "m_Name": "Scene Color",
     "m_DrawState": {
-        "m_Expanded": true,
+        "m_Expanded": false,
         "m_Position": {
             "serializedVersion": "2",
             "x": 70.00003814697266,

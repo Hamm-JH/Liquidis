@@ -150,6 +150,7 @@ Shader "MK/Toon/URP/Standard/Physically Based"
 		[MKToonRenderPriority] _RenderPriority ("", Range(-50, 50)) = 0.0
 
 		[Enum(MK.Toon.Stencil)] _Stencil ("", Int) = 1
+		[Enum(MK.Toon.Stencil)] _Stencil ("", Int) = 1
 		[MKToonStencilRef] _StencilRef ("", Range(0, 255)) = 0
 		[MKToonStencilReadMask] _StencilReadMask ("", Range(0, 255)) = 255
 		[MKToonStencilWriteMask] _StencilWriteMask ("", Range(0, 255)) = 255
