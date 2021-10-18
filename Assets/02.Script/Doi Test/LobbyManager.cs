@@ -48,7 +48,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                     StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
                 }
-                else if(PhotonNetwork.CountOfRooms == 1)
+                else if(PhotonNetwork.CountOfRooms == 1) 
                 {
                     Debug.Log("room count : 1");
 

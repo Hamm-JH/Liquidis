@@ -569,7 +569,9 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					// geo
 					if (i == 0)
 					{
-						MappingParameter.instance.GetGeoValueFromLerp(concentrationCurrentValue);
+                        //Debug.Log($"c : {api.Value}");
+
+                        MappingParameter.instance.GetGeoValueFromLerp(concentrationCurrentValue);
 					}
 					else if (i == 1) // color
 					{
@@ -590,7 +592,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 1)
 		{
 			excitementCurrentValue = api.Value;
-			Debug.Log($"e : {api.Value}");
+			//Debug.Log($"e : {api.Value}");
 			//excitementValue = api.Value;
 			// mapping parameter
 			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
@@ -605,6 +607,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					}
 					else if (i == 1) // color
 					{
+						Debug.Log($"excitement : {api.Value}");
+
 						MappingParameter.instance.LerpColorMeetingFace(excitementCurrentValue);
 						//MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
 
@@ -621,12 +625,12 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 2)
 		{
 			positiveCurrentValue = api.Value;
-			//Debug.Log($"p : {api.Value}");
-			//positiveValue = api.Value;
+            //Debug.Log($"p : {api.Value}");
+            //positiveValue = api.Value;
 
-			//Debug.Log("positive  value : " + positiveCurrentValue);
-			// mapping parameter
-			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+            //Debug.Log("positive  value : " + positiveCurrentValue);
+            // mapping parameter
+            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
 			{
 				// 긍부정으로 맵핑된 항목 찾기
 				if (MappingParameter.instance.matchType[i] == 3)
@@ -645,7 +649,9 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					}
 					else if (i == 2) // speed
 					{
-						MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveCurrentValue);
+                        //Debug.Log($"positive : {api.Value}");
+
+                        MappingParameter.instance.SetSpeedValueWaitingMeeting(positiveCurrentValue);
 
 					}
 				}
