@@ -40,6 +40,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+
+
                 if(PhotonNetwork.CountOfRooms == 0)
                 {
                     Debug.Log("room count : 0");
@@ -82,7 +84,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
+        PhotonNetwork.JoinRandomOrCreateRoom(null);
+        //PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
 
 
     }
@@ -91,7 +94,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.JoinRoom(roomCode);
+        //PhotonNetwork.JoinRoom(roomCode);
+        PhotonNetwork.JoinRandomOrCreateRoom(null);
 
 
     }
