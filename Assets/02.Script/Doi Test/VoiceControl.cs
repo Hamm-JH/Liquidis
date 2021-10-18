@@ -20,7 +20,7 @@ public class VoiceControl : MonoBehaviour
     {
         GameObject player;
         player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
-        playerClip = player.GetComponent<AudioSource>().clip;
+        playerClip = player.GetComponentInChildren<AudioSource>().clip;
         playerSource.clip = playerClip;
     }
 
