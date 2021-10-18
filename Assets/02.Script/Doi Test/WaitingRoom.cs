@@ -6,6 +6,7 @@ using Photon.Realtime;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 
 public class WaitingRoom : MonoBehaviour
@@ -104,18 +105,18 @@ public class WaitingRoom : MonoBehaviour
     void SliderAni()
     {
 
-		// debug disabled
-		if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
-		{
-			slider_canvas.gameObject.SetActive(true);
-			slider_canvas.SetTrigger("SceneStart");
-			StartCoroutine(SliderGuide());
+        // debug disabled
+        //if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        //{
+        //	slider_canvas.gameObject.SetActive(true);
+        //	slider_canvas.SetTrigger("SceneStart");
+        //	StartCoroutine(SliderGuide());
 
-		}
-		// debug enabled
-		//slider_canvas.gameObject.SetActive(true);
-		//slider_canvas.SetTrigger("SceneStart");
-        //StartCoroutine(SliderGuide());
+        //}
+        // debug enabled
+        slider_canvas.gameObject.SetActive(true);
+        slider_canvas.SetTrigger("SceneStart");
+        StartCoroutine(SliderGuide());
 
     }
 
@@ -300,7 +301,8 @@ public class WaitingRoom : MonoBehaviour
     IEnumerator LoadMeetingRoom()
     {
         yield return new WaitForSeconds(2f);
-        PhotonNetwork.LoadLevel("MeetingRoom");
+        SceneManager.LoadScene("MeetingRoom");
+        //PhotonNetwork.LoadLevel("MeetingRoom");
     }
 
   
@@ -327,7 +329,7 @@ public class WaitingRoom : MonoBehaviour
             Debug.Log("f");
         }
 
-        Debug.Log("player count : " + PhotonNetwork.CountOfPlayers);
+        //Debug.Log("player count : " + PhotonNetwork.CountOfPlayers);
 
         #region 1. EEG 데이터 요청
         // 데이터 요청시 api를 생성한다.
