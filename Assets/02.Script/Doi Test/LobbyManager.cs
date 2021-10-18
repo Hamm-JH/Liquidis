@@ -41,7 +41,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
-
+                
                 if(PhotonNetwork.CountOfRooms == 0)
                 {
                     Debug.Log("room count : 0");
@@ -84,8 +84,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.JoinRandomOrCreateRoom(null);
-        //PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
+        //PhotonNetwork.JoinRandomOrCreateRoom(null);
+        PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
 
 
     }
@@ -94,8 +94,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
-        //PhotonNetwork.JoinRoom(roomCode);
-        PhotonNetwork.JoinRandomOrCreateRoom(null);
+        PhotonNetwork.JoinRoom(roomCode);
+        //PhotonNetwork.JoinRandomOrCreateRoom(null);
 
 
     }
@@ -137,14 +137,19 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
       }
 
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        //base.OnCreateRoomFailed(returnCode, message);
+        PhotonNetwork.RejoinRoom(roomCode);
 
+    }
 
-      public override void OnJoinRoomFailed(short returnCode, string message)
+    public override void OnJoinRoomFailed(short returnCode, string message)
       {
 
           status_text.text = "방에 참가하지 못했습니다.";
-          PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = 2 });
-
+        //PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = 2 });
+        PhotonNetwork.RejoinRoom(roomCode);
       }
 
 
