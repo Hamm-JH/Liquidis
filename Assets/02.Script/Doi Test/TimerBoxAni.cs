@@ -16,7 +16,7 @@ public class TimerBoxAni : MonoBehaviour
     //public GameObject left_button;
     public GameObject right_button;
     public Animator timerCanvas_ani;
-
+    public Animator timerbox_ani;
     bool isFirstClicked = false;
     public float afterButtonOff_time = 1f;
 
@@ -35,7 +35,7 @@ public class TimerBoxAni : MonoBehaviour
         }
         else
         {
-            right_button.GetComponent<Button>().interactable = false;
+            //right_button.GetComponent<Button>().interactable = false;
             timerCanvas_ani.SetTrigger("ButtonOff");
             StartCoroutine(AfterButtonOff());
         }
@@ -44,7 +44,7 @@ public class TimerBoxAni : MonoBehaviour
     IEnumerator AfterButtonOff()
     {
         yield return new WaitForSeconds(afterButtonOff_time);
-        timerCanvas_ani.SetTrigger("TimerLoop");
+        timerbox_ani.SetTrigger("TimerLoop");
 
     }
     #region rotate cube ani

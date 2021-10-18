@@ -14,6 +14,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 	public UnityAction<API.Brainwave> biGetter; //뇌파 데이터
 
+	public GameObject mirrorPlane;
+
 	[Header("Ani")]
 	public GameObject counterHead_ani; //카운터 헤드
 	public GameObject timer; //타이머 오브젝트
@@ -25,6 +27,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	public float[] duration; //경과시간 배열
 	public GameObject volumeObj; //포스트 프로세싱
 
+
+
 	public Animator mirror_room_ani; //미러룸 애니
 	public Animator camera_rig_ani;
 
@@ -33,6 +37,10 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	public float afterPlayerLight = 1f;
 	public float afterPlayerHeadStart = 1f;
 	public float timerStartTime = 5f; //타이머 시작 시간
+	public float afterTimerOn = 3f;
+	public float maxSpeed = 0.1f;
+	public float waitUntilSpeedUp_time = 5f;
+	public float loadIntroTime = 3f;
 
 
 	[Header("General Value")]
@@ -181,12 +189,14 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
 		mirror_room_ani.SetTrigger("LightOn");
 
-		//yield return new WaitForSeconds(timerStartTime);
-		//timer.SetActive(true);
-		//timer_canvas.SetActive(true);
+        yield return new WaitForSeconds(timerStartTime);
+        timer.SetActive(true);
+
+		yield return new WaitForSeconds(afterTimerOn);
+		timer_canvas.SetActive(true);
 
 
-	}
+    }
 
 	//IEnumerator StartTimerAni()
 	//{
@@ -220,6 +230,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			{
 				if (!pass5min)
 				{
+					timer.GetComponent<Animator>().SetTrigger("Pass5Min");
 					pass5min = true;
 				}
 			}
@@ -228,6 +239,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			{
 				if (!pass10min)
 				{
+					timer.GetComponent<Animator>().SetTrigger("Pass10Min");
 					pass10min = true;
 				}
 			}
@@ -667,7 +679,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 			// photon debug
 			//DataSyncronize.instance.SetSympathy(playerNum, sympathyCurrentValue);
-
 			//MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
 		}
 		// 안정
@@ -688,8 +699,10 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		// TimerBox 애니에서 timer loop 끈다
 		// 
 
-		timer.GetComponent<Animator>().SetTrigger("GameOverShake");
+		//timer.GetComponent<Animator>().SetTrigger("GameOverShake");
 		//timerBox_animation.isLooping = false;
+
+		EndingAniStart();
 	}
 
 	void EndingAniStart()
@@ -708,42 +721,38 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		bool stopSpeed = true;
 
-		currentSpeedValue = MappingParameter.instance.speedLerpInterval;
+		//currentSpeedValue = MappingParameter.instance.speedLerpInterval;
+		float startSpeedInterval = MappingParameter.instance.speedIntervalAMax;
+
+        MappingParameter.instance.SetGeoValueMeeting(2f);
+
+		// target duration 설정은 volume manager 외부에서 직접 쓰기
+		volumeObj.GetComponent<VolumeManager_Duru>().isEnd = true;
 
 		while (stopSpeed)
 		{
-			currentSpeedValue += Time.deltaTime * speedLerp;
+			startSpeedInterval -= Time.deltaTime * speedLerp;
+			MappingParameter.instance.SetSpeedValueWaitingMeeting(startSpeedInterval);
 
 			// mapping parameter
 
 
-			if (currentSpeedValue > targetSpeedLerp)
+			if (startSpeedInterval < maxSpeed)
 			{
 				stopSpeed = false;
 			}
 			yield return null;
 		}
 
-		MappingParameter.instance.SetGeoValueMeeting(2f);
+		yield return new WaitForSeconds(waitUntilSpeedUp_time);
 
-		yield return new WaitForSeconds(duration[0]);//?
+		//counterHead_ani.GetComponent<Animator>().SetTrigger("PlayerHeadOut");//플레이어헤드아웃
 
-		mirror_room_ani.SetTrigger("MirrorRoomShake");//미러룸셰이크
-
-		yield return new WaitForSeconds(duration[1]);//미러룸셰이크>포스트프로세스
-
-		volumeObj.GetComponent<VolumeManager_Duru>().isEnd = true;
-		// target duration 설정은 volume manager 외부에서 직접 쓰기
-
-		yield return new WaitForSeconds(duration[2]);//포스트 프로세스>플레이어헤드아웃
-
-		counterHead_ani.GetComponent<Animator>().SetTrigger("PlayerHeadOut");//플레이어헤드아웃
-
-		yield return new WaitForSeconds(duration[3]);//플레이어헤드아웃>카운터헤드바이
+		//yield return new WaitForSeconds(duration[3]);//플레이어헤드아웃>카운터헤드바이
 
 		counterHead_ani.GetComponent<Animator>().SetTrigger("CounterHeadBye");//카운터헤드바이
 
-		yield return new WaitForSeconds(duration[4]);//카운터헤드바이>인트로씬로드
+		yield return new WaitForSeconds(loadIntroTime);//카운터헤드바이>인트로씬로드
 
 		// 인트로씬 로드
 	}

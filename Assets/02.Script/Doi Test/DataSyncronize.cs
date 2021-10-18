@@ -58,10 +58,12 @@ public class DataSyncronize : MonoBehaviourPunCallbacks
         if(MappingParameter.instance.playerNum == 0)
         {
             MappingParameter.instance.SetVFXValueMeeting(sympathy_p2);
+            MeetingRoom.instance.mirrorPlane.GetComponent<Renderer>().material.SetFloat("_ReflectionIntensity", sympathy_p2);
         }
         else if(MappingParameter.instance.playerNum == 1)
         {
             MappingParameter.instance.SetVFXValueMeeting(sympathy_p1);
+            MeetingRoom.instance.mirrorPlane.GetComponent<Renderer>().material.SetFloat("_ReflectionIntensity", sympathy_p1);
 
         }
     }
