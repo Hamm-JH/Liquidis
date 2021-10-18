@@ -236,6 +236,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 				if (!pass15min)
 				{
 					pass15min = true;
+					EndingAniStart();
 				}
 			}
 		}

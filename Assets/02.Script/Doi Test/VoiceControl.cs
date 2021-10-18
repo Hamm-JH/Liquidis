@@ -8,8 +8,9 @@ public class VoiceControl : MonoBehaviour
 {
 
     public GameObject playerPref;
+    public AudioClip playerClip;
+    public AudioSource playerSource;
 
-    
     void Start()
     {
         //PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
@@ -17,8 +18,10 @@ public class VoiceControl : MonoBehaviour
 
     public void GenPlayerSpeaker()
     {
-        PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
-
+        GameObject player;
+        player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
+        playerClip = player.GetComponent<AudioSource>().clip;
+        playerSource.clip = playerClip;
     }
 
 }

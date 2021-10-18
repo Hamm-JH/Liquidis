@@ -14,10 +14,12 @@ public class TimerBoxAni : MonoBehaviour
     //bool isCanvasOn = false;
 
     //public GameObject left_button;
-    //public GameObject right_button;
+    public GameObject right_button;
     public Animator timerCanvas_ani;
 
     bool isFirstClicked = false;
+    public float afterButtonOff_time = 1f;
+
     // 다 꺼지고 나면 TimerRotateLoop(Set trigger: TimerLoop) : 대화동안 진행루프.
     private void Start()
     {
@@ -33,9 +35,17 @@ public class TimerBoxAni : MonoBehaviour
         }
         else
         {
+            right_button.GetComponent<Button>().interactable = false;
             timerCanvas_ani.SetTrigger("ButtonOff");
-
+            StartCoroutine(AfterButtonOff());
         }
+    }
+
+    IEnumerator AfterButtonOff()
+    {
+        yield return new WaitForSeconds(afterButtonOff_time);
+        timerCanvas_ani.SetTrigger("TimerLoop");
+
     }
     #region rotate cube ani
     //private void Start()
