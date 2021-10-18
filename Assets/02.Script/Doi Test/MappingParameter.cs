@@ -590,6 +590,7 @@ public class MappingParameter : MonoBehaviour
     public void InitialWaitingRoomParameters(GameObject targetSphere, VisualEffect _vfx)
     {
         waitingPreview = targetSphere;
+        previewCube = targetSphere;
         vfxObject = _vfx;
         currentScene = scene.WAITING;
 

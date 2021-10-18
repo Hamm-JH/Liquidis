@@ -42,11 +42,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
                 if(PhotonNetwork.CountOfRooms == 0)
                 {
+                    Debug.Log("room count : 0");
                     StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
                 }
                 else if(PhotonNetwork.CountOfRooms == 1)
                 {
+                    Debug.Log("room count : 1");
+
                     StartCoroutine(LoadWaitingAniJoin());
                 }
                 // linked to the coroutine
