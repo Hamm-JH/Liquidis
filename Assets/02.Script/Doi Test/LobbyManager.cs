@@ -71,7 +71,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else
         {
             // 맵핑을 다 해야 넘어간다는 안내창 필요
-            Debug.Log("맵핑이 다 안됐다");
+            //Debug.Log("맵핑이 다 안됐다");
         }
          
 
