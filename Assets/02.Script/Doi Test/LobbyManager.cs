@@ -132,7 +132,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         // load scene
           PhotonNetwork.LoadLevel("04_Play_WaitingRoom");
-
+        Debug.Log("room name : " + PhotonNetwork.CurrentRoom.Name);
 
 
       }
