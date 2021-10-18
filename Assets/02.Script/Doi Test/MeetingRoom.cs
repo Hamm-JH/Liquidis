@@ -5,6 +5,7 @@ using UnityEngine.VFX;
 using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 
 public class MeetingRoom : MonoBehaviourPunCallbacks
 {
@@ -285,7 +286,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			obj: API.Objective.Result_Concentration,
 			targetCallBack: biGetter
 			);
-
 		Request(api);
 
 		#endregion
@@ -417,7 +417,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			float current = excitementCurrentValue;
 			float target = api.Relaxation;
 
-			Request(1, current, target);
+			Request(4, current, target);
 
 		}
 		else if (api.Objective == API.Objective.Attention)
@@ -425,38 +425,38 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			//Debug.Log($"Attention : {api.Attention.ToString()}");
 
 			//concentrationCurrentValue = api.Attention;
-			float current = concentrationCurrentValue;
-			float target = api.Attention;
+			//float current = concentrationCurrentValue;
+			//float target = api.Attention;
 
-			Request(0, current, target);
+			//Request(0, current, target);
 		}
 		else if (api.Objective == API.Objective.Result_Concentration)
 		{
 			float current = concentrationCurrentValue;
 			float target = api.Concentration;
 
-			Request(2, current, target);
+			Request(0, current, target);
 		}
 		else if (api.Objective == API.Objective.Result_Excitement)
 		{
 			float current = excitementCurrentValue;
 			float target = api.Excitement;
 
-			Request(3, current, target);
+			Request(1, current, target);
 		}
 		else if (api.Objective == API.Objective.Result_Positiveness)
 		{
 			float current = positiveCurrentValue;
 			float target = api.Positiveness;
 
-			Request(4, current, target);
+			Request(2, current, target);
 		}
 		else if (api.Objective == API.Objective.Result_Empathy)
 		{
 			float current = sympathyCurrentValue;
 			float target = api.Empathy;
 
-			Request(5, current, target);
+			Request(3, current, target);
 		}
 		else if (api.Objective == API.Objective.EEGRandom)
 		{
@@ -474,75 +474,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		}
 		else if (api.Objective == API.Objective.MindRandom)
 		{
-			float concentrationValue = 0;
-			float excitementValue = 0;
-
-
-			if (api.Option == 0)
-			{
-				//Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
-				//excitementCurrentValue = api.Relaxation;
-				//float current = excitementCurrentValue;
-				//float target = api.Relaxation;
-
-				//Request(1, current, target);
-
-				// 여기가 몬가 잘못된 것 같은데
-				Debug.Log($"Positive : {api.Attention.ToString()}");
-
-				//positiveCurrentValue = api.Attention;
-
-				float current = positiveCurrentValue;
-				float target = api.Attention;
-
-				Request(2, current, target);
-
-
-			}
-			else if (api.Option == 1)
-			{
-				//Debug.Log($"Attention : {api.Attention.ToString()}");
-				//concentrationCurrentValue = api.Attention;
-
-				//float current = concentrationCurrentValue;
-				//float target = api.Attention;
-
-				//Request(0, current, target);
-
-				Debug.Log($"Sympathy : {api.Attention.ToString()}");
-
-				//sympathyCurrentValue = api.Attention;
-
-				float current = sympathyCurrentValue;
-				float target = api.Attention;
-
-				Request(3, current, target);
-			}
-			else if (api.Option == 2)
-			{
-				//// 여기가 몬가 잘못된 것 같은데
-				//Debug.Log($"Positive : {api.Attention.ToString()}");
-
-				////positiveCurrentValue = api.Attention;
-
-				//float current = positiveCurrentValue;
-				//float target = api.Attention;
-
-				//Request(2, current, target);
-
-			}
-			else if (api.Option == 3)
-			{
-				//Debug.Log($"Sympathy : {api.Attention.ToString()}");
-
-				////sympathyCurrentValue = api.Attention;
-
-				//float current = sympathyCurrentValue = api.Attention;
-				//float target = api.Attention;
-
-				//Request(3, current, target);
-			}
-
 
 		}
 	}
@@ -604,7 +535,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (index == 4)
 		{
 			API.Lerp lerp_relaxation = new API.Lerp(
-		 _requestIndex: 3,
+		 _requestIndex: 4,
 		 _Function: functionType,
 		 _interval: speedInterval,
 		 _currValue: current,
@@ -615,39 +546,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		}
 
 	}
-
-	//public void Request(int index, float value)
-	//{
-	//    if (index == 0)
-	//    {
-	//        API.Lerp lerp_concentration = new API.Lerp(
-	//      _requestIndex: 0,
-	//      _Function: functionType,
-	//      _interval: speedInterval,
-	//      _currValue: concentrationCurrentValue,
-	//      _targetValue: value,
-	//      _callback: lerpGetter
-	//      );
-
-	//        Request(lerp_concentration);
-
-	//    }
-	//    else if (index == 1)
-	//    {
-	//        API.Lerp lerp_excitement = new API.Lerp(
-	//      _requestIndex: 1,
-	//      _Function: functionType,
-	//      _interval: speedInterval,
-	//      _currValue: excitementCurrentValue,
-	//      _targetValue: value,
-	//      _callback: lerpGetter
-	//      );
-
-	//        Request(lerp_excitement);
-	//    }
-
-
-	//}
 
 	public void Request(API.Lerp api)
 	{
@@ -660,6 +558,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		if (api.RequestIndex == 0)
 		{
 			concentrationCurrentValue = api.Value;
+			//Debug.Log($"c : {api.Value}");
 			//concentrationValue = api.Value;
 			// mapping parameter
 			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
@@ -691,7 +590,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 1)
 		{
 			excitementCurrentValue = api.Value;
-
+			Debug.Log($"e : {api.Value}");
 			//excitementValue = api.Value;
 			// mapping parameter
 			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
@@ -722,14 +621,15 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 2)
 		{
 			positiveCurrentValue = api.Value;
+			//Debug.Log($"p : {api.Value}");
 			//positiveValue = api.Value;
 
-			Debug.Log("positive  value : " + positiveCurrentValue);
+			//Debug.Log("positive  value : " + positiveCurrentValue);
 			// mapping parameter
 			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
 			{
 				// 긍부정으로 맵핑된 항목 찾기
-				if (MappingParameter.instance.matchType[i] == 2)
+				if (MappingParameter.instance.matchType[i] == 3)
 				{
 					// geo
 					if (i == 0)
@@ -755,6 +655,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 3)
 		{
 			sympathyCurrentValue = api.Value;
+			//Debug.Log($"s : {api.Value}");
 			//vfxValue = api.Value;
 			//sympathyValue = api.Value;
 
@@ -767,7 +668,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if(api.RequestIndex == 4)
 		{
 			relaxationCurrentValue = api.Value;
-
+			//Debug.Log($"r : {api.Value}");
 
 		}
 
@@ -787,6 +688,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 	void EndingAniStart()
 	{
+		Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Contents;
+
 		Debug.Log("ending start");
 		StartCoroutine(EndingAniSequence());
 		timer.GetComponent<Animator>().SetTrigger("GameOverShake");

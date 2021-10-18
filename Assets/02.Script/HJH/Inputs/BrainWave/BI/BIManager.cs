@@ -137,13 +137,21 @@ namespace Manager
 
 		public bool IsSensorConnected { get => isSensorConnected;}
 		public bool IsSensorNoised { get => isSensorNoised;}
-		
+
 
 
 
 		#endregion
 
 		#region Initialize & Activate, deactivate
+
+		private void Awake()
+		{
+			leftActivity = new LinkDataValue();
+			rightActivity = new LinkDataValue();
+			attention = new LinkDataValue();
+			relaxation = new LinkDataValue();
+		}
 
 		// Start is called before the first frame update
 		void Start()
@@ -152,11 +160,6 @@ namespace Manager
 			LooxidLinkManager.Instance.Initialize();
 
 			sensorCount = Enum.GetValues(typeof(EEGSensorID)).Length;
-
-			leftActivity = new LinkDataValue();
-			rightActivity = new LinkDataValue();
-			attention = new LinkDataValue();
-			relaxation = new LinkDataValue();
 			
 			result_concentration	= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
 			result_excitement		= new mindData[Enum.GetValues(typeof(CollectionStatus)).Length];
@@ -422,8 +425,9 @@ namespace Manager
 			{
 				double val1 = Result_concentration[(int)CollectionStatus.Reference].Result;
 				double val2 = Result_concentration[(int)CollectionStatus.Contents].Result;
-				double result = val2;
+				double result = attention.target;
 				api.Set(objective, api.Option, (float)result);
+				api.CallBack.Invoke(api);
 			}
 			else if (objective == API.Objective.Result_Excitement)
 			{
@@ -431,6 +435,7 @@ namespace Manager
 				double val2 = Result_excitement[(int)CollectionStatus.Contents].Result;
 				double result = (val2 - val1 + 1) / 2;
 				api.Set(objective, api.Option, (float)result);
+				api.CallBack.Invoke(api);
 			}
 			else if (objective == API.Objective.Result_Positiveness)
 			{
@@ -438,6 +443,7 @@ namespace Manager
 				double val2 = Result_positiveness[(int)CollectionStatus.Contents].Result;
 				double result = 0.5 + (val2 - val1) / 2;
 				api.Set(objective, api.Option, (float)result);
+				api.CallBack.Invoke(api);
 			}
 			else if (objective == API.Objective.Result_Empathy)
 			{
@@ -445,6 +451,7 @@ namespace Manager
 				double val2 = Result_empathy[(int)CollectionStatus.Contents].Result;
 				double result = 0.5 + (val2 - val1) / 2;
 				api.Set(objective, api.Option, (float)result);
+				api.CallBack.Invoke(api);
 			}
 
 		}
