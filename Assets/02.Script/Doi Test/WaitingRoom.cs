@@ -84,16 +84,16 @@ public class WaitingRoom : MonoBehaviour
 
         lerpGetter += Receive;
 
-        StartCoroutine(InitialMappingParameters());
-        
+        //StartCoroutine(InitialMappingParameters());
+        InitialMappingParameters();
 
         light_group_ani.SetTrigger("SceneStart");
         SliderAni();
     }
 
-    IEnumerator InitialMappingParameters()
+    void InitialMappingParameters()
     {
-        yield return new WaitForEndOfFrame();
+        //yield return new WaitForEndOfFrame();
         MappingParameter.instance.InitialWaitingRoomParameters(waitingPreview, vfxEffect);
         MappingSliders();
 
