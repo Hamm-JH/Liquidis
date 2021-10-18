@@ -327,6 +327,8 @@ public class WaitingRoom : MonoBehaviour
             Debug.Log("f");
         }
 
+        Debug.Log("player count : " + PhotonNetwork.CountOfPlayers);
+
         #region 1. EEG 데이터 요청
         // 데이터 요청시 api를 생성한다.
         // 뇌파 데이터 api 생성시 필수 할당 데이터

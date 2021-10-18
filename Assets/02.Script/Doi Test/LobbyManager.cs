@@ -26,6 +26,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
       public void OnJoinButtonClicked()
       {
+       
 
         if (MappingParameter.instance.AllMappedEmotionCheck())
         {
@@ -39,8 +40,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
 
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+                if(PhotonNetwork.CountOfRooms == 0)
+                {
+                    StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
-                StartCoroutine(LoadWaitingAni(roomOptions));
+                }
+                else if(PhotonNetwork.CountOfRooms == 1)
+                {
+                    StartCoroutine(LoadWaitingAniJoin());
+                }
                 // linked to the coroutine
                 //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
@@ -67,11 +75,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
       }
 
-    IEnumerator LoadWaitingAni(RoomOptions roomOptions)
+    IEnumerator LoadWaitingAniCreate(RoomOptions roomOptions)
     {
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+        PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
+
+
+    }
+
+    IEnumerator LoadWaitingAniJoin()
+    {
+        lightgroup_ani.SetTrigger("Start");
+        yield return new WaitForSeconds(1.3f);
+        PhotonNetwork.JoinRoom(roomCode);
 
 
     }
