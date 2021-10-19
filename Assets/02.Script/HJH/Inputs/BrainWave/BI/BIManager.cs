@@ -21,13 +21,28 @@ namespace Manager
 	{
 		[SerializeField] int dataCount;
 		[SerializeField] double dataSum;
-		[SerializeField] List<double> datas;
+		[SerializeField] Queue<double> datas;
 		[SerializeField] double result;
 
 		public int DataCount { get => dataCount; set => dataCount=value; }
 		public double DataSum { get => dataSum; set => dataSum=value; }
-		public List<double> Datas { get => datas; set => datas=value; }
+		public Queue<double> Datas { get => datas; set => datas=value; }
 		public double Result { get => result; set => result=value; }
+
+		public void Add(double data, int maxCount)
+		{
+			datas.Enqueue(data);
+			dataSum = dataSum + data;
+			dataCount = datas.Count;
+
+			int count = datas.Count;
+			if(count > maxCount)
+			{
+				double old = datas.Dequeue();
+				dataSum = dataSum - old;
+				dataCount = datas.Count;
+			}
+		}
 
 		public void SetResult()
 		{
@@ -56,6 +71,8 @@ namespace Manager
 		#endregion
 
 		#region Values
+
+		public int eegMaximumCount = 100;
 
 		private EEGSensor sensorStatusData;
 
@@ -176,9 +193,16 @@ namespace Manager
 			for (int i = 0; i < index; i++)
 			{
 				result_concentration[i] = new mindData();
+				result_concentration[i].Datas = new Queue<double>();
+
 				result_excitement[i] = new mindData();
+				result_excitement[i].Datas = new Queue<double>();
+
 				result_positiveness[i] = new mindData();
+				result_positiveness[i].Datas = new Queue<double>();
+
 				result_empathy[i] = new mindData();
+				result_empathy[i].Datas = new Queue<double>();
 			}
 
 			Delta = InitIndexArray();
@@ -305,11 +329,11 @@ namespace Manager
 			positiveness = value;
 		}
 
+		/// <summary>
+		/// 공감
+		/// </summary>
 		private void UpdateEmpathy()
 		{
-			// 공감
-			//empathy = 
-
 			double value = (
 				Alpha[(int)EEGSensorID.AF3].target +
 				Alpha[(int)EEGSensorID.AF4].target +
@@ -584,33 +608,37 @@ namespace Manager
 
 					case CollectionStatus.Reference:
 						{
-							result_concentration[(int)_CollectionStatus].DataCount++;
-							result_concentration[(int)_CollectionStatus].DataSum += concentration;
+							result_concentration[(int)_CollectionStatus].Add(concentration, eegMaximumCount);
 
-							result_excitement[(int)_CollectionStatus].DataCount++;
-							result_excitement[(int)_CollectionStatus].DataSum += excitement;
+							result_excitement[(int)_CollectionStatus].Add(excitement, eegMaximumCount);
 
-							result_positiveness[(int)_CollectionStatus].DataCount++;
-							result_positiveness[(int)_CollectionStatus].DataSum += positiveness;
+							result_positiveness[(int)_CollectionStatus].Add(positiveness, eegMaximumCount);
 
-							result_empathy[(int)_CollectionStatus].DataCount++;
-							result_empathy[(int)_CollectionStatus].DataSum += empathy;
+							result_empathy[(int)_CollectionStatus].Add(empathy, eegMaximumCount);
+
+							//result_concentration[(int)_CollectionStatus].DataCount++;
+							//result_concentration[(int)_CollectionStatus].DataSum += concentration;
+
+							//result_excitement[(int)_CollectionStatus].DataCount++;
+							//result_excitement[(int)_CollectionStatus].DataSum += excitement;
+
+							//result_positiveness[(int)_CollectionStatus].DataCount++;
+							//result_positiveness[(int)_CollectionStatus].DataSum += positiveness;
+
+							//result_empathy[(int)_CollectionStatus].DataCount++;
+							//result_empathy[(int)_CollectionStatus].DataSum += empathy;
 						}
 						break;
 
 					case CollectionStatus.Contents:
 						{
-							result_concentration[(int)_CollectionStatus].DataCount++;
-							result_concentration[(int)_CollectionStatus].DataSum += concentration;
+							result_concentration[(int)_CollectionStatus].Add(concentration, eegMaximumCount);
 
-							result_excitement[(int)_CollectionStatus].DataCount++;
-							result_excitement[(int)_CollectionStatus].DataSum += excitement;
+							result_excitement[(int)_CollectionStatus].Add(excitement, eegMaximumCount);
 
-							result_positiveness[(int)_CollectionStatus].DataCount++;
-							result_positiveness[(int)_CollectionStatus].DataSum += positiveness;
+							result_positiveness[(int)_CollectionStatus].Add(positiveness, eegMaximumCount);
 
-							result_empathy[(int)_CollectionStatus].DataCount++;
-							result_empathy[(int)_CollectionStatus].DataSum += empathy;
+							result_empathy[(int)_CollectionStatus].Add(empathy, eegMaximumCount);
 
 							SetMindResult(_CollectionStatus);
 						}
