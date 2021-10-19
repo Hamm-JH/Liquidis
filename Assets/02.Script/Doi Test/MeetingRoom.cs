@@ -114,7 +114,11 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	}
 	private void Start()
 	{
-		StartCoroutine(InitialMappingParameters());//?
+		//StartCoroutine(InitialMappingParameters());//?
+
+		
+
+		InitialMappingParameters();
 
 		// 이벤트에 메서드 연결
 		biGetter += Receive;
@@ -124,7 +128,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		// ani sequence
 		StartCoroutine(PlayerLightSequence());
 
-
+		StartCoroutine(InitBIStatus());
 
 		// waiting room 
 		//playerNum = PhotonNetwork.LocalPlayer.ActorNumber - 1;
@@ -169,12 +173,22 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 	//}
 
-	IEnumerator InitialMappingParameters()
+	void InitialMappingParameters()
 	{
-		yield return new WaitForEndOfFrame();
+		//yield return new WaitForEndOfFrame();
+
 		MappingParameter.instance.InitialMeeintRoomParameters(meetingHead, vfxObject);
 
 
+	}
+
+	IEnumerator InitBIStatus()
+	{
+		yield return null;
+
+		Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Contents;
+
+		yield break;
 	}
 
 	IEnumerator PlayerLightSequence()
@@ -294,44 +308,44 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		#region 4. 집중
 
-		API.Brainwave api = new API.Brainwave(
+		API.Brainwave api_concentration = new API.Brainwave(
 			obj: API.Objective.Result_Concentration,
 			targetCallBack: biGetter
 			);
-		Request(api);
+		Request(api_concentration);
 
 		#endregion
 
 		#region 5. 흥분
 
-		api = new API.Brainwave(
+		API.Brainwave api_excitement = new API.Brainwave(
 			obj: API.Objective.Result_Excitement,
 			targetCallBack: biGetter
 			);
 
-		Request(api);
+		Request(api_excitement);
 
 		#endregion
 
 		#region 6. 긍부정
 
-		api = new API.Brainwave(
+		API.Brainwave api_positiveness = new API.Brainwave(
 			obj: API.Objective.Result_Positiveness,
 			targetCallBack: biGetter
 			);
 
-		Request(api);
+		Request(api_positiveness);
 
 		#endregion
 
 		#region 7. 공감
 
-		api = new API.Brainwave(
+		API.Brainwave api_empathy = new API.Brainwave(
 			obj: API.Objective.Result_Empathy,
 			targetCallBack: biGetter
 			);
 
-		Request(api);
+		Request(api_empathy);
 
 		#endregion
 
@@ -447,12 +461,16 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			float current = concentrationCurrentValue;
 			float target = api.Concentration;
 
+
 			Request(0, current, target);
 		}
 		else if (api.Objective == API.Objective.Result_Excitement)
 		{
+
 			float current = excitementCurrentValue;
 			float target = api.Excitement;
+			//Debug.Log($"current : {current}");
+			//Debug.Log($"target : {api.Excitement}");
 
 			Request(1, current, target);
 		}
@@ -619,7 +637,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					}
 					else if (i == 1) // color
 					{
-						Debug.Log($"excitement : {api.Value}");
+						//Debug.Log($"excitement : {excitementCurrentValue}");
+						//Debug.Log($"excitement : {api.Value}");
 
 						MappingParameter.instance.LerpColorMeetingFace(excitementCurrentValue);
 						//MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
@@ -637,12 +656,12 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 2)
 		{
 			positiveCurrentValue = api.Value;
-            //Debug.Log($"p : {api.Value}");
-            //positiveValue = api.Value;
+			//Debug.Log($"p : {api.Value}");
+			//positiveValue = api.Value;
 
-            //Debug.Log("positive  value : " + positiveCurrentValue);
-            // mapping parameter
-            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+			//Debug.Log("positive  value : " + positiveCurrentValue);
+			// mapping parameter
+			for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
 			{
 				// 긍부정으로 맵핑된 항목 찾기
 				if (MappingParameter.instance.matchType[i] == 3)

@@ -19,10 +19,10 @@ namespace Manager
 	[Serializable]
 	public struct mindData
 	{
-		int dataCount;
-		double dataSum;
-		List<double> datas;
-		double result;
+		[SerializeField] int dataCount;
+		[SerializeField] double dataSum;
+		[SerializeField] List<double> datas;
+		[SerializeField] double result;
 
 		public int DataCount { get => dataCount; set => dataCount=value; }
 		public double DataSum { get => dataSum; set => dataSum=value; }
@@ -101,10 +101,10 @@ namespace Manager
 		private LinkDataValue attention;
 		private LinkDataValue relaxation;
 
-		private double concentration;   // ÁýÁß
-		private double excitement;		// ÈïºÐ
-		private double positiveness;	// ±àºÎÁ¤
-		private double empathy;			// °ø°¨
+		[SerializeField] private double concentration;   // ÁýÁß
+		[SerializeField] private double excitement;		// ÈïºÐ
+		[SerializeField] private double positiveness;	// ±àºÎÁ¤
+		[SerializeField] private double empathy;			// °ø°¨
 
 		private mindData[] result_concentration;   // ÁýÁß
 		private mindData[] result_excitement;      // ÈïºÐ
@@ -116,6 +116,12 @@ namespace Manager
 		private LinkDataValue[] alpha;
 		private LinkDataValue[] beta;
 		private LinkDataValue[] gamma;
+
+		private double _delta;
+		private double _theta;
+		private double _alpha;
+		private double _beta;
+		private double _gamma;
 
 		public double Concentration { get => concentration; }
 		public double Excitement { get => excitement; }
@@ -215,7 +221,7 @@ namespace Manager
 			LooxidLinkData.OnReceiveMindIndexes += OnReceiveMindIndexes;
 			LooxidLinkData.OnReceiveEEGFeatureIndexes += OnReceiveEEGFeatureIndexes;
 
-			//StartCoroutine(SetEEG());
+			StartCoroutine(SetEEG());
 			StartCoroutine(SetMindIndex());
 		}
 
