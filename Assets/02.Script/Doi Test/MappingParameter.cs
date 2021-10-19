@@ -167,6 +167,8 @@ public class MappingParameter : MonoBehaviour
     public Button speed_add_button;
     public Button speed_interval_left_button;
     public Button speed_interval_right_button;
+    public GameObject[] speed_type_images;
+    public GameObject[] speed_interval_images;
 
 
     private void Awake()
@@ -1118,6 +1120,13 @@ public class MappingParameter : MonoBehaviour
         if (speedType < 2)
         {
             speedType += 1;
+
+            foreach( GameObject target in speed_type_images)
+            {
+                target.SetActive(false);
+            }
+
+            speed_type_images[speedType].SetActive(true);
         }
     }
 
@@ -1128,6 +1137,13 @@ public class MappingParameter : MonoBehaviour
         if (speedType > 0)
         {
             speedType -= 1;
+
+            foreach (GameObject target in speed_type_images)
+            {
+                target.SetActive(false);
+            }
+
+            speed_type_images[speedType].SetActive(true);
         }
     }
 
@@ -1137,6 +1153,15 @@ public class MappingParameter : MonoBehaviour
         if (speedIntervalType < 1)
         {
             speedIntervalType += 1;
+
+            foreach (GameObject target in speed_interval_images)
+            {
+                target.SetActive(false);
+            }
+
+            speed_interval_images[speedIntervalType].SetActive(true);
+
+
             InitialSpeedIntervalValue();
         }
     }
@@ -1148,6 +1173,15 @@ public class MappingParameter : MonoBehaviour
         if (speedIntervalType > 0)
         {
             speedIntervalType -= 1;
+
+            foreach (GameObject target in speed_interval_images)
+            {
+                target.SetActive(false);
+            }
+
+            speed_interval_images[speedIntervalType].SetActive(true);
+
+
             InitialSpeedIntervalValue();
         }
     }
