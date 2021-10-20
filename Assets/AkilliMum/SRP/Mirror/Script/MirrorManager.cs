@@ -335,7 +335,7 @@ namespace AkilliMum.SRP.Mirror
             }
             catch (Exception ex)
             {
-              //  Debug.Log(ex);
+                Debug.Log(ex);
             }
             finally
             {
@@ -841,7 +841,7 @@ namespace AkilliMum.SRP.Mirror
                 return;
             IsDirty = false;
 
-            //Debug.Log("camera manager create mirror camera called...");
+            Debug.Log("camera manager create mirror camera called...");
 
             _mirrorCameraContainer = new GameObject("Mirror object for " + _mainCamera.GetInstanceID(), typeof(Camera), typeof(Skybox));
             _mirrorCamera = _mirrorCameraContainer.GetComponent<Camera>();
