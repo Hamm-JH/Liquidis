@@ -106,17 +106,17 @@ public class WaitingRoom : MonoBehaviour
     {
 
         // debug disabled
-        //if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
-        //{
-        //	slider_canvas.gameObject.SetActive(true);
-        //	slider_canvas.SetTrigger("SceneStart");
-        //	StartCoroutine(SliderGuide());
+        if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        {
+            slider_canvas.gameObject.SetActive(true);
+            slider_canvas.SetTrigger("SceneStart");
+            StartCoroutine(SliderGuide());
 
-        //}
+        }
         // debug enabled
-        slider_canvas.gameObject.SetActive(true);
-        slider_canvas.SetTrigger("SceneStart");
-        StartCoroutine(SliderGuide());
+        //slider_canvas.gameObject.SetActive(true);
+        //slider_canvas.SetTrigger("SceneStart");
+        //StartCoroutine(SliderGuide());
 
     }
 
@@ -301,8 +301,8 @@ public class WaitingRoom : MonoBehaviour
     IEnumerator LoadMeetingRoom()
     {
         yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene("MeetingRoom");
-        //PhotonNetwork.LoadLevel("MeetingRoom");
+        //SceneManager.LoadScene("MeetingRoom");
+        PhotonNetwork.LoadLevel("MeetingRoom");
     }
 
   
