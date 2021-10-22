@@ -8,19 +8,19 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Items/URP/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scene/Main/01_Intro.unity
     guid: 442ee56f70f49d1488a9916cc758ab04
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scene/Main/02_Play_Guide.unity
     guid: 38fc558dcfe9d5643bbc8bcffc9f0b7f
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scene/Main/03_Play_Select.unity
     guid: f73baa89ab26ef94489309e34b520431
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scene/Main/04_Play_WaitingRoom.unity
     guid: 9ca988c560968da45bc7eb39ed26a8ad
-  - enabled: 0
+  - enabled: 1
     path: Assets/01.Scene/Main/MeetingRoom.unity
     guid: e6fb93c743aea7f45b8117d37337e364
   - enabled: 1
