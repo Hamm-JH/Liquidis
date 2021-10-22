@@ -601,7 +601,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					{
                         //Debug.Log($"c : {api.Value}");
 
-                        MappingParameter.instance.GetGeoValueFromLerp(concentrationCurrentValue);
+                        MappingParameter.instance.SetGeoValueMeeting(concentrationCurrentValue);
 					}
 					else if (i == 1) // color
 					{
@@ -633,7 +633,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					// geo
 					if (i == 0)
 					{
-						MappingParameter.instance.GetGeoValueFromLerp(excitementCurrentValue);
+						MappingParameter.instance.SetGeoValueMeeting(excitementCurrentValue);
 					}
 					else if (i == 1) // color
 					{
@@ -669,7 +669,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 					// geo
 					if (i == 0)
 					{
-						MappingParameter.instance.GetGeoValueFromLerp(positiveCurrentValue);
+						MappingParameter.instance.SetGeoValueMeeting(positiveCurrentValue);
 					}
 					else if (i == 1) // color
 					{
