@@ -93,51 +93,60 @@ public class LobbyDebug : MonoBehaviourPunCallbacks
     {
 
         PhotonNetwork.ConnectUsingSettings();
-        OnConnectedToMaster();
+        //OnConnectedToMaster();
 
 
     }
 
+
+
+    private void Update()
+    {
+        print(PhotonNetwork.NetworkClientState);
+    }
+
     public void OnJoinButtonClicked()
     {
+        RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+        PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
-        if (PhotonNetwork.IsConnected)
-        {
-
-
-            status_text.text = "접속 중입니다";
-
-
-            RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+        //if (PhotonNetwork.IsConnected)
+        //{
 
 
-            if (PhotonNetwork.CountOfRooms == 0)
-            {
-                Debug.Log("room count : 0");
-        PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
+        //    status_text.text = "접속 중입니다";
 
 
-            }
-            else if (PhotonNetwork.CountOfRooms == 1)
-            {
-                Debug.Log("room count : 1");
-
-        PhotonNetwork.JoinRoom(roomCode);
-
-            }
-            // linked to the coroutine
-            //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+        //    RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
 
-        }
-        else
-        {
-            enterLobby_button.interactable = false;
+        //    if (PhotonNetwork.CountOfRooms == 0)
+        //    {
+        //        Debug.Log("room count : 0");
+        //PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
 
-            status_text.text = "Offline : Connection Disabled - Try Reconnecting";
 
-            PhotonNetwork.ConnectUsingSettings();
-        }
+        //    }
+        //    else if (PhotonNetwork.CountOfRooms == 1)
+        //    {
+        //        Debug.Log("room count : 1");
+
+        //PhotonNetwork.JoinRoom(roomCode);
+
+        //    }
+        //    // linked to the coroutine
+        //    //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+
+
+        //}
+        //else
+        //{
+        //    enterLobby_button.interactable = false;
+
+        //    status_text.text = "Offline : Connection Disabled - Try Reconnecting";
+
+        //    PhotonNetwork.ConnectUsingSettings();
+        //}
 
 
         //    if (PhotonNetwork.IsConnected)
@@ -191,7 +200,7 @@ public class LobbyDebug : MonoBehaviourPunCallbacks
     {
         //base.OnJoinedRoom();
 
-        status_text.text = "방에 입장하는 중입니다";
+        status_text.text = PhotonNetwork.CurrentRoom.Name;
         voiceControl.GenPlayerSpeaker();
         status2_text.text = PhotonNetwork.CountOfPlayers.ToString();
     }

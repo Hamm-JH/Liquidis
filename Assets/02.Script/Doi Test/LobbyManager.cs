@@ -19,11 +19,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
       {
 
           PhotonNetwork.ConnectUsingSettings();
-        OnConnectedToMaster();
+        //OnConnectedToMaster();
 
         
       }
-
+    
       public void OnJoinButtonClicked()
       {
        
@@ -41,21 +41,21 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
                 RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
 
-                
-                if(PhotonNetwork.CountOfRooms == 0)
-                {
-                    Debug.Log("room count : 0");
-                    StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
-                }
-                else if(PhotonNetwork.CountOfRooms == 1) 
-                {
-                    Debug.Log("room count : 1");
+                //if(PhotonNetwork.CountOfRooms == 0)
+                //{
+                //    Debug.Log("room count : 0");
+                //    StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
-                    StartCoroutine(LoadWaitingAniJoin());
-                }
+                //}
+                //else if(PhotonNetwork.CountOfRooms == 1) 
+                //{
+                //    Debug.Log("room count : 1");
+
+                //    StartCoroutine(LoadWaitingAniJoin());
+                //}
                 // linked to the coroutine
-                //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
+                PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
 
             }
@@ -85,8 +85,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         lightgroup_ani.SetTrigger("Start");
         yield return new WaitForSeconds(1.3f);
         //PhotonNetwork.JoinRandomOrCreateRoom(null);
-        PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
-
+        //PhotonNetwork.CreateRoom(roomCode, roomOptions, null);
+        PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
     }
 

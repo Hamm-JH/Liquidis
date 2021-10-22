@@ -8,21 +8,24 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Items/URP/Scenes/SampleScene.unity
     guid: d1c3109bdb54ad54c8a2b2838528e640
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scene/Main/01_Intro.unity
     guid: 442ee56f70f49d1488a9916cc758ab04
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scene/Main/02_Play_Guide.unity
     guid: 38fc558dcfe9d5643bbc8bcffc9f0b7f
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scene/Main/03_Play_Select.unity
     guid: f73baa89ab26ef94489309e34b520431
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scene/Main/04_Play_WaitingRoom.unity
     guid: 9ca988c560968da45bc7eb39ed26a8ad
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scene/Main/MeetingRoom.unity
     guid: e6fb93c743aea7f45b8117d37337e364
+  - enabled: 1
+    path: Assets/01.Scene/Test/photon test.unity
+    guid: f1bf37e4abc70424db3c7036056c9e13
   m_configObjects:
     Unity.XR.OpenVR.Settings: {fileID: 11400000, guid: a27a22030b3b85c4ab3b40b3b0a34f9d, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 85636931203d6934a8658773aaff6c36, type: 2}
