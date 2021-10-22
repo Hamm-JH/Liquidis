@@ -62,7 +62,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	public float speedInterval = 3f; //속도인터벌
 	API.Lerp.Function functionType; //러프타입
 
-	public int playerNum = 0;
+
 
 	private string roomCode = "ABCD";
 
@@ -697,7 +697,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
             //sympathyValue = api.Value;
 
             // photon debug
-            DataSyncronize.instance.SetSympathy(playerNum, sympathyCurrentValue);
+            DataSyncronize.instance.SetSympathy(MappingParameter.instance.playerNum, sympathyCurrentValue);
             //MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
         }
 		// 안정
