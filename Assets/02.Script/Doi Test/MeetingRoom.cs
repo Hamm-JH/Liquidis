@@ -144,7 +144,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		//}
 
-
+		voiceControl.GenPlayerSpeaker();
 
 	}
 
