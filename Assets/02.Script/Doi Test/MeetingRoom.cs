@@ -692,14 +692,14 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		else if (api.RequestIndex == 3)
 		{
 			sympathyCurrentValue = api.Value;
-			//Debug.Log($"s : {api.Value}");
-			//vfxValue = api.Value;
-			//sympathyValue = api.Value;
+            //Debug.Log($"s : {api.Value}");
+            //vfxValue = api.Value;
+            //sympathyValue = api.Value;
 
-			// photon debug
-			//DataSyncronize.instance.SetSympathy(playerNum, sympathyCurrentValue);
-			//MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
-		}
+            // photon debug
+            DataSyncronize.instance.SetSympathy(playerNum, sympathyCurrentValue);
+            //MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
+        }
 		// æ»¡§
 		else if(api.RequestIndex == 4)
 		{

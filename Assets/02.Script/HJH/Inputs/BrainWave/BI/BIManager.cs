@@ -134,11 +134,11 @@ namespace Manager
 		private LinkDataValue[] beta;
 		private LinkDataValue[] gamma;
 
-		private double _delta;
-		private double _theta;
-		private double _alpha;
-		private double _beta;
-		private double _gamma;
+		[SerializeField] private double _delta;
+		[SerializeField] private double _theta;
+		[SerializeField] private double _alpha;
+		[SerializeField] private double _beta;
+		[SerializeField] private double _gamma;
 
 		public double Concentration { get => concentration; }
 		public double Excitement { get => excitement; }
@@ -277,7 +277,7 @@ namespace Manager
 			rightActivity.value = Mathf.Lerp((float)rightActivity.value, (float)rightActivity.target, 0.2f);
 			attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
 			relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
-
+			//Debug.Log("H");
 			UpdateMindIndex();
 		}
 
@@ -309,7 +309,7 @@ namespace Manager
 				Gamma[(int)EEGSensorID.Fp2].target +
 				Gamma[(int)EEGSensorID.AF7].target +
 				Gamma[(int)EEGSensorID.AF8].target) / 6;
-
+			//Debug.Log("H");
 			excitement = value;
 		}
 
@@ -353,6 +353,7 @@ namespace Manager
 		/// <param name="api"></param>
 		public void Request(API.Brainwave api)
 		{
+			Debug.Log(1);
 			//ThreadPool.QueueUserWorkItem(Request_Inside, api);
 
 			// 센서 인덱스
@@ -549,7 +550,7 @@ namespace Manager
 			while (this.gameObject.activeSelf)
 			{
 				// 0.1초 간격으로 대기
-				yield return new WaitForSeconds(0.1f);
+				yield return null;
 
 				// 룩시드링크에서 현재에서 과거 10초 안의 데이터를 가져온다.
 				List<EEGFeatureIndex> featureIndexList = LooxidLinkData.Instance.GetEEGFeatureIndexData(10.0f);
