@@ -2,6 +2,7 @@ using Looxid.Link;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.Events;
@@ -353,7 +354,7 @@ namespace Manager
 		/// <param name="api"></param>
 		public void Request(API.Brainwave api)
 		{
-			Debug.Log(1);
+
 			//ThreadPool.QueueUserWorkItem(Request_Inside, api);
 
 			// 센서 인덱스
@@ -531,6 +532,12 @@ namespace Manager
 		IEnumerator SetEEG()
 		{
 			// 데이터 선언, 초기화
+			List<Queue<double>> _deltaScaleDataList = new List<Queue<double>>();
+			List<Queue<double>> _thetaScaleDataList = new List<Queue<double>>();
+			List<Queue<double>> _alphaScaleDataList = new List<Queue<double>>();
+			List<Queue<double>> _betaScaleDataList = new List<Queue<double>>();
+			List<Queue<double>> _gammaScaleDataList = new List<Queue<double>>();
+
 			List<List<double>> deltaScaleDataList = new List<List<double>>();
 			List<List<double>> thetaScaleDataList = new List<List<double>>();
 			List<List<double>> alphaScaleDataList = new List<List<double>>();
@@ -540,6 +547,12 @@ namespace Manager
 			// 뇌파 센서의 수 만큼 각각의 데이터리스트를 초기화한다.
 			for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
 			{
+				_deltaScaleDataList.Add(new Queue<double>());
+				_thetaScaleDataList.Add(new Queue<double>());
+				_alphaScaleDataList.Add(new Queue<double>());
+				_betaScaleDataList.Add(new  Queue<double>());
+				_gammaScaleDataList.Add(new Queue<double>());
+
 				deltaScaleDataList.Add(new List<double>());
 				thetaScaleDataList.Add(new List<double>());
 				alphaScaleDataList.Add(new List<double>());
@@ -567,19 +580,37 @@ namespace Manager
 							double betaValue  = featureIndexList[ii].Beta((EEGSensorID)i);
 							double gammaValue = featureIndexList[ii].Gamma((EEGSensorID)i);
 
-							if (!double.IsInfinity(deltaValue) && !double.IsNaN(deltaValue)) deltaScaleDataList[i].Add(deltaValue);
-							if (!double.IsInfinity(thetaValue) && !double.IsNaN(thetaValue)) thetaScaleDataList[i].Add(thetaValue);
-							if (!double.IsInfinity(alphaValue) && !double.IsNaN(alphaValue)) alphaScaleDataList[i].Add(alphaValue);
-							if (!double.IsInfinity(betaValue) && !double.IsNaN(betaValue))   betaScaleDataList[i].Add(betaValue);
-							if (!double.IsInfinity(gammaValue) && !double.IsNaN(gammaValue)) gammaScaleDataList[i].Add(gammaValue);
+							if (!double.IsInfinity(deltaValue) && !double.IsNaN(deltaValue)) _deltaScaleDataList[i].Enqueue(deltaValue);
+							if (!double.IsInfinity(thetaValue) && !double.IsNaN(thetaValue)) _thetaScaleDataList[i].Enqueue(thetaValue);
+							if (!double.IsInfinity(alphaValue) && !double.IsNaN(alphaValue)) _alphaScaleDataList[i].Enqueue(alphaValue);
+							if (!double.IsInfinity(betaValue) && !double.IsNaN(betaValue))   _betaScaleDataList[i].Enqueue(betaValue);
+							if (!double.IsInfinity(gammaValue) && !double.IsNaN(gammaValue)) _gammaScaleDataList[i].Enqueue(gammaValue);
+
+							ControlEEGArray(_deltaScaleDataList[i], eegMaximumCount);
+							ControlEEGArray(_thetaScaleDataList[i], eegMaximumCount);
+							ControlEEGArray(_alphaScaleDataList[i], eegMaximumCount);
+							ControlEEGArray(_betaScaleDataList[i], eegMaximumCount);
+							ControlEEGArray(_gammaScaleDataList[i], eegMaximumCount);
+
+							//if (!double.IsInfinity(deltaValue) && !double.IsNaN(deltaValue)) deltaScaleDataList[i].Add(deltaValue);
+							//if (!double.IsInfinity(thetaValue) && !double.IsNaN(thetaValue)) thetaScaleDataList[i].Add(thetaValue);
+							//if (!double.IsInfinity(alphaValue) && !double.IsNaN(alphaValue)) alphaScaleDataList[i].Add(alphaValue);
+							//if (!double.IsInfinity(betaValue) && !double.IsNaN(betaValue))   betaScaleDataList[i].Add(betaValue);
+							//if (!double.IsInfinity(gammaValue) && !double.IsNaN(gammaValue)) gammaScaleDataList[i].Add(gammaValue);
 						}
 
+						Delta[i].SetScale(_deltaScaleDataList[i].ToList());
+						Theta[i].SetScale(_thetaScaleDataList[i].ToList());
+						Alpha[i].SetScale(_alphaScaleDataList[i].ToList());
+						Beta[i].SetScale (_betaScaleDataList[i] .ToList());
+						Gamma[i].SetScale(_gammaScaleDataList[i].ToList());
+
 						// 센서별로 스케일 설정 (min, max 값 설정)
-						Delta[i].SetScale(deltaScaleDataList[i]);
-						Theta[i].SetScale(thetaScaleDataList[i]);
-						Alpha[i].SetScale(alphaScaleDataList[i]);
-						Beta[i].SetScale(betaScaleDataList[i]);
-						Gamma[i].SetScale(gammaScaleDataList[i]);
+						//Delta[i].SetScale(deltaScaleDataList[i]);
+						//Theta[i].SetScale(thetaScaleDataList[i]);
+						//Alpha[i].SetScale(alphaScaleDataList[i]);
+						//Beta[i].SetScale(betaScaleDataList[i]);
+						//Gamma[i].SetScale(gammaScaleDataList[i]);
 					}
 				}
 			}
@@ -587,6 +618,20 @@ namespace Manager
 
 			yield break;
 		}
+
+		private void ControlEEGArray(Queue<double> values, int maximumCount)
+        {
+			int index = values.Count;
+
+			int diff = index - maximumCount;
+			if(index > maximumCount)
+            {
+                for (int i = 0; i < diff; i++)
+                {
+					values.Dequeue();
+                }
+            }
+        }
 
 		IEnumerator SetMindIndex()
 		{
