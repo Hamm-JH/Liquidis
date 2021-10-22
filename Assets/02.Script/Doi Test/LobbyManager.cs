@@ -32,41 +32,30 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             enterLobby_button.interactable = false;
 
-            if (PhotonNetwork.IsConnected)
-            {
+            status_text.text = "접속 중입니다";
 
 
-                status_text.text = "접속 중입니다";
+            RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+
+            StartCoroutine(LoadWaitingAniCreate(roomOptions));
 
 
-                RoomOptions roomOptions = new RoomOptions { MaxPlayers = 2 };
+            //if(PhotonNetwork.CountOfRooms == 0)
+            //{
+            //    Debug.Log("room count : 0");
+
+            //}
+            //else if(PhotonNetwork.CountOfRooms == 1) 
+            //{
+            //    Debug.Log("room count : 1");
+
+            //    StartCoroutine(LoadWaitingAniJoin());
+            //}
+            // linked to the coroutine
+            //PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
 
 
-                //if(PhotonNetwork.CountOfRooms == 0)
-                //{
-                //    Debug.Log("room count : 0");
-                //    StartCoroutine(LoadWaitingAniCreate(roomOptions));
-
-                //}
-                //else if(PhotonNetwork.CountOfRooms == 1) 
-                //{
-                //    Debug.Log("room count : 1");
-
-                //    StartCoroutine(LoadWaitingAniJoin());
-                //}
-                // linked to the coroutine
-                PhotonNetwork.JoinOrCreateRoom(roomCode, roomOptions, null);
-
-
-            }
-            else
-            {
-                enterLobby_button.interactable = false;
-
-                status_text.text = "Offline : Connection Disabled - Try Reconnecting";
-
-                PhotonNetwork.ConnectUsingSettings();
-            }
+           
         }
         else
         {
@@ -90,15 +79,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     }
 
-    IEnumerator LoadWaitingAniJoin()
-    {
-        lightgroup_ani.SetTrigger("Start");
-        yield return new WaitForSeconds(1.3f);
-        PhotonNetwork.JoinRoom(roomCode);
-        //PhotonNetwork.JoinRandomOrCreateRoom(null);
+    //IEnumerator LoadWaitingAniJoin()
+    //{
+    //    lightgroup_ani.SetTrigger("Start");
+    //    yield return new WaitForSeconds(1.3f);
+    //    PhotonNetwork.JoinRoom(roomCode);
+    //    //PhotonNetwork.JoinRandomOrCreateRoom(null);
 
 
-    }
+    //}
 
     #region Photon Callback Methods
     public override void OnConnectedToMaster()
