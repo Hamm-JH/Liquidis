@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviourPun
 {
     private void Start()
     {
-        if (photonView.IsMine)
-            DontDestroyOnLoad(gameObject);
+        //if (photonView.IsMine)
+        DontDestroyOnLoad(gameObject);
     }
 }
