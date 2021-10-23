@@ -37,6 +37,8 @@ public class WaitingRoom : MonoBehaviour
     public Animator light_group_ani;
     public Animator counterHead_ani;
 
+    bool vfxOn = true;
+
     public float afterSliderFadeIn = 1f;
     public float afterSelectBoxShake = 7f;
     public float selectBoxFalseTime = 9f;
@@ -248,7 +250,8 @@ public class WaitingRoom : MonoBehaviour
         slider_canvas.SetTrigger("FadeStart");
 
 
-       // StartCoroutine(SliderCanvasFalse());
+        // sensor disconnected
+        vfxOn = false;
         vfxEffect.SetFloat("SpawnRate", 0f); // -> ∏Ó√ ?
     }
 
@@ -741,8 +744,12 @@ public class WaitingRoom : MonoBehaviour
         }
         else if (api.RequestIndex == 3)
         {
-            sympathyValue = api.Value;
-            MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
+            if (vfxOn)
+            {
+                sympathyValue = api.Value;
+                MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
+            }
+           
         }
     }
 }

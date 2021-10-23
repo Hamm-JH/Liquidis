@@ -303,11 +303,11 @@ public class MappingParameter : MonoBehaviour
             }
 
             // initialize vFX
-            //vfxObject.SetFloat("SphereRadius", 0.1f);
-            //vfxObject.SetFloat("MinLifeTime", 0.1f);
-            //vfxObject.SetFloat("MaxLifeTime", 1f);
-            //vfxObject.SetFloat("ConformSphere", 0.2f);
-            //vfxObject.SetInt("AnimationCurve", 0);
+            vfxObject.SetFloat("SphereRadius", 0.3f);
+            vfxObject.SetFloat("MinLifeTime", 0.1f);
+            vfxObject.SetFloat("MaxLifeTime", 1f);
+            vfxObject.SetFloat("ConformSphere", 0.4f);
+            vfxObject.SetInt("AnimationCurve", 0);
 
 
         }
@@ -324,10 +324,10 @@ public class MappingParameter : MonoBehaviour
             }
 
             // initialize vFX
-            vfxObject.SetFloat("SphereRadius", 0.1f);
+            vfxObject.SetFloat("SphereRadius", 0.3f);
             vfxObject.SetFloat("MinLifeTime", 0.1f);
             vfxObject.SetFloat("MaxLifeTime", 1f);
-            vfxObject.SetFloat("ConformSphere", 0.2f);
+            vfxObject.SetFloat("ConformSphere", 0.4f);
             vfxObject.SetFloat("ParticleSize", 0.1f);
             vfxObject.SetInt("AnimationCurve", 0);
 
