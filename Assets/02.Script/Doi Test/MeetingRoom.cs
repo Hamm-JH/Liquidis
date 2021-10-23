@@ -47,11 +47,11 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	float currentTime = 0f;//현재 시간.
 	bool timeStart = false;
 	float time_5min = 300f; //5분
-	bool pass5min = false;
+	public bool pass5min = false;
 	float time_10min = 600f;//10분
-	bool pass10min = false;
+	public bool pass10min = false;
 	float time_15min = 900f; //15분
-	bool pass15min = false;
+	public bool pass15min = false;
 	public float relaxationCurrentValue = 0f;
 	public float concentrationCurrentValue = 0f;//집중현재값
 	public float excitementCurrentValue = 0f;//흥분현재값

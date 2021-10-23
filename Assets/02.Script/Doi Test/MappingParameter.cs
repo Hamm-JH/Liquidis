@@ -844,12 +844,12 @@ public class MappingParameter : MonoBehaviour
         geoValue = _value;
         if (geometryType == 0)
         {
-            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
         }
         else if (geometryType == 1)
         {
-            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+            meetingtHead.GetComponent<Renderer>().material.SetFloat("_Noise", geoValue);
 
         }
     }
