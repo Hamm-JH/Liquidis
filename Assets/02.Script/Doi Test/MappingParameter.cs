@@ -597,10 +597,10 @@ public class MappingParameter : MonoBehaviour
         currentScene = scene.WAITING;
 
         // initialize vFX
-        vfxObject.SetFloat("SphereRadius", 0.1f);
+        vfxObject.SetFloat("SphereRadius", 0.3f);
         vfxObject.SetFloat("MinLifeTime", 0.1f);
         vfxObject.SetFloat("MaxLifeTime", 1f);
-        vfxObject.SetFloat("ConformSphere", 0.2f);
+        vfxObject.SetFloat("ConformSphere", 0.4f);
         vfxObject.SetInt("AnimationCurve", 0);
 
         waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
@@ -613,6 +613,9 @@ public class MappingParameter : MonoBehaviour
         meetingtHead = _meetinghead;
         vfxObject = _vfxObj;
         currentScene = scene.MEETING;
+
+        // initialize cloud unlit
+        //geoPreviewMaterials[1].SetFloat("",);
 
         // initialize vFX
         vfxObject.SetFloat("SphereRadius", 30f);

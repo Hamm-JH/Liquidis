@@ -62,6 +62,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	public float speedInterval = 3f; //속도인터벌
 	API.Lerp.Function functionType; //러프타입
 
+	bool vfxOn = true;
 
 
 	private string roomCode = "ABCD";
@@ -202,6 +203,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		yield return new WaitForSeconds(afterPlayerHeadStart);
 		counterHead_ani.GetComponent<Animator>().SetTrigger("LightOn");
 		mirror_room_ani.SetTrigger("LightOn");
+		vfxObject.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(timerStartTime);
         timer.SetActive(true);
@@ -691,15 +693,19 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		//공감도
 		else if (api.RequestIndex == 3)
 		{
-			sympathyCurrentValue = api.Value;
-            //Debug.Log($"s : {api.Value}");
-            //vfxValue = api.Value;
-            //sympathyValue = api.Value;
+            if (vfxOn)
+            {
+				sympathyCurrentValue = api.Value;
+				//Debug.Log($"s : {api.Value}");
+				//vfxValue = api.Value;
+				//sympathyValue = api.Value;
 
-            // photon debug
-            DataSyncronize.instance.SetSympathy(MappingParameter.instance.playerNum, sympathyCurrentValue);
-            //MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
-        }
+				// photon debug
+				DataSyncronize.instance.SetSympathy(MappingParameter.instance.playerNum, sympathyCurrentValue);
+				//MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
+			}
+
+		}
 		// 안정
 		else if(api.RequestIndex == 4)
 		{
@@ -745,6 +751,9 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
         MappingParameter.instance.SetGeoValueMeeting(2f);
 
+		vfxOn = false;
+		vfxObject.SetFloat("SpawnRate", 0f);
+
 		// target duration 설정은 volume manager 외부에서 직접 쓰기
 		volumeObj.GetComponent<VolumeManager_Duru>().isEnd = true;
 
@@ -762,6 +771,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			}
 			yield return null;
 		}
+		vfxObject.gameObject.SetActive(false);
 
 		yield return new WaitForSeconds(waitUntilSpeedUp_time);
 

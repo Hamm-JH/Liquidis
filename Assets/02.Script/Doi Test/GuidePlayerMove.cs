@@ -17,6 +17,13 @@ public class GuidePlayerMove : MonoBehaviour
     float headOnTime = 0f;
     public Transform camera;
 
+    public enum nextScene
+    {
+        Select,
+        Movie
+    }
+    public nextScene targetScene;
+
     // Update is called once per frame
     void Update()
     {
@@ -73,6 +80,16 @@ public class GuidePlayerMove : MonoBehaviour
     IEnumerator LoadSelectScene()
     {
         yield return new WaitForSeconds(3f);
-        SceneManager.LoadScene("03_Play_Select");
+
+        if(targetScene == nextScene.Select)
+        {
+            SceneManager.LoadScene("03_Play_Select");
+
+        }
+        if(targetScene == nextScene.Movie)
+        {
+            SceneManager.LoadScene("Movie");
+
+        }
     }
 }

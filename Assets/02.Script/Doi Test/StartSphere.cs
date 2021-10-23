@@ -120,6 +120,7 @@ public class StartSphere : MonoBehaviour
                 }
                 else if(transform.position.x <= movieXpos)
                 {
+                    SceneManager.LoadScene("02_Movie_Guide");
 
                 }
 

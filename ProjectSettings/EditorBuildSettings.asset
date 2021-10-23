@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/01.Scene/Main/02_Play_Guide.unity
     guid: 38fc558dcfe9d5643bbc8bcffc9f0b7f
   - enabled: 1
+    path: Assets/01.Scene/Main/02_Movie_Guide.unity
+    guid: bfa971503d657f14c954b013b7b23a74
+  - enabled: 1
     path: Assets/01.Scene/Main/03_Play_Select.unity
     guid: f73baa89ab26ef94489309e34b520431
   - enabled: 1
@@ -23,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scene/Main/MeetingRoom.unity
     guid: e6fb93c743aea7f45b8117d37337e364
+  - enabled: 1
+    path: Assets/01.Scene/Main/Movie.unity
+    guid: 782a830639be3ed44a96e984ea77a645
   - enabled: 1
     path: Assets/01.Scene/Test/photon test.unity
     guid: f1bf37e4abc70424db3c7036056c9e13
