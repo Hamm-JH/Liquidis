@@ -30,8 +30,7 @@ public class VoiceControl : MonoBehaviour
     {
         GameObject player;
 
-        photonVoiceNetwork.ConnectAndJoinRoom();
-
+       
 
         player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
         
