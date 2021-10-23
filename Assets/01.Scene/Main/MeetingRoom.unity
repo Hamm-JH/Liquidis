@@ -967,7 +967,7 @@ MonoBehaviour:
   ShowSettings: 1
   MinimalTimeScaleToDispatchInFixedUpdate: -1
   AutoCreateSpeakerIfNotFound: 1
-  AutoConnectAndJoin: 1
+  AutoConnectAndJoin: 0
   AutoLeaveAndDisconnect: 1
   WorkInOfflineMode: 0
   usePunAppSettings: 1

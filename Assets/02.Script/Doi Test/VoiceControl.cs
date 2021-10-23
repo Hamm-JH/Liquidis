@@ -29,8 +29,12 @@ public class VoiceControl : MonoBehaviour
     public void GenPlayerSpeaker()
     {
         GameObject player;
-        player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
+
         photonVoiceNetwork.ConnectAndJoinRoom();
+
+
+        player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
+        
         photonVoiceNetwork.InitRecorder(photonVoiceNetwork.GetComponent<Recorder>());
 
            playerClip = player.GetComponentInChildren<AudioSource>().clip;
