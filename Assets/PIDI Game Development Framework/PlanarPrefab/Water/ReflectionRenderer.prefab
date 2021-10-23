@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3013357644386700857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3013357644386700859}
+  - component: {fileID: 3013357644386700856}
+  m_Layer: 4
+  m_Name: ReflectionRenderer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3013357644386700859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013357644386700857}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.04, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3013357644386700856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3013357644386700857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dde72cd477072284786978889ffce393, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultReflectorMesh: {fileID: 4300002, guid: 7895f1f943551db4e9784958a7e88a58, type: 3}
+  defaultReflectorMaterial: {fileID: 2100000, guid: fbfc4efe23a9b0046a787d829353352b, type: 2}
+  showPreviewReflector: 0
+  _settings:
+    nearClipPlane: 0.05
+    farClipPlane: 100
+    reflectLayers:
+      serializedVersion: 2
+      m_Bits: 495
+    customLODBias: 1
+    maxLODLevel: 0
+    renderShadows: 1
+    usePostFX: 0
+    postFXVolumeMask:
+      serializedVersion: 2
+      m_Bits: 0
+    accurateMatrix: 1
+    camerasTag: 
+    screenBasedResolution: 1
+    explicitResolution: {x: 1024, y: 1024}
+    outputResolutionMultiplier: 1
+    reflectionFramerate: 0
+    useMipMaps: 0
+    useAntialiasing: 0
+    clearToColor: 0
+    backgroundColor: {r: 0, g: 0, b: 1, a: 1}
+    renderDepth: 0
+    forceHDR: 0
+    updateOnCastOnly: 1
+    framerateByDistance: 1
+    framerateThreshold: 20
+    customSkybox: {fileID: 0}
+  externalReflectionTex: {fileID: 0}
+  externalReflectionDepth: {fileID: 0}
