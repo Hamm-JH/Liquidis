@@ -801,20 +801,25 @@ public class MappingParameter : MonoBehaviour
     public void GetGeoValueFromLerp(float _value)
     {
         //geoValue = _value;
-        if (geometryType == 0)
+
+        if(currentScene == scene.SELECT)
         {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-            if(currentScene == scene.SELECT)
+            if (geometryType == 0)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
                 stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
-        }
-        else if (geometryType == 1)
-        {
-            previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-            if (currentScene == scene.SELECT)
+
+            }
+            else if (geometryType == 1)
+            {
+                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
                 stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
+
+            }
         }
+       
     }
   
    

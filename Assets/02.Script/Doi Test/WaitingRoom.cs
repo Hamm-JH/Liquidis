@@ -653,12 +653,12 @@ public class WaitingRoom : MonoBehaviour
                     // geo
                     if (i == 0)
                     {
-                        MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
+                        //MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
                     }
                     else if (i == 1) // color
                     {
-                        MappingParameter.instance.SpeedColorSetColor(concentrationValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
+                        //MappingParameter.instance.SpeedColorSetColor(concentrationValue);
+                        //MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
 
 
                     }
@@ -688,13 +688,13 @@ public class WaitingRoom : MonoBehaviour
                     // geo
                     if (i == 0)
                     {
-                        MappingParameter.instance.GetGeoValueFromLerp(excitementValue);
+                        //MappingParameter.instance.GetGeoValueFromLerp(excitementValue);
                     }
                     else if (i == 1) // color
                     {
                         //MappingParameter.instance.SpeedColorSetColor(excitementValue);
                         //MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
-                        MappingParameter.instance.LerpColorWaitingCube(excitementValue);
+                        //MappingParameter.instance.LerpColorWaitingCube(excitementValue);
 
 
                     }
@@ -722,13 +722,13 @@ public class WaitingRoom : MonoBehaviour
                     // geo
                     if (i == 0)
                     {
-                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+                        //MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
                     }
                     else if (i == 1) // color
                     {
                         //MappingParameter.instance.SpeedColorSetColor(excitementValue);
                         //MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
-                        MappingParameter.instance.LerpColorWaitingCube(positiveValue);
+                        //MappingParameter.instance.LerpColorWaitingCube(positiveValue);
 
 
                     }
@@ -747,7 +747,7 @@ public class WaitingRoom : MonoBehaviour
             if (vfxOn)
             {
                 sympathyValue = api.Value;
-                MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
+                //MappingParameter.instance.SetVFXValueMeeting(sympathyValue);
             }
            
         }
