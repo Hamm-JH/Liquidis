@@ -119,6 +119,7 @@ namespace Manager
 		private LinkDataValue attention;
 		private LinkDataValue relaxation;
 
+		[Header("집중 값")]
 		[SerializeField] private double concentration;   // 집중
 		[SerializeField] private double excitement;		// 흥분
 		[SerializeField] private double positiveness;	// 긍부정
@@ -135,6 +136,7 @@ namespace Manager
 		private LinkDataValue[] beta;
 		private LinkDataValue[] gamma;
 
+		[Header("Debug get eeg")]
 		[SerializeField] private double _delta;
 		[SerializeField] private double _theta;
 		[SerializeField] private double _alpha;
