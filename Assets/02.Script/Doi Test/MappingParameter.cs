@@ -625,6 +625,14 @@ public class MappingParameter : MonoBehaviour
         vfxObject.SetInt("AnimationCurve", 1);
 
         meetingtHead.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
+
+        geoPreviewMaterials[1].SetFloat("_3dNoiseSizeA", 0.12f);
+        geoPreviewMaterials[1].SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
+        geoPreviewMaterials[1].SetFloat("_NoiseScaleC", 1f);
+        geoPreviewMaterials[1].SetFloat("_3dNoiseSizeC", 10f);
+        geoPreviewMaterials[1].SetVector("_Tiling", new Vector4(-0.01f, -0.01f, 0, 0));
+        
+
         LerpColorMeetingFace(colorValue);
 
     }
@@ -815,11 +823,11 @@ public class MappingParameter : MonoBehaviour
             {
                 previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
                 stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeA", 0.12f);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScaleC", 1f);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeC", 10f);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_Tiling", new Vector4(-0.01f,-0.01f, 0,0));
+                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeA", 0.12f);
+                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
+                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScaleC", 1f);
+                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeC", 10f);
+                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_Tiling", new Vector4(-0.01f,-0.01f, 0,0));
                
 
 
