@@ -815,6 +815,12 @@ public class MappingParameter : MonoBehaviour
             {
                 previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
                 stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeA", 0.12f);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScaleC", 1f);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeC", 10f);
+                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_Tiling", new Vector4(-0.01f,-0.01f, 0,0));
+               
 
 
             }
