@@ -15,11 +15,11 @@ public class TimeScale : MonoBehaviour
 
     void Update()
     {
-                Time.timeScale = 10f;
+                Time.timeScale = 1f;
          
             // Adjust fixed delta time according to timescale
             // The fixed delta time will now be 0.02 real-time seconds per frame
             Time.fixedDeltaTime = this.fixedDeltaTime * Time.timeScale;
-        }
+        
     }
 }

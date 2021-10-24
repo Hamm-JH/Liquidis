@@ -116,13 +116,22 @@ namespace AkilliMum.SRP.Mirror
         public OptionManager _optionManager;
 
 
-        // ReSharper disable once UnusedMember.Global
-        protected virtual void OnEnable()
-        {
-            //Debug.Log("Base on enable");
+        //// ReSharper disable once UnusedMember.Global
+        //protected virtual void OnEnable()
+        //{
+        //    //Debug.Log("Base on enable");
 
+        //    InitializeMirror();
+        //}
+
+        private void Start()
+        {
             InitializeMirror();
+
+            Invoke(nameof(StartDelay), 1f);
         }
+
+        void StartDelay() => InitializeMirror();
 
         public void InitializeMirror()
         {
