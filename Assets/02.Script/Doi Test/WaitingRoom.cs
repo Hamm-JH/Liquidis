@@ -304,8 +304,8 @@ public class WaitingRoom : MonoBehaviour
     IEnumerator LoadMeetingRoom()
     {
         yield return new WaitForSeconds(2f);
-        //SceneManager.LoadScene("MeetingRoom");
-        PhotonNetwork.LoadLevel("MeetingRoom");
+        SceneManager.LoadScene("MeetingRoom");
+        //PhotonNetwork.LoadLevel("MeetingRoom");
     }
 
   

@@ -34,9 +34,13 @@ public class VoiceControl : MonoBehaviour
 
         player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
         
-        photonVoiceNetwork.InitRecorder(photonVoiceNetwork.GetComponent<Recorder>());
+        if(photonVoiceNetwork.GetComponent<Recorder>() != null)
+        {
+            photonVoiceNetwork.InitRecorder(photonVoiceNetwork.GetComponent<Recorder>());
 
-           playerClip = player.GetComponentInChildren<AudioSource>().clip;
+        }
+
+        playerClip = player.GetComponentInChildren<AudioSource>().clip;
         playerSource.clip = playerClip;
     }
 
