@@ -1165,6 +1165,7 @@ GameObject:
   - component: {fileID: 5694644557633659310}
   - component: {fileID: 5694644557633659304}
   - component: {fileID: 5694644557933815905}
+  - component: {fileID: 442882072974090372}
   m_Layer: 0
   m_Name: SelectBox_New_WaitingRoom
   m_TagString: Untagged
@@ -1210,6 +1211,7 @@ MonoBehaviour:
   cubeObj: {fileID: 4089781186117437174}
   currentEmotion: 1
   mappingParameter: {fileID: 0}
+  emotion_images: []
 --- !u!114 &5694644557633659304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1247,6 +1249,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &442882072974090372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4089781186117437174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2628511c020b3d048a2626f698d9bf8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shake: {fileID: 8300000, guid: 3e0b7eaf514e81b41b20c98792e62746, type: 3}
+  shrinkBlack: {fileID: 8300000, guid: 8debda7f38850db44a7f9d73dff7dc02, type: 3}
+  light:
+  - {fileID: 8300000, guid: 638cae0f87477134dbed2181cfd13f56, type: 3}
+  - {fileID: 8300000, guid: 0d0c2b09220de874ba08492c06c23881, type: 3}
+  - {fileID: 8300000, guid: 288f50fd5d849cb4697511fc02c0bf7b, type: 3}
+  - {fileID: 8300000, guid: 7c18baa07ae244145b3204138d8a18c3, type: 3}
+  - {fileID: 8300000, guid: 4106ec4f2b00adc4fbfc4fa764b24589, type: 3}
+  face: {fileID: 8300000, guid: 0ef340deaa897c246bd3d1047fe0e91f, type: 3}
+  waitingSequenceSource: {fileID: 0}
+  waitingSequenceSource_sub: {fileID: 0}
 --- !u!1001 &4089781184125155223
 PrefabInstance:
   m_ObjectHideFlags: 0
