@@ -10,6 +10,8 @@ public class WaitingSequneceMusicQue : MonoBehaviour
     public AudioClip[] light;
     public AudioClip face;
 
+    int lightCount = 0;
+
     public AudioSource waitingSequenceSource;
     public AudioSource waitingSequenceSource_sub;
 
@@ -32,36 +34,49 @@ public class WaitingSequneceMusicQue : MonoBehaviour
         waitingSequenceSource_sub.clip = shrinkBlack;
         waitingSequenceSource_sub.Play();
     }
+    
 
-    public void Light1Play()
-    {
-        waitingSequenceSource.clip = light[0];
-        waitingSequenceSource.Play();
-    }
+    public void LightPlay() {
 
-    public void Light2Play()
-    {
-        waitingSequenceSource.clip = light[1];
-        waitingSequenceSource.Play();
-    }
+        if(lightCount <= 4)
+        {
+            waitingSequenceSource.clip = light[lightCount];
+            waitingSequenceSource.Play();
+        }
+       
 
-    public void Light3Play()
-    {
-        waitingSequenceSource.clip = light[2];
-        waitingSequenceSource.Play();
+        if(lightCount < 5)
+            lightCount++;
     }
+    //public void Light1Play()
+    //{
+    //    waitingSequenceSource.clip = light[0];
+    //    waitingSequenceSource.Play();
+    //}
 
-    public void Light4Play()
-    {
-        waitingSequenceSource.clip = light[3];
-        waitingSequenceSource.Play();
-    }
+    //public void Light2Play()
+    //{
+    //    waitingSequenceSource.clip = light[1];
+    //    waitingSequenceSource.Play();
+    //}
 
-    public void Light5Play()
-    {
-        waitingSequenceSource.clip = light[4];
-        waitingSequenceSource.Play();
-    }
+    //public void Light3Play()
+    //{
+    //    waitingSequenceSource.clip = light[2];
+    //    waitingSequenceSource.Play();
+    //}
+
+    //public void Light4Play()
+    //{
+    //    waitingSequenceSource.clip = light[3];
+    //    waitingSequenceSource.Play();
+    //}
+
+    //public void Light5Play()
+    //{
+    //    waitingSequenceSource.clip = light[4];
+    //    waitingSequenceSource.Play();
+    //}
 
     public void FacePlay()
     {
