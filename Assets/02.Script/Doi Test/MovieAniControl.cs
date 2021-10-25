@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-
+using UnityEngine.SceneManagement;
 
 public class MovieAniControl : MonoBehaviour
 {
@@ -332,5 +332,10 @@ public class MovieAniControl : MonoBehaviour
     public void SetJYVfxLow()
     {
         jyVFX.SetFloat("SpawnRate", vfxLow);
+    }
+
+    public void MoveIntro()
+    {
+        SceneManager.LoadScene("01_Intro");
     }
 }
