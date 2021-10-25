@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.liquidis.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "H:\\Github for I\\Liquidis\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\doido\\Documents\\GitHub\\Liquidis\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "Liquidis [Testing]"
