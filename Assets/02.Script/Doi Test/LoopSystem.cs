@@ -40,9 +40,11 @@ public class LoopSystem : MonoBehaviour
         duration = targetClip.length;
 
         currentState = loopState.loopA;
+
+        sourceA.clip = targetClip;
+        sourceB.clip = targetClip;
+
         
-
-
     }
 
 
@@ -50,9 +52,11 @@ public class LoopSystem : MonoBehaviour
     {
         if (startPlay)
         {
-            if (curTime < duration - 1)
+            
+            if (curTime < duration - 1f)
             {
                 curTime += Time.deltaTime;
+            
             }
             else
             {
@@ -80,12 +84,15 @@ public class LoopSystem : MonoBehaviour
                 StartCoroutine("PauseLoop", sourceB);
                 sourceA.clip = targetClip;
                 sourceA.outputAudioMixerGroup = groupA;
+                Debug.Log("play loop A");
                 sourceA.Play();
                 break;
             case loopState.loopB:
                 StartCoroutine("PauseLoop", sourceA);
                 sourceB.clip = targetClip;
                 sourceB.outputAudioMixerGroup = groupB;
+                Debug.Log("play loop B");
+
                 sourceB.Play();
 
                 break;
@@ -99,19 +106,25 @@ public class LoopSystem : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         target.Pause();
+       
+    }
+
+    IEnumerator StopLoop(AudioSource target)
+    {
+        yield return new WaitForSeconds(1f);
+        target.Pause();
         startPlay = false;
         curTime = 0f;
     }
-
     public void StopLooping()
     {
         switch (currentState)
         {
             case loopState.loopA:
-                StartCoroutine("PauseLoop", sourceA);
+                StartCoroutine("StopLoop", sourceA);
                 break;
             case loopState.loopB:
-                StartCoroutine("PauseLoop", sourceB);
+                StartCoroutine("StopLoop", sourceB);
                 break;
 
         }

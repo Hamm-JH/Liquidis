@@ -18,6 +18,8 @@ public class IntroManager : MonoBehaviour
         }
     }
 
+    public LoopSystem introSound;
+
     private void Awake()
     {
         if (_introManager == null)
@@ -32,7 +34,7 @@ public class IntroManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        introSound.StartLooping();
     }
 
     private void Update()
