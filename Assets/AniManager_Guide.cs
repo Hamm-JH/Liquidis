@@ -13,6 +13,7 @@ public class AniManager_Guide : MonoBehaviour
     float targetTime = 3f;
     float zTarget = 62f;
 
+    public LoopSystem guideSound;
 
     // Start is called before the first frame update
     //void Awake()
@@ -20,11 +21,16 @@ public class AniManager_Guide : MonoBehaviour
     //    StartAni();
 
     //}
+    private void Start()
+    {
+        guideSound.StartLooping();
 
+    }
     public void StartAni()
     {
         guideAni.SetTrigger("start");
         camera_rig.SetTrigger("SceneStart");
+
     }
 
     private void Update()
