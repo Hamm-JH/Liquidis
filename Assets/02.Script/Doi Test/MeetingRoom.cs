@@ -65,6 +65,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 	bool vfxOn = true;
 
+	public LoopSystem meetingSound;
+
 
 	private string roomCode = "ABCD";
 
@@ -147,6 +149,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		//}
 
 		voiceControl.GenPlayerSpeaker();
+
+		meetingSound.StartLooping();
 
 	}
 
