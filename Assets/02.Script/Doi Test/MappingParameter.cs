@@ -20,6 +20,9 @@ public class MappingParameter : MonoBehaviour
                 return _mappingParameter;
         }
     }
+
+    
+
     [Header("object")]
     public GameObject previewCube;
     public Material refMaterial;
@@ -91,11 +94,24 @@ public class MappingParameter : MonoBehaviour
     public Material[] stencilStencilMaterials;
     public Material[] stencilSpeedMaterials;
 
+
     public Material color_preview_origin;
     public Material color_stencil_origin;
     public Material colorStencil;
     public Material colorPreview;
     public Material colorCancelDefault;
+
+    //public Material Color_preview_origin
+    //{
+    //    get
+    //    {
+    //        if(color_preview_origin == null)
+    //        {
+    //            color_preview_origin = Resources.Load<Material>("target");
+    //        }
+    //        return color_preview_origin;
+    //    }
+    //}
 
     public GameObject[] stencilWindows;
 

@@ -20,7 +20,7 @@ public class WaitingSequneceMusicQue : MonoBehaviour
         
     }
 
-    
+   
     public void ShakePlay()
     {
         waitingSequenceSource.clip = shake;

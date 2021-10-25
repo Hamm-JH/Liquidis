@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using UnityEngine.SceneManagement;
 
 public class MeetingRoom : MonoBehaviourPunCallbacks
 {
@@ -784,5 +785,14 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		yield return new WaitForSeconds(loadIntroTime);//카운터헤드바이>인트로씬로드
 
 		// 인트로씬 로드
+
+		PhotonNetwork.LeaveRoom();
+
+		if(MappingParameter.instance != null)
+        {
+			Destroy(MappingParameter.instance.gameObject);
+        }
+
+		SceneManager.LoadScene("01_Intro");
 	}
 }
