@@ -10,6 +10,8 @@ public class MeetingSequenceMusicQue : MonoBehaviour
 
     public AudioClip shakebox_meeting;
     public AudioClip face_wakeup;
+    public AudioClip face_load;
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,5 +29,11 @@ public class MeetingSequenceMusicQue : MonoBehaviour
     {
         meetingAudioSource_sub.clip = face_wakeup;
         meetingAudioSource_sub.Play();
+    }
+
+    public void FaceLoad()
+    {
+        meetingAudioSource.clip = face_load;
+        meetingAudioSource.Play();
     }
 }
