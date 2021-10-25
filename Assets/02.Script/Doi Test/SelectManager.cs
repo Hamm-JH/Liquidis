@@ -19,6 +19,8 @@ public class SelectManager : MonoBehaviour
 
     [Header("Animator")]
     public Animator lightgroup_ani;
+    public LoopSystem selectMusic;
+
 
     private static SelectManager _selectManager;
     public static SelectManager instance
@@ -74,6 +76,9 @@ public class SelectManager : MonoBehaviour
 
         // animation
         StartSelectAniSequence();
+
+        // music
+        selectMusic.StartLooping();
     }
 
 

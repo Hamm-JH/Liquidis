@@ -22,6 +22,8 @@ public class WaitingRoom : MonoBehaviour
     public GameObject[] excitement_subTexts;
     public GameObject[] positive_subTexts;
 
+    public LoopSystem waitingSound;
+
 
 
     [Header("Obj")]
@@ -36,6 +38,8 @@ public class WaitingRoom : MonoBehaviour
    
     public Animator light_group_ani;
     public Animator counterHead_ani;
+
+    public AudioSource waitingSequneceMusic;
 
     bool vfxOn = true;
 
@@ -90,8 +94,12 @@ public class WaitingRoom : MonoBehaviour
         //StartCoroutine(InitialMappingParameters());
         InitialMappingParameters();
 
+        // music
+        waitingSound.StartLooping();
+
         light_group_ani.SetTrigger("SceneStart");
         SliderAni();
+
     }
 
     void InitialMappingParameters()
@@ -244,6 +252,8 @@ public class WaitingRoom : MonoBehaviour
         //StartCoroutine(WaitingAni());
         Debug.Log("ani start");
         selectBox.SetTrigger("Start");
+        // music
+        waitingSequneceMusic.Play();
         StartCoroutine(WaitingAniSequenceAfterShake());
         
         StartCoroutine(SelectBoxFalseSequence());
