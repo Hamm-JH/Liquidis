@@ -26,6 +26,14 @@ public class MovieAniControl : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            BlockAPlay();
+
+        }
+    }
     public void BlockAPlay()
     {
         ejHead.clip = blockA[EJ];
