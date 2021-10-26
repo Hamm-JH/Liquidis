@@ -96,4 +96,21 @@ public class RotateCube : MonoBehaviour
             }
 		}
 	}
+
+    //public void LeftButton()
+    //{
+    //    if(MappingParameter.instance.currentMatchEmotion < 2)
+    //    {
+    //        OnRotate(0);
+    //    }
+    //}
+
+    //public void RightButton()
+    //{
+    //    if (MappingParameter.instance.currentMatchEmotion > 1)
+    //    {
+    //        OnRotate(1);
+
+    //    }
+    //}
 }
