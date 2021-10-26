@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class SelectBoxAni : MonoBehaviour
 {
-    public Animator lightGroup_ani;
+    //public Animator lightGroup_ani;
+    //public Animator guide_ani;
     public int currentOpen = 0;
     bool[] aniOpen;
-    bool isAllCheck = false;
+    //bool isAllCheck = false;
 
-    public GameObject mainCanvas;
-    bool isCanvasOn = false;
+    //public GameObject mainCanvas;
+    //bool isCanvasOn = false;
 
     private void Start()
     {
         
-
         if(MappingParameter.instance.currentScene == MappingParameter.scene.SELECT)
         {
             aniOpen = new bool[3];
@@ -27,58 +27,66 @@ public class SelectBoxAni : MonoBehaviour
         aniOpen[0] = true;
         currentOpen = 0;
 
-        //GetComponent<Animator>().SetTrigger("GuideStart");
         GetComponent<Animator>().SetTrigger("1FadeIn");
-        Debug.Log("fadeStart?");
 
     }
 
     public void LeftButton()
     {
-        if (!isAllCheck)
-        {
-            if (CheckAllTrue())
-            {
-                AllFadeOut();
-                isAllCheck = true;
-            }
-        }
-        else
-        {
-            return;
-        }
+        //if (!isAllCheck)
+        //{
+        //    if (CheckAllTrue())
+        //    {
+        //        AllFadeOut();
+        //        isAllCheck = true;
+        //    }
+        //}
+        //else
+        //{
+        //    return;
+        //}
         
-            if (currentOpen < 2)//현재 창위치가 2보다 작으면
+            if (currentOpen < 4)//현재 창위치가 2보다 작으면
             {
 
                 currentOpen += 1;//좌버튼 누를 때마다 숫자가 늘어난다.
-            Debug.Log("currentOpen:" + currentOpen);
+            //Debug.Log("currentOpen:" + currentOpen);
             if (!aniOpen[currentOpen]) //현재 숫자창이 참이 아니면
                 aniOpen[currentOpen] = true; //현재 숫자창을 참으로 한다.
 
             switch (currentOpen)
                 {
                     case 1:
-                        Debug.Log("ani trigger : " + currentOpen);
+                        //Debug.Log("ani trigger : " + currentOpen);
                     GetComponent<Animator>().SetTrigger("1FadeOut");
                     GetComponent<Animator>().SetTrigger("2FadeIn");
 
-                    if (!isCanvasOn)
-                    {
-                        mainCanvas.SetActive(true);
-                        isCanvasOn = true;
-                    }
+                    //if (!isCanvasOn)
+                    //{
+                    //    mainCanvas.SetActive(true);
+                    //    isCanvasOn = true;
+                    //}
 
-                   
-                        
                         break;
                     case 2:
-                        Debug.Log("ani trigger : " + currentOpen);
+                        //Debug.Log("ani trigger : " + currentOpen);
 
                         GetComponent<Animator>().SetTrigger("2FadeOut");
                         GetComponent<Animator>().SetTrigger("3FadeIn");
                         break;
-                }
+                case 3:
+                    //Debug.Log("ani trigger : " + currentOpen);
+
+                    GetComponent<Animator>().SetTrigger("3FadeOut");
+                    GetComponent<Animator>().SetTrigger("4FadeIn");
+                    break;
+                case 4:
+                    //Debug.Log("ani trigger : " + currentOpen);
+
+                    GetComponent<Animator>().SetTrigger("4FadeOut");
+                    GetComponent<Animator>().SetTrigger("5FadeIn");
+                    break;
+            }
 
             }
         
@@ -89,41 +97,47 @@ public class SelectBoxAni : MonoBehaviour
     public void RightButton()
     {
 
-        if (!isAllCheck)
-        {
-            if (CheckAllTrue())
-            {
-                AllFadeOut();
-                isAllCheck = true;
-            }
-        }
-        else
-            return;
+        //if (!isAllCheck)
+        //{
+        //    if (CheckAllTrue())
+        //    {
+        //        AllFadeOut();
+        //        isAllCheck = true;
+        //    }
+        //}
+        //else
+        //    return;
         
             if (currentOpen > 0)
             {
                 currentOpen -= 1;
-            Debug.Log("currentOpen:" + currentOpen);
+
+
             if (!aniOpen[currentOpen])
                 aniOpen[currentOpen] = true;
 
             switch (currentOpen)
                 {
                     case 0:
-                        Debug.Log("Right ani trigger : " + currentOpen);
                     GetComponent<Animator>().SetTrigger("2FadeOut");
                     GetComponent<Animator>().SetTrigger("1FadeIn");
-                   
                     break;
 
                     case 1:
-                        Debug.Log("Rignt ani trigger : " + currentOpen);
-
-                       
-                        GetComponent<Animator>().SetTrigger("2FadeIn");
+                    GetComponent<Animator>().SetTrigger("2FadeIn");
                     GetComponent<Animator>().SetTrigger("3FadeOut");
                     break;
-                }
+
+                    case 2:
+                    GetComponent<Animator>().SetTrigger("3FadeIn");
+                    GetComponent<Animator>().SetTrigger("4FadeOut");
+                    break;
+
+                    case 3:
+                    GetComponent<Animator>().SetTrigger("4FadeIn");
+                    GetComponent<Animator>().SetTrigger("5FadeOut");
+                    break;
+            }
 
             }
         
@@ -154,7 +168,7 @@ public class SelectBoxAni : MonoBehaviour
             }
         }
 
-        if (count == 3)
+        if (count == 5)
         {
             check = true;
         }
@@ -167,12 +181,11 @@ public class SelectBoxAni : MonoBehaviour
         return check;
     }
 
-    void AllFadeOut()
-    {
-        Debug.Log("all read");
-        GetComponent<Animator>().SetTrigger("1FadeOut");
-        GetComponent<Animator>().SetTrigger("2FadeOut");
-        GetComponent<Animator>().SetTrigger("3FadeOut");
+    //void AllFadeOut()
+    //{
+    //    GetComponent<Animator>().SetTrigger("1FadeOut");
+    //    GetComponent<Animator>().SetTrigger("2FadeOut");
+    //    GetComponent<Animator>().SetTrigger("3FadeOut");
 
-    }
+    //}
 }
