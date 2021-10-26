@@ -18,7 +18,7 @@ public class SelectBoxAni : MonoBehaviour
         
         if(MappingParameter.instance.currentScene == MappingParameter.scene.SELECT)
         {
-            aniOpen = new bool[3];
+            aniOpen = new bool[5];
             HelpUIStart();
         }
     }
@@ -45,19 +45,22 @@ public class SelectBoxAni : MonoBehaviour
         //{
         //    return;
         //}
-        
-            if (currentOpen < 4)//현재 창위치가 2보다 작으면
+            Debug.Log("button left:");
+
+
+
+        if (currentOpen < 4)//현재 창위치가 2보다 작으면
             {
 
                 currentOpen += 1;//좌버튼 누를 때마다 숫자가 늘어난다.
-            //Debug.Log("currentOpen:" + currentOpen);
+            Debug.Log("currentOpen:" + currentOpen);
             if (!aniOpen[currentOpen]) //현재 숫자창이 참이 아니면
                 aniOpen[currentOpen] = true; //현재 숫자창을 참으로 한다.
 
             switch (currentOpen)
                 {
                     case 1:
-                        //Debug.Log("ani trigger : " + currentOpen);
+                    Debug.Log("ani trigger : " + currentOpen); GetComponent<Animator>();
                     GetComponent<Animator>().SetTrigger("1FadeOut");
                     GetComponent<Animator>().SetTrigger("2FadeIn");
 
@@ -69,19 +72,19 @@ public class SelectBoxAni : MonoBehaviour
 
                         break;
                     case 2:
-                        //Debug.Log("ani trigger : " + currentOpen);
+                    Debug.Log("ani trigger : " + currentOpen);
 
-                        GetComponent<Animator>().SetTrigger("2FadeOut");
+                    GetComponent<Animator>().SetTrigger("2FadeOut");
                         GetComponent<Animator>().SetTrigger("3FadeIn");
                         break;
                 case 3:
-                    //Debug.Log("ani trigger : " + currentOpen);
+                    Debug.Log("ani trigger : " + currentOpen);
 
                     GetComponent<Animator>().SetTrigger("3FadeOut");
                     GetComponent<Animator>().SetTrigger("4FadeIn");
                     break;
                 case 4:
-                    //Debug.Log("ani trigger : " + currentOpen);
+                    Debug.Log("ani trigger : " + currentOpen);
 
                     GetComponent<Animator>().SetTrigger("4FadeOut");
                     GetComponent<Animator>().SetTrigger("5FadeIn");
