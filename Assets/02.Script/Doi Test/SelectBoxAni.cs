@@ -49,7 +49,7 @@ public class SelectBoxAni : MonoBehaviour
 
 
 
-        if (currentOpen < 4)//현재 창위치가 2보다 작으면
+        if (currentOpen < 5)//현재 창위치가 2보다 작으면
             {
 
                 currentOpen += 1;//좌버튼 누를 때마다 숫자가 늘어난다.
@@ -88,6 +88,11 @@ public class SelectBoxAni : MonoBehaviour
 
                     GetComponent<Animator>().SetTrigger("4FadeOut");
                     GetComponent<Animator>().SetTrigger("5FadeIn");
+                    break;
+                case 5:
+                    Debug.Log("ani trigger : " + currentOpen);
+
+                    GetComponent<Animator>().SetTrigger("ButtonOff");
                     break;
             }
 
