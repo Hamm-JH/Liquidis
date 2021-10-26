@@ -26,6 +26,9 @@ public class LoopSystem : MonoBehaviour
     private float duration = 0f;
     private bool startPlay = false;
 
+    public AudioMixer mainMixer;
+    public string targetVolumeParameter = "";
+
     public enum loopState
     {
         loopA,
@@ -44,7 +47,10 @@ public class LoopSystem : MonoBehaviour
         sourceA.clip = targetClip;
         sourceB.clip = targetClip;
 
-        
+        InitializeVolume();
+
+
+
     }
 
 
@@ -72,7 +78,7 @@ public class LoopSystem : MonoBehaviour
             }
         }
 
-
+       
 
     }
 
@@ -144,6 +150,36 @@ public class LoopSystem : MonoBehaviour
 
     }
 
+    void InitializeVolume()
+    {
+        
+        float targetValue = 1f;
+
+        targetValue = Mathf.Log10(targetValue) * 20;
+        mainMixer.SetFloat(targetVolumeParameter, targetValue);
+    }
+    public void MusicFadeOut()
+    {
+        StartCoroutine(FadeVolume());
+    }
+
+
+    IEnumerator FadeVolume()
+    {
+        float value = 1f;
+        float targetValue = 0f;
+
+        while(value > 0f)
+        {
+            targetValue = Mathf.Log10(value) * 20;
+            mainMixer.SetFloat(targetVolumeParameter, targetValue);
+
+            value -= 0.003f;
+            //Debug.Log("volume : " + value);
+            yield return null;
+        }
+       
+    }
     //public void ChangeClip(targetClipState _target, AudioClip _targetClip)
     //{
     //    switch (_target)
@@ -152,7 +188,7 @@ public class LoopSystem : MonoBehaviour
     //            currentClip = targetClipState.HEALTHY_A;
     //            duration = HEALTHY_A;
     //            break;
-           
+
     //    }
 
     //    targetClip = _targetClip;

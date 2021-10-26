@@ -799,6 +799,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 			Destroy(MappingParameter.instance.gameObject);
         }
 
+		meetingSound.MusicFadeOut();
+		yield return new WaitForSeconds(2f);
 		SceneManager.LoadScene("01_Intro");
 	}
 }

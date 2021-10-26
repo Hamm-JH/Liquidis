@@ -118,6 +118,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // initial mapping parameters
         MappingParameter.instance.RemoveWaitingRoomParameters();
 
+        // music fade out
+        SelectManager.instance.selectMusic.MusicFadeOut();
 
         // load scene
           PhotonNetwork.LoadLevel("04_Play_WaitingRoom");

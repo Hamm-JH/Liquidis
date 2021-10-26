@@ -23,6 +23,7 @@ public class GuidePlayerMove : MonoBehaviour
         Movie
     }
     public nextScene targetScene;
+    public LoopSystem guideSound;
 
     // Update is called once per frame
     void Update()
@@ -83,11 +84,15 @@ public class GuidePlayerMove : MonoBehaviour
 
         if(targetScene == nextScene.Select)
         {
+            guideSound.MusicFadeOut();
+            yield return new WaitForSeconds(2f);
             SceneManager.LoadScene("03_Play_Select");
 
         }
         if(targetScene == nextScene.Movie)
         {
+            guideSound.MusicFadeOut();
+            yield return new WaitForSeconds(2f);
             SceneManager.LoadScene("Movie");
 
         }

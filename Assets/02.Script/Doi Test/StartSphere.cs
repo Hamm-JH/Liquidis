@@ -115,12 +115,14 @@ public class StartSphere : MonoBehaviour
             {
                 if (transform.position.x >= playXpos)
                 {
-                    SceneManager.LoadScene("02_Play_Guide");
+                    IntroManager.instance.introSound.MusicFadeOut();
+                    StartCoroutine(LoadSelectGuide());
 
                 }
                 else if(transform.position.x <= movieXpos)
                 {
-                    SceneManager.LoadScene("02_Movie_Guide");
+                    IntroManager.instance.introSound.MusicFadeOut();
+                    StartCoroutine(LoadMovieGuide());
 
                 }
 
@@ -136,6 +138,19 @@ public class StartSphere : MonoBehaviour
         }
 
 
-    }
+       
 
+    }
+    IEnumerator LoadSelectGuide()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("02_Play_Guide");
+
+    }
+    IEnumerator LoadMovieGuide()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("02_Movie_Guide");
+
+    }
 }
