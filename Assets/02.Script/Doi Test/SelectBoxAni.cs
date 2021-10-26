@@ -110,8 +110,9 @@ public class SelectBoxAni : MonoBehaviour
         //}
         //else
         //    return;
-        
-            if (currentOpen > 0)
+            Debug.Log("button right:");
+
+        if (currentOpen > 0)
             {
                 currentOpen -= 1;
 
