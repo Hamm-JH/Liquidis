@@ -18,7 +18,7 @@ public class SelectBoxAni : MonoBehaviour
         
         if(MappingParameter.instance.currentScene == MappingParameter.scene.SELECT)
         {
-            aniOpen = new bool[5];
+            aniOpen = new bool[6];
             HelpUIStart();
         }
     }
