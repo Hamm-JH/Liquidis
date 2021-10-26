@@ -17,7 +17,7 @@ public class TimerBoxAni : MonoBehaviour
     public GameObject right_button;
     public Animator timerCanvas_ani;
     public Animator timerbox_ani;
-    bool isFirstClicked = false;
+    public int currentOpen = 0;
     public float afterButtonOff_time = 1f;
 
     // 다 꺼지고 나면 TimerRotateLoop(Set trigger: TimerLoop) : 대화동안 진행루프.
@@ -28,17 +28,23 @@ public class TimerBoxAni : MonoBehaviour
 
     public void RightButtonClicked()
     {
-        if (!isFirstClicked)
+        switch (currentOpen)
         {
-            timerCanvas_ani.SetTrigger("2FadeIn");
-            isFirstClicked = true;
+            case 0:
+                timerCanvas_ani.SetTrigger("2FadeIn");
+                currentOpen += 1;
+                break;
+            case 1:
+                timerCanvas_ani.SetTrigger("3FadeIn");
+                currentOpen += 1;
+                break;
+            case 2:
+                timerCanvas_ani.SetTrigger("ButtonOff");
+                StartCoroutine(AfterButtonOff());
+                break;
+           
         }
-        else
-        {
-            //right_button.GetComponent<Button>().interactable = false;
-            timerCanvas_ani.SetTrigger("ButtonOff");
-            StartCoroutine(AfterButtonOff());
-        }
+      
     }
 
     IEnumerator AfterButtonOff()

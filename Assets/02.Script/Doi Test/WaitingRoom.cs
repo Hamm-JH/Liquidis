@@ -120,7 +120,7 @@ public class WaitingRoom : MonoBehaviour
         {
             slider_canvas.gameObject.SetActive(true);
             slider_canvas.SetTrigger("SceneStart");
-            StartCoroutine(SliderGuide());
+            //StartCoroutine(SliderGuide());
 
         }
         // debug enabled
@@ -130,12 +130,12 @@ public class WaitingRoom : MonoBehaviour
 
     }
 
-    IEnumerator SliderGuide()
-    {
-        yield return new WaitForSeconds(afterSliderFadeIn);
-        slider_canvas.SetTrigger("GuideStart");
+    //IEnumerator SliderGuide()
+    //{
+    //    yield return new WaitForSeconds(afterSliderFadeIn);
+    //    slider_canvas.SetTrigger("GuideStart");
 
-    }
+    //}
 
 
 
