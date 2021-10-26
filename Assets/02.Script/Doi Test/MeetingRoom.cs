@@ -131,6 +131,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		// ani sequence
 		StartCoroutine(PlayerLightSequence());
+		meetingSound.StartLooping();
 
 		StartCoroutine(InitBIStatus());
 
@@ -150,7 +151,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		voiceControl.GenPlayerSpeaker();
 
-		meetingSound.StartLooping();
 
 	}
 
@@ -738,6 +738,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	void EndingAniStart()
 	{
 		Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Contents;
+
+		voiceControl.EndTransmition();
 
 		Debug.Log("ending start");
 		StartCoroutine(EndingAniSequence());

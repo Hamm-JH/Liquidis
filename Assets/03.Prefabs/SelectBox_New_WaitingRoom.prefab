@@ -1261,15 +1261,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2628511c020b3d048a2626f698d9bf8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shake: {fileID: 8300000, guid: 3e0b7eaf514e81b41b20c98792e62746, type: 3}
-  shrinkBlack: {fileID: 8300000, guid: 8debda7f38850db44a7f9d73dff7dc02, type: 3}
+  shake: {fileID: 8300000, guid: 9d6963b7199468c4ba9568a134ce6ae4, type: 3}
+  shrinkBlack: {fileID: 8300000, guid: a94d6ca4fc220cd48b7956d61d663619, type: 3}
   light:
-  - {fileID: 8300000, guid: 638cae0f87477134dbed2181cfd13f56, type: 3}
-  - {fileID: 8300000, guid: 0d0c2b09220de874ba08492c06c23881, type: 3}
-  - {fileID: 8300000, guid: 288f50fd5d849cb4697511fc02c0bf7b, type: 3}
-  - {fileID: 8300000, guid: 7c18baa07ae244145b3204138d8a18c3, type: 3}
-  - {fileID: 8300000, guid: 4106ec4f2b00adc4fbfc4fa764b24589, type: 3}
-  face: {fileID: 8300000, guid: 0ef340deaa897c246bd3d1047fe0e91f, type: 3}
+  - {fileID: 8300000, guid: 5b6e1dffab85c534d9aea53e225a1492, type: 3}
+  - {fileID: 8300000, guid: a7ad1255660e58546aac6311a600c013, type: 3}
+  - {fileID: 8300000, guid: 452e5ed5dbe10e0408e65610d49c793b, type: 3}
+  - {fileID: 8300000, guid: 1ddf0e9d14b2c834c9911e94fbe95703, type: 3}
+  - {fileID: 8300000, guid: d32700bfd9ca7d84b848071357409664, type: 3}
+  face: {fileID: 8300000, guid: 17b1c9b6b2d919140a3f89807feba80f, type: 3}
   waitingSequenceSource: {fileID: 0}
   waitingSequenceSource_sub: {fileID: 0}
 --- !u!1001 &4089781184125155223

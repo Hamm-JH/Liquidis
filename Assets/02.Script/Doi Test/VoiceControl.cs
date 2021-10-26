@@ -18,7 +18,7 @@ public class VoiceControl : MonoBehaviour
     public AudioSource playerSource;
    
     PhotonVoiceNetwork photonVoiceNetwork;
-
+   
     void Start()
     {
         //PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
@@ -33,7 +33,7 @@ public class VoiceControl : MonoBehaviour
        
 
         player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
-        
+       
         if(photonVoiceNetwork != null)
         {
             photonVoiceNetwork.InitRecorder(photonVoiceNetwork.GetComponent<Recorder>());
@@ -44,4 +44,8 @@ public class VoiceControl : MonoBehaviour
         playerSource.clip = playerClip;
     }
 
+    public void EndTransmition()
+    {
+        photonVoiceNetwork.GetComponent<Recorder>().TransmitEnabled = false;
+    }
 }
