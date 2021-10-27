@@ -23,7 +23,7 @@ public class MovieAniControl : MonoBehaviour
     public VisualEffect ejVFX;
     public VisualEffect jyVFX;
 
-
+    public GameObject timer;
 
     static int EJ = 0;
     static int JY = 1;
@@ -337,5 +337,10 @@ public class MovieAniControl : MonoBehaviour
     public void MoveIntro()
     {
         SceneManager.LoadScene("01_Intro");
+    }
+
+    public void SetActiveTimer()
+    {
+        timer.SetActive(true);
     }
 }
