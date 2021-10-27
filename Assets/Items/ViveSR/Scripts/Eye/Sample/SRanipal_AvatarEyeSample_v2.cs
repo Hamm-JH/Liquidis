@@ -100,7 +100,7 @@ namespace ViveSR
                         {
                             for (int i = 0; i < (int)EyeShape_v2.Max; ++i)
                             {
-                                bool isBlink = ((EyeShape_v2)i == EyeShape_v2.Eye_Left_Blink || (EyeShape_v2)i == EyeShape_v2.Eye_Right_Blink);
+                                bool isBlink = ((EyeShape_v2)i == EyeShape_v2.Eye_Right_Blink || (EyeShape_v2)i == EyeShape_v2.Eye_Left_Blink);
                                 EyeWeightings[(EyeShape_v2)i] = isBlink ? 1 : 0;
                             }
 
@@ -208,7 +208,7 @@ namespace ViveSR
                         EyeShape_v2 eyeShape = eyeShapeTable.eyeShapes[i];
                         if (eyeShape > EyeShape_v2.Max || eyeShape < 0) continue;
 
-                        if (eyeShape == EyeShape_v2.Eye_Left_Blink || eyeShape == EyeShape_v2.Eye_Right_Blink)
+                        if (eyeShape == EyeShape_v2.Eye_Right_Blink || eyeShape == EyeShape_v2.Eye_Left_Blink)
                             eyeShapeTable.skinnedMeshRenderer.SetBlendShapeWeight(i, weighting[eyeShape] * 100f);
                         else
                         {
