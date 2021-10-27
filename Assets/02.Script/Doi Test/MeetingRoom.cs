@@ -6,6 +6,7 @@ using UnityEngine.Events;
 using Photon.Pun;
 using Photon.Realtime;
 using System;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class MeetingRoom : MonoBehaviourPunCallbacks
@@ -66,6 +67,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	bool vfxOn = true;
 
 	public LoopSystem meetingSound;
+
+	public Button endGame_button;
 
 
 	private string roomCode = "ABCD";
@@ -731,13 +734,14 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 
 		//timer.GetComponent<Animator>().SetTrigger("GameOverShake");
 		//timerBox_animation.isLooping = false;
-
+		
 		photonView.RPC("RPC_ForceEndGame", RpcTarget.AllBuffered);
 	}
 
 	[PunRPC]
 	void RPC_ForceEndGame()
     {
+		endGame_button.gameObject.SetActive(false);
 		EndingAniStart();
 
 	}
