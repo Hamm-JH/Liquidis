@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FlowMap_Speed_Preview
+  m_Name: FlowMap_Speed_Movie
   m_Shader: {fileID: 4800000, guid: dec83cc3aeac2634c9ac2d2eb7064421, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4

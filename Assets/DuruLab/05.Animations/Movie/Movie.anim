@@ -1543,12 +1543,49 @@ AnimationClip:
     path: Frame/Keyword 1
     classID: 23
     script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 25.033333
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 30.066668
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Intensity
+    path: PlayerHead/Point Light
+    classID: 108
+    script: {fileID: 0}
   m_PPtrCurves:
   - curve:
     - time: 0
       value: {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
     - time: 25.033333
-      value: {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
+      value: {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     - time: 40.083332
       value: {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
     attribute: m_Materials.Array.data[0]
@@ -1559,7 +1596,7 @@ AnimationClip:
     - time: 0
       value: {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
     - time: 25.033333
-      value: {fileID: 2100000, guid: 05c0f97fa5d8d0b4eb5a4049ba5b3689, type: 2}
+      value: {fileID: 2100000, guid: 99bb53f85da44e842a3ac26ab477b3fe, type: 2}
     - time: 40.083332
       value: {fileID: 2100000, guid: 05c0f97fa5d8d0b4eb5a4049ba5b3689, type: 2}
     attribute: m_Materials.Array.data[0]
@@ -1756,6 +1793,13 @@ AnimationClip:
       customType: 22
       isPPtrCurve: 0
     - serializedVersion: 2
+      path: 1200474045
+      attribute: 898800009
+      script: {fileID: 0}
+      typeID: 108
+      customType: 25
+      isPPtrCurve: 0
+    - serializedVersion: 2
       path: 452569576
       attribute: 0
       script: {fileID: 0}
@@ -1813,10 +1857,10 @@ AnimationClip:
       isPPtrCurve: 0
     pptrCurveMapping:
     - {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
-    - {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
+    - {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     - {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
     - {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
-    - {fileID: 2100000, guid: 05c0f97fa5d8d0b4eb5a4049ba5b3689, type: 2}
+    - {fileID: 2100000, guid: 99bb53f85da44e842a3ac26ab477b3fe, type: 2}
     - {fileID: 2100000, guid: 05c0f97fa5d8d0b4eb5a4049ba5b3689, type: 2}
   m_AnimationClipSettings:
     serializedVersion: 2
@@ -4399,6 +4443,43 @@ AnimationClip:
     attribute: material._BaseColor.a
     path: Frame/Keyword 1
     classID: 23
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 25.033333
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 30.066668
+        value: 1
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 136
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_Intensity
+    path: PlayerHead/Point Light
+    classID: 108
     script: {fileID: 0}
   m_EulerEditorCurves:
   - curve:
