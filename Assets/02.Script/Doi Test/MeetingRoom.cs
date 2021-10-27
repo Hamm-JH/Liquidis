@@ -732,7 +732,14 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		//timer.GetComponent<Animator>().SetTrigger("GameOverShake");
 		//timerBox_animation.isLooping = false;
 
+		photonView.RPC("RPC_ForceEndGame", RpcTarget.AllBuffered);
+	}
+
+	[PunRPC]
+	void RPC_ForceEndGame()
+    {
 		EndingAniStart();
+
 	}
 
 	void EndingAniStart()
