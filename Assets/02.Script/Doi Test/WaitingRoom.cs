@@ -269,6 +269,7 @@ public class WaitingRoom : MonoBehaviour
     {
         Debug.Log("light start waiting");
         yield return new WaitForSeconds(afterSelectBoxShake);
+        vfxEffect.gameObject.SetActive(false);
         light_group_ani.SetTrigger("Start");
         Debug.Log("light done");
 
