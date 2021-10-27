@@ -136,6 +136,9 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		StartCoroutine(PlayerLightSequence());
 		meetingSound.StartLooping();
 
+		timeStart = true;
+
+
 		StartCoroutine(InitBIStatus());
 
 		// waiting room 
@@ -153,7 +156,6 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		//}
 
 		voiceControl.GenPlayerSpeaker();
-
 
 	}
 
