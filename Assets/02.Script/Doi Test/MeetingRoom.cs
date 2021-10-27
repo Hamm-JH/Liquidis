@@ -798,6 +798,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		yield return new WaitForSeconds(loadIntroTime);//카운터헤드바이>인트로씬로드
 
 		// 인트로씬 로드
+		voiceControl.DestroyPlayer();
+		Destroy(voiceControl.gameObject);
 
 		PhotonNetwork.LeaveRoom();
 

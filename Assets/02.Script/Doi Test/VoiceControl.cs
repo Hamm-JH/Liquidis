@@ -16,6 +16,7 @@ public class VoiceControl : MonoBehaviour
     public GameObject playerPref;
     public AudioClip playerClip;
     public AudioSource playerSource;
+    GameObject genPlayer;
    
     PhotonVoiceNetwork photonVoiceNetwork;
    
@@ -28,11 +29,11 @@ public class VoiceControl : MonoBehaviour
 
     public void GenPlayerSpeaker()
     {
-        GameObject player;
+        
 
        
 
-        player = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
+        genPlayer = PhotonNetwork.Instantiate("player", Vector3.zero, Quaternion.Euler(Vector3.zero));
        
         if(photonVoiceNetwork != null)
         {
@@ -40,12 +41,17 @@ public class VoiceControl : MonoBehaviour
 
         }
 
-        playerClip = player.GetComponentInChildren<AudioSource>().clip;
+        playerClip = genPlayer.GetComponentInChildren<AudioSource>().clip;
         playerSource.clip = playerClip;
     }
 
     public void EndTransmition()
     {
         photonVoiceNetwork.GetComponent<Recorder>().TransmitEnabled = false;
+    }
+
+    public void DestroyPlayer()
+    {
+        Destroy(genPlayer);
     }
 }
