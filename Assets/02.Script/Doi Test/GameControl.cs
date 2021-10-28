@@ -19,6 +19,7 @@ public class GameControl : MonoBehaviour
             if(MeetingRoom.instance != null)
             {
                 MeetingRoom.instance.voiceControl.DestroyPlayer();
+                MeetingRoom.instance.ForceLoadIntroLeaveRoom();
                 Destroy(MeetingRoom.instance.voiceControl.gameObject);
             }
 

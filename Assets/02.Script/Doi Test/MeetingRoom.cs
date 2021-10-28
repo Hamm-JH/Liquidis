@@ -820,4 +820,10 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		yield return new WaitForSeconds(2f);
 		SceneManager.LoadScene("01_Intro");
 	}
+
+	public void ForceLoadIntroLeaveRoom()
+    {
+		PhotonNetwork.LeaveRoom();
+
+	}
 }
