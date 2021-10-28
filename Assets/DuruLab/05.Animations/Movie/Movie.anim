@@ -1604,6 +1604,8 @@ AnimationClip:
       value: {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     - time: 40.083332
       value: {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
+    - time: 40.15
+      value: {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     attribute: m_Materials.Array.data[0]
     path: PlayerHead/PlayerHead/DemoHead_eu
     classID: 137
@@ -1882,6 +1884,7 @@ AnimationClip:
     - {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
     - {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     - {fileID: 2100000, guid: 77905ffd9a4694d4e97cfa8ea34df2fc, type: 2}
+    - {fileID: 2100000, guid: 6a96b1a08ab7cdc4fbdac7d395ea3bff, type: 2}
     - {fileID: 2100000, guid: 7e6208f3aa1078e48a879c029c27b4c5, type: 2}
     - {fileID: 2100000, guid: 99bb53f85da44e842a3ac26ab477b3fe, type: 2}
     - {fileID: 2100000, guid: 99bb53f85da44e842a3ac26ab477b3fe, type: 2}
@@ -1890,7 +1893,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 40.1
+    m_StopTime: 40.166668
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
