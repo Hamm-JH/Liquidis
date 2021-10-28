@@ -23,11 +23,11 @@ namespace MovieScene
 
         private void Update()
         {
-            if(rt_menu.stateDown)
-            {
-                // ¾À Á¾·á
-                target.DebugToIntro();
-            }
+            //if(rt_menu.stateDown)
+            //{
+            //    // ¾À Á¾·á
+            //    target.DebugToIntro();
+            //}
 
             Vector2 pos = rt_trackpos.axis;
 
