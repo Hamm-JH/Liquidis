@@ -53,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Diffuse1:
-        m_Texture: {fileID: 2800000, guid: 3d2fe022e73df1e4eb102fb0f3f81fac, type: 3}
+        m_Texture: {fileID: 2800000, guid: 66ad3cc1804c09c439ed18bd8b9b9e18, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -135,7 +135,7 @@ Material:
     - _GlossyReflections: 0
     - _Metalic1: 1
     - _Metallic: 0
-    - _Noise: 0.554
+    - _Noise: 2
     - _Noise1: 0.41
     - _Noise3: 0
     - _Noise_2: 0.2
@@ -144,14 +144,14 @@ Material:
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
-    - _Smoothness1: 0
+    - _Smoothness1: 0.621
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _Speed: 0.1
     - _SrcBlend: 1
     - _Strength1: 1
     - _Surface: 0
-    - _Tiling1: -4.7
+    - _Tiling1: 4
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
@@ -160,6 +160,6 @@ Material:
     - _Color0: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _TextureColor: {r: 1, g: 0.611645, b: 0, a: 0}
+    - _TextureColor: {r: 3.9999995, g: 2.4502614, b: 0, a: 0}
     - _TextureColor1: {r: 5.3403144, g: 1.2300315, b: 0, a: 0}
   m_BuildTextureStacks: []

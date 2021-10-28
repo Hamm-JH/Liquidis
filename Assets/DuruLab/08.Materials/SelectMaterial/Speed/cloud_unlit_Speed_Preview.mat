@@ -41,7 +41,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _3dNoiseSize: -3.86
-    - _3dNoiseSizeA: -19.6
+    - _3dNoiseSizeA: 1
     - _3dNoiseSizeB: -25.52
     - _3dNoiseSizeC: 12
     - _AlphaCutoff: 0.5
@@ -54,7 +54,7 @@ Material:
     - _Float5: 1
     - _Metallic: 1
     - _Multiply11000: 0.0001
-    - _Noise: 0.545
+    - _Noise: 2
     - _NoiseStrength: 0.139
     - _NoiseStrengthA: 0
     - _NoiseStrengthABC: 0
@@ -104,7 +104,7 @@ Material:
     - _FresnelColr: {r: 0.047169805, g: 0.046528384, b: 0.025142396, a: 0}
     - _NoiseScale: {r: 0.53, g: 1, b: 1, a: 0}
     - _NoiseScaleA: {r: 1, g: 1, b: 1, a: 0}
-    - _NoiseScaleB: {r: -10.85, g: 18.73, b: 1, a: 0}
+    - _NoiseScaleB: {r: 2.71, g: 4.54, b: 1, a: 0}
     - _NoiseScaleC: {r: 1, g: 1, b: 2.02, a: 0}
     - _PlayerPos: {r: 1.77, g: 6.11, b: -31.65, a: 0}
     - _RimColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}

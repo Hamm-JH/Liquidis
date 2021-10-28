@@ -109,7 +109,7 @@ Material:
     - _PlayerPos: {r: 1.77, g: 6.11, b: -31.65, a: 0}
     - _RimColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _SmoothStep: {r: 0.2, g: 0.83, b: 0, a: 0}
-    - _TextureColor: {r: 1, g: 0, b: 0.087763555, a: 1}
+    - _TextureColor: {r: 1, g: 0, b: 0.08776351, a: 1}
     - _Tiling: {r: -0.05, g: -0.05, b: 0, a: 0}
     - _re: {r: 0, g: 0.08, b: 0, a: 0}
   m_BuildTextureStacks: []
