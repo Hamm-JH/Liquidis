@@ -618,6 +618,8 @@ public class MappingParameter : MonoBehaviour
         vfxObject.SetFloat("MaxLifeTime", 1f);
         vfxObject.SetFloat("ConformSphere", 0.4f);
         vfxObject.SetInt("AnimationCurve", 0);
+        vfxObject.SetFloat("ParticleSize", 0.1f);
+
 
         waitingPreview.GetComponent<Renderer>().material = stencilStencilMaterials[geometryType];
         LerpColorWaitingCube(colorValue);
@@ -1143,6 +1145,11 @@ public class MappingParameter : MonoBehaviour
     public void SetVFXValue()
     {
         vfxValue = vfx_slider.value;
+        vfxObject.SetFloat("SpawnRate", vfxValue);
+    }
+    public void SetVFXValue(float value)
+    {
+        vfxValue = value;
         vfxObject.SetFloat("SpawnRate", vfxValue);
     }
 

@@ -116,7 +116,7 @@ public class WaitingRoom : MonoBehaviour
     {
 
         // debug disabled
-        if(PhotonNetwork.IsConnected)
+        if (PhotonNetwork.IsConnected)
         {
             if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
             {
@@ -127,8 +127,7 @@ public class WaitingRoom : MonoBehaviour
         }
         // debug enabled
         //slider_canvas.gameObject.SetActive(true);
-        //slider_canvas.SetTrigger("SceneStart");
-        //StartCoroutine(SliderGuide());
+        //slider_canvas.SetTrigger("scenestart");
 
     }
 
@@ -181,7 +180,8 @@ public class WaitingRoom : MonoBehaviour
         }
 
         MappingParameter.instance.vfx_slider = sympathy_slider;
-        MappingParameter.instance.vfx_slider.onValueChanged.AddListener(delegate { SetVFXValue(); });
+        //sympathy_slider.onValueChanged.AddListener(delegate { SetVFXValue(); });
+        //MappingParameter.instance.vfx_slider.onValueChanged.AddListener(delegate { SetVFXValue(); });
 
     }
 
@@ -241,7 +241,10 @@ public class WaitingRoom : MonoBehaviour
 
     public void SetVFXValue()
     {
-        MappingParameter.instance.SetVFXValue();
+        //MappingParameter.instance.SetVFXValue();
+
+        Debug.Log(sympathy_slider.value);
+        MappingParameter.instance.SetVFXValue(sympathy_slider.value);
 
     }
 
