@@ -1734,7 +1734,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 29.866667
+    m_StopTime: 34.4
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -4050,6 +4050,20 @@ AnimationClip:
   m_Events:
   - time: 0
     functionName: Timer_GameOver
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 31.816668
+    functionName: FadeMusicOut
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 34.4
+    functionName: MoveIntro
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

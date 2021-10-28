@@ -17,6 +17,8 @@ public class MovieAniControl : MonoBehaviour
     public AudioSource ejHead;
     public AudioSource jyHead;
 
+    public LoopSystem movieSound;
+
     public Renderer ejHead_renderer;
     public Renderer jyHead_renderer;
 
@@ -57,7 +59,9 @@ public class MovieAniControl : MonoBehaviour
     {
         animator = GetComponent<Animator>();
 
-        InitialValues();
+        //InitialValues();
+
+        movieSound.StartLooping();
     }
 
     private void Update()
@@ -157,7 +161,7 @@ public class MovieAniControl : MonoBehaviour
 
 
 
-    void InitialValues()
+    public void InitialValues()
     {
         currentEJGeoValue = ejHead_renderer.material.GetFloat("_Noise");
         currentJYGeoValue = jyHead_renderer.material.GetFloat("_Noise");
@@ -238,6 +242,11 @@ public class MovieAniControl : MonoBehaviour
             }
         }
        
+    }
+
+    public void FadeMusicOut()
+    {
+        movieSound.MusicFadeOut();
     }
 
     // set color
