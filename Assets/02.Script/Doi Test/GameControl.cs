@@ -29,6 +29,11 @@ public class GameControl : MonoBehaviour
                 Destroy(MappingParameter.instance.gameObject);
             }
 
+
+            if(Manager.BIManager.Instance != null)
+            {
+                Destroy(Manager.BIManager.Instance.gameObject);
+            }
             SceneManager.LoadScene("01_Intro");
         }
 

@@ -808,7 +808,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 		// 인트로씬 로드
 		voiceControl.DestroyPlayer();
 		Destroy(voiceControl.gameObject);
-
+		Destroy(Manager.BIManager.Instance.gameObject);
 		PhotonNetwork.LeaveRoom();
 
 		if(MappingParameter.instance != null)

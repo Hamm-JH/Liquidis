@@ -61,10 +61,6 @@ namespace Manager
 		{
 			get
 			{
-				if(instance == null)
-				{
-					instance = FindObjectOfType<BIManager>() as BIManager;
-				}
 				return instance;
 			}
 		}
@@ -173,6 +169,16 @@ namespace Manager
 
 		private void Awake()
 		{
+			if(BIManager.Instance != null)
+            {
+				Destroy(this);
+            }
+			else
+            {
+				BIManager.instance = this;
+				DontDestroyOnLoad(gameObject);
+            }
+
 			leftActivity = new LinkDataValue();
 			rightActivity = new LinkDataValue();
 			attention = new LinkDataValue();
