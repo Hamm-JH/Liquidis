@@ -711,7 +711,9 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 				//sympathyValue = api.Value;
 
 				// photon debug
-				DataSyncronize.instance.SetSympathy(MappingParameter.instance.playerNum, sympathyCurrentValue);
+
+				if(PhotonNetwork.IsConnected)
+					DataSyncronize.instance.SetSympathy(MappingParameter.instance.playerNum, sympathyCurrentValue);
 				//MappingParameter.instance.SetVFXValueMeeting(sympathyCurrentValue);
 			}
 

@@ -64,6 +64,8 @@ namespace Manager
                 Beta [i].target = (double.IsInfinity(betaValue ) || double.IsNaN(betaValue)) ? 0.0f  : LooxidLinkUtility.Scale(Beta [i].min, Beta [i].max, 0.0f, 1.0f, betaValue );
                 Gamma[i].target = (double.IsInfinity(gammaValue) || double.IsNaN(gammaValue)) ? 0.0f : LooxidLinkUtility.Scale(Gamma[i].min, Gamma[i].max, 0.0f, 1.0f, gammaValue);
 
+                //Debug.Log(delta[i].target);
+
                 _delta = Delta[i].target;
                 _theta = Theta[i].target;
                 _alpha = Alpha[i].target;

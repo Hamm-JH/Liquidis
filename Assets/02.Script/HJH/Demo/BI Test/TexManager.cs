@@ -16,25 +16,33 @@ public class TexManager : MonoBehaviour
     /// </summary>
     public UnityAction<API.Brainwave> biGetter;
 
-	private void Start()
-	{
+    private void Start()
+    {
         // 이벤트 연결
         biGetter += Receive;
-	}
+    }
 
-	private void Update()
-	{
+    private void Update()
+    {
         // 요청 예시
-        //int index = Enum.GetValues(typeof(EEGSensorID)).Length;
-		//for (int i = 0; i < index; i++)
-		//{
-        //    Request(new API.Brainwave(
-        //        targetId: (EEGSensorID)i,
-        //        targetSecond: 10,
-        //        targetCallBack: biGetter)
-        //        );
-        //}
-	}
+        int index = Enum.GetValues(typeof(EEGSensorID)).Length;
+        for (int i = 0; i < index; i++)
+        {
+            API.Brainwave api_EEG = new API.Brainwave(
+                obj: API.Objective.EEG,
+                targetId: (EEGSensorID)i,
+                targetSecond: 10,
+                targetCallBack: biGetter
+            );
+
+            Request(api_EEG);
+            //Request(new API.Brainwave(
+            //    targetId: (EEGSensorID)i,
+            //    targetSecond: 10,
+            //    targetCallBack: biGetter)
+            //    );
+        }
+    }
 
     /// <summary>
     /// 뇌파 관리자로 데이터 요청
@@ -42,48 +50,48 @@ public class TexManager : MonoBehaviour
     /// <param name="api"></param>
     /// <param name="action"></param>
     private void Request(API.Brainwave api)
-	{
+    {
         Manager.BIManager.Instance.Request(api);
-	}
+    }
 
     /// <summary>
     /// 이벤트에 연결된 데이터 수신 메서드
     /// </summary>
     /// <param name="api"></param>
     private void Receive(API.Brainwave api)
-	{
+    {
         //stacks[(int)api.Id].Push(api);
 
-		List<string> _in = new List<string>();
-		_in.Add(api.Id.ToString());
-		_in.Add(api.Delta.ToString());
-		_in.Add(api.Theta.ToString());
-		_in.Add(api.Alpha.ToString());
-		_in.Add(api.Beta.ToString());
-		_in.Add(api.Gamma.ToString());
+        List<string> _in = new List<string>();
+        _in.Add(api.Id.ToString());
+        _in.Add(api.Delta.ToString());
+        _in.Add(api.Theta.ToString());
+        _in.Add(api.Alpha.ToString());
+        _in.Add(api.Beta.ToString());
+        _in.Add(api.Gamma.ToString());
 
-		eegTxts[(int)api.Id].Set(_in.ToArray());
+        eegTxts[(int)api.Id].Set(_in.ToArray());
 
-		//string str = "";
-		//str += $"++ sensorID : {api.Id.ToString()}\n";
-		//str += $"++ delta : {api.Delta}\n";
-		//str += $"++ theta : {api.Theta}\n";
-		//str += $"++ alpha : {api.Alpha}\n";
-		//str += $"++ beta : {api.Beta}\n";
-		//str += $"++ gamma : {api.Gamma}\n";
+        //string str = "";
+        //str += $"++ sensorID : {api.Id.ToString()}\n";
+        //str += $"++ delta : {api.Delta}\n";
+        //str += $"++ theta : {api.Theta}\n";
+        //str += $"++ alpha : {api.Alpha}\n";
+        //str += $"++ beta : {api.Beta}\n";
+        //str += $"++ gamma : {api.Gamma}\n";
 
-		//Debug.Log(str);
-	}
+        //Debug.Log(str);
+    }
 
-	private void OnEnable()
-	{
+    private void OnEnable()
+    {
         StartCoroutine(SetFPS(fps));
     }
 
-	private void OnDisable()
-	{
+    private void OnDisable()
+    {
         StopAllCoroutines();
-	}
+    }
 
     IEnumerator SetFPS(TexOut tex)
     {
@@ -97,17 +105,17 @@ public class TexManager : MonoBehaviour
         yield break;
     }
 
-	#region Legacy
-	IEnumerator SetEEG()
-	{
+    #region Legacy
+    IEnumerator SetEEG()
+    {
         // 여기선 BIManager에서 가져온 데이터(value)만 가져와서 뿌리는 역할을 담당한다.
 
         #region 데이터 초기화
         LinkDataValue delta = new LinkDataValue();
-		LinkDataValue theta = new LinkDataValue();
-		LinkDataValue alpha = new LinkDataValue();
-		LinkDataValue beta  = new LinkDataValue();
-		LinkDataValue gamma = new LinkDataValue();
+        LinkDataValue theta = new LinkDataValue();
+        LinkDataValue alpha = new LinkDataValue();
+        LinkDataValue beta = new LinkDataValue();
+        LinkDataValue gamma = new LinkDataValue();
 
         // 데이터 선언, 초기화
         List<List<double>> deltaScaleDataList = new List<List<double>>();
@@ -128,7 +136,7 @@ public class TexManager : MonoBehaviour
         #endregion
 
         while (LooxidLinkManager.Instance.isActiveAndEnabled)
-		{
+        {
             // 0.1초 간격 대기
             yield return new WaitForSeconds(0.1f);
 
@@ -136,25 +144,25 @@ public class TexManager : MonoBehaviour
             List<EEGFeatureIndex> featureIndexList = LooxidLinkData.Instance.GetEEGFeatureIndexData(10.0f);
 
             // 가져온 데이터가 하나라도 있을 경우
-            if(featureIndexList.Count > 0)
-			{
+            if (featureIndexList.Count > 0)
+            {
                 // n초 안의 뇌파 데이터를 수집해옴.
                 // 이를 아래에서 연산해 10초 안의 최소, 최대값을 계산해냄.
 
                 // FeatureIndex 값을 실시간으로 받아오는 쪽에서는 현재 뇌파값이 어떤지 산출해냄
                 // delta.target
 
-				// 센서별로 리스트 데이터 초기화
-				// AF3 = 0,
-				// AF4 = 1,
-				// Fp1 = 2,
-				// Fp2 = 3,
-				// AF7 = 4,
-				// AF8 = 5
-				for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
-				{
-					for (int ii = 0; ii < featureIndexList.Count; ii++)
-					{
+                // 센서별로 리스트 데이터 초기화
+                // AF3 = 0,
+                // AF4 = 1,
+                // Fp1 = 2,
+                // Fp2 = 3,
+                // AF7 = 4,
+                // AF8 = 5
+                for (int i = 0; i < Enum.GetValues(typeof(EEGSensorID)).Length; i++)
+                {
+                    for (int ii = 0; ii < featureIndexList.Count; ii++)
+                    {
                         // EEGFeatureIndex 리스트의 n번째 요소의 데이터를 반복문에서 하나씩 처리한다.
                         // 센서별로 데이터 수집
                         double deltaValue = featureIndexList[ii].Delta((EEGSensorID)i);
@@ -172,10 +180,10 @@ public class TexManager : MonoBehaviour
                         //Debug.Log($"deltaValue : {deltaValue}");
                     }
 
-					//for (int ii = 0; ii < deltaScaleDataList[i].Count; ii++)
-					//{
+                    //for (int ii = 0; ii < deltaScaleDataList[i].Count; ii++)
+                    //{
                     //    Debug.Log($"deltaScale {ii} : {deltaScaleDataList[i][ii]}");
-					//}
+                    //}
 
                     // 센서별로 스케일 설정 (정상)
                     delta.SetScale(deltaScaleDataList[i]);
@@ -196,7 +204,7 @@ public class TexManager : MonoBehaviour
                     Debug.Log($"value : {delta.value}");
 
                     if (featureIndexList.Count != 0)
-					{
+                    {
                         // 센서 단위로 데이터 세팅 완료.
                         string[] _ins = new string[7];
                         _ins[0] = ((EEGSensorID)i).ToString();
@@ -209,12 +217,12 @@ public class TexManager : MonoBehaviour
                         //Debug.Log($"Count : {i}");
                         //Debug.Log($"ins : {_ins}");
                         //Debug.Log($"data 1 : {delta}");
-						//Debug.Log($"data 2 : {theta}");
-						//Debug.Log($"data 3 : {alpha}");
+                        //Debug.Log($"data 2 : {theta}");
+                        //Debug.Log($"data 3 : {alpha}");
                         //Debug.Log($"data 4 : {beta}");
                         //Debug.Log($"data 5 : {gamma}");
                         eegTxts[i].Set(_ins);
-					}
+                    }
                 }
 
 
@@ -233,10 +241,10 @@ public class TexManager : MonoBehaviour
         }
 
         yield break;
-	}
+    }
 
     IEnumerator SetEEG(TexOut tex, EEGSensorID id)
-	{
+    {
         string sensorID = "";
         float delta = 0;
         float theta = 0;
@@ -246,8 +254,8 @@ public class TexManager : MonoBehaviour
 
         string[] _ins = new string[6];
 
-        while(gameObject.activeSelf)
-		{
+        while (gameObject.activeSelf)
+        {
             yield return new WaitForSeconds(0.2f);
 
             Debug.Log("Hello");
@@ -260,9 +268,9 @@ public class TexManager : MonoBehaviour
             _ins[5] = gamma.ToString();
 
             tex.Set(_ins);
-		}
+        }
 
         yield break;
-	}
-	#endregion
+    }
+    #endregion
 }

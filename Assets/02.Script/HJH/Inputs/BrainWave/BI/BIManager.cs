@@ -93,7 +93,7 @@ namespace Manager
 		#endregion
 
 		[Header("Collection Switching index")]
-		private CollectionStatus collectionStatus;
+		[SerializeField] private CollectionStatus collectionStatus;
 
 		public CollectionStatus _CollectionStatus
 		{
@@ -276,12 +276,13 @@ namespace Manager
 		// Update is called once per frame
 		void Update()
 		{
+			//Debug.Log("1");
 			leftActivity.value = Mathf.Lerp((float)leftActivity.value, (float)leftActivity.target, 0.2f);
 			rightActivity.value = Mathf.Lerp((float)rightActivity.value, (float)rightActivity.target, 0.2f);
 			attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
 			relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
-			//Debug.Log("H");
-			UpdateMindIndex();
+            //Debug.Log("H");
+            UpdateMindIndex();
 		}
 
 		private void UpdateMindIndex()
@@ -297,6 +298,7 @@ namespace Manager
 		/// </summary>
 		private void UpdateConcentration()
 		{
+			//Debug.Log(attention.value);
 			concentration = attention.value;
 		}
 
@@ -567,8 +569,10 @@ namespace Manager
 				// 0.1초 간격으로 대기
 				yield return null;
 
-				// 룩시드링크에서 현재에서 과거 10초 안의 데이터를 가져온다.
-				List<EEGFeatureIndex> featureIndexList = LooxidLinkData.Instance.GetEEGFeatureIndexData(10.0f);
+                //Debug.Log("1");
+
+                // 룩시드링크에서 현재에서 과거 10초 안의 데이터를 가져온다.
+                List<EEGFeatureIndex> featureIndexList = LooxidLinkData.Instance.GetEEGFeatureIndexData(10.0f);
 
 				if(featureIndexList.Count > 0)
 				{

@@ -411,7 +411,7 @@ namespace Looxid.Link
             attention.value = Mathf.Lerp((float)attention.value, (float)attention.target, 0.2f);
             relaxation.value = Mathf.Lerp((float)relaxation.value, (float)relaxation.target, 0.2f);
 
-            Debug.Log(relaxation.value);
+            //Debug.Log(relaxation.value);
 
             delta.value = Mathf.Lerp((float)delta.value, (float)delta.target, 0.2f);
             theta.value = Mathf.Lerp((float)theta.value, (float)theta.target, 0.2f);

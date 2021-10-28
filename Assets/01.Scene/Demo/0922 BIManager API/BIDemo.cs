@@ -192,17 +192,17 @@ public class BIDemo : MonoBehaviour
             str += $"Beta : {api.Beta} \n";
             str += $"Gamma : {api.Gamma}\n";
 
-            Debug.Log(str);
+            //Debug.Log(str);
         }
         else if(api.Objective == API.Objective.MindRandom)
 		{
             if(api.Option == 0)
 			{
-                Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
+                //Debug.Log($"Relaxation: {api.Relaxation.ToString()}");
 			}
             else if(api.Option == 1)
 			{
-                Debug.Log($"Attention : {api.Attention.ToString()}");
+                //Debug.Log($"Attention : {api.Attention.ToString()}");
             }
 		}
     }

@@ -116,12 +116,14 @@ public class WaitingRoom : MonoBehaviour
     {
 
         // debug disabled
-        if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+        if(PhotonNetwork.IsConnected)
         {
-            slider_canvas.gameObject.SetActive(true);
-            slider_canvas.SetTrigger("SceneStart");
-            //StartCoroutine(SliderGuide());
-
+            if (PhotonNetwork.LocalPlayer == PhotonNetwork.PlayerList[0])
+            {
+                slider_canvas.gameObject.SetActive(true);
+                slider_canvas.SetTrigger("SceneStart");
+                //StartCoroutine(SliderGuide());
+            }
         }
         // debug enabled
         //slider_canvas.gameObject.SetActive(true);
