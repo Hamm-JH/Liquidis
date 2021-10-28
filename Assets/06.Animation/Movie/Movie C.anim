@@ -110551,7 +110551,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 150.01666
-    functionName: 
+    functionName: Timer_Loop
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -25,6 +25,8 @@ public class MovieAniControl : MonoBehaviour
 
     public GameObject timer;
 
+    public Animator timerBox;
+
     static int EJ = 0;
     static int JY = 1;
 
@@ -342,5 +344,22 @@ public class MovieAniControl : MonoBehaviour
     public void SetActiveTimer()
     {
         timer.SetActive(true);
+    }
+
+    public void Timer_Pass5Min()
+    {
+        timerBox.SetTrigger("Pass5Min");
+    }
+    public void Timer_Pass10Min()
+    {
+        timerBox.SetTrigger("Pass10Min");
+    }
+    public void Timer_Loop()
+    {
+        timerBox.SetTrigger("TimerLoop");
+    }
+    public void Timer_GameOver()
+    {
+        timerBox.SetTrigger("GameOverShake");
     }
 }
