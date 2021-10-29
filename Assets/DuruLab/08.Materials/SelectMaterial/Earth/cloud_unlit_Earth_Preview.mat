@@ -41,22 +41,27 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _3dNoiseSize: -3.86
-    - _3dNoiseSizeA: 1
+    - _3dNoiseSizeA: 0.07
+    - _3dNoiseSizeA1: 0.07
     - _3dNoiseSizeB: -25.52
-    - _3dNoiseSizeC: 12
+    - _3dNoiseSizeB1: -25.52
+    - _3dNoiseSizeC: 0.81
+    - _3dNoiseSizeC1: 0.81
     - _AlphaCutoff: 0.5
     - _Cutoff: 0.5
     - _Detailstrength: 0.102
     - _EdgeLength: 2.9
     - _Fallof: 16.7
+    - _Fallof1: 16.7
     - _Float3: -3.29
     - _Float4: 0
     - _Float5: 1
     - _Metallic: 1
     - _Multiply11000: 0.0001
-    - _Noise: 1.218
+    - _Noise: 0.912
+    - _Noise1: 0
     - _NoiseStrength: 0.139
-    - _NoiseStrengthA: 0
+    - _NoiseStrengthA: 0.13225527
     - _NoiseStrengthABC: 0
     - _NoiseStrengthB: 0
     - _NoiseStrengthC: 0.0001
@@ -68,12 +73,15 @@ Material:
     - _Speed: 0.69
     - _SpeedA: 5
     - _SpeedB: 0
+    - _SpeedB1: 0
     - _SpeedC: 10
+    - _SpeedC1: 10
     - _TessMax: 10.94
     - _TessMin: 0.7
     - _TessPhongStrength: 0.241
     - _TessValue: 6.6
     - _VertexColorMult: 1.08
+    - _VertexColorMult1: 1.08
     - _Wrap: -1
     - __dirty: 0
     - _blendfadedist: 0.388
@@ -97,19 +105,29 @@ Material:
     - _DetailColor: {r: 1, g: 1, b: 1, a: 1}
     - _Direction: {r: 1, g: 0, b: 0, a: 0}
     - _DirectionA: {r: 1, g: 0, b: 0, a: 0}
+    - _DirectionA1: {r: 1, g: 0, b: 0, a: 0}
     - _DirectionB: {r: 1.48, g: -0.86, b: -0.36, a: 0}
+    - _DirectionB1: {r: 1.48, g: -0.86, b: -0.36, a: 0}
     - _DirectionC: {r: 1, g: 0, b: 0, a: 0}
+    - _DirectionC1: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelBSP: {r: -2.08, g: 3.8, b: 1.11, a: 0}
+    - _FresnelBSP1: {r: -2.08, g: 3.8, b: 1.11, a: 0}
     - _FresnelColr: {r: 0.047169805, g: 0.046528384, b: 0.025142396, a: 0}
     - _NoiseScale: {r: 0.53, g: 1, b: 1, a: 0}
     - _NoiseScaleA: {r: 1, g: 1, b: 1, a: 0}
+    - _NoiseScaleA1: {r: 1, g: 1, b: 1, a: 0}
     - _NoiseScaleB: {r: 2.71, g: 4.54, b: 1, a: 0}
-    - _NoiseScaleC: {r: 1, g: 1, b: 2.02, a: 0}
+    - _NoiseScaleB1: {r: 2.71, g: 4.54, b: 1, a: 0}
+    - _NoiseScaleC: {r: 1, g: 1, b: 0.99, a: 0}
+    - _NoiseScaleC1: {r: 1, g: 1, b: 0.99, a: 0}
     - _PlayerPos: {r: 1.77, g: 6.11, b: -31.65, a: 0}
     - _RimColor: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
+    - _RimColor1: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
     - _SmoothStep: {r: 0.2, g: 0.83, b: 0, a: 0}
-    - _TextureColor: {r: 1, g: 0, b: 0.08776354, a: 1}
+    - _TextureColor: {r: 1, g: 0, b: 0.08776351, a: 1}
+    - _TextureColor1: {r: 1, g: 0, b: 0.009412766, a: 1}
     - _Tiling: {r: -0.05, g: -0.05, b: 0, a: 0}
+    - _Tiling1: {r: -0.05, g: -0.05, b: 0, a: 0}
     - _re: {r: 0, g: 0.08, b: 0, a: 0}
   m_BuildTextureStacks: []
