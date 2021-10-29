@@ -365,7 +365,7 @@ public class MovieAniControl : MonoBehaviour
     }
     public void Timer_Loop()
     {
-        timerBox.SetTrigger("TimerLoop");
+        timerBox.SetTrigger("MovieLoop");
     }
     public void Timer_GameOver()
     {

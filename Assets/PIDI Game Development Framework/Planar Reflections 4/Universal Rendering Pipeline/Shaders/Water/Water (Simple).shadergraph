@@ -806,8 +806,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": -377.0000915527344,
-            "y": -1907.0
+            "x": 483.0000915527344,
+            "y": -1889.0
         },
         "m_Blocks": [
             {
@@ -823,8 +823,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": -377.0000915527344,
-            "y": -1707.0
+            "x": 483.0000915527344,
+            "y": -1689.0
         },
         "m_Blocks": [
             {
@@ -4833,7 +4833,7 @@
 }
 
 {
-    "m_SGVersion": 2,
+    "m_SGVersion": 3,
     "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
     "m_ObjectId": "ad6a0a3bd9d3b5869cbdd0eacc8fcc71",
     "m_Guid": {

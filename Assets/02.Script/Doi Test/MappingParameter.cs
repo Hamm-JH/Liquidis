@@ -366,6 +366,7 @@ public class MappingParameter : MonoBehaviour
             vfxObject.SetFloat("MaxLifeTime", 10f);
             vfxObject.SetFloat("ConformSphere", 40f);
             vfxObject.SetInt("AnimationCurve", 1);
+            vfxObject.SetFloat("ParticleSize", 1f);
         }
 
        
@@ -641,6 +642,7 @@ public class MappingParameter : MonoBehaviour
         vfxObject.SetFloat("MaxLifeTime", 10f);
         vfxObject.SetFloat("ConformSphere", 40f);
         vfxObject.SetInt("AnimationCurve", 1);
+        vfxObject.SetFloat("ParticleSize", 1f);
 
         meetingtHead.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
 
