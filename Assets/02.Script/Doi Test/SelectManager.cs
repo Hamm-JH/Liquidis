@@ -372,32 +372,39 @@ public class SelectManager : MonoBehaviour
             concentrationValue = api.Value;
             //Debug.Log("concentration : " + concentrationValue);
             // mapping parameter
-            for(int i=0; i<MappingParameter.instance.matchType.Length; i++)
+
+            if (MappingParameter.instance.nowSpeedOpen)
             {
-                // ÁýÁßÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
-                if (MappingParameter.instance.matchType[i] == 1)
-                {
-                    // geo
-                    if(i== 0)
-                    {
-                        MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
-                    }
-                    else if(i == 1) // color
-                    {
-                        MappingParameter.instance.SpeedColorSetColor(concentrationValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
-
-
-                    }
-                    else if (i == 2) // speed
-                    {
-                        //MappingParameter.instance.SetSpeedValue(concentrationValue);
-
-
-                    }
-
-                }
+                MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
+                MappingParameter.instance.SpeedColorSetColor(concentrationValue);
+                MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
             }
+            //for (int i=0; i<MappingParameter.instance.matchType.Length; i++)
+            //{
+            //    // ÁýÁßÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
+            //    if (MappingParameter.instance.matchType[i] == 1)
+            //    {
+            //        // geo
+            //        if(i== 0)
+            //        {
+            //            MappingParameter.instance.GetGeoValueFromLerp(concentrationValue);
+            //        }
+            //        else if(i == 1) // color
+            //        {
+            //            MappingParameter.instance.SpeedColorSetColor(concentrationValue);
+            //            MappingParameter.instance.LerpColorSpeedSetColor(concentrationValue);
+
+
+            //        }
+            //        else if (i == 2) // speed
+            //        {
+            //            //MappingParameter.instance.SetSpeedValue(concentrationValue);
+
+
+            //        }
+
+            //    }
+            //}
             
            
         }
@@ -405,62 +412,62 @@ public class SelectManager : MonoBehaviour
         {
             excitementValue = api.Value;
             // mapping parameter
-            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-            {
-                // ÈïºÐÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
-                if (MappingParameter.instance.matchType[i] == 2)
-                {
-                    // geo
-                    if (i == 0)
-                    {
-                        MappingParameter.instance.GetGeoValueFromLerp(excitementValue);
-                    }
-                    else if (i == 1) // color
-                    {
-                        MappingParameter.instance.SpeedColorSetColor(excitementValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
+            //for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+            //{
+            //    // ÈïºÐÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
+            //    if (MappingParameter.instance.matchType[i] == 2)
+            //    {
+            //        // geo
+            //        if (i == 0)
+            //        {
+            //            MappingParameter.instance.GetGeoValueFromLerp(excitementValue);
+            //        }
+            //        else if (i == 1) // color
+            //        {
+            //            MappingParameter.instance.SpeedColorSetColor(excitementValue);
+            //            MappingParameter.instance.LerpColorSpeedSetColor(excitementValue);
 
 
-                    }
-                    else if (i == 2) // speed
-                    {
-                        //MappingParameter.instance.SetSpeedValue(excitementValue);
+            //        }
+            //        else if (i == 2) // speed
+            //        {
+            //            //MappingParameter.instance.SetSpeedValue(excitementValue);
 
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
         }
         else if (api.RequestIndex == 2)
         {
             positiveValue = api.Value;
             // mapping parameter
-            for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
-            {
-                // ÈïºÐÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
-                if (MappingParameter.instance.matchType[i] == 3)
-                {
-                    // geo
-                    if (i == 0)
-                    {
-                        MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
-                    }
-                    else if (i == 1) // color
-                    {
-                        MappingParameter.instance.SpeedColorSetColor(positiveValue);
-                        MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
+        //    for (int i = 0; i < MappingParameter.instance.matchType.Length; i++)
+        //    {
+        //        // ÈïºÐÀ¸·Î ¸ÊÇÎµÈ Ç×¸ñ Ã£±â
+        //        if (MappingParameter.instance.matchType[i] == 3)
+        //        {
+        //            // geo
+        //            if (i == 0)
+        //            {
+        //                MappingParameter.instance.GetGeoValueFromLerp(positiveValue);
+        //            }
+        //            else if (i == 1) // color
+        //            {
+        //                MappingParameter.instance.SpeedColorSetColor(positiveValue);
+        //                MappingParameter.instance.LerpColorSpeedSetColor(positiveValue);
 
 
-                    }
-                    else if (i == 2) // speed
-                    {
-                        //MappingParameter.instance.SetSpeedValue(positiveValue);
+        //            }
+        //            else if (i == 2) // speed
+        //            {
+        //                //MappingParameter.instance.SetSpeedValue(positiveValue);
 
 
-                    }
+        //            }
 
-                }
-            }
+        //        }
+        //    }
         }
 
     }

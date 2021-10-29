@@ -86,6 +86,8 @@ public class MappingParameter : MonoBehaviour
 
     public int playerNum = 0;
 
+    public bool nowSpeedOpen = false;
+
     //public bool[] typeUse;
     public Material[] geoMaterials_preview_origin;
     public Material[] geoMaterials_stencil_origin;
@@ -406,18 +408,22 @@ public class MappingParameter : MonoBehaviour
         if (currentOpenMenu == 0)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
+            nowSpeedOpen = false;
 
         }
         else if (currentOpenMenu == 1)
         {
             previewCube.GetComponent<Renderer>().material = colorPreview;
             LerpColorSetColor(colorValue);
+            nowSpeedOpen = false;
 
-        }else if(currentOpenMenu == 2)
+
+        }
+        else if(currentOpenMenu == 2)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
             SpeedColorSetColor(colorValue);
-
+            nowSpeedOpen = true;
         }
 
 
@@ -452,18 +458,21 @@ public class MappingParameter : MonoBehaviour
         if (currentOpenMenu == 0)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
+            nowSpeedOpen = false;
 
         }
         else if (currentOpenMenu == 1)
         {
             previewCube.GetComponent<Renderer>().material = colorPreview;
             LerpColorSetColor(colorValue);
+            nowSpeedOpen = false;
 
         }
         else if (currentOpenMenu == 2)
         {
             previewCube.GetComponent<Renderer>().material = geoPreviewMaterials[geometryType];
             SpeedColorSetColor(colorValue);
+            nowSpeedOpen = true;
 
         }
 
@@ -830,29 +839,33 @@ public class MappingParameter : MonoBehaviour
     {
         //geoValue = _value;
 
-        if(currentScene == scene.SELECT)
+        if (nowSpeedOpen)
         {
-            if (geometryType == 0)
+            if (currentScene == scene.SELECT)
             {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+                if (geometryType == 0)
+                {
+                    previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+                    stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
 
 
-            }
-            else if (geometryType == 1)
-            {
-                previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-                stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
-                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeA", 0.12f);
-                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
-                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScaleC", 1f);
-                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeC", 10f);
-                //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_Tiling", new Vector4(-0.01f,-0.01f, 0,0));
-               
+                }
+                else if (geometryType == 1)
+                {
+                    previewCube.GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+                    stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_Noise", _value);
+                    //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeA", 0.12f);
+                    //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_NoiseScaleA", new Vector4(0.49f, 1f, 1f, 0));
+                    //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_NoiseScaleC", 1f);
+                    //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetFloat("_3dNoiseSizeC", 10f);
+                    //stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_Tiling", new Vector4(-0.01f,-0.01f, 0,0));
 
 
+
+                }
             }
         }
+        
        
     }
   
@@ -1064,7 +1077,8 @@ public class MappingParameter : MonoBehaviour
     {
         lerpColor = Color.Lerp(colorA, colorB, value);
 
-        previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+        if(nowSpeedOpen)
+         previewCube.GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
     }
 
     // 스텐실에 색깔 입히는 메소드 (match 버튼 클릭)
@@ -1083,7 +1097,12 @@ public class MappingParameter : MonoBehaviour
         lerpColor = Color.Lerp(fixedColorA, fixedColorB, value);
 
         if (currentScene == scene.SELECT)
+        {
+
             stencilSpheres[currentMatchEmotion - 1].GetComponent<Renderer>().material.SetVector("_TextureColor", lerpColor);
+
+          
+        }
     }
     // waiting room stencil cube에 색깔 입히는 메소드
     public void LerpColorWaitingCube(float value)
