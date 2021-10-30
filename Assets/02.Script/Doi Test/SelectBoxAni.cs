@@ -13,6 +13,10 @@ public class SelectBoxAni : MonoBehaviour
     //public GameObject mainCanvas;
     //bool isCanvasOn = false;
 
+    public GameObject camera;
+
+    public Vector3 targetFrontCameraPos;
+
     private void Start()
     {
         
@@ -93,6 +97,7 @@ public class SelectBoxAni : MonoBehaviour
                     Debug.Log("ani trigger : " + currentOpen);
 
                     GetComponent<Animator>().SetTrigger("ButtonOff");
+                    MoveCameraFront();
                     break;
             }
 
@@ -197,4 +202,9 @@ public class SelectBoxAni : MonoBehaviour
     //    GetComponent<Animator>().SetTrigger("3FadeOut");
 
     //}
+
+    void MoveCameraFront()
+    {
+        camera.transform.position = targetFrontCameraPos;
+    }
 }

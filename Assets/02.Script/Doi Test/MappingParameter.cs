@@ -417,7 +417,7 @@ public class MappingParameter : MonoBehaviour
             if (!IsMappedEmotion(currentMatchEmotion))
             {
                 match_button.interactable = true;
-                match_cancel_button.gameObject.SetActive(false);
+                //match_cancel_button.gameObject.SetActive(false);
             }
             else
             {
@@ -477,7 +477,7 @@ public class MappingParameter : MonoBehaviour
             if (!IsMappedEmotion(currentMatchEmotion))
             {
                 match_button.interactable = true;
-                match_cancel_button.gameObject.SetActive(false);
+                //match_cancel_button.gameObject.SetActive(false);
             }
             else
             {
@@ -763,7 +763,7 @@ public class MappingParameter : MonoBehaviour
     // Geometry 타입 바꾸기 ->버튼
     public void SetGeoType_Right()
     {
-        if (geometryType < 2)
+        if (geometryType < 1)
         {
             geometryType += 1;
             previewCube.GetComponent<MeshRenderer>().material = geoPreviewMaterials[geometryType];
