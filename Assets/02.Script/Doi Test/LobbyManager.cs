@@ -131,6 +131,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnCreateRoomFailed(short returnCode, string message)
     {
         //base.OnCreateRoomFailed(returnCode, message);
+        PhotonNetwork.ConnectUsingSettings();
+
         PhotonNetwork.RejoinRoom(roomCode);
 
     }
@@ -140,6 +142,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
           status_text.text = "방에 참가하지 못했습니다.";
         //PhotonNetwork.CreateRoom(roomCode, new RoomOptions { MaxPlayers = 2 });
+        PhotonNetwork.ConnectUsingSettings();
+
         PhotonNetwork.RejoinRoom(roomCode);
       }
 

@@ -328,6 +328,15 @@ public class MappingParameter : MonoBehaviour
             vfxObject.SetInt("AnimationCurve", 0);
 
 
+            if (IsMappedEmotion(1))
+            {
+                match_button.interactable = false;
+            }
+            else
+            {
+                match_button.interactable = true;
+            };
+
         }
         else if(currentScene == scene.WAITING)
         {
@@ -404,6 +413,16 @@ public class MappingParameter : MonoBehaviour
                 match_cancel_button.gameObject.SetActive(true);
 
             }
+
+            if (!IsMappedEmotion(currentMatchEmotion))
+            {
+                match_button.interactable = true;
+                match_cancel_button.gameObject.SetActive(false);
+            }
+            else
+            {
+                match_button.interactable = false;
+            }
         }
         if (currentOpenMenu == 0)
         {
@@ -426,6 +445,7 @@ public class MappingParameter : MonoBehaviour
             nowSpeedOpen = true;
         }
 
+       
 
     }
 
@@ -453,6 +473,16 @@ public class MappingParameter : MonoBehaviour
                 match_cancel_button.gameObject.SetActive(true);
 
             }
+
+            if (!IsMappedEmotion(currentMatchEmotion))
+            {
+                match_button.interactable = true;
+                match_cancel_button.gameObject.SetActive(false);
+            }
+            else
+            {
+                match_button.interactable = false;
+            }
         }
 
         if (currentOpenMenu == 0)
@@ -476,6 +506,8 @@ public class MappingParameter : MonoBehaviour
 
         }
 
+       
+
     }
 
     // CubeMaterial에서 호출
@@ -486,7 +518,19 @@ public class MappingParameter : MonoBehaviour
         if (matchType[currentOpenMenu] == 0)
         {
             match_button.gameObject.SetActive(true);
+            match_button.interactable = true;
+
             match_cancel_button.gameObject.SetActive(false);
+        }
+       
+        if (!IsMappedEmotion(currentMatchEmotion))
+        {
+            match_button.interactable = true;
+            //match_cancel_button.gameObject.SetActive(false);
+        }
+        else
+        {
+            match_button.interactable = false;
         }
 
         //if(currentMatchEmotion == 1)

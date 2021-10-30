@@ -163,17 +163,18 @@ public class WaitingRoom : MonoBehaviour
             }
             else if(MappingParameter.instance.matchType[i] == 2)
             {
-                MappingParameter.instance.color_slider = positive_slider;
-                positive_subTexts[i].SetActive(true);
-                MappingParameter.instance.color_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
+                MappingParameter.instance.speed_slider = excitement_slider;
+                excitement_subTexts[i].SetActive(true);
+                MappingParameter.instance.speed_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
 
 
             }
             else if (MappingParameter.instance.matchType[i] == 3)
             {
-                MappingParameter.instance.speed_slider = excitement_slider;
-                excitement_subTexts[i].SetActive(true);
-                MappingParameter.instance.speed_slider.onValueChanged.AddListener(delegate { SetSpeedValue(); });
+                MappingParameter.instance.color_slider = positive_slider;
+                positive_subTexts[i].SetActive(true);
+                MappingParameter.instance.color_slider.onValueChanged.AddListener(delegate { SetColorValue(); });
+               
 
 
             }
