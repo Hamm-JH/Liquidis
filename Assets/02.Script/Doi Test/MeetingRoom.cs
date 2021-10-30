@@ -746,6 +746,8 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	void RPC_ForceEndGame()
     {
 		endGame_button.gameObject.SetActive(false);
+		timer_canvas.SetActive(false);
+
 		EndingAniStart();
 
 	}
@@ -753,6 +755,7 @@ public class MeetingRoom : MonoBehaviourPunCallbacks
 	void EndingAniStart()
 	{
 		Manager.BIManager.Instance._CollectionStatus = Manager.CollectionStatus.Contents;
+		timer_canvas.SetActive(false);
 
 		voiceControl.EndTransmition();
 
