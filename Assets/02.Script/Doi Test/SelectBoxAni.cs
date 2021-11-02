@@ -97,7 +97,7 @@ public class SelectBoxAni : MonoBehaviour
                     Debug.Log("ani trigger : " + currentOpen);
 
                     GetComponent<Animator>().SetTrigger("ButtonOff");
-                    MoveCameraFront();
+                    //MoveCameraFront();
                     break;
             }
 
@@ -203,8 +203,10 @@ public class SelectBoxAni : MonoBehaviour
 
     //}
 
-    void MoveCameraFront()
+    public void MoveCameraFront()
     {
         camera.transform.position = targetFrontCameraPos;
     }
+
+
 }
