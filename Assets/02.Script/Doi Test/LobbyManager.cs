@@ -21,7 +21,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
           PhotonNetwork.ConnectUsingSettings();
         //OnConnectedToMaster();
 
-        
+        enterLobby_button.interactable = false;
       }
     
       public void OnJoinButtonClicked()
@@ -93,7 +93,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
       {
           status_text.text = "서버에 연결되었습니다.";
-            enterLobby_button.interactable = true;
+            //enterLobby_button.interactable = true;
 
       }
 

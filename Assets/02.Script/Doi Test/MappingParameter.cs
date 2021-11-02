@@ -320,6 +320,9 @@ public class MappingParameter : MonoBehaviour
                 match_button.gameObject.SetActive(true);
             }
 
+            ready_button.interactable = false;
+
+
             // initialize vFX
             vfxObject.SetFloat("SphereRadius", 0.3f);
             vfxObject.SetFloat("MinLifeTime", 0.1f);
