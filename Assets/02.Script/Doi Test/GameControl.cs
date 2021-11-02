@@ -5,6 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour
 {
+
+    public bool isGuide = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +44,14 @@ public class GameControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
+        }
+
+        if (isGuide)
+        {
+            if(Input.GetKeyDown(KeyCode.G)){
+                SceneManager.LoadScene("03_Play_Select");
+
+            }
         }
     }
 }

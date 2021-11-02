@@ -48,7 +48,7 @@ public class GuidePlayerMove : MonoBehaviour
             {
                 MoveAniStart();
                 done = true;
-                return;
+                //return;
 
             }
         }
